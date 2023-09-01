@@ -33,6 +33,9 @@ dependencies {
 	
     //Security 적용
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //테스트를 위한 h2 데이터베이스
+    implementation group: 'com.h2database', name: 'h2', version: '2.2.220'
 }
 
 tasks.named('test') {
