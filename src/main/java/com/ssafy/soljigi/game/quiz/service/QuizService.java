@@ -1,6 +1,5 @@
 package com.ssafy.soljigi.game.quiz.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +9,9 @@ import com.ssafy.soljigi.game.quiz.dto.QuizDto;
 import com.ssafy.soljigi.game.quiz.entity.Quiz;
 import com.ssafy.soljigi.game.quiz.repository.QuizRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class QuizService {
 
@@ -19,18 +21,8 @@ public class QuizService {
 		this.quizRepository = quizRepository;
 	}
 
-	public List<Quiz> getAllQuizzes() {
-		return quizRepository.findAll();
-	}
-
 	public List<Quiz> getRandomQuizzes() {
-		List<Quiz> allQuizzes = getAllQuizzes();
-
-		// 리스트를 랜덤하게 섞는다.
-		Collections.shuffle(allQuizzes);
-
-		// 처음 10개의 퀴즈만 반환한다.
-		return allQuizzes.subList(0, Math.min(10, allQuizzes.size()));
+		return quizRepository.findRandomQuizzes(10);
 	}
 
 	@Transactional
@@ -41,9 +33,5 @@ public class QuizService {
 			.answer(quizDto.getAnswer())
 			.build();
 		quizRepository.save(quiz);
-	}
-
-	public Quiz getQuizById(Long id) {
-		return quizRepository.findById(id).orElse(null);
 	}
 }

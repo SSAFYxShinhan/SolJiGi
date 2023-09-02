@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +23,7 @@ public class Quiz {
 	@Column(nullable = false)
 	private String question;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.LAZY)
 	private List<String> options;
 
 	@Column(nullable = false)
@@ -32,8 +33,7 @@ public class Quiz {
 	}
 
 	@Builder
-	public Quiz(Long id, String question, List<String> options, int answer) {
-		this.id = id;
+	public Quiz(String question, List<String> options, int answer) {
 		this.question = question;
 		this.options = options;
 		this.answer = answer;
