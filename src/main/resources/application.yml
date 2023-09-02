@@ -3,11 +3,9 @@ spring:
     active: dev
     include: secret
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://127.0.0.1:3306/soljigi?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test
-    username: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/soljigi?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username:
     password:
   jpa:
     hibernate:
@@ -22,4 +20,5 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-
+server:
+  port: 8081
