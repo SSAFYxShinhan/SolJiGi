@@ -128,9 +128,9 @@ function checkSelectedPair() {
         if (matchCardCount === allMatchCount) {
             setTimeout(() => {
                 clearTimer();
-                alert('.');
+                alert('성공');
                 gameState = state.READY;
-            }, 1000);
+            }, 500);
         }
     } else {
         console.log('wrong!!!');
