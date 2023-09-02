@@ -20,6 +20,7 @@ import com.ssafy.soljigi.user.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -52,6 +53,8 @@ public class JwtServiceImpl implements JwtService {
 			claims = extractAllClaims(token);
 		} catch (ExpiredJwtException e) {
 			throw new AppException(ErrorCode.EXPIRED_TOKEN);
+		} catch (MalformedJwtException e) {
+			throw new AppException(ErrorCode.MALFORMED_TOKEN);
 		}
 		return claimsResolvers.apply(claims);
 	}
@@ -71,7 +74,7 @@ public class JwtServiceImpl implements JwtService {
 		return extractClaim(token, Claims::getExpiration);
 	}
 
-	private Claims extractAllClaims(String token) throws ExpiredJwtException {
+	private Claims extractAllClaims(String token) throws ExpiredJwtException, MalformedJwtException {
 		return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
 			.getBody();
 	}
@@ -86,8 +89,7 @@ public class JwtServiceImpl implements JwtService {
 		response.setStatus(errorCode.getHttpStatus().value());
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		ErrorResponse errorResponse = new ErrorResponse(errorCode, errorCode.getMessage());
-		Response<ErrorResponse> resultResponse = Response.error(errorResponse);
+		Response<ErrorResponse> resultResponse = Response.error(ErrorCode.INVALID_TOKEN);
 
 		// 한글 출력을 위해 getWriter()
 		response.getWriter().write(objectMapper.writeValueAsString(resultResponse));

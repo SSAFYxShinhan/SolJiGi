@@ -38,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		final String username;
 		if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
 			filterChain.doFilter(request, response);
+			// throw new AppException(ErrorCode.MALFORMED_TOKEN);
 			return;
 		}
 		jwt = authHeader.substring(7);

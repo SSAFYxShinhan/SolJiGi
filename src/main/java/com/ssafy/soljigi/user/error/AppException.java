@@ -1,5 +1,8 @@
 package com.ssafy.soljigi.user.error;
 
+import lombok.Getter;
+
+@Getter
 public class AppException extends RuntimeException {
 
 	ErrorCode errorCode;

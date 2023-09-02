@@ -21,4 +21,4 @@ logging:
   level:
     org.hibernate.SQL: debug
 server:
-  port: 8081
+  port: 8080

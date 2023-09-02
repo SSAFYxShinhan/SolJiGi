@@ -22,8 +22,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		AccessDeniedException accessDeniedException) throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		Response<ErrorResponse> error = Response.error(
-			new ErrorResponse(ErrorCode.INVALID_TOKEN, ErrorCode.INVALID_TOKEN.getMessage()));
+		Response<ErrorResponse> error = Response.error(ErrorCode.INVALID_TOKEN);
 
 		response.setStatus(HttpStatus.FORBIDDEN.value());
 		response.setContentType("application/json");
