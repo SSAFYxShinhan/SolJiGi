@@ -26,6 +26,7 @@ import lombok.extern.log4j.Log4j2;
 public class AuthenticationServiceImpl implements AuthenticationService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
+
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
 
@@ -50,9 +51,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	//로그인
 	@Override
 	public JwtAuthenticationResponse signin(SigninRequest request) {
-		log.info("signin service : " + request);
+		log.warn("1. signin service : " + request);
 		var user = userRepository.findByUsername(request.getUsername())
 			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+		if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+			throw new AppException(ErrorCode.USER_NOT_PASSWORD);
+		}
+
 		authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 

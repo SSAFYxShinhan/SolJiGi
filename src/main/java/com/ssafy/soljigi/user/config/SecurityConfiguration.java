@@ -23,10 +23,12 @@ import com.ssafy.soljigi.user.config.custom.JwtExceptionFilter;
 import com.ssafy.soljigi.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Log4j2
 public class SecurityConfiguration {
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 	private final UserService userService;
@@ -37,6 +39,8 @@ public class SecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+		log.warn("1. into filterchain");
 		http.csrf(AbstractHttpConfigurer::disable);
 
 		http.authorizeHttpRequests(request ->
@@ -45,6 +49,8 @@ public class SecurityConfiguration {
 				.requestMatchers(HttpMethod.GET, "/view/white_error").permitAll()
 				.anyRequest().authenticated());
 
+		log.warn("2. authorizeHttpRequests");
+
 		http.exceptionHandling(manager ->
 				manager.accessDeniedHandler(new CustomAccessDeniedHandler()))
 			.exceptionHandling(manager ->
@@ -52,10 +58,14 @@ public class SecurityConfiguration {
 			.exceptionHandling(manager ->
 				manager.accessDeniedPage("/view/white_error"));
 
+		log.warn("3. exceptionHanding");
+
 		http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
 			.authenticationProvider(authenticationProvider())
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
+
+		log.warn("4. finish filter");
 
 		return http.build();
 	}
