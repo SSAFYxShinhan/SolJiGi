@@ -37,6 +37,10 @@ public class SecurityConfiguration {
 		"/api/v1/auth/**"
 	};
 
+	private static final String[] GET_AUTHENTICATED = {
+		"/view/main"
+	};
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -45,18 +49,18 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
-				.requestMatchers(HttpMethod.GET, "/view/main").permitAll()
+				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, "/view/white_error").permitAll()
 				.anyRequest().authenticated());
 
 		log.warn("2. authorizeHttpRequests");
 
 		http.exceptionHandling(manager ->
+				manager.accessDeniedPage("/view/white_error"))
+			.exceptionHandling(manager ->
 				manager.accessDeniedHandler(new CustomAccessDeniedHandler()))
 			.exceptionHandling(manager ->
-				manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
-			.exceptionHandling(manager ->
-				manager.accessDeniedPage("/view/white_error"));
+				manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
 		log.warn("3. exceptionHanding");
 

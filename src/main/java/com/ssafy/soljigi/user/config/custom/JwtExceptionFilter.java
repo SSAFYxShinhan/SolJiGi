@@ -14,8 +14,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 
 @Component
+@Log4j2
 public class JwtExceptionFilter extends OncePerRequestFilter {
 
 	@Override
@@ -25,6 +27,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 		try {
 			filterChain.doFilter(request, response);
 		} catch (AppException e) {
+			log.warn("ex. JwtExceptionFilter" + " " + e.getErrorCode() + " " + e.getErrorCode().getMessage());
 			response.setStatus(e.getErrorCode().getHttpStatus().value());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding("UTF-8");

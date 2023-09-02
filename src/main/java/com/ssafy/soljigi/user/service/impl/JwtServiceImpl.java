@@ -24,6 +24,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -55,6 +56,8 @@ public class JwtServiceImpl implements JwtService {
 			throw new AppException(ErrorCode.EXPIRED_TOKEN);
 		} catch (MalformedJwtException e) {
 			throw new AppException(ErrorCode.MALFORMED_TOKEN);
+		} catch (SignatureException e) {
+			throw new AppException(ErrorCode.NOT_TRUSTED_TOKEN);
 		}
 		return claimsResolvers.apply(claims);
 	}
@@ -74,7 +77,8 @@ public class JwtServiceImpl implements JwtService {
 		return extractClaim(token, Claims::getExpiration);
 	}
 
-	private Claims extractAllClaims(String token) throws ExpiredJwtException, MalformedJwtException {
+	private Claims extractAllClaims(String token) throws ExpiredJwtException, MalformedJwtException,
+		SignatureException {
 		return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
 			.getBody();
 	}

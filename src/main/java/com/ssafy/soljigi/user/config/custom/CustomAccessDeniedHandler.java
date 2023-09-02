@@ -3,6 +3,7 @@ package com.ssafy.soljigi.user.config.custom;
 import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -24,13 +25,14 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		AccessDeniedException accessDeniedException) throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		Response<ErrorResponse> error = Response.error(ErrorCode.INVALID_TOKEN);
+		ResponseEntity<Response<ErrorResponse>> body = ResponseEntity.badRequest()
+			.body(Response.error(ErrorCode.UNREACHABLE_SERVICE));
 
 		response.setStatus(HttpStatus.FORBIDDEN.value());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		log.error(response);
-		response.getWriter().write(objectMapper.writeValueAsString(error));
+		response.getWriter().write(objectMapper.writeValueAsString(body));
 
 	}
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.soljigi.user.dto.response.Response;
 import com.ssafy.soljigi.user.error.ErrorCode;
-import com.ssafy.soljigi.user.error.exception.InvalidTokenException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,10 +22,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 		AuthenticationException authException) throws IOException {
-
-		if (request.getHeader("Authorization") == null) {
-			throw new InvalidTokenException();
-		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
