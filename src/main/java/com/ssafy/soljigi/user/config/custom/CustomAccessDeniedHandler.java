@@ -2,14 +2,16 @@ package com.ssafy.soljigi.user.config.custom;
 
 import java.io.IOException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.soljigi.user.dto.response.ErrorResponse;
+import com.ssafy.soljigi.user.dto.response.Response;
 import com.ssafy.soljigi.user.error.ErrorCode;
-import com.ssafy.soljigi.user.service.impl.JwtServiceImpl;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -17,12 +19,15 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
-		AccessDeniedException accessDeniedException) throws
-		IOException,
-		ServletException,
-		IOException {
-		// 4. 토큰 인증 후 권한 거부
-		ErrorCode errorCode = ErrorCode.FORBIDDEN_REQUEST;
-		JwtServiceImpl.MakeError(response, errorCode);
+		AccessDeniedException accessDeniedException) throws IOException {
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		Response<ErrorResponse> error = Response.error(
+			new ErrorResponse(ErrorCode.INVALID_TOKEN, ErrorCode.INVALID_TOKEN.getMessage()));
+
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(objectMapper.writeValueAsString(error));
 	}
 }

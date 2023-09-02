@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ssafy.soljigi.user.config.custom.CustomAuthenticationEntryPoint;
+import com.ssafy.soljigi.user.config.custom.CustomAccessDeniedHandler;
 import com.ssafy.soljigi.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,12 +39,15 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
-				.requestMatchers(HttpMethod.POST, "/view/main").permitAll()
+				.requestMatchers(HttpMethod.GET, "/view/main").permitAll()
 				.anyRequest().authenticated());
 
 		http.exceptionHandling(manager ->
-				manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
-			.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
+			manager.accessDeniedHandler(new CustomAccessDeniedHandler()));
+		// .exceptionHandling(manager ->
+		// 	manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
+		http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
 			.authenticationProvider(authenticationProvider()).addFilterBefore(
 				jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

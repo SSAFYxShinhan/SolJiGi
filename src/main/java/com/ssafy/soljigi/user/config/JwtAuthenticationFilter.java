@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			return;
 		}
 		jwt = authHeader.substring(7);
-		log.info(jwt);
+		log.warn("insert jwt token" + jwt);
 		username = jwtService.extractUserName(jwt);
 		if (io.micrometer.common.util.StringUtils.isNotEmpty(username)
 			&& SecurityContextHolder.getContext().getAuthentication() == null) {
