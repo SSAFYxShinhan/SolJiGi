@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.soljigi.user.dto.response.ErrorResponse;
 import com.ssafy.soljigi.user.dto.response.Response;
+import com.ssafy.soljigi.user.error.AppException;
 import com.ssafy.soljigi.user.error.ErrorCode;
 import com.ssafy.soljigi.user.service.JwtService;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -45,7 +47,12 @@ public class JwtServiceImpl implements JwtService {
 	}
 
 	private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
-		final Claims claims = extractAllClaims(token);
+		final Claims claims;
+		try {
+			claims = extractAllClaims(token);
+		} catch (ExpiredJwtException e) {
+			throw new AppException(ErrorCode.EXPIRED_TOKEN);
+		}
 		return claimsResolvers.apply(claims);
 	}
 
@@ -64,7 +71,7 @@ public class JwtServiceImpl implements JwtService {
 		return extractClaim(token, Claims::getExpiration);
 	}
 
-	private Claims extractAllClaims(String token) {
+	private Claims extractAllClaims(String token) throws ExpiredJwtException {
 		return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
 			.getBody();
 	}

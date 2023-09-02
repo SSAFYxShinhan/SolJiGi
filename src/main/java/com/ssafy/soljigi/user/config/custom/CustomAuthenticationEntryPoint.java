@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.soljigi.user.error.AppException;
-import com.ssafy.soljigi.user.error.InvalidTokenException;
+import com.ssafy.soljigi.user.error.exception.InvalidTokenException;
 import com.ssafy.soljigi.user.error.exception.UserNotLoggedInException;
 
 import jakarta.servlet.http.HttpServletRequest;

@@ -47,6 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return JwtAuthenticationResponse.builder().token(jwt).build();
 	}
 
+	//로그인
 	@Override
 	public JwtAuthenticationResponse signin(SigninRequest request) {
 		log.info("signin service : " + request);
