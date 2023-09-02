@@ -19,12 +19,8 @@ public class DementiaTest {
 	static int randNum;
 
 	// 테스트용 main문 입니다
-	// public static void main(String[] args) {
-	// 	Random random = new Random();
-	// 	for (int i = 0; i < 20; i++) {
-	// 		System.out.println(random.nextInt(4));
-	// 	}
-	// }
+	public static void main(String[] args) {
+	}
 
 	@RequestMapping(value = "/test")
 	public String testStartPage(Model model) {
@@ -35,6 +31,7 @@ public class DementiaTest {
 	@ResponseBody
 	@RequestMapping(value = "/getQuiz", method = RequestMethod.POST)
 	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) {
+
 		Random random = new Random();
 
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
@@ -49,38 +46,58 @@ public class DementiaTest {
 		randNum = random.nextInt(4);
 		year -= randNum;
 		quiz1.add(Integer.toString(year)); // option 1
-		quiz1.add(Integer.toString(year++)); // option 2
-		quiz1.add(Integer.toString(year++)); // option 3
-		quiz1.add(Integer.toString(year++)); // option 4
-		quiz1.add(Integer.toString(year)); // answer
+		quiz1.add(Integer.toString(year + 1)); // option 2
+		quiz1.add(Integer.toString(year + 2)); // option 3
+		quiz1.add(Integer.toString(year + 3)); // option 4
+		quiz1.add(Integer.toString(year + randNum)); // answer
 		map.put("q1", quiz1);
 
 		// Q2 : 오늘의 달 맞추기
 		ArrayList<String> quiz2 = new ArrayList<>();
 		randNum = random.nextInt(4);
 		month -= randNum;
-		quiz2.add(Integer.toString(month)); // option 1
-		quiz2.add(Integer.toString(month++)); // option 2
-		quiz2.add(Integer.toString(month++)); // option 3
-		quiz2.add(Integer.toString(month++)); // option 4
-		quiz2.add(Integer.toString(month)); // answer
+		if (month <= 0)
+			month += 12;
+		// option 추가
+		for (int i = 0; i < 4; i++) {
+			if (month + i > 12) {
+				quiz2.add(Integer.toString(month + i - 12));
+			} else {
+				quiz2.add(Integer.toString(month + i));
+			}
+		}
+		if (month + randNum > 12) {
+			quiz2.add(Integer.toString(month + randNum - 12));
+		} else {
+			quiz2.add(Integer.toString(month + randNum));
+		}
 		map.put("q2", quiz2);
 
 		// Q3 : 오늘 일  맞추기
 		ArrayList<String> quiz3 = new ArrayList<>();
 		randNum = random.nextInt(4);
 		day -= randNum;
-		quiz3.add(Integer.toString(day)); // option 1
-		quiz3.add(Integer.toString(day++)); // option 2
-		quiz3.add(Integer.toString(day++)); // option 3
-		quiz3.add(Integer.toString(day++)); // option 4
-		quiz3.add(Integer.toString(day)); // answer
+		if (day <= 0)
+			day += 31;
+		// option 추가
+		for (int i = 0; i < 4; i++) {
+			if (day + i > 31) {
+				quiz3.add(Integer.toString(day + i - 31));
+			} else {
+				quiz3.add(Integer.toString(day + i));
+			}
+		}
+		if (day + randNum > 31) {
+			quiz3.add(Integer.toString(day + randNum - 31));
+		} else {
+			quiz3.add(Integer.toString(day + randNum));
+		}
 		map.put("q3", quiz3);
 
 		// Q4 : 오늘의 요일 맞추기
 		map.put("q4", dayOfWeek); // only answer
-
 		return map;
+
 	}
 
 	@RequestMapping(value = "/tester")
