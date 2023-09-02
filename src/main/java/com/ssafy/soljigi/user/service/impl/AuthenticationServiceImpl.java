@@ -30,6 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
 
+	//회원가입
 	@Override
 	@Transactional
 	public JwtAuthenticationResponse signup(SignUpRequest request) {
