@@ -2,6 +2,8 @@ package com.ssafy.soljigi.game.quiz.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -24,6 +26,7 @@ public class Quiz {
 	private String question;
 
 	@ElementCollection(fetch = FetchType.LAZY)
+	@BatchSize(size = 10)
 	private List<String> options;
 
 	@Column(nullable = false)
