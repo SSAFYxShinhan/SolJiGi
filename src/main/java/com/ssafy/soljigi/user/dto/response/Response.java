@@ -1,5 +1,7 @@
 package com.ssafy.soljigi.user.dto.response;
 
+import com.ssafy.soljigi.user.error.ErrorCode;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,8 +12,8 @@ public class Response<T> {
 	private T result;
 
 	//에러 리턴
-	public static Response<ErrorResponse> error(ErrorResponse errorResponse) {
-		return new Response("ERROR", errorResponse);
+	public static Response<ErrorResponse> error(ErrorCode errorCode) {
+		return new Response(errorCode.getHttpStatus().toString(), errorCode.getMessage());
 	}
 
 	// 성공 리턴
