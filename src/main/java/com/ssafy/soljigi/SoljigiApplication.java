@@ -9,5 +9,4 @@ public class SoljigiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SoljigiApplication.class, args);
 	}
-
 }
