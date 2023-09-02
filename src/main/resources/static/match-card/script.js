@@ -22,6 +22,15 @@ const imgSource = [
     // 'Friends.png',
 ];
 
+const state = {
+    GAME: 0,
+    READY: 1,
+};
+Object.freeze(imgSource);
+Object.freeze(state);
+
+const GAME_TIME_LIMIT = 10;
+const CARD_SHOW_TIME = 5;
 let R, C;
 let gameMap = null;
 let imgSrcMap = null;
@@ -29,27 +38,58 @@ let cardOpened = null;
 let selectedIdx = 0;
 let matchCardCount = 0;
 let allMatchCount = 0;
+let countDownTimer = null;
+let timer = GAME_TIME_LIMIT;
+let gameState = null;
+
+const gameContent = document.querySelector('.match-card__content');
+const timerObj = document.querySelector('.match-card__timer');
 const selectedCursor = [
     [-1, -1],
     [-1, -1],
 ];
-const gameContent = document.querySelector('.match-card__content');
 
 matchCardGameStart(2, 4);
 
+function countDown() {
+    if (timer === 0) {
+        clearTimer();
+        alert('시간 초과입니다!');
+        gameState = state.READY;
+        return;
+    }
+    timerObj.innerText = --timer;
+}
+
+function clearTimer() {
+    if (countDownTimer != null) {
+        clearInterval(countDownTimer);
+    }
+}
+
 function matchCardGameStart(row, col) {
+    gameState = state.GAME;
     R = row;
     C = col;
+    gameInitialize();
+    cardAllOpen();
+    setTimeout(() => {
+        cardAllHide();
+        timer = GAME_TIME_LIMIT;
+        timerObj.innerText = timer;
+        countDownTimer = setInterval(countDown, 1000);
+    }, CARD_SHOW_TIME * 1000);
+}
+
+function gameInitialize() {
     gameContent.innerHTML = '';
     gameMap = Array.from(Array(R), () => new Array(C));
     imgSrcMap = Array.from(Array(R), () => new Array(C));
     cardOpened = Array.from(Array(R), () => new Array(C));
     selectedIdx = 0;
     matchCardCount = 0;
-    allMatchCount = (row * col) >> 1;
+    allMatchCount = (R * C) >> 1;
     constructMap();
-    cardAllOpen();
-    setTimeout(() => cardAllHide(), 1000);
 }
 
 function cardAllOpen() {
@@ -87,7 +127,9 @@ function checkSelectedPair() {
         ++matchCardCount;
         if (matchCardCount === allMatchCount) {
             setTimeout(() => {
-                alert('answer!');
+                clearTimer();
+                alert('.');
+                gameState = state.READY;
             }, 1000);
         }
     } else {
@@ -118,6 +160,7 @@ function constructMap() {
         for (let j = 0; j < C; ++j) {
             const flipCardElement = generateCardElement(cardImgs[idx]);
             flipCardElement.addEventListener('click', () => {
+                if (gameState !== state.GAME) return;
                 if (!cardOpened[i][j] && selectedIdx < 2) {
                     cardOpen(i, j);
                     selectedCursor[selectedIdx++] = [i, j];

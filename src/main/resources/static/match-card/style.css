@@ -5,6 +5,26 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(223, 223, 223);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-card__header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.match-card__timer {
+    font-size: 50px;
+}
+
 .match-card__content {
     display: flex;
     flex-direction: column;
@@ -16,22 +36,22 @@
 
 .match-card__flip {
     width: 200px;
-    height: 250px;
+    height: 200px;
     perspective: 1100px;
+    margin: 5px;
 }
 
 .match-card__card {
     width: 100%;
     height: 100%;
-    background-color: yellow;
     border: 1px solid black;
     border-radius: 10px;
-    margin: 5px;
     cursor: pointer;
     position: relative;
     transition: 0.4s;
     transform-style: preserve-3d;
 }
+
 .match-card__card-front,
 .match-card__card-back {
     position: absolute;
@@ -40,13 +60,6 @@
     backface-visibility: hidden;
     border-radius: 10px;
 }
-
-.match-card__flip {
-    width: 200px;
-    height: 200px;
-    perspective: 1100px;
-}
-
 .match-card__card-front {
     transform: rotateY(180deg);
 }
