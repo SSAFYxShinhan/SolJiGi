@@ -19,8 +19,8 @@ public class QuizService {
 
 	private final QuizRepository quizRepository;
 
-	public List<Quiz> getRandomQuizzes() {
-		return quizRepository.findRandomQuizzes(10);
+	public List<Quiz> getRandomQuizzes(int count) {
+		return quizRepository.findRandomQuizzes(count);
 	}
 
 	@Transactional

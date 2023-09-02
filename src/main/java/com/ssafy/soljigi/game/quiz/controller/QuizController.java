@@ -23,7 +23,7 @@ public class QuizController {
 
 	@GetMapping("/quizzes")
 	public List<Quiz> getQuizzes() {
-		List<Quiz> quizzes = quizService.getRandomQuizzes();
+		List<Quiz> quizzes = quizService.getRandomQuizzes(10);
 		return quizzes;
 	}
 
