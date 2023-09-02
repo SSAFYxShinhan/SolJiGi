@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.ssafy.soljigi.user.config.custom.CustomAccessDeniedHandler;
+import com.ssafy.soljigi.user.config.custom.CustomAuthenticationEntryPoint;
 import com.ssafy.soljigi.user.config.custom.JwtExceptionFilter;
 import com.ssafy.soljigi.user.service.UserService;
 
@@ -40,12 +42,15 @@ public class SecurityConfiguration {
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, "/view/main").permitAll()
+				.requestMatchers(HttpMethod.GET, "/view/white_error").permitAll()
 				.anyRequest().authenticated());
 
-		// http.exceptionHandling(manager ->
-		// 	manager.accessDeniedHandler(new CustomAccessDeniedHandler()));
-		// .exceptionHandling(manager ->
-		// 	manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+		http.exceptionHandling(manager ->
+				manager.accessDeniedHandler(new CustomAccessDeniedHandler()))
+			.exceptionHandling(manager ->
+				manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
+			.exceptionHandling(manager ->
+				manager.accessDeniedPage("/view/white_error"));
 
 		http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
 			.authenticationProvider(authenticationProvider())

@@ -15,7 +15,9 @@ public enum ErrorCode {
 
 	INVALID_TOKEN(HttpStatus.NON_AUTHORITATIVE_INFORMATION, "토큰이 유효하지 않습니다."),
 	EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
-	MALFORMED_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 토큰 형식입니다.");
+	MALFORMED_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 토큰 형식입니다."),
+
+	UNREACHABLE_SERVICE(HttpStatus.NOT_ACCEPTABLE, "접근 방식이 잘못되었습니다.");
 	private HttpStatus httpStatus;
 	private String message;
 }

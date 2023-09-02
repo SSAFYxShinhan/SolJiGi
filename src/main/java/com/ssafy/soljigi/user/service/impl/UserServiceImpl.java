@@ -2,9 +2,10 @@ package com.ssafy.soljigi.user.service.impl;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.soljigi.user.error.AppException;
+import com.ssafy.soljigi.user.error.ErrorCode;
 import com.ssafy.soljigi.user.repository.UserRepository;
 import com.ssafy.soljigi.user.service.UserService;
 
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 			@Override
 			public UserDetails loadUserByUsername(String username) {
 				return userRepository.findByUsername(username)
-					.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+					.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 			}
 		};
 	}
