@@ -39,8 +39,8 @@ public class DementiaTest {
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
 		LocalDate nowTime = LocalDate.now();
 		int year = nowTime.getYear(); // 년, 2023
-		int monthValue = nowTime.getMonthValue(); // 월, 6
-		int dayOfMonth = nowTime.getDayOfMonth(); // 일, 17
+		int month = nowTime.getMonthValue(); // 월, 6
+		int day = nowTime.getDayOfMonth(); // 일, 17
 		int dayOfWeekValue = nowTime.getDayOfWeek().getValue(); // 요일, 4
 
 		// Q1 : 올해 년도 맞추기
@@ -53,6 +53,28 @@ public class DementiaTest {
 		quiz1.add(Integer.toString(year++)); // option 4
 		quiz1.add(Integer.toString(year)); // answer
 		map.put("q1", quiz1);
+
+		// Q2 : 올해 월 맞추기
+		ArrayList<String> quiz2 = new ArrayList<>();
+		randNum = random.nextInt(4);
+		month -= randNum;
+		quiz2.add(Integer.toString(month)); // option 1
+		quiz2.add(Integer.toString(month++)); // option 2
+		quiz2.add(Integer.toString(month++)); // option 3
+		quiz2.add(Integer.toString(month++)); // option 4
+		quiz2.add(Integer.toString(month)); // answer
+		map.put("q2", quiz2);
+
+		// Q1 : 올해 일  맞추기
+		ArrayList<String> quiz3 = new ArrayList<>();
+		randNum = random.nextInt(4);
+		day -= randNum;
+		quiz3.add(Integer.toString(day)); // option 1
+		quiz3.add(Integer.toString(day++)); // option 2
+		quiz3.add(Integer.toString(day++)); // option 3
+		quiz3.add(Integer.toString(day++)); // option 4
+		quiz3.add(Integer.toString(day)); // answer
+		map.put("q3", quiz3);
 
 		return map;
 	}
