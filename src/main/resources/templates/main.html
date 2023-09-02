@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="input-group">
+        <span class="input-group-text">회원가입테스트</span>
+        <input type="text" aria-label="Last name" class="form-control" id="username">
+        <input type="text" aria-label="Third name" class="form-control" id="password">
+        <button type="button" class="btn btn-primary" id="join">회원가입</button>
+    </div>
+    <div id="area">
+
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">로그인테스트</span>
+        <input type="text" aria-label="First name" class="form-control" id="username1">
+        <input type="text" aria-label="Last name" class="form-control" id="password1">
+        <button type="button" class="btn btn-primary" id="login">로그인</button>
+    </div>
+    <div id="area_login">
+
+    </div>
+
+
+    <div class="input-group">
+        <span class="input-group-text">로그아웃</span>
+        <button type="button" class="btn btn-primary" id="logout">로그아웃</button>
+    </div>
+    <div id="area_logout">
+
+
+</div>
+
+<script>
+
+    document.getElementById("login").addEventListener('click', loginTest);
+    document.getElementById("join").addEventListener('click', joinTest);
+    document.getElementById("logout").addEventListener('click', logout);
+
+    async function joinTest() {
+        let response = await fetch("/api/v1/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+            })
+        });
+        if (response.ok) {
+            console.log(await response);
+            let json = await response.json();
+            document.getElementById("area").innerHTML = json.result;
+        } else {
+            console.log(await response);
+            let json = await response.text();
+            document.getElementById("area").innerHTML = json;
+        }
+
+    }
+
+    async function loginTest() {
+        let response = await fetch("/api/v1/auth/signin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: document.getElementById("username1").value,
+                password: document.getElementById("password1").value
+            })
+        })
+        if (response.ok) {
+            console.log(await response);
+            let json = await response.json();
+            document.getElementById("area_login").innerHTML = json.result;
+            localStorage.setItem("jwt", 'Bearer ' + json.result);
+            console.log(localStorage.getItem("jwt"));
+
+        } else {
+            console.log(await response);
+            let json = await response.text();
+            document.getElementById("area_login").innerHTML = json;
+        }
+
+    }
+
+    async function logout() {
+        localStorage.clear();
+        document.getElementById("area_logout").innerHTML = "로그아웃 성공";
+    }
+
+</script>
+
+</body>
+
+</html>
