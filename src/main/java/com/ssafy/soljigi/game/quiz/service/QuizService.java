@@ -9,17 +9,15 @@ import com.ssafy.soljigi.game.quiz.dto.QuizDto;
 import com.ssafy.soljigi.game.quiz.entity.Quiz;
 import com.ssafy.soljigi.game.quiz.repository.QuizRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class QuizService {
 
 	private final QuizRepository quizRepository;
-
-	public QuizService(QuizRepository quizRepository) {
-		this.quizRepository = quizRepository;
-	}
 
 	public List<Quiz> getRandomQuizzes() {
 		return quizRepository.findRandomQuizzes(10);

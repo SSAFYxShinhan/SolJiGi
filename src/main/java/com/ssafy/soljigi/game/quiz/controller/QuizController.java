@@ -12,15 +12,14 @@ import com.ssafy.soljigi.game.quiz.dto.QuizDto;
 import com.ssafy.soljigi.game.quiz.entity.Quiz;
 import com.ssafy.soljigi.game.quiz.service.QuizService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/quiz")
+@RequiredArgsConstructor
 public class QuizController {
 
 	private final QuizService quizService;
-
-	public QuizController(QuizService quizService) {
-		this.quizService = quizService;
-	}
 
 	@GetMapping("/quizzes")
 	public List<Quiz> getQuizzes() {
