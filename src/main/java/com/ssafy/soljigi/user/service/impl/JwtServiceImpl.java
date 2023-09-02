@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.user.service.impl;
 
+import java.io.IOException;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,10 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.soljigi.user.dto.response.ErrorResponse;
+import com.ssafy.soljigi.user.dto.response.Response;
+import com.ssafy.soljigi.user.error.ErrorCode;
 import com.ssafy.soljigi.user.service.JwtService;
 
 import io.jsonwebtoken.Claims;
@@ -16,6 +21,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class JwtServiceImpl implements JwtService {
@@ -67,4 +73,17 @@ public class JwtServiceImpl implements JwtService {
 		byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
+
+	public static void MakeError(HttpServletResponse response, ErrorCode errorCode) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		response.setStatus(errorCode.getHttpStatus().value());
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		ErrorResponse errorResponse = new ErrorResponse(errorCode, errorCode.getMessage());
+		Response<ErrorResponse> resultResponse = Response.error(errorResponse);
+
+		// 한글 출력을 위해 getWriter()
+		response.getWriter().write(objectMapper.writeValueAsString(resultResponse));
+	}
+
 }
