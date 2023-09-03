@@ -1,10 +1,5 @@
 emojis = ['😀', '😁', '😂', '😍', '😎', '🤩', '😴', '🥱', '🙄', '😜', '😳'];
 
-state = {
-    GAME: 0,
-    READY: 1,
-};
-
 class SamePictureGame {
     constructor(row, col, timeLimit) {
         this.container = document.querySelector('.gameContainer');
@@ -125,6 +120,7 @@ class SamePictureGame {
                 clearInterval(countDownTimer);
             }
             alert('시간 초과입니다!');
+            this.container.innerHTML = '';
             return;
         }
     }

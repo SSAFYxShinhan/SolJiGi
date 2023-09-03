@@ -1,18 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-}
-
-.gameContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-}
 .same-picture__header {
     display: flex;
     flex-direction: column;
