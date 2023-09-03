@@ -36,11 +36,11 @@ public class User implements UserDetails {
 	private Gender gender;
 	private LocalDate birthDate;
 	private Address address;
-	private Long number;
+	private String number;
 	private Long educationLevel;
-	private Long accountNumber;
+	private String accountNumber;
 	private Boolean accountVerification;
-	private Long careGiverNumber;
+	private String careGiverNumber;
 	@Enumerated
 	private Role role;
 
