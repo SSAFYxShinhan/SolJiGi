@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	private String username;
 	private String password;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private LocalDate birthDate;
 	private Address address;
@@ -41,7 +42,7 @@ public class User implements UserDetails {
 	private String accountNumber;
 	private Boolean accountVerification;
 	private String careGiverNumber;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	@Override
