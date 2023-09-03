@@ -6,12 +6,12 @@
 </head>
 <body>
 <label>
-    <input type="text" placeholder="계좌번호를 입력하세요" name="accountNumber" id="accountNumber">
+    <input type="text" placeholder="계좌번호를 입력하세요" name="accountNumber" id="accountNumber" required/>
 </label>
 <button id="authOneApiButton">인증</button>
 
 <label>
-    <input type="text" placeholder="인증코드 입력">
+    <input type="text" placeholder="인증코드 입력" id="authOneKey">
 </label>
 <button id="authOneCheckButton">검사</button>
 </body>
@@ -33,5 +33,13 @@
             .catch(err => console.log(err));
     }
 
+    async function authCheck() {
+        var authOneKey = "1234 SSAFY";
+        if (document.getElementById("authOneKey").value === authOneKey) {
+            document.getElementById("result").innerText = "성공"
+        }
+    }
+
     document.getElementById("authOneApiButton").addEventListener("click", authOne);
+    document.getElementById("authOneCheckButton").addEventListener("click", authCheck);
 </script>
