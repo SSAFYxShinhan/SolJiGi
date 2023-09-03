@@ -1,29 +1,21 @@
-package com.ssafy.soljigi.dementiaTest;
+package com.ssafy.soljigi.dementiaTest.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
-@Controller
-public class AttentionQ {
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
+public class AttentionService {
 	// 거꾸로 말하기 문제 목록 => DB에 구현 예정
 	static final String[] list4Word = new String[] {"금수강산", "오리무중", "진수성찬", "백해무익",
 		"건강최고", "백년해로", "사필귀정", "분리수거", "신한은행", "난세영웅"}; // size = 10
 
-	// 출력확인용 main함수
-	// public static void main(String[] args) {
-	// }
-
-	@ResponseBody
-	@RequestMapping(value = "/getQuiz", method = RequestMethod.POST)
-	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) {
+	public static HashMap<String, Object> getQuiz(HashMap<String, Object> map) {
 
 		Random random = new Random();
 

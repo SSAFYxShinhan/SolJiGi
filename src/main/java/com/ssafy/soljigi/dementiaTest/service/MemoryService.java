@@ -1,16 +1,17 @@
-package com.ssafy.soljigi.dementiaTest;
+package com.ssafy.soljigi.dementiaTest.service;
 
 import java.util.HashMap;
 import java.util.Random;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
-@Controller
-public class MakeMemoryQ {
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+
+public class MemoryService {
+	// 임시로 배열에 저장 ==> 추후 DB로 이관 예정
 	static final String[] listWho = new String[] {"민수", "영호", "철수", "보람", "영희", "성철", "민지", "영수"
 		, "영자", "윤정", "준영", "찬호", "상원", "종우", "준범", "석근", "지민", "효진", "수빈", "수현"}; // size = 20
 	static final String[] listHow = new String[] {"자전거를 타고", "천천히 걸어서", "킥보드를 타고", "마을버스를 타고", "택시를 타고",
@@ -23,23 +24,7 @@ public class MakeMemoryQ {
 	static final String[] listWhat = new String[] {"야구", "축구", "농구", "탁구", "배구", "산책", "테니스", "족구", "당구", "노래", "구르기",
 		"줄넘기", "체조", "사격", "공부", "복싱", "골프", "볼링", "공연", "발표"}; // size = 20
 
-	// 출력확인용 main함수
-	// public static void main(String[] args) {
-	// 	Random random = new Random();
-	// 	StringBuilder sb = new StringBuilder();
-	// 	for (int i = 0; i < 10; i++) {
-	// 		sb.append(listWho[random.nextInt(20)] + "(이)는 ");
-	// 		sb.append(listHow[random.nextInt(20)] + " ");
-	// 		sb.append(listWhere[random.nextInt(20)] + "에 가서 ");
-	// 		sb.append(listWhen[random.nextInt(20)] + "부터 ");
-	// 		sb.append(listWhat[random.nextInt(20)] + "(을)를 했다.\n");
-	// 	}
-	// 	System.out.println(sb);
-	// }
-
-	@ResponseBody
-	@RequestMapping(value = "/getQuiz", method = RequestMethod.POST)
-	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) {
+	public static HashMap<String, Object> getQuiz(HashMap<String, Object> map) {
 
 		Random random = new Random();
 
@@ -52,6 +37,5 @@ public class MakeMemoryQ {
 		map.put("what", listWhat[random.nextInt(20)]);
 
 		return map;
-
 	}
 }

@@ -1,37 +1,21 @@
-package com.ssafy.soljigi.dementiaTest;
+package com.ssafy.soljigi.dementiaTest.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
-@Controller
-public class DementiaTest {
-	static String userName = "김싸피";
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrientService {
 	static final String[] listDayOfWeek = new String[] {"", "월", "화", "수", "목", "금", "토", "일"};
 	static int randNum;
 
-	// 테스트용 main문 입니다
-	// public static void main(String[] args) {
-	// }
-
-	@RequestMapping(value = "/test")
-	public String testStartPage(Model model) {
-		model.addAttribute("userName", userName);
-		return "dementiaTest";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/getQuiz", method = RequestMethod.POST)
-	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) {
-
+	public static HashMap<String, Object> getQuiz(HashMap<String, Object> map) {
 		Random random = new Random();
 
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
@@ -97,12 +81,5 @@ public class DementiaTest {
 		// Q4 : 오늘의 요일 맞추기
 		map.put("q4", dayOfWeek); // only answer
 		return map;
-
 	}
-
-	@RequestMapping(value = "/tester")
-	public String dementiaTester(Model model) {
-		return "dementiaTester";
-	}
-
 }
