@@ -64,10 +64,12 @@ public class SecurityConfiguration {
 
 		log.warn("3. exceptionHanding");
 
-		http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
-			.authenticationProvider(authenticationProvider())
-			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
+		http.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS));
+
+		http.authenticationProvider(authenticationProvider());
+
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
 
 		log.warn("4. finish filter");
 

@@ -19,7 +19,7 @@ public enum ErrorCode {
 	MALFORMED_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 토큰 형식입니다."),
 	NOT_TRUSTED_TOKEN(HttpStatus.UNAUTHORIZED, "신뢰할 수 없는 토큰입니다."),
 
-	UNREACHABLE_SERVICE(HttpStatus.NOT_ACCEPTABLE, "접근 방식이 잘못되었습니다.");
+	UNREACHABLE_SERVICE(HttpStatus.UNAUTHORIZED, "접근 방식이 잘못되었습니다.");
 	private HttpStatus httpStatus;
 	private String message;
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 	@GetMapping("/main")
 	public String mainPage() {
-		return "main";
+		return "user/main";
 	}
 
 	@GetMapping("/white_error")

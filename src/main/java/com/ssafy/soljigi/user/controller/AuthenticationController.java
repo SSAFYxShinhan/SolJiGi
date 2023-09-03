@@ -35,12 +35,13 @@ public class AuthenticationController {
 		HttpServletResponse response) {
 		log.warn("1. AuthenticationController : signin " + request.getUsername() + " " + request.getPassword());
 		JwtAuthenticationResponse jwt = authenticationService.signin(request);
-		Cookie cookie = new Cookie("token", jwt.getToken());
-		cookie.setDomain("localhost");
+		Cookie cookie = new Cookie("token", "Bearer+" + jwt.getToken());
 		cookie.setPath("/");
 		cookie.setMaxAge(30 * 60);
-		cookie.setSecure(true);
+		// cookie.setSecure(true);
+
 		cookie.setHttpOnly(true);
+		response.setHeader("token", cookie.toString());
 		response.addCookie(cookie);
 		return ResponseEntity.ok().body(Response.success(cookie));
 	}

@@ -23,6 +23,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 		AuthenticationException authException) throws IOException {
 
+		log.warn("CustomAuthenticationEntryPoint start");
 		ObjectMapper objectMapper = new ObjectMapper();
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		response.setContentType("application/json");
@@ -30,5 +31,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 		response.getWriter()
 			.write(objectMapper.writeValueAsString(
 				ResponseEntity.badRequest().body(Response.error(ErrorCode.UNREACHABLE_SERVICE))));
+		log.warn("CustomAuthenticationEntryPoint end" + response);
 	}
 }

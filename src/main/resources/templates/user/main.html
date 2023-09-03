@@ -31,8 +31,8 @@
 
 
     <div class="input-group">
-        <span class="input-group-text">로그아웃</span>
-        <button type="button" class="btn btn-primary" id="logout">로그아웃</button>
+        <span class="input-group-text">데이터 요청</span>
+        <button type="button" class="btn btn-primary" id="data">데이터 요청</button>
     </div>
     <div id="area_logout">
 
@@ -44,7 +44,59 @@
 
         document.getElementById("login").addEventListener('click', loginTest);
         document.getElementById("join").addEventListener('click', joinTest);
-        document.getElementById("logout").addEventListener('click', logout);
+        document.getElementById("data").addEventListener('click', getData3);
+
+        axios.defaults.withCredentials = true;
+
+        function getData() {
+            axios.get('/api/v1/resource')
+                .then((result) => {
+                    console.log(result.data)
+                }).catch(() => {
+                console.log('에러남')
+            })
+        }
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        async function getData3() {
+            let response = await fetch("/api/v1/resource", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    credentials: "include",
+                    // "Authorization": getCookie("token")
+                }
+            })
+            if (response.ok) {
+                console.log(await response);
+                let json = await response.json();
+                document.getElementById("area_login").innerHTML = json.result;
+            } else {
+                console.log(await response);
+                let json = await response.text();
+                document.getElementById("area_login").innerHTML = json;
+            }
+
+        }
+
+        async function getData2() {
+            await fetch("/api/v1/resource", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    credentials: "include"
+                }
+            }).then(res => res.json())
+                .then(json => {
+                    console.log(json.result)
+                })
+        }
 
         async function joinTest() {
             let response = await fetch("/api/v1/auth/signup", {
@@ -61,8 +113,6 @@
                 console.log(await response);
                 let json = await response.json();
                 document.getElementById("area_login").innerHTML = json.result;
-                console.log(localStorage.getItem("jwt"));
-
             } else {
                 console.log(await response);
                 let json = await response.text();
@@ -87,9 +137,6 @@
                 console.log(await response);
                 let json = await response.json();
                 document.getElementById("area_login").innerHTML = json.result;
-                localStorage.setItem("jwt", 'Bearer ' + json.result);
-                console.log(localStorage.getItem("jwt"));
-
             } else {
                 console.log(await response);
                 let json = await response.text();
