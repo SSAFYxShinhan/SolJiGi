@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label>
+    <input type="text" placeholder="계좌번호를 입력하세요" name="accountNumber" id="accountNumber" required/>
+</label>
+<button id="authOneApiButton">인증</button>
+
+<label>
+    <input type="text" placeholder="인증코드 입력" id="authOneKey">
+</label>
+<button id="authOneCheckButton">검사</button>
+</body>
+
+<span id="result"></span>
+</html>
+
+<script>
+    async function authOne() {
+        var url = "/api/v1/auth/one"
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(document.getElementById("accountNumber").value)
+        }).then(response => response.json())
+            .then(result => console.log("성공", result))
+            .catch(err => console.log(err));
+    }
+
+    async function authCheck() {
+        var authOneKey = "1234 SSAFY";
+        if (document.getElementById("authOneKey").value === authOneKey) {
+            document.getElementById("result").innerText = "성공"
+        }
+    }
+
+    document.getElementById("authOneApiButton").addEventListener("click", authOne);
+    document.getElementById("authOneCheckButton").addEventListener("click", authCheck);
+</script>
