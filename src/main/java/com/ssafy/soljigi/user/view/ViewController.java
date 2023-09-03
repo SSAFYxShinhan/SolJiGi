@@ -11,10 +11,5 @@ public class ViewController {
 	public String mainPage() {
 		return "user/main";
 	}
-
-	@GetMapping("/white_error")
-	public String whitePage() {
-		return "403";
-	}
-
+	
 }

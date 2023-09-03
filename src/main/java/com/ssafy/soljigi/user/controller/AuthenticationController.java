@@ -25,16 +25,16 @@ public class AuthenticationController {
 	private final AuthenticationService authenticationService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUpRequest request) {
+	public ResponseEntity<JwtAuthenticationResponse> signUp(@RequestBody SignUpRequest request) {
 		log.warn("1. AuthenticationController : signup " + request.getUsername() + " " + request.getPassword());
-		return ResponseEntity.ok(authenticationService.signup(request));
+		return ResponseEntity.ok(authenticationService.signUp(request));
 	}
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> signin(@RequestBody SigninRequest request,
+	public ResponseEntity<?> signIn(@RequestBody SigninRequest request,
 		HttpServletResponse response) {
 		log.warn("1. AuthenticationController : signin " + request.getUsername() + " " + request.getPassword());
-		JwtAuthenticationResponse jwt = authenticationService.signin(request);
+		JwtAuthenticationResponse jwt = authenticationService.signIn(request);
 		Cookie cookie = new Cookie("token", "Bearer+" + jwt.getToken());
 		cookie.setPath("/");
 		cookie.setMaxAge(30 * 60);

@@ -5,7 +5,7 @@ import com.ssafy.soljigi.user.dto.request.SigninRequest;
 import com.ssafy.soljigi.user.dto.response.JwtAuthenticationResponse;
 
 public interface AuthenticationService {
-	JwtAuthenticationResponse signup(SignUpRequest request);
+	JwtAuthenticationResponse signUp(SignUpRequest request);
 
-	JwtAuthenticationResponse signin(SigninRequest request);
+	JwtAuthenticationResponse signIn(SigninRequest request);
 }

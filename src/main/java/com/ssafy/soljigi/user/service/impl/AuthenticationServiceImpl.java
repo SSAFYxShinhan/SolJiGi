@@ -33,7 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	//회원가입
 	@Override
 	@Transactional
-	public JwtAuthenticationResponse signup(SignUpRequest request) {
+	public JwtAuthenticationResponse signUp(SignUpRequest request) {
 		log.info("signup service : " + request);
 		userRepository.findByUsername(request.getUsername())
 			.ifPresent(user -> {
@@ -51,7 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	//로그인
 	@Override
-	public JwtAuthenticationResponse signin(SigninRequest request) {
+	public JwtAuthenticationResponse signIn(SigninRequest request) {
 		log.warn("1. signin service : " + request);
 		var user = userRepository.findByUsername(request.getUsername())
 			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
