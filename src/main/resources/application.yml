@@ -7,6 +7,18 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/soljigi?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username:
     password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+#      #jwt token
+#      token:
+#        signing:
+#          key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+
+
 logging:
   level:
     org.hibernate.SQL: debug
+server:
+  port: 8080
