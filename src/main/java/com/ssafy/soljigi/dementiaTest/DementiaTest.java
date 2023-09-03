@@ -19,8 +19,8 @@ public class DementiaTest {
 	static int randNum;
 
 	// 테스트용 main문 입니다
-	public static void main(String[] args) {
-	}
+	// public static void main(String[] args) {
+	// }
 
 	@RequestMapping(value = "/test")
 	public String testStartPage(Model model) {
