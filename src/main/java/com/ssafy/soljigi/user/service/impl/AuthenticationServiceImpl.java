@@ -5,13 +5,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.dto.request.SignUpRequest;
 import com.ssafy.soljigi.user.dto.request.SigninRequest;
 import com.ssafy.soljigi.user.dto.response.JwtAuthenticationResponse;
 import com.ssafy.soljigi.user.entity.Role;
 import com.ssafy.soljigi.user.entity.User;
-import com.ssafy.soljigi.user.error.AppException;
-import com.ssafy.soljigi.user.error.ErrorCode;
 import com.ssafy.soljigi.user.repository.UserRepository;
 import com.ssafy.soljigi.user.service.AuthenticationService;
 import com.ssafy.soljigi.user.service.JwtService;

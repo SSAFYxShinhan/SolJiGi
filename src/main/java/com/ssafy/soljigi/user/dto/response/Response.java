@@ -1,6 +1,6 @@
 package com.ssafy.soljigi.user.dto.response;
 
-import com.ssafy.soljigi.user.error.ErrorCode;
+import com.ssafy.soljigi.base.error.ErrorCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.config;
+package com.ssafy.soljigi.base.config;
 
 import java.io.IOException;
 

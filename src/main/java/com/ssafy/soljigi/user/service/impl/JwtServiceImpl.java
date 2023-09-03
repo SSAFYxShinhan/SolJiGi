@@ -11,10 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.dto.response.ErrorResponse;
 import com.ssafy.soljigi.user.dto.response.Response;
-import com.ssafy.soljigi.user.error.AppException;
-import com.ssafy.soljigi.user.error.ErrorCode;
 import com.ssafy.soljigi.user.service.JwtService;
 
 import io.jsonwebtoken.Claims;

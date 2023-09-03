@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.config.custom;
+package com.ssafy.soljigi.base.config.custom;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.soljigi.base.error.AppException;
 import com.ssafy.soljigi.user.dto.response.Response;
-import com.ssafy.soljigi.user.error.AppException;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

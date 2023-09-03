@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.error;
+package com.ssafy.soljigi.base.error;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

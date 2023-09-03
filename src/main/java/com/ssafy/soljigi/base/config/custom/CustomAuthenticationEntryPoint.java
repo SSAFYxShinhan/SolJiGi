@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.config.custom;
+package com.ssafy.soljigi.base.config.custom;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.dto.response.Response;
-import com.ssafy.soljigi.user.error.ErrorCode;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

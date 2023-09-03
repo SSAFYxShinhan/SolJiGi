@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.soljigi.user.error.AppException;
-import com.ssafy.soljigi.user.error.ErrorCode;
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.repository.UserRepository;
 import com.ssafy.soljigi.user.service.UserService;
 

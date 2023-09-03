@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.config;
+package com.ssafy.soljigi.base.config;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
@@ -17,9 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ssafy.soljigi.user.config.custom.CustomAccessDeniedHandler;
-import com.ssafy.soljigi.user.config.custom.CustomAuthenticationEntryPoint;
-import com.ssafy.soljigi.user.config.custom.JwtExceptionFilter;
+import com.ssafy.soljigi.base.config.custom.CustomAccessDeniedHandler;
+import com.ssafy.soljigi.base.config.custom.CustomAuthenticationEntryPoint;
+import com.ssafy.soljigi.base.config.custom.JwtExceptionFilter;
 import com.ssafy.soljigi.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
