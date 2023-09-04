@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 	@GetMapping("/main")
 	public String mainPage() {
-		return "user/main";
+		return "view/main";
 	}
-	
+
+	@GetMapping("/login")
+	public String loginPage() {
+		return "view/login";
+	}
 }

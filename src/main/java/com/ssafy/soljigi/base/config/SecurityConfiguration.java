@@ -38,7 +38,8 @@ public class SecurityConfiguration {
 	};
 
 	private static final String[] GET_AUTHENTICATED = {
-		"/view/main"
+		"/view/main",
+		"/view/login"
 	};
 
 	@Bean
@@ -50,17 +51,15 @@ public class SecurityConfiguration {
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).permitAll()
-				.requestMatchers(HttpMethod.GET, "/view/white_error").permitAll()
 				.anyRequest().authenticated());
 
 		log.warn("2. authorizeHttpRequests");
 
+		// .exceptionHandling(manager ->
+		// 	manager.accessDeniedHandler(new CustomAccessDeniedHandler()))
 		http.exceptionHandling(manager ->
-				manager.accessDeniedPage("/view/white_error"))
-			.exceptionHandling(manager ->
-				manager.accessDeniedHandler(new CustomAccessDeniedHandler()))
-			.exceptionHandling(manager ->
-				manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+			manager.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+				.accessDeniedHandler(new CustomAccessDeniedHandler()));
 
 		log.warn("3. exceptionHanding");
 
