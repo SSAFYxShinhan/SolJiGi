@@ -9,13 +9,14 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.soljigi.base.error.ErrorCode;
-import com.ssafy.soljigi.user.dto.response.Response;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 인증이 안된 익명의 사용자가 인증이 필요한 엔드포인트로 접근하게 된다면 401
+ */
 @Slf4j
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -23,14 +24,14 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 		AuthenticationException authException) throws IOException {
 
-		log.warn("CustomAuthenticationEntryPoint start");
+		log.warn("1. CustomAuthenticationEntryPoint start");
 		ObjectMapper objectMapper = new ObjectMapper();
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		response.getWriter()
 			.write(objectMapper.writeValueAsString(
-				ResponseEntity.badRequest().body(Response.error(ErrorCode.UNREACHABLE_SERVICE))));
-		log.warn("CustomAuthenticationEntryPoint end" + response);
+				ResponseEntity.badRequest().body(authException.getMessage())));
+		log.warn("2. CustomAuthenticationEntryPoint end " + response);
 	}
 }
