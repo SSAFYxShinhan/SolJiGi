@@ -25,10 +25,10 @@ public class QuizService {
 
 	@Transactional
 	public void saveQuiz(QuizDto quizDto) {
-		Quiz quiz = Quiz.builder()
+		Quiz quiz = Quiz.choiceBuilder()
 			.question(quizDto.getQuestion())
-			.options(quizDto.getOptions())
-			.answer(quizDto.getAnswer())
+			.choice(quizDto.getChoice())
+			.choiceAnswer(quizDto.getChoiceAnswer())
 			.build();
 		quizRepository.save(quiz);
 	}
