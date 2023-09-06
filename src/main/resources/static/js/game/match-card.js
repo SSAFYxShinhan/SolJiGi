@@ -23,10 +23,9 @@ const imgSource = [
 ];
 
 Object.freeze(imgSource);
-Object.freeze(state);
 
 class MatchCardGame {
-    constructor(container, row, col, timeLimit) {
+    constructor(container, row, col, timeLimit, result) {
         this.CARD_SHOW_TIME = 3;
         this.container = container;
         this.R = row;
@@ -41,9 +40,9 @@ class MatchCardGame {
         this.allMatchCount = 0;
         this.countDownTimer = null;
         this.gameState = null;
-        this.timeout = null;
         this.R = row;
         this.C = col;
+        this.result = result;
         this.gameInitialize();
 
         this.timerElement = document.querySelector('.match-card__timer');
@@ -51,6 +50,7 @@ class MatchCardGame {
             [-1, -1],
             [-1, -1],
         ];
+        this.start();
     }
 
     countDown(timerElement, time, countDownTimer) {
@@ -61,6 +61,7 @@ class MatchCardGame {
             }
             this.container.innerHTML = '';
             alert('시간 초과입니다!');
+            this.gameState = state.READY;
         }
     }
 
@@ -73,7 +74,7 @@ class MatchCardGame {
     start() {
         this.gameState = state.GAME;
         this.cardAllOpen();
-        this.timeout = setTimeout(() => {
+        setTimeout(() => {
             this.cardAllHide();
             this.timer = this.timeLimit;
             this.timerElement.innerText = this.timer;
@@ -137,6 +138,7 @@ class MatchCardGame {
                 setTimeout(() => {
                     this.clearTimer();
                     alert('성공');
+                    ++result[gameType.MATCH_CARD];
                     this.container.innerHTML = '';
                     this.gameState = state.READY;
                 }, 500);
