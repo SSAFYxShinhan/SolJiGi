@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.quiz.entity;
+package com.ssafy.soljigi.game.entity;
 
 import java.util.List;
 

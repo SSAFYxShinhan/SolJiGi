@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.quiz.repository;
+package com.ssafy.soljigi.game.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ssafy.soljigi.game.quiz.entity.Quiz;
+import com.ssafy.soljigi.game.entity.Quiz;
 
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
