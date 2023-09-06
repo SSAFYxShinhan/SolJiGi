@@ -1,11 +1,10 @@
 emojis = ['😀', '😁', '😂', '😍', '😎', '🤩', '😴', '🥱', '🙄', '😜', '😳'];
 
 class SamePictureGame {
-    constructor(container, row, col, timeLimit) {
+    constructor(container, row, col, timeLimit, result) {
         this.container = container;
         this.R = row;
         this.C = col;
-        this.timeLimit = timeLimit;
         this.time = timeLimit;
         this.countDownTimer = null;
         this.cardEmoji = new Array(row * col);
@@ -17,6 +16,7 @@ class SamePictureGame {
         this.timerElement = document.querySelector('.same-picture__timer');
         this.cards = document.querySelectorAll('.same-picture__card');
         this.submitBtn = document.querySelector('.same-picture__submit-btn');
+        this.result = result;
 
         this.submitBtn.addEventListener('click', () => {
             if (this.gameState !== state.GAME) return;
@@ -25,6 +25,7 @@ class SamePictureGame {
             this.clearTimer();
             this.container.innerHTML = '';
             if (this.checkAnswer()) {
+                ++result[gameType.SAME_PICTURE];
                 alert('정답입니다!');
             } else {
                 alert('오답입니다!');
@@ -44,6 +45,7 @@ class SamePictureGame {
                 }
             });
         }
+        this.start();
     }
 
     start() {
@@ -121,6 +123,7 @@ class SamePictureGame {
             }
             alert('시간 초과입니다!');
             this.container.innerHTML = '';
+            this.gameState = state.READY;
         }
     }
 
