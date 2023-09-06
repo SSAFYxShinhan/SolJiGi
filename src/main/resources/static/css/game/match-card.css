@@ -20,9 +20,9 @@
 }
 
 .match-card__flip {
-    width: 200px;
-    height: 200px;
-    perspective: 1100px;
+    width: 100px;
+    height: 100px;
+    perspective: 600px;
     margin: 5px;
 }
 
