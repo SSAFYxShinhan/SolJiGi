@@ -1,6 +1,8 @@
-package com.ssafy.soljigi.game.quiz.service;
+package com.ssafy.soljigi.game.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.ssafy.soljigi.game.quiz.dto.TransactionResponse;
-import com.ssafy.soljigi.game.quiz.entity.Quiz;
-import com.ssafy.soljigi.game.quiz.repository.TransactionRepository;
+import com.ssafy.soljigi.game.dto.QuizDto;
+import com.ssafy.soljigi.game.dto.TransactionResponse;
+import com.ssafy.soljigi.game.entity.Quiz;
+import com.ssafy.soljigi.game.repository.QuizRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,40 +22,61 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TransactionService {
-
-	private final TransactionRepository transactionRepository;
+public class QuizService {
 
 	private final String TRANSACTION_URL = "https://shbhack.shinhan.com/v1/search/transaction";
+	private final QuizRepository quizRepository;
 
-	public void makeQuizzes(TransactionResponse response) {
-		List<TransactionResponse.DataBody.TransactionDetail> details = response.getDataBody().getTransactionDetails();
+	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) {
+		List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
+			.map(QuizDto::of)
+			.toList();
+		List<QuizDto> transactionQuizzes = makeTransactionQuizzes(userId, transaction);
 
-		for (TransactionResponse.DataBody.TransactionDetail detail : details) {
-			String content = detail.getContent();
+		randomQuizzes.addAll(transactionQuizzes);
+		Collections.shuffle(randomQuizzes);
+		return randomQuizzes;
+	}
 
-			Quiz quiz = Quiz.choiceBuilder()
-				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
-				.choice(Arrays.asList("0~1900", "2000~4900", "5000~7900", "8000~9900"))
-				.choiceAnswer(1)
-				.build();
-			saveQuiz(quiz);
-
-			if (content.equals("김밥천국")) {
-				Quiz quiz1 = Quiz.choiceBuilder()
-					.question("최근에 어디에서 식사를 하셨나요?")
-					.choice(Arrays.asList("스타벅스", "김밥천국", "고기집", "횟집"))
-					.choiceAnswer(1)
-					.build();
-
-				saveQuiz(quiz1);
-			}
-		}
+	public List<Quiz> getRandomQuizzes(int count) {
+		return quizRepository.findRandomQuizzes(count);
 	}
 
 	@Transactional
-	public void saveQuiz(Quiz quiz) {
-		transactionRepository.save(quiz);
+	public void saveQuiz(QuizDto quizDto) {
+		Quiz quiz = Quiz.choiceBuilder()
+			.question(quizDto.getQuestion())
+			.choice(quizDto.getChoice())
+			.choiceAnswer(quizDto.getChoiceAnswer())
+			.build();
+		quizRepository.save(quiz);
+	}
+
+	public List<QuizDto> makeTransactionQuizzes(Long userId, int count) {
+		TransactionResponse response = fetchTransactionData(userId);
+		List<TransactionResponse.DataBody.TransactionDetail> details = response.getDataBody().getTransactionDetails();
+
+		List<QuizDto> quizzes = new ArrayList<>();
+		for (TransactionResponse.DataBody.TransactionDetail detail : details) {
+			String content = detail.getContent();
+
+			quizzes.add(QuizDto.builder()
+				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
+				.choice(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999"))
+				.choiceAnswer(1)
+				.build());
+
+			if (content.equals("김밥천국")) {
+				quizzes.add(QuizDto.builder()
+					.question("최근에 어디에서 식사를 하셨나요?")
+					.choice(Arrays.asList("스타벅스", "김밥천국", "고기집", "횟집"))
+					.choiceAnswer(1)
+					.build());
+			}
+		}
+		Collections.shuffle(quizzes);
+
+		return quizzes.subList(0, Math.min(count, quizzes.size()));
 	}
 
 	public TransactionResponse fetchTransactionData(Long userId) {
@@ -84,5 +108,4 @@ public class TransactionService {
 
 		return response;
 	}
-
 }
