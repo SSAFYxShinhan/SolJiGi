@@ -1,4 +1,4 @@
-const imgSourcePrefix = './img/friends/';
+const imgSourcePrefix = 'img/friends/';
 const imgSource = [
     'front1.png',
     'front2.png',
@@ -26,12 +26,11 @@ Object.freeze(imgSource);
 Object.freeze(state);
 
 class MatchCardGame {
-    constructor(row, col, timeLimit) {
+    constructor(container, row, col, timeLimit) {
         this.CARD_SHOW_TIME = 3;
-        this.container = document.querySelector('.gameContainer');
+        this.container = container;
         this.R = row;
         this.C = col;
-        this.timeLimit = timeLimit;
         this.timeLimit = timeLimit;
         this.time = timeLimit;
         this.gameMap = null;
@@ -42,11 +41,11 @@ class MatchCardGame {
         this.allMatchCount = 0;
         this.countDownTimer = null;
         this.gameState = null;
+        this.timeout = null;
         this.R = row;
         this.C = col;
         this.gameInitialize();
 
-        this.gameContent = document.querySelector('.match-card__content');
         this.timerElement = document.querySelector('.match-card__timer');
         this.selectedCursor = [
             [-1, -1],
@@ -56,13 +55,12 @@ class MatchCardGame {
 
     countDown(timerElement, time, countDownTimer) {
         timerElement.innerText = time;
-        if (time == 0) {
+        if (time === 0) {
             if (countDownTimer != null) {
                 clearInterval(countDownTimer);
             }
             this.container.innerHTML = '';
             alert('시간 초과입니다!');
-            return;
         }
     }
 
@@ -75,7 +73,7 @@ class MatchCardGame {
     start() {
         this.gameState = state.GAME;
         this.cardAllOpen();
-        setTimeout(() => {
+        this.timeout = setTimeout(() => {
             this.cardAllHide();
             this.timer = this.timeLimit;
             this.timerElement.innerText = this.timer;
@@ -88,6 +86,7 @@ class MatchCardGame {
                     ),
                 1000
             );
+            console.log(this.countDownTimer);
         }, this.CARD_SHOW_TIME * 1000);
     }
 
@@ -173,7 +172,6 @@ class MatchCardGame {
         const contentElement = document.createElement('div');
         contentElement.classList.add('match-card__content');
 
-        console.log(1, this.R);
         for (let i = 0, idx = 0; i < this.R; ++i) {
             const rowElement = document.createElement('div');
             rowElement.classList.add('match-card__content-row');
@@ -220,5 +218,3 @@ class MatchCardGame {
         return flipElement;
     }
 }
-
-new MatchCardGame(4, 4, 30).start();

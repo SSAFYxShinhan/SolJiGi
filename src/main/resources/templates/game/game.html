@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Game</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/game/match-card.css" rel="stylesheet">
+    <link href="/css/game/same-picture.css" rel="stylesheet">
+    <script src="/js/script.js"></script>
+    <script src="/js/game/match-card.js"></script>
+    <script src="/js/game/same-picture.js"></script>
+
+    <style>
+        .gameContainer {
+            background-color: lightgray;
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<div id="layout">
+    <form>
+        <div class="game-header">
+            <div class="game-timer">
+
+            </div>
+        </div>
+        <div class="gameContainer">
+
+        </div>
+    </form>
+    <button class="game-next-btn" onclick="nextGame()">Next</button>
+</div>
+
+<script th:inline="javascript">
+    const GAME_MATCH_CARD = 0;
+    const GAME_SAME_PICTURE = 1;
+    const container = document.querySelector('.gameContainer');
+    const questions = [[${quizzes}]];
+    const matchCardCount = [[${matchCard}]];
+    const samePictureCount = [[${samePicture}]];
+    let currGame;
+    let countDownTimer;
+
+    for (let i = 0; i < matchCardCount; ++i)
+        questions.push(GAME_MATCH_CARD);
+    for (let i = 0; i < samePictureCount; ++i)
+        questions.push(GAME_SAME_PICTURE);
+
+    shuffle(questions);
+
+    console.log(questions);
+
+    let gameIdx = 0;
+    updateView(questions[gameIdx]);
+
+    function updateView(game) {
+        if (game === GAME_MATCH_CARD) {
+            currGame = new MatchCardGame(container, 4, 4, 5);
+        } else if (game === GAME_SAME_PICTURE) {
+            currGame = new SamePictureGame(container, 5, 5, 5);
+        } else {
+            return;
+        }
+        currGame.start();
+    }
+
+    function nextGame() {
+        console.log(currGame.gameState);
+        if (currGame && currGame.gameState === state.GAME) {
+            alert('아직 진행중인 게임이 있습니다.');
+            return;
+        }
+        updateView(questions[++gameIdx]);
+    }
+
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+</script>
+
+</body>
+
+</html>
