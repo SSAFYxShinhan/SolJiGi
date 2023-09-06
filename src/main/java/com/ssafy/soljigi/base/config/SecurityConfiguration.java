@@ -51,7 +51,7 @@ public class SecurityConfiguration {
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, "/view/white_error").permitAll()
-				.anyRequest().authenticated());
+				.anyRequest().permitAll());
 
 		log.warn("2. authorizeHttpRequests");
 
