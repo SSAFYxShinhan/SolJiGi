@@ -1,5 +1,5 @@
 class ChoiceQuizGame {
-    constructor(container, quiz, timeLimit, result) {
+    constructor(container, quiz, timeLimit, result, nextEvent) {
         this.container = container;
         this.quiz = quiz;
         this.time = timeLimit;
@@ -7,6 +7,7 @@ class ChoiceQuizGame {
         this.timerElement = document.querySelector(".choice-quiz__timer");
         this.gameState = state.GAME;
         this.result = result;
+        this.nextEvent = nextEvent;
 
         this.countDownTimer = setInterval(
             () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -24,6 +25,7 @@ class ChoiceQuizGame {
                 }
                 this.container.innerHTML = "";
                 this.gameState = state.READY;
+                this.nextEvent();
             });
         }
     }
@@ -37,6 +39,7 @@ class ChoiceQuizGame {
             this.container.innerHTML = "";
             alert("시간 초과입니다!");
             this.gameState = state.READY;
+            this.nextEvent();
         }
     }
 
@@ -53,10 +56,10 @@ class ChoiceQuizGame {
         <div class="choice-quiz__timer">${this.time}</div>
     </div>
     <div class="choice-quiz__content">
-    <span class="choice-quiz__question">${this.quiz.question}</span>
-    <div class="choice-quiz_btn-container">`;
+    <div class="choice-quiz__question"><span>${this.quiz.question}</span></div>
+    <div class="choice-quiz__btn-container">`;
         for (const chc of this.quiz.choice) {
-            content += `<button class="choice-quiz__choice">${chc}</button>`;
+            content += `<div class="choice-quiz__choice"><span>${chc}</span></div>`;
         }
         content += `
         </div>

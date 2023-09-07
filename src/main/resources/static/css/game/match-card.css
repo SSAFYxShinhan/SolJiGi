@@ -1,18 +1,21 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 .match-card__header {
-    height: 100px;
     display: flex;
     align-items: center;
+    height: 80px;
 }
 
 .match-card__timer {
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .match-card__content {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 8;
 }
 
 .match-card__content-row {
@@ -20,8 +23,8 @@
 }
 
 .match-card__flip {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     perspective: 600px;
     margin: 5px;
 }
