@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.transaction.dto;
+package com.ssafy.soljigi.game.quiz.dto;
 
 import java.util.List;
 

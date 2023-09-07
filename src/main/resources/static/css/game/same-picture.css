@@ -1,20 +1,6 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-}
 .same-picture__header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -22,21 +8,21 @@ body {
 }
 
 .same-picture__timer {
-    margin: 0px 10px;
+    margin: 10px 10px;
 }
 
 .same-picture__problem {
     font-size: 30px;
 }
 
-.same-picture__cards {
+.same-picture__content {
     display: flex;
     align-items: center;
     width: 100%;
     flex-direction: column;
 }
 
-.same-picture__cards > div {
+.same-picture__content > div {
     display: flex;
 }
 
@@ -64,11 +50,12 @@ body {
     background-color: rgb(249, 255, 61);
 }
 
-.same-picture__btn-container {
+.same-picture__footer {
     display: flex;
+    justify-content: center;
 }
 
-.same-picture__btn {
-    width: 80px;
+.same-picture__submit-btn {
     margin: 5px;
+    font-size: 16px;
 }

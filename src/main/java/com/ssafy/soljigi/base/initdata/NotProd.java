@@ -30,14 +30,14 @@ public class NotProd {
 		private final QuizRepository quizRepository;
 
 		public void dbInit() {
-			int quizCount = 100;
+			int quizCount = 9;
 
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
-					Quiz.builder()
+					Quiz.choiceBuilder()
 						.question("quiz" + i)
-						.options(Arrays.asList("1", "2", "3", "4"))
-						.answer(0)
+						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
+						.choiceAnswer(0)
 						.build()
 				);
 			}
