@@ -24,13 +24,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class QuizService {
 
-	private final String TRANSACTION_URL = "https://shbhack.shinhan.com/v1/search/transaction";
+	// private final String TRANSACTION_URL = "https://shbhack.shinhan.com/v1/search/transaction";
+	private final String TRANSACTION_URL = "http://localhost:8080/v1/search/transaction";
 	private final QuizRepository quizRepository;
 
 	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) {
-		List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
-			.map(QuizDto::of)
-			.toList();
+		// List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
+		// 	.map(QuizDto::of)
+		// 	.toList();
+		List<QuizDto> randomQuizzes = new ArrayList<>(getRandomQuizzes(finance).stream().map(QuizDto::of).toList());
+
 		List<QuizDto> transactionQuizzes = makeTransactionQuizzes(userId, transaction);
 
 		randomQuizzes.addAll(transactionQuizzes);
@@ -53,8 +56,12 @@ public class QuizService {
 	}
 
 	public List<QuizDto> makeTransactionQuizzes(Long userId, int count) {
-		TransactionResponse response = fetchTransactionData(userId);
-		List<TransactionResponse.DataBody.TransactionDetail> details = response.getDataBody().getTransactionDetails();
+		List<TransactionResponse.DataBody.TransactionDetail> details;
+		try {
+			details = fetchTransactionData(userId);
+		} catch (IllegalArgumentException e) {
+			return new ArrayList<>();
+		}
 
 		List<QuizDto> quizzes = new ArrayList<>();
 		for (TransactionResponse.DataBody.TransactionDetail detail : details) {
@@ -62,14 +69,14 @@ public class QuizService {
 
 			quizzes.add(QuizDto.builder()
 				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
-				.choice(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999"))
+				.choice(new ArrayList<>(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999")))
 				.choiceAnswer(1)
 				.build());
 
 			if (content.equals("김밥천국")) {
 				quizzes.add(QuizDto.builder()
 					.question("최근에 어디에서 식사를 하셨나요?")
-					.choice(Arrays.asList("스타벅스", "김밥천국", "고기집", "횟집"))
+					.choice(new ArrayList<>(Arrays.asList("스타벅스", "김밥천국", "고기집", "횟집")))
 					.choiceAnswer(1)
 					.build());
 			}
@@ -79,13 +86,13 @@ public class QuizService {
 		return quizzes.subList(0, Math.min(count, quizzes.size()));
 	}
 
-	public TransactionResponse fetchTransactionData(Long userId) {
+	public List<TransactionResponse.DataBody.TransactionDetail> fetchTransactionData(Long userId) {
 		RestTemplate restTemplate = new RestTemplate();
 
 		/**
 		 * TO DO : 회원의 아이디로 계좌번호 가져오기
 		 */
-		String accountNumber = "110184999999";
+		String accountNumber = "110184888888";
 
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();
@@ -97,15 +104,9 @@ public class QuizService {
 			TransactionResponse.class);
 
 		if (response.getDataHeader().getSuccessCode() == 1) {
-			return null;
+			throw new IllegalArgumentException();
 		}
 
-		TransactionResponse.DataBody body = response.getDataBody();
-		List<TransactionResponse.DataBody.TransactionDetail> details = body.getTransactionDetails();
-		for (TransactionResponse.DataBody.TransactionDetail d : details) {
-			log.info("d={}", d);
-		}
-
-		return response;
+		return response.getDataBody().getTransactionDetails();
 	}
 }
