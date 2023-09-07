@@ -23,9 +23,11 @@ public class ApiController {
 	public AccountTransactionDto search(@RequestBody SearchRequest request) {
 		log.info("{}", request);
 		if (!request.getDataHeader().getApikey().equals(apiKey)) {
-			return null;
+			return AccountTransactionDto.ofFail();
 		}
-		AccountTransactionDto resp = null;
+
+		AccountTransactionDto resp = AccountTransactionDto.ofFail();
+
 		try {
 			resp = accountService.get(request.getDataBody().getAccountNumber());
 		} catch (IllegalArgumentException e) {

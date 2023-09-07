@@ -18,12 +18,9 @@ public class AccountService {
 		accountRepository.save(account);
 	}
 
-	public Account getAccountByNumber(String accountNumber) {
-		return accountRepository.findById(accountNumber).orElse(null);
-	}
-
 	public AccountTransactionDto get(String accountNumber) {
-		Account account = accountRepository.findById(accountNumber).orElseThrow(IllegalArgumentException::new);
+		Account account = accountRepository.findByAccountNumber(accountNumber)
+			.orElseThrow(IllegalArgumentException::new);
 		return AccountTransactionDto.of(account);
 	}
 }
