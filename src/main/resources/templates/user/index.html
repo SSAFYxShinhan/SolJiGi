@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -9,42 +9,37 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <!--    <link href="/user/img/icon/favicon.ico" rel="icon">-->
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+            rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
-    <!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
-
-    <link th:href="@{/user/lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{/user/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-    <link th:href="@{/user/lib/lightbox/css/lightbox.css}" rel="stylesheet">
+    <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
+    <link href="../view-data/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../view-data/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../view-data/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-    <!--    <link th:href="@{/user/css/bootstrap.min.css}" rel="stylesheet">-->
+    <link href="../view-data/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link th:href="@{/user/css/style.css}" rel="stylesheet">
+    <link href="../view-data/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 <!-- Spinner Start -->
-<div id="spinner">
-    <!--     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">-->
-    <!--    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>-->
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
 </div>
 <!-- Spinner End -->
 
@@ -115,11 +110,11 @@
 
 <!-- Carousel Start -->
 <a name="index"></a>
-<div class="container-fluid px-0 mb-5">
+<div class="container-fluid px-0 mb-5" >
     <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="w-100 opacity-50" th:src="@{/user/img/main_pic1.jpg}" alt="Image">
+                <img class="w-100" style="{opacity: 30}" src="../view-data/img/main_pic1.jpg" alt="Image">
                 <div class="carousel-caption">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -128,7 +123,7 @@
                                     <strong>치매예방 서비스</strong>
                                 </p>
                                 <h1 class="display-1 text-white mb-4 animated slideInRight">하나의 계좌로, 건강까지</h1>
-                                <a href="signin.html"
+                                <a th:href="@{/view/signin}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스 시작하기</a>
                             </div>
                         </div>
@@ -136,7 +131,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="w-70" th:src="@{/user/img/main_pic4.jpg}" alt="Image">
+                <img class="w-70" src="../view-data/img/main_pic4.jpg" alt="Image">
                 <div class="carousel-caption">
                     <div class="container">
                         <div class="row justify-content-end">
@@ -144,7 +139,7 @@
                                 <p class="fs-4 text-white animated slideInLeft">신한은행<strong>치매진단</strong>
                                 </p>
                                 <h1 class="display-1 text-white mb-5 animated slideInLeft">진단서비스 제공</h1>
-                                <a href="account.html"
+                                <a th:href="@{/view/one-auth}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">진단 서비스 시작하기</a>
                             </div>
                         </div>
@@ -173,7 +168,7 @@
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                 <div class="feature-item border h-100 p-5">
                     <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                        <img class="img-fluid" th:src="@{/user/img/icon/icon-1.png}" alt="Icon">
+                        <img class="img-fluid" src="../view-data/img/icon/icon-1.png" alt="Icon">
                     </div>
                     <h5 class="mb-3">운동을 통한 치매발병률 감소</h5>
                     <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
@@ -182,7 +177,7 @@
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
                 <div class="feature-item border h-100 p-5">
                     <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                        <img class="img-fluid" th:src="@{/user/img/icon/icon-2.png}" alt="Icon">
+                        <img class="img-fluid" src="../view-data/img/icon/icon-2.png" alt="Icon">
                     </div>
                     <h5 class="mb-3">퀴즈를 통한 뇌세포 활동 촉진</h5>
                     <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
@@ -191,7 +186,7 @@
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
                 <div class="feature-item border h-100 p-5">
                     <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                        <img class="img-fluid" th:src="@{/user/img/icon/icon-3.png}" alt="Icon">
+                        <img class="img-fluid" src="../view-data/img/icon/icon-3.png" alt="Icon">
                     </div>
                     <h5 class="mb-3">거래내역 기반 개인 경험의 기억테스트</h5>
                     <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
@@ -200,7 +195,7 @@
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
                 <div class="feature-item border h-100 p-5">
                     <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-                        <img class="img-fluid" th:src="@{/user/img/icon/icon-4.png}" alt="Icon">
+                        <img class="img-fluid" src="../view-data/img/icon/icon-4.png" alt="Icon">
                     </div>
                     <h5 class="mb-3">언제 어디서든 사용가능</h5>
                     <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
@@ -232,12 +227,12 @@
                         diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
                     <div class="row g-5 pt-2 mb-5">
                         <div class="col-sm-6">
-                            <img class="img-fluid mb-4" th:src="@{/user/img/icon/icon-5.png}" alt="">
+                            <img class="img-fluid mb-4" src="../view-data/img/icon/icon-5.png" alt="">
                             <h5 class="mb-3">Managed Services</h5>
                             <span>Clita erat ipsum et lorem et sit sed stet lorem</span>
                         </div>
                         <div class="col-sm-6">
-                            <img class="img-fluid mb-4" th:src="@{/user/img/icon/icon-2.png}" alt="">
+                            <img class="img-fluid mb-4" src="../view-data/img/icon/icon-2.png" alt="">
                             <h5 class="mb-3">Dedicated Experts</h5>
                             <span>Clita erat ipsum et lorem et sit sed stet lorem</span>
                         </div>
@@ -287,11 +282,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-5.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-5.png" alt="Icon">
                         </div>
-                        <h5 class="mb-3">Digital Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                        <h5 class="mb-3">Digital Marketing</h4>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -304,11 +299,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-6.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-6.png" alt="Icon">
                         </div>
-                        <h5 class="mb-3">Internet Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                        <h5 class="mb-3">Internet Marketing</h4>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -321,11 +316,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-7.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-7.png" alt="Icon">
                         </div>
-                        <h5 class="mb-3">Content Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                        <h5 class="mb-3">Content Marketing</h4>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -338,11 +333,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-8.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-8.png" alt="Icon">
                         </div>
-                        <h5 class="mb-3">Social Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                        <h5 class="mb-3">Social Marketing</h4>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -355,11 +350,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-8.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-9.png" alt="Icon">
                         </div>
                         <h5 class="mb-3">B2B Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -372,11 +367,11 @@
                     <div class="service-text rounded p-5">
                         <div class="btn-square bg-light rounded-circle mx-auto mb-4"
                              style="width: 64px; height: 64px;">
-                            <img class="img-fluid" th:src="@{/user/img/icon/icon-8.png}" alt="Icon">
+                            <img class="img-fluid" src="../../static/view-data/img/icon/icon-10.png" alt="Icon">
                         </div>
                         <h5 class="mb-3">E-mail Marketing</h5>
-                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                            stet</p>
+                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                                stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -402,9 +397,9 @@
         <div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
             <div class="project-item mb-5">
                 <div class="position-relative">
-                    <img class="img-fluid" th:src="@{/user/img/project-1.jpg}" alt="">
+                    <img class="img-fluid" src="../../static/view-data/img/project-1.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-1.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -417,9 +412,9 @@
             </div>
             <div class="project-item mb-5">
                 <div class="position-relative">
-                    <img class="img-fluid" th:src="@{/user/img/project-2.jpg}" alt="">
+                    <img class="img-fluid" src="../../static/view-data/img/project-2.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-2.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -432,9 +427,9 @@
             </div>
             <div class="project-item mb-5">
                 <div class="position-relative">
-                    <img class="img-fluid" th:src="@{/user/img/project-3.jpg}" alt="">
+                    <img class="img-fluid" src="../../static/view-data/img/project-3.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-3.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -447,9 +442,9 @@
             </div>
             <div class="project-item mb-5">
                 <div class="position-relative">
-                    <img class="img-fluid" th:src="@{/user/img/project-4.jpg}" alt="">
+                    <img class="img-fluid" src="../../static/view-data/img/project-4.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-4.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -544,7 +539,7 @@
         <div class="row g-4">
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="team-item rounded overflow-hidden pb-4">
-                    <img class="img-fluid mb-4" th:src="@{/user/img/team-1.jpg}" alt="">
+                    <img class="img-fluid mb-4" src="../../static/view-data/img/team-1.jpg" alt="">
                     <h5>Alex Robin</h5>
                     <span class="text-primary">Founder & CEO</span>
                     <ul class="team-social">
@@ -557,7 +552,7 @@
             </div>
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="team-item rounded overflow-hidden pb-4">
-                    <img class="img-fluid mb-4" th:src="@{/user/img/team-2.jpg}" alt="">
+                    <img class="img-fluid mb-4" src="../../static/view-data/img/team-2.jpg" alt="">
                     <h5>Adam Crew</h5>
                     <span class="text-primary">Co Founder</span>
                     <ul class="team-social">
@@ -570,7 +565,7 @@
             </div>
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="team-item rounded overflow-hidden pb-4">
-                    <img class="img-fluid mb-4" th:src="@{/user/img/team-3.jpg}" alt="">
+                    <img class="img-fluid mb-4" src="../../static/view-data/img/team-3.jpg" alt="">
                     <h5>Boris Johnson</h5>
                     <span class="text-primary">Executive Manager</span>
                     <ul class="team-social">
@@ -583,7 +578,7 @@
             </div>
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                 <div class="team-item rounded overflow-hidden pb-4">
-                    <img class="img-fluid mb-4" th:src="@{/user/img/team-4.jpg}" alt="">
+                    <img class="img-fluid mb-4" src="../../static/view-data/img/team-4.jpg" alt="">
                     <h5>Robert Jordan</h5>
                     <span class="text-primary">Digital Marketer</span>
                     <ul class="team-social">
@@ -610,28 +605,28 @@
         </div>
         <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
             <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                <img class="mb-4" th:src="@{/user/img/testimonial-1.jpg}" alt="">
+                <img class="mb-4" src="../../static/view-data/img/testimonial-1.jpg" alt="">
                 <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
                     sit, sed stet lorem sit clita duo justo</p>
                 <h5>Client Name</h5>
                 <span class="text-primary">Profession</span>
             </div>
             <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                <img class="mb-4" th:src="@{/user/img/testimonial-2.jpg}" alt="">
+                <img class="mb-4" src="../../static/view-data/img/testimonial-2.jpg" alt="">
                 <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
                     sit, sed stet lorem sit clita duo justo</p>
                 <h5>Client Name</h5>
                 <span class="text-primary">Profession</span>
             </div>
             <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                <img class="mb-4" th:src="@{/user/img/testimonial-3.jpg}" alt="">
+                <img class="mb-4" src="../../static/view-data/img/testimonial-3.jpg" alt="">
                 <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
                     sit, sed stet lorem sit clita duo justo</p>
                 <h5>Client Name</h5>
                 <span class="text-primary">Profession</span>
             </div>
             <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                <img class="mb-4" th:src="@{/user/img/testimonial-4.jpg}" alt="">
+                <img class="mb-4" src="../../static/view-data/img/testimonial-4.jpg" alt="">
                 <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
                     sit, sed stet lorem sit clita duo justo</p>
                 <h5>Client Name</h5>
@@ -721,22 +716,15 @@
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="/user/lib/wow/wow.min.js"></script>
-<script src="/user/lib/easing/easing.min.js"></script>
-<script src="/user/lib/waypoints/waypoints.min.js"></script>
-<script src="/user/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="/user/lib/lightbox/js/lightbox.min.js"></script>
-
-<!--<script th:src="@{/user/lib/wow/wow.min.js}"></script>-->
-<!--<script th:src="@{/user/lib/easing/easing.min.js}"></script>-->
-<!--<script th:src="@{/user/lib/waypoints/waypoints.min.js}"></script>-->
-<!--<script th:src="@{/user/lib/owlcarousel/owl.carousel.min.js}"></script>-->
-<!--<script th:src="@{/user/lib/lightbox/js/lightbox.min.js}"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../view-data/lib/wow/wow.min.js"></script>
+<script src="../view-data/lib/easing/easing.min.js"></script>
+<script src="../view-data/lib/waypoints/waypoints.min.js"></script>
+<script src="../view-data/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../view-data/lib/lightbox/js/lightbox.min.js"></script>
 
 <!-- Template Javascript -->
+<script src="../view-data/js/main.js"></script>
 </body>
 
 </html>

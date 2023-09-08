@@ -16,4 +16,14 @@ public class ViewController {
 	public String mainPage() {
 		return "user/index";
 	}
+
+	@GetMapping("/signin")
+	public String signInPage() {
+		return "user/signin";
+	}
+
+	@GetMapping("/one-auth")
+	public String oneAuthPage() {
+		return "user/one-auth";
+	}
 }
