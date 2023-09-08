@@ -33,6 +33,31 @@
 
     <!-- Template Stylesheet -->
     <link href="../view-data/css/style.css" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'GongGothicMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+            font-weight: 100;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'GongGothicMedium';
+        }
+
+        h1 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h2 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h5 {
+            font-family: 'GongGothicMedium';
+        }
+    </style>
 </head>
 
 <body>
@@ -110,7 +135,7 @@
 
 <!-- Carousel Start -->
 <a name="index"></a>
-<div class="container-fluid px-0 mb-5" >
+<div class="container-fluid px-0 mb-5">
     <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -118,13 +143,23 @@
                 <div class="carousel-caption">
                     <div class="container">
                         <div class="row justify-content-start">
-                            <div class="col-lg-7 text-start">
+                            <div class="flex text-start">
                                 <p class="fs-4 text-white animated slideInRight">신한은행
-                                    <strong>치매예방 서비스</strong>
+                                    <strong style="background-color: blue;">치매예방 서비스</strong>
                                 </p>
-                                <h1 class="display-1 text-white mb-4 animated slideInRight">하나의 계좌로, 건강까지</h1>
+                                <div class="flex">
+                                    <p class="display-1 mb-4 animated slideInRight" style="color: blue;">하나의 계좌 <span
+                                            style="color: white;"
+                                            class="display-1  mb-4 animated slideInRight">로,</span></p>
+
+                                </div>
+                                <div class="flex">
+                                    <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
+                                        <span class="display-1 text-white animated slideInRight">까지</span></p>
+                                </div>
                                 <a th:href="@{/view/signin}"
-                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스 시작하기</a>
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
+                                    시작하기</a>
                             </div>
                         </div>
                     </div>
@@ -134,14 +169,18 @@
                 <img class="w-70" src="../view-data/img/main_pic4.jpg" alt="Image">
                 <div class="carousel-caption">
                     <div class="container">
-                        <div class="row justify-content-end">
-                            <div class="col-lg-7 text-end">
-                                <p class="fs-4 text-white animated slideInLeft">신한은행<strong>치매진단</strong>
-                                </p>
-                                <h1 class="display-1 text-white mb-5 animated slideInLeft">진단서비스 제공</h1>
-                                <a th:href="@{/view/one-auth}"
-                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">진단 서비스 시작하기</a>
+                        <div class="flex text-end">
+                            <p class="fs-4 text-white animated slideInLeft">신한은행<strong>치매진단</strong>
+                            </p>
+                            <div>
+                                <p class="display-1 text-white animated slideInLeft">진단서비스</p>
                             </div>
+                            <div>
+                                <p class="display-1 text-white animated slideInLeft">제공</p>
+                            </div>
+                            <a th:href="@{/view/one-auth}"
+                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">진단 서비스
+                                시작하기</a>
                         </div>
                     </div>
                 </div>
@@ -353,8 +392,8 @@
                             <img class="img-fluid" src="../../static/view-data/img/icon/icon-9.png" alt="Icon">
                         </div>
                         <h5 class="mb-3">B2B Marketing</h5>
-                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet</p>
+                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                            stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -370,8 +409,8 @@
                             <img class="img-fluid" src="../../static/view-data/img/icon/icon-10.png" alt="Icon">
                         </div>
                         <h5 class="mb-3">E-mail Marketing</h5>
-                            <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet</p>
+                        <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
+                            stet</p>
                     </div>
                     <div class="service-btn rounded-0 rounded-bottom">
                         <a class="text-primary fw-medium" href="">Read More<i
@@ -399,7 +438,8 @@
                 <div class="position-relative">
                     <img class="img-fluid" src="../../static/view-data/img/project-1.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-1.jpg"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                           href="../../static/view-data/img/project-1.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -414,7 +454,8 @@
                 <div class="position-relative">
                     <img class="img-fluid" src="../../static/view-data/img/project-2.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-2.jpg"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                           href="../../static/view-data/img/project-2.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -429,7 +470,8 @@
                 <div class="position-relative">
                     <img class="img-fluid" src="../../static/view-data/img/project-3.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-3.jpg"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                           href="../../static/view-data/img/project-3.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
@@ -444,7 +486,8 @@
                 <div class="position-relative">
                     <img class="img-fluid" src="../../static/view-data/img/project-4.jpg" alt="">
                     <div class="project-overlay">
-                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="../../static/view-data/img/project-4.jpg"
+                        <a class="btn btn-lg-square btn-light rounded-circle m-1"
+                           href="../../static/view-data/img/project-4.jpg"
                            data-lightbox="project"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
                                 class="fa fa-link"></i></a>
