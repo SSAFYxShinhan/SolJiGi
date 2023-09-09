@@ -85,7 +85,3 @@
 
 })(jQuery);
 
-
-document.getElementById("game-start-btn").addEventListener("click", function () {
-
-});
