@@ -60,6 +60,21 @@
 }
 
 .same-picture__submit-btn {
-    margin: 5px;
-    font-size: 16px;
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 25px 10px 10px 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 55px;
+    transition: all 200ms ease-in;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.same-picture__submit-btn:hover {
+    background-color: #0876bb;
 }
