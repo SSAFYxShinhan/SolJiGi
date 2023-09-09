@@ -10,38 +10,25 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/game/match-card.css" rel="stylesheet">
     <link href="/css/game/same-picture.css" rel="stylesheet">
+    <link href="/css/game/quiz.css" rel="stylesheet">
     <script src="/js/script.js"></script>
     <script src="/js/game/match-card.js"></script>
     <script src="/js/game/same-picture.js"></script>
     <script src="/js/game/choice-quiz.js"></script>
-
-    <style>
-        .gameContainer {
-            background-color: lightgray;
-            width: 600px;
-            height: 600px;
-        }
-    </style>
 </head>
 <body>
 <div id="layout">
-    <form>
-        <div class="game-header">
-            <div class="game-timer">
-
-            </div>
-        </div>
+    <div class="game-form">
         <div class="gameContainer">
 
         </div>
-    </form>
-    <button class="game-next-btn" onclick="nextGame()">Next</button>
+    </div>
 </div>
 
 <script th:inline="javascript">
     const quiz = {
         question: "이 문제의 답은?",
-        choice: ["1sf", "2sdfs", "3sdf", "4sdf"],
+        choice: ["보기1", "보기2", "보기3", "보기4"],
         answer: 1,
     };
 
@@ -50,6 +37,8 @@
     const questions = [[${quizzes}]];
     const matchCardCount = [[${matchCard}]];
     const samePictureCount = [[${samePicture}]];
+    const matchCardGameLevel = [[2, 2, 5], [2, 3, 6], [2, 4, 10], [2, 5, 15], [3, 4, 15], [4, 4, 20], ];
+    const samePictureGameLevel = [[2, 2, 5], [3, 3, 7], [3, 4, 8], [4, 4, 10], [4, 5, 10], [4, 6, 15], [5, 5, 15],];
     let currGame;
 
     for (let i = 0; i < matchCardCount; ++i)
@@ -65,24 +54,28 @@
     updateView(questions[gameIdx++]);
 
     function updateView(game) {
+        let r, c, time;
         if (game === gameType.MATCH_CARD) {
-            currGame = new MatchCardGame(container, 2, 2, 25, result);
+            const random = rand(0, matchCardGameLevel.length);
+            r = matchCardGameLevel[random][0];
+            c = matchCardGameLevel[random][1];
+            time = matchCardGameLevel[random][2];
+            currGame = new MatchCardGame(container, r, c, time, result, nextGame);
         } else if (game === gameType.SAME_PICTURE) {
-            currGame = new SamePictureGame(container, 2, 2, 25, result);
+            const random = rand(0, samePictureGameLevel.length);
+            r = samePictureGameLevel[random][0];
+            c = samePictureGameLevel[random][1];
+            time = samePictureGameLevel[random][2];
+            currGame = new SamePictureGame(container, r, c, time, result, nextGame);
         } else {
-            currGame = new ChoiceQuizGame(container, quiz, 5, result);
+            currGame = new ChoiceQuizGame(container, quiz, 10, result, nextGame);
         }
     }
 
     function nextGame() {
         if (gameIdx === questions.length) {
             alert('게임이 종료되었습니다.');
-            container.innerHTML = `'결과 화면 이동 로직 작성 ${result}`;
-            return;
-        }
-
-        if (currGame && currGame.gameState === state.GAME) {
-            alert('아직 진행중인 게임이 있습니다.');
+            container.innerHTML = `결과 화면 이동 로직 작성 ${result}`;
             return;
         }
         currGame = null;
@@ -90,7 +83,7 @@
     }
 
     function rand(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 
     function shuffle(array) {

@@ -25,8 +25,8 @@ const imgSource = [
 Object.freeze(imgSource);
 
 class MatchCardGame {
-    constructor(container, row, col, timeLimit, result) {
-        this.CARD_SHOW_TIME = 3;
+    constructor(container, row, col, timeLimit, result, nextEvent) {
+        this.CARD_SHOW_TIME = 5;
         this.container = container;
         this.R = row;
         this.C = col;
@@ -43,6 +43,7 @@ class MatchCardGame {
         this.R = row;
         this.C = col;
         this.result = result;
+        this.nextEvent = nextEvent;
         this.gameInitialize();
 
         this.timerElement = document.querySelector('.match-card__timer');
@@ -62,6 +63,7 @@ class MatchCardGame {
             this.container.innerHTML = '';
             alert('시간 초과입니다!');
             this.gameState = state.READY;
+            this.nextEvent();
         }
     }
 
@@ -141,6 +143,7 @@ class MatchCardGame {
                     ++result[gameType.MATCH_CARD];
                     this.container.innerHTML = '';
                     this.gameState = state.READY;
+                    this.nextEvent();
                 }, 500);
             }
         } else {
