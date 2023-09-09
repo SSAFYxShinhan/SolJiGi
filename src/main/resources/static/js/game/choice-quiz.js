@@ -17,7 +17,7 @@ class ChoiceQuizGame {
         for (let i = 0, length = this.choiceElements.length; i < length; ++i) {
             this.choiceElements[i].addEventListener("click", () => {
                 this.clearTimer();
-                if (i === this.quiz.answer) {
+                if (i === this.quiz.choiceAnswer) {
                     ++result[gameType.CHOICE_QUIZ];
                     alert("정답입니다.");
                 } else {

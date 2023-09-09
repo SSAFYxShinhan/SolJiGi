@@ -15,6 +15,7 @@
     <script src="/js/game/match-card.js"></script>
     <script src="/js/game/same-picture.js"></script>
     <script src="/js/game/choice-quiz.js"></script>
+    <script src="/js/game/short-answer-quiz.js"></script>
 </head>
 <body>
 <div id="layout">
@@ -26,12 +27,6 @@
 </div>
 
 <script th:inline="javascript">
-    const quiz = {
-        question: "이 문제의 답은?",
-        choice: ["보기1", "보기2", "보기3", "보기4"],
-        answer: 1,
-    };
-
     let result = [0, 0, 0, 0];
     const container = document.querySelector('.gameContainer');
     const questions = [[${quizzes}]];
@@ -47,8 +42,6 @@
         questions.push(gameType.SAME_PICTURE);
 
     shuffle(questions);
-
-    console.log(questions);
 
     let gameIdx = 0;
     updateView(questions[gameIdx++]);
@@ -67,8 +60,10 @@
             c = samePictureGameLevel[random][1];
             time = samePictureGameLevel[random][2];
             currGame = new SamePictureGame(container, r, c, time, result, nextGame);
-        } else {
-            currGame = new ChoiceQuizGame(container, quiz, 10, result, nextGame);
+        } else if (game.type === 'SHORT') {
+            currGame = new ShortAnswerQuizGame(container, game, 10, result, nextGame);
+        } else if (game.type === 'CHOICE') {
+            currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
         }
     }
 
