@@ -1,11 +1,10 @@
 emojis = ['😀', '😁', '😂', '😍', '😎', '🤩', '😴', '🥱', '🙄', '😜', '😳'];
 
 class SamePictureGame {
-    constructor(row, col, timeLimit) {
-        this.container = document.querySelector('.gameContainer');
+    constructor(container, row, col, timeLimit, result, nextEvent) {
+        this.container = container;
         this.R = row;
         this.C = col;
-        this.timeLimit = timeLimit;
         this.time = timeLimit;
         this.countDownTimer = null;
         this.cardEmoji = new Array(row * col);
@@ -17,23 +16,27 @@ class SamePictureGame {
         this.timerElement = document.querySelector('.same-picture__timer');
         this.cards = document.querySelectorAll('.same-picture__card');
         this.submitBtn = document.querySelector('.same-picture__submit-btn');
+        this.result = result;
+        this.nextEvent = nextEvent;
 
         this.submitBtn.addEventListener('click', () => {
-            if (this.gameState != state.GAME) return;
+            if (this.gameState !== state.GAME) return;
 
             this.gameState = state.READY;
             this.clearTimer();
             this.container.innerHTML = '';
             if (this.checkAnswer()) {
+                ++result[gameType.SAME_PICTURE];
                 alert('정답입니다!');
             } else {
                 alert('오답입니다!');
             }
+            this.nextEvent();
         });
 
         for (let i = 0; i < this.R * this.C; ++i) {
             this.cards[i].addEventListener('click', () => {
-                if (this.gameState != state.GAME) return;
+                if (this.gameState !== state.GAME) return;
                 this.cardSelected[i] = !this.cardSelected[i];
                 if (this.cardSelected[i]) {
                     this.cards[i].classList.add('same-picture__card-selected');
@@ -44,6 +47,7 @@ class SamePictureGame {
                 }
             });
         }
+        this.start();
     }
 
     start() {
@@ -115,13 +119,14 @@ class SamePictureGame {
 
     countDown(timerElement, time, countDownTimer) {
         timerElement.innerText = time;
-        if (time == 0) {
+        if (time === 0) {
             if (countDownTimer != null) {
                 clearInterval(countDownTimer);
             }
             alert('시간 초과입니다!');
             this.container.innerHTML = '';
-            return;
+            this.gameState = state.READY;
+            this.nextEvent();
         }
     }
 
@@ -173,5 +178,3 @@ class SamePictureGame {
         return copied.slice(0, count);
     }
 }
-
-new SamePictureGame(4, 4, 10).start();
