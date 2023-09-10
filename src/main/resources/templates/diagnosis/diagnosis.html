@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/game/match-card.css" rel="stylesheet">
+    <link href="/css/game/same-picture.css" rel="stylesheet">
+    <link href="/css/game/quiz.css" rel="stylesheet">
+    <script src="/js/script.js"></script>
+    <script src="/js/game/match-card.js"></script>
+    <script src="/js/game/same-picture.js"></script>
+    <script src="/js/game/choice-quiz.js"></script>
+    <script src="/js/game/short-answer-quiz.js"></script>
+</head>
+<body>
+
+<div id="layout">
+    <div class="game-form">
+        <div class="diagnosisContainer">
+
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    let result = [0, 0, 0, 0, 0, 0];
+    const container = document.querySelector('.diagnosisContainer');
+
+    const questions = generateDiagnosis();
+    console.log(questions)
+
+    let gameIdx = 0;
+    updateView(questions[gameIdx++]);
+
+    function updateView(diagnosis) {
+        if (diagnosis.type === diagnosisType.ORIENT) {
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
+        } else if (diagnosis === gameType.SAME_PICTURE) {
+            currGame = new SamePictureGame(container, 5, 5, 3, result, nextGame, true);
+        } else if (diagnosis === gameType.MATCH_CARD) {
+            currGame = new MatchCardGame(container, 4, 4, 3, result, nextGame, true);
+        }
+    }
+
+    function generateDiagnosis() {
+        const questions = []
+        const orientQuiz = [[${orient}]];
+        const memoryQuiz = [[${memory}]];
+        const attentionQuiz = [[${attention}]];
+        const spacetimeQuiz = [[${spacetime}]];
+        const executiveQuiz = [[${executive}]];
+        const languageQuiz = [[${language}]];
+
+        orientQuiz.forEach(quiz => {
+            questions.push( {type: diagnosisType.ORIENT, quiz: quiz} )
+        });
+        questions.push({type: diagnosisType.MEMORY, read: true, quiz: memoryQuiz});
+        questions.push(gameType.MATCH_CARD);
+        questions.push(gameType.SAME_PICTURE);
+
+        return questions;
+        // return orientQuiz
+        //     .concat({type: diagnosisType.MEMORY, read: true, memoryQuiz})
+        //     .concat(attentionQuiz)
+        //     .concat(gameType.MATCH_CARD)
+        //     .concat(gameType.SAME_PICTURE)
+        //     .concat(executiveQuiz)
+        //     .concat({type: diagnosisType.MEMORY, read: false, memoryQuiz})
+        //     .concat(languageQuiz)
+    }
+
+    function nextGame() {
+        if (gameIdx === questions.length) {
+            alert('게임이 종료되었습니다.');
+            container.innerHTML = `결과 화면 이동 로직 작성 ${result}`;
+            return;
+        }
+        currGame = null;
+        updateView(questions[gameIdx++]);
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 class ShortAnswerQuizGame {
-  constructor(container, quiz, timeLimit, result, nextEvent) {
+  constructor(container, quiz, timeLimit, result, nextEvent, diagnosisType = -1) {
     this.container = container;
     this.quiz = quiz;
     this.time = timeLimit;
@@ -7,6 +7,8 @@ class ShortAnswerQuizGame {
     this.timerElement = document.querySelector(".short-answer-quiz__timer");
     this.result = result;
     this.nextEvent = nextEvent;
+    this.diagnosisType = diagnosisType;
+    console.log(diagnosisType)
 
     this.countDownTimer = setInterval(
       () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -19,7 +21,11 @@ class ShortAnswerQuizGame {
       const answer = document.querySelector('.short-answer-quiz__input').value.trim();
 
       if (this.quiz.shortAnswer.indexOf(answer) > -1) {
-          ++result[gameType.SHORT_ANSWER_QUIZ];
+        if (diagnosisType !== -1) {
+            ++result[this.diagnosisType];
+          } else {
+            ++result[gameType.SHORT_ANSWER_QUIZ];
+          }
           alert("정답입니다.");
       } else {
           alert("오답입니다.");
