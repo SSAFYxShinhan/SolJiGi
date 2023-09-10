@@ -93,13 +93,22 @@
     width: 100%;
     flex-grow: 4;
     background-color: #127bbd;
-    font-size: 50px;
+    font-size: 40px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: whitesmoke;
     text-align: center;
     border-radius: 20px;
+}
+
+.short-answer-quiz__question > span {
+    font-size: 50px;
+    margin-top: 20px;
+    font-weight: 700;
+    color: darkred;
+
 }
 
 .short-answer-quiz__input-form {

@@ -53,6 +53,8 @@
                     currGame = new ChoiceQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.MEMORY);
                 }
             }
+        } else if (diagnosis.type === diagnosisType.ATTENTION) {
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
@@ -70,16 +72,22 @@
         const executiveQuiz = [[${executive}]];
         const languageQuiz = [[${language}]];
 
-        orientQuiz.forEach(quiz => {
-            questions.push( {type: diagnosisType.ORIENT, quiz: quiz} )
-        });
-        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        questions.push(gameType.MATCH_CARD);
-        questions.push(gameType.SAME_PICTURE);
-        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        memoryQuiz.forEach(quiz => {
-            questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: quiz} )
-        });
+        console.log(attentionQuiz);
+        // orientQuiz.forEach(quiz => {
+        //     questions.push( {type: diagnosisType.ORIENT, quiz: quiz} )
+        // });
+        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        attentionQuiz.forEach(quiz => {
+            if (quiz !== null)
+                questions.push({type: diagnosisType.ATTENTION, quiz: quiz});
+        })
+        // questions.push(gameType.MATCH_CARD);
+        // questions.push(gameType.SAME_PICTURE);
+        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        // memoryQuiz.forEach(quiz => {
+        //     questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: quiz} )
+        // });
+
 
         return questions;
         // return orientQuiz
