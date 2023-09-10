@@ -1,4 +1,4 @@
-const imgSourcePrefix = './img/friends/';
+const imgSourcePrefix = 'img/friends/';
 const imgSource = [
     'front1.png',
     'front2.png',
@@ -23,15 +23,13 @@ const imgSource = [
 ];
 
 Object.freeze(imgSource);
-Object.freeze(state);
 
 class MatchCardGame {
-    constructor(row, col, timeLimit) {
-        this.CARD_SHOW_TIME = 3;
-        this.container = document.querySelector('.gameContainer');
+    constructor(container, row, col, timeLimit, result, nextEvent) {
+        this.CARD_SHOW_TIME = 5;
+        this.container = container;
         this.R = row;
         this.C = col;
-        this.timeLimit = timeLimit;
         this.timeLimit = timeLimit;
         this.time = timeLimit;
         this.gameMap = null;
@@ -44,25 +42,28 @@ class MatchCardGame {
         this.gameState = null;
         this.R = row;
         this.C = col;
+        this.result = result;
+        this.nextEvent = nextEvent;
         this.gameInitialize();
 
-        this.gameContent = document.querySelector('.match-card__content');
         this.timerElement = document.querySelector('.match-card__timer');
         this.selectedCursor = [
             [-1, -1],
             [-1, -1],
         ];
+        this.start();
     }
 
     countDown(timerElement, time, countDownTimer) {
         timerElement.innerText = time;
-        if (time == 0) {
+        if (time === 0) {
             if (countDownTimer != null) {
                 clearInterval(countDownTimer);
             }
             this.container.innerHTML = '';
             alert('시간 초과입니다!');
-            return;
+            this.gameState = state.READY;
+            this.nextEvent();
         }
     }
 
@@ -88,6 +89,7 @@ class MatchCardGame {
                     ),
                 1000
             );
+            console.log(this.countDownTimer);
         }, this.CARD_SHOW_TIME * 1000);
     }
 
@@ -138,8 +140,10 @@ class MatchCardGame {
                 setTimeout(() => {
                     this.clearTimer();
                     alert('성공');
+                    ++result[gameType.MATCH_CARD];
                     this.container.innerHTML = '';
                     this.gameState = state.READY;
+                    this.nextEvent();
                 }, 500);
             }
         } else {
@@ -173,7 +177,6 @@ class MatchCardGame {
         const contentElement = document.createElement('div');
         contentElement.classList.add('match-card__content');
 
-        console.log(1, this.R);
         for (let i = 0, idx = 0; i < this.R; ++i) {
             const rowElement = document.createElement('div');
             rowElement.classList.add('match-card__content-row');
@@ -220,5 +223,3 @@ class MatchCardGame {
         return flipElement;
     }
 }
-
-new MatchCardGame(4, 4, 30).start();

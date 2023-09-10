@@ -12,18 +12,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.thymeleaf.util.StringUtils;
 
+import com.ssafy.soljigi.base.error.AppException;
 import com.ssafy.soljigi.user.service.JwtService;
 import com.ssafy.soljigi.user.service.UserService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@Component
 @Log4j2
+@Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private final JwtService jwtService;
@@ -32,11 +34,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(@NonNull HttpServletRequest request,
 		@NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
-		throws ServletException, IOException {
+		throws ServletException, IOException, AppException {
 		log.warn("1. JwtAuthenticationFilter : start");
 		String authHeader = null;
 		if (request.getCookies() != null) {
-			authHeader = request.getCookies()[0].getValue();
+			for (Cookie cookie : request.getCookies()) {
+				if (cookie.getName().equals("token")) {
+					authHeader = cookie.getValue();
+				}
+			}
 		}
 
 		final String jwt;

@@ -31,4 +31,5 @@ public class ViewController {
 	public String oneAuthPage() {
 		return "user/one-auth";
 	}
+
 }
