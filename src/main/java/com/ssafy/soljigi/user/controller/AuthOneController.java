@@ -21,6 +21,7 @@ public class AuthOneController {
 
 	@PostMapping("/one")
 	public ResponseEntity<?> authOne(@RequestBody AuthOneRequest request) {
+
 		return ResponseEntity.ok().body(authOneService.authOne(request.getAccountNumber()));
 	}
 }
