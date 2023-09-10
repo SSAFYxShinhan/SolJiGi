@@ -51,7 +51,7 @@ public class SecurityConfiguration {
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
 				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).permitAll()
-				.anyRequest().authenticated());
+				.anyRequest().permitAll());
 
 		log.warn("2. authorizeHttpRequests");
 

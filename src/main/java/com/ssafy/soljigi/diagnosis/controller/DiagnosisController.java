@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.soljigi.diagnosis.service.AttentionService;
 import com.ssafy.soljigi.diagnosis.service.ExecutiveService;
-import com.ssafy.soljigi.diagnosis.service.LanguageService;
 import com.ssafy.soljigi.diagnosis.service.MemoryService;
 import com.ssafy.soljigi.diagnosis.service.OrientService;
 
@@ -27,7 +26,6 @@ public class DiagnosisController {
 	private final AttentionService attentionService;
 	// private final SpacetimeService spacetimeService;
 	private final ExecutiveService executiveService;
-	private final LanguageService languageService;
 
 	@GetMapping
 	public String diagnosis(Model model) {
@@ -38,7 +36,7 @@ public class DiagnosisController {
 		model.addAttribute("attention", attentionService.getQuiz());
 		model.addAttribute("spacetime", -1);
 		model.addAttribute("executive", executiveService.getQuiz());
-		model.addAttribute("language", languageService.getQuiz());
+
 		return "diagnosis/diagnosis";
 	}
 }
