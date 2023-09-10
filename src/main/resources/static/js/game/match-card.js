@@ -1,4 +1,4 @@
-const imgSourcePrefix = 'img/friends/';
+const imgSourcePrefix = '/img/friends/';
 const imgSource = [
     'front1.png',
     'front2.png',
@@ -25,7 +25,7 @@ const imgSource = [
 Object.freeze(imgSource);
 
 class MatchCardGame {
-    constructor(container, row, col, timeLimit, result, nextEvent) {
+    constructor(container, row, col, timeLimit, result, nextEvent, isDiagnosis = null) {
         this.CARD_SHOW_TIME = 5;
         this.container = container;
         this.R = row;
@@ -44,6 +44,7 @@ class MatchCardGame {
         this.C = col;
         this.result = result;
         this.nextEvent = nextEvent;
+        this.isDiagnosis = isDiagnosis;
         this.gameInitialize();
 
         this.timerElement = document.querySelector('.match-card__timer');
@@ -140,7 +141,11 @@ class MatchCardGame {
                 setTimeout(() => {
                     this.clearTimer();
                     alert('성공');
-                    ++result[gameType.MATCH_CARD];
+                    if (this.isDiagnosis) {
+                        ++result[diagnosisType.SPACETIME];
+                    } else {
+                        ++result[gameType.MATCH_CARD];
+                    }
                     this.container.innerHTML = '';
                     this.gameState = state.READY;
                     this.nextEvent();
