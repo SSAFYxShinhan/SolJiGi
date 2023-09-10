@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.soljigi.dementiaTest.service.AttentionService;
 import com.ssafy.soljigi.dementiaTest.service.MemoryService;
 import com.ssafy.soljigi.dementiaTest.service.OrientService;
-import com.ssafy.soljigi.dementiaTest.service.TestService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/quiz")
 @RequiredArgsConstructor
 public class TestController {
-	
-	private final TestService testService;
 
 	@GetMapping("/gettest")
 	public HashMap<String, Object> getQuizzes() {

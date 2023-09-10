@@ -1,11 +1,11 @@
-package com.ssafy.soljigi.game.transaction.controller;
+package com.ssafy.soljigi.game.quiz.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.soljigi.game.transaction.dto.TransactionResponse;
-import com.ssafy.soljigi.game.transaction.service.TransactionService;
+import com.ssafy.soljigi.game.quiz.dto.TransactionResponse;
+import com.ssafy.soljigi.game.quiz.service.TransactionService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,8 @@ public class TransactionController {
 	@GetMapping("/fetchTransaction/{userId}")
 	public TransactionResponse fetchTransaction(@PathVariable("userId") Long userId) {
 		log.info("userId= {}", userId);
+		TransactionResponse response = transactionService.fetchTransactionData(userId);
+		transactionService.makeQuizzes(response);
 		return transactionService.fetchTransactionData(userId);
 	}
 }
