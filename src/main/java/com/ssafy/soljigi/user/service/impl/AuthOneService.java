@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.user.service;
+package com.ssafy.soljigi.user.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
