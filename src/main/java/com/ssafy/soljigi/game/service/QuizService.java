@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.ssafy.soljigi.base.error.BaseException;
+import com.ssafy.soljigi.game.dto.ChatGptResponse;
+
 import com.ssafy.soljigi.game.dto.QuizDto;
 import com.ssafy.soljigi.game.dto.TransactionResponse;
 import com.ssafy.soljigi.game.entity.Quiz;
@@ -24,11 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class QuizService {
 
+	private final ChatGPTService chatGPTService;
+
 	// private final String TRANSACTION_URL = "https://shbhack.shinhan.com/v1/search/transaction";
 	private final String TRANSACTION_URL = "http://localhost:8080/v1/search/transaction";
 	private final QuizRepository quizRepository;
 
-	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) {
+	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) throws BaseException {
+
 		// List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
 		// 	.map(QuizDto::of)
 		// 	.toList();
@@ -55,33 +61,51 @@ public class QuizService {
 		quizRepository.save(quiz);
 	}
 
-	public List<QuizDto> makeTransactionQuizzes(Long userId, int count) {
+	public List<QuizDto> makeTransactionQuizzes(Long userId, int count) throws BaseException {
 		List<TransactionResponse.DataBody.TransactionDetail> details;
+
 		try {
 			details = fetchTransactionData(userId);
+			log.info("details={}", details);
+
 		} catch (IllegalArgumentException e) {
 			return new ArrayList<>();
 		}
 
 		List<QuizDto> quizzes = new ArrayList<>();
 		for (TransactionResponse.DataBody.TransactionDetail detail : details) {
+
+			if (detail.getWithdraw() == 0)
+				continue;
+
 			String content = detail.getContent();
+
+			// GPT에게 새로운 퀴즈 질문과 선택지를 생성해달라고 요청
+			ChatGptResponse chatGptRes = chatGPTService.getChatResponse(
+				content + "가 식당이면 " + content + "를 꼭 포함해서 보기 4개를 '|'로 구분해서 만들어줘. 한국어로.\n"
+					+ content + "가 식당이 아니면 0만 출력해줘.");
+
+			// GPT 응답에서 질문과 선택지 분리하기
+			String[] choices = chatGptRes.getResponseMessage().trim().split("\\|");
+
+			if (choices.length == 4) {
+				quizzes.add(QuizDto.builder()
+					.question("최근에 어디서 식사를 했나요?")
+					.choice(new ArrayList<>(Arrays.asList(choices)))
+					.choiceAnswer(Arrays.asList(choices).indexOf(content))
+					.build());
+			}
+
 
 			quizzes.add(QuizDto.builder()
 				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
 				.choice(new ArrayList<>(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999")))
 				.choiceAnswer(1)
 				.build());
-
-			if (content.equals("김밥천국")) {
-				quizzes.add(QuizDto.builder()
-					.question("최근에 어디에서 식사를 하셨나요?")
-					.choice(new ArrayList<>(Arrays.asList("스타벅스", "김밥천국", "고기집", "횟집")))
-					.choiceAnswer(1)
-					.build());
-			}
 		}
 		Collections.shuffle(quizzes);
+		log.info("quizzes={}", quizzes);
+
 
 		return quizzes.subList(0, Math.min(count, quizzes.size()));
 	}
@@ -92,7 +116,8 @@ public class QuizService {
 		/**
 		 * TO DO : 회원의 아이디로 계좌번호 가져오기
 		 */
-		String accountNumber = "110184888888";
+		String accountNumber = "1234";
+
 
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();
@@ -102,6 +127,8 @@ public class QuizService {
 		// API 호출 및 응답 받기
 		TransactionResponse response = restTemplate.postForObject(TRANSACTION_URL, requestBody,
 			TransactionResponse.class);
+
+		log.info("fetchTransactionData.response={}", response);
 
 		if (response.getDataHeader().getSuccessCode() == 1) {
 			throw new IllegalArgumentException();
