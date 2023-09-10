@@ -7,11 +7,13 @@
     <link href="/css/game/match-card.css" rel="stylesheet">
     <link href="/css/game/same-picture.css" rel="stylesheet">
     <link href="/css/game/quiz.css" rel="stylesheet">
+    <link href="/css/diagnosis/diagnosis.css" rel="stylesheet">
     <script src="/js/script.js"></script>
     <script src="/js/game/match-card.js"></script>
     <script src="/js/game/same-picture.js"></script>
     <script src="/js/game/choice-quiz.js"></script>
     <script src="/js/game/short-answer-quiz.js"></script>
+    <script src="/js/diagnosis/memory.js"></script>
 </head>
 <body>
 
@@ -25,6 +27,8 @@
 
 <script th:inline="javascript">
     let result = [0, 0, 0, 0, 0, 0];
+    let memoryResult = [0, 0, 0, 0, 0];
+    let mqIdx = 0;
     const container = document.querySelector('.diagnosisContainer');
 
     const questions = generateDiagnosis();
@@ -36,16 +40,30 @@
     function updateView(diagnosis) {
         if (diagnosis.type === diagnosisType.ORIENT) {
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
+        } else if (diagnosis.type === diagnosisType.MEMORY) {
+            if (diagnosis.step === 'READ') {
+                currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
+            } else if (diagnosis.step === 'ANSWER') {
+                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
+                mqIdx = 0;
+            } else if (diagnosis.step === 'CHOICE') {
+                if (memoryResult[mqIdx++] === 2) {
+                    nextGame();
+                } else {
+                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.MEMORY);
+                }
+            }
         } else if (diagnosis === gameType.SAME_PICTURE) {
-            currGame = new SamePictureGame(container, 5, 5, 3, result, nextGame, true);
+            currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
-            currGame = new MatchCardGame(container, 4, 4, 3, result, nextGame, true);
+            currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
         }
     }
 
     function generateDiagnosis() {
         const questions = []
         const orientQuiz = [[${orient}]];
+        const memory4w1h = [[${memory4w1h}]];
         const memoryQuiz = [[${memory}]];
         const attentionQuiz = [[${attention}]];
         const spacetimeQuiz = [[${spacetime}]];
@@ -55,9 +73,13 @@
         orientQuiz.forEach(quiz => {
             questions.push( {type: diagnosisType.ORIENT, quiz: quiz} )
         });
-        questions.push({type: diagnosisType.MEMORY, read: true, quiz: memoryQuiz});
+        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
         questions.push(gameType.MATCH_CARD);
         questions.push(gameType.SAME_PICTURE);
+        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        memoryQuiz.forEach(quiz => {
+            questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: quiz} )
+        });
 
         return questions;
         // return orientQuiz

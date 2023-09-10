@@ -19,6 +19,9 @@ const diagnosisType = {
     LANGUAGE: 5
 }
 
+const memory4w1h = ['who', 'how', 'where', 'when', 'what']
+
 Object.freeze(state);
 Object.freeze(gameType);
 Object.freeze(diagnosisType);
+Object.freeze(memory4w1h);
