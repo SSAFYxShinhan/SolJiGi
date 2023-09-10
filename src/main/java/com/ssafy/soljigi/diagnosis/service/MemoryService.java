@@ -11,8 +11,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.soljigi.quiz.dto.QuizDto;
-import com.ssafy.soljigi.quiz.entity.Type;
+import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,8 +48,8 @@ public class MemoryService {
 		return map;
 	}
 
-	public List<QuizDto> getQuiz(Map<String, String> _4w1h) {
-		List<QuizDto> quizzes = new ArrayList<>(5);
+	public List<DiagnosisQuizDto> getQuiz(Map<String, String> _4w1h) {
+		List<DiagnosisQuizDto> quizzes = new ArrayList<>(5);
 		quizzes.add(generateChoiceQuiz("제가 아까 어떤 사람의 이름을 말했는데 누구일까요?", listWho, _4w1h.get("who")));
 		quizzes.add(generateChoiceQuiz("무엇을 타고 갔습니까?", listHow, _4w1h.get("how")));
 		quizzes.add(generateChoiceQuiz("어디에 갔습니까?", listWhere, _4w1h.get("where")));
@@ -58,7 +58,7 @@ public class MemoryService {
 		return quizzes;
 	}
 
-	private QuizDto generateChoiceQuiz(String question, String[] candidate, String answer) {
+	private DiagnosisQuizDto generateChoiceQuiz(String question, String[] candidate, String answer) {
 		Random random = new Random();
 		Set<String> set = new HashSet<>();
 		set.add(answer);
@@ -69,8 +69,8 @@ public class MemoryService {
 		List<String> choices = new ArrayList<>(set.stream().toList());
 		Collections.shuffle(choices);
 
-		return QuizDto.builder()
-			.type(Type.CHOICE)
+		return DiagnosisQuizDto.builder()
+			.type(DiagnosisType.MEMORY)
 			.question(question)
 			.choice(choices)
 			.choiceAnswer(choices.indexOf(answer))

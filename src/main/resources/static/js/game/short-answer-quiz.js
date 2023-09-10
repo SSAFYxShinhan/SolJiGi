@@ -21,7 +21,7 @@ class ShortAnswerQuizGame {
       const answer = document.querySelector('.short-answer-quiz__input').value.trim().replaceAll(' ', '');
 
       if (this.quiz.shortAnswer.indexOf(answer) > -1) {
-        if (this.dType !== -1) {
+          if (this.dType !== -1) {
             ++result[this.dType];
           } else {
             ++result[gameType.SHORT_ANSWER_QUIZ];

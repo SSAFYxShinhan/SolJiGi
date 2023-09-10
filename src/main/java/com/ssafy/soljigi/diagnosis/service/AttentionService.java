@@ -1,14 +1,13 @@
 package com.ssafy.soljigi.diagnosis.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.soljigi.quiz.dto.QuizDto;
+import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,24 +30,24 @@ public class AttentionService {
 		{"팔", "여덟", "8", "에잇"},
 		{"구", "아홉", "9", "나인"}};
 
-	public List<QuizDto> getQuiz() {
-		List<QuizDto> quizzes = new ArrayList<>(3);
+	public List<DiagnosisQuizDto> getQuiz() {
+		List<DiagnosisQuizDto> quizzes = new ArrayList<>(3);
 		quizzes.add(generateNumberQuiz(4));
 		quizzes.add(generateNumberQuiz(5));
 		quizzes.add(generateReverseQuiz());
 		return quizzes;
 	}
 
-	private QuizDto generateReverseQuiz() {
+	private DiagnosisQuizDto generateReverseQuiz() {
 		Random random = new Random();
 		String word = list4Word[random.nextInt(list4Word.length)];
-		return QuizDto.builder()
+		return DiagnosisQuizDto.builder()
 			.question("제가 불러드리는 말을<br>끝에서부터 거꾸로 따라해주세요.<br><span>" + word + "</span>")
 			.shortAnswer(List.of(new StringBuffer(word).reverse().toString()))
 			.build();
 	}
 
-	private QuizDto generateNumberQuiz(int count) {
+	private DiagnosisQuizDto generateNumberQuiz(int count) {
 		Random random = new Random();
 		StringBuilder problem = new StringBuilder();
 		StringBuilder answer = new StringBuilder();
@@ -60,7 +59,8 @@ public class AttentionService {
 			answer.append(nums[i]);
 		}
 
-		return QuizDto.builder()
+		return DiagnosisQuizDto.builder()
+				.type(DiagnosisType.ATTENTION)
 				.question("제가 불러드리는 숫자를<br>그대로 따라해주세요.<br><span>" + problem.toString() + "</span>")
 				.shortAnswer(getNumberQuizAnswerCandidate(answer.toString()))
 				.build();

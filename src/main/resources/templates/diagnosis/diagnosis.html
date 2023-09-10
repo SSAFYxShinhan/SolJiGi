@@ -32,7 +32,6 @@
     const container = document.querySelector('.diagnosisContainer');
 
     const questions = generateDiagnosis();
-    console.log(questions)
 
     let gameIdx = 0;
     updateView(questions[gameIdx++]);
@@ -72,21 +71,21 @@
         const executiveQuiz = [[${executive}]];
         const languageQuiz = [[${language}]];
 
-        console.log(attentionQuiz);
-        // orientQuiz.forEach(quiz => {
-        //     questions.push( {type: diagnosisType.ORIENT, quiz: quiz} )
-        // });
-        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        attentionQuiz.forEach(quiz => {
-            if (quiz !== null)
-                questions.push({type: diagnosisType.ATTENTION, quiz: quiz});
+        orientQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
+        });
+        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        attentionQuiz.forEach(diagnosisQuiz => {
+            if (diagnosisQuiz !== null)
+                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
         })
-        // questions.push(gameType.MATCH_CARD);
-        // questions.push(gameType.SAME_PICTURE);
-        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        // memoryQuiz.forEach(quiz => {
-        //     questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: quiz} )
-        // });
+        questions.push(gameType.MATCH_CARD);
+        questions.push(gameType.SAME_PICTURE);
+        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        memoryQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
+        });
+        console.log(questions);
 
 
         return questions;

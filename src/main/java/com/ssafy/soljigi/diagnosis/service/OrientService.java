@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.soljigi.quiz.dto.QuizDto;
-import com.ssafy.soljigi.quiz.entity.Type;
+import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class OrientService {
 	private static final String[] listDayOfWeek = new String[] {"", "월", "화", "수", "목", "금", "토", "일"};
 
-	public List<QuizDto> getQuiz() {
-		List<QuizDto> quizzes = new ArrayList<>(5);
+	public List<DiagnosisQuizDto> getQuiz() {
+		List<DiagnosisQuizDto> quizzes = new ArrayList<>(5);
 
 		LocalDate nowTime = LocalDate.now();
 		int year = nowTime.getYear();
@@ -28,35 +28,35 @@ public class OrientService {
 		int dayOfWeek = nowTime.getDayOfWeek().getValue();
 
 		// Q1-1 : 올해 년도 맞추기
-		quizzes.add(QuizDto.builder()
-			.type(Type.SHORT)
+		quizzes.add(DiagnosisQuizDto.builder()
+			.type(DiagnosisType.ORIENT)
 			.question("올해는 몇 년도입니까?")
 			.shortAnswer(getYearAnswerCandidate(year))
 			.build());
 
 		// Q1-2 : 오늘의 달 맞추기
-		quizzes.add(QuizDto.builder()
-			.type(Type.SHORT)
+		quizzes.add(DiagnosisQuizDto.builder()
+			.type(DiagnosisType.ORIENT)
 			.question("지금은 몇 월입니까?")
 			.shortAnswer(getMonthAnswerCandidate(month))
 			.build());
 
 		// Q1-3 : 오늘 일 맞추기
-		quizzes.add(QuizDto.builder()
-			.type(Type.SHORT)
+		quizzes.add(DiagnosisQuizDto.builder()
+			.type(DiagnosisType.ORIENT)
 			.question("오늘은 며칠입니까?")
 			.shortAnswer(getDayAnswerCandidate(day))
 			.build());
 
 		// Q1-4 : 오늘 일 맞추기
-		quizzes.add(QuizDto.builder()
-			.type(Type.SHORT)
+		quizzes.add(DiagnosisQuizDto.builder()
+			.type(DiagnosisType.ORIENT)
 			.question("오늘은 무슨 요일입니까?")
 			.shortAnswer(getDayOfWeekAnswerCandidate(dayOfWeek))
 			.build());
 
 		// Q1-5 : 지금 {name}님의 주소는 어디인가요?
-		// quizzes.add(QuizDto.builder()
+		// quizzes.add(DiagnosisQuizDto.builder()
 		// 	.type(Type.CHOICE)
 		// 	.question("오늘은 무슨 요일입니까?")
 		// 	.shortAnswer(getDayOfWeekAnswerCandidate(dayOfWeek))
