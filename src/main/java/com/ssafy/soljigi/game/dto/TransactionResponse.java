@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.quiz.dto;
+package com.ssafy.soljigi.game.dto;
 
 import java.util.List;
 
@@ -43,9 +43,9 @@ public class TransactionResponse {
 			@JsonProperty("적요")
 			private String summary;
 			@JsonProperty("출금금액")
-			private long withdrawalAmount;
+			private long withdraw;
 			@JsonProperty("입금금액")
-			private long depositAmount;
+			private long deposit;
 			@JsonProperty("내용")
 			private String content;
 			@JsonProperty("잔액")

@@ -1,9 +1,9 @@
-package com.ssafy.soljigi.game.quiz.dto;
+package com.ssafy.soljigi.game.dto;
 
 import java.util.List;
 
-import com.ssafy.soljigi.game.quiz.entity.Quiz;
-import com.ssafy.soljigi.game.quiz.entity.Type;
+import com.ssafy.soljigi.game.entity.Quiz;
+import com.ssafy.soljigi.game.entity.Type;
 
 import lombok.Builder;
 import lombok.Data;
