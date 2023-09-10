@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ssafy.soljigi.base.error.BaseException;
 import com.ssafy.soljigi.game.dto.ChatGptResponse;
+
 import com.ssafy.soljigi.game.dto.QuizDto;
 import com.ssafy.soljigi.game.dto.TransactionResponse;
 import com.ssafy.soljigi.game.entity.Quiz;
@@ -33,6 +34,7 @@ public class QuizService {
 	private final QuizRepository quizRepository;
 
 	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) throws BaseException {
+
 		// List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
 		// 	.map(QuizDto::of)
 		// 	.toList();
@@ -65,6 +67,7 @@ public class QuizService {
 		try {
 			details = fetchTransactionData(userId);
 			log.info("details={}", details);
+
 		} catch (IllegalArgumentException e) {
 			return new ArrayList<>();
 		}
@@ -93,6 +96,7 @@ public class QuizService {
 					.build());
 			}
 
+
 			quizzes.add(QuizDto.builder()
 				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
 				.choice(new ArrayList<>(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999")))
@@ -101,6 +105,7 @@ public class QuizService {
 		}
 		Collections.shuffle(quizzes);
 		log.info("quizzes={}", quizzes);
+
 
 		return quizzes.subList(0, Math.min(count, quizzes.size()));
 	}
@@ -113,6 +118,7 @@ public class QuizService {
 		 */
 		String accountNumber = "1234";
 
+
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();
 		requestBody.put("dataHeader", Map.of("apikey", "2023_Shinhan_SSAFY_Hackathon"));
@@ -123,6 +129,7 @@ public class QuizService {
 			TransactionResponse.class);
 
 		log.info("fetchTransactionData.response={}", response);
+
 		if (response.getDataHeader().getSuccessCode() == 1) {
 			throw new IllegalArgumentException();
 		}

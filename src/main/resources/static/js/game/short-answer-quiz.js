@@ -1,5 +1,5 @@
 class ShortAnswerQuizGame {
-  constructor(container, quiz, timeLimit, result, nextEvent) {
+  constructor(container, quiz, timeLimit, result, nextEvent, dType = -1) {
     this.container = container;
     this.quiz = quiz;
     this.time = timeLimit;
@@ -7,6 +7,8 @@ class ShortAnswerQuizGame {
     this.timerElement = document.querySelector(".short-answer-quiz__timer");
     this.result = result;
     this.nextEvent = nextEvent;
+    this.dType = dType;
+    console.log(dType)
 
     this.countDownTimer = setInterval(
       () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -16,10 +18,14 @@ class ShortAnswerQuizGame {
     this.form.addEventListener("submit", () => {
       event.preventDefault();
       this.clearTimer();
-      const answer = document.querySelector('.short-answer-quiz__input').value.trim();
+      const answer = document.querySelector('.short-answer-quiz__input').value.trim().replaceAll(' ', '');
 
       if (this.quiz.shortAnswer.indexOf(answer) > -1) {
-          ++result[gameType.SHORT_ANSWER_QUIZ];
+          if (this.dType !== -1) {
+            ++result[this.dType];
+          } else {
+            ++result[gameType.SHORT_ANSWER_QUIZ];
+          }
           alert("정답입니다.");
       } else {
           alert("오답입니다.");

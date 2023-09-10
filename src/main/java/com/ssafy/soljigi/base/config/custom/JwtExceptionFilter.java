@@ -12,6 +12,7 @@ import com.ssafy.soljigi.user.dto.response.Response;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +32,14 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 			response.setStatus(e.getErrorCode().getHttpStatus().value());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding("UTF-8");
+
+			Cookie cookie = new Cookie("token", null);
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			response.sendRedirect("/view/login");
 			objectMapper.writeValue(response.getWriter(), Response.error(e.getErrorCode()));
+
 		}
 
 	}

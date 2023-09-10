@@ -1,5 +1,5 @@
 class ChoiceQuizGame {
-    constructor(container, quiz, timeLimit, result, nextEvent) {
+    constructor(container, quiz, timeLimit, result, nextEvent, diagnosisType = -1) {
         this.container = container;
         this.quiz = quiz;
         this.time = timeLimit;
@@ -8,6 +8,7 @@ class ChoiceQuizGame {
         this.gameState = state.GAME;
         this.result = result;
         this.nextEvent = nextEvent;
+        this.diagnosisType = diagnosisType;
 
         this.countDownTimer = setInterval(
             () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -18,7 +19,11 @@ class ChoiceQuizGame {
             this.choiceElements[i].addEventListener("click", () => {
                 this.clearTimer();
                 if (i === this.quiz.choiceAnswer) {
-                    ++result[gameType.CHOICE_QUIZ];
+                    if (diagnosisType !== -1) {
+                        ++result[this.diagnosisType];
+                    } else {
+                        ++result[gameType.CHOICE_QUIZ];
+                    }
                     alert("정답입니다.");
                 } else {
                     alert("오답입니다.");

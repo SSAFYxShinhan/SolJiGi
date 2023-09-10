@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.user.dto.request.AuthOneRequest;
-import com.ssafy.soljigi.user.service.AuthOneService;
+import com.ssafy.soljigi.user.service.impl.AuthOneService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +21,7 @@ public class AuthOneController {
 
 	@PostMapping("/one")
 	public ResponseEntity<?> authOne(@RequestBody AuthOneRequest request) {
+
 		return ResponseEntity.ok().body(authOneService.authOne(request.getAccountNumber()));
 	}
 }
