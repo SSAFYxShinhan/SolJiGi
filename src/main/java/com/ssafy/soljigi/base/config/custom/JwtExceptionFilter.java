@@ -37,7 +37,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 			cookie.setMaxAge(0);
 			cookie.setPath("/");
 			response.addCookie(cookie);
-			response.sendRedirect("/view/login");
+			response.sendRedirect("/view/sign-in");
 			objectMapper.writeValue(response.getWriter(), Response.error(e.getErrorCode()));
 
 		}
