@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.dementiaTest.dto.SaveDTO;
-import com.ssafy.soljigi.dementiaTest.service.AttentionService;
 import com.ssafy.soljigi.dementiaTest.service.LanguageService;
-import com.ssafy.soljigi.dementiaTest.service.MemoryService;
-import com.ssafy.soljigi.dementiaTest.service.OrientService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,9 +27,6 @@ public class TestController {
 	@GetMapping("/gettest")
 	public HashMap<String, Object> getQuizzes() {
 		HashMap<String, Object> map = new ManagedMap<>();
-		map = OrientService.getQuiz(map);
-		map = MemoryService.getQuiz(map);
-		map = AttentionService.getQuiz(map);
 		map = LanguageService.getQuiz(map);
 
 		// map 내용 출력
