@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.ssafy.soljigi.base.error.BaseException;
-import com.ssafy.soljigi.game.dto.ChatGptRes;
+import com.ssafy.soljigi.game.dto.ChatGptResponse;
 import com.ssafy.soljigi.game.dto.QuizDto;
 import com.ssafy.soljigi.game.dto.TransactionResponse;
 import com.ssafy.soljigi.game.entity.Quiz;
@@ -78,7 +78,7 @@ public class QuizService {
 			String content = detail.getContent();
 
 			// GPT에게 새로운 퀴즈 질문과 선택지를 생성해달라고 요청
-			ChatGptRes chatGptRes = chatGPTService.getChatResponse(
+			ChatGptResponse chatGptRes = chatGPTService.getChatResponse(
 				content + "가 식당이면 " + content + "를 꼭 포함해서 보기 4개를 '|'로 구분해서 만들어줘. 한국어로.\n"
 					+ content + "가 식당이 아니면 0만 출력해줘.");
 

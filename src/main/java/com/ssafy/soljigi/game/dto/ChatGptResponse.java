@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatGptRes {
+public class ChatGptResponse {
 	private String responseMessage;
 }
