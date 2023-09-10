@@ -10,7 +10,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-
+openai:
+  model: gpt-3.5-turbo
+  api-key: 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
+  url: https://api.openai.com/v1/comletions
 logging:
   level:
     org.hibernate.SQL: debug
