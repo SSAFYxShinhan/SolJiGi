@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.soljigi.game.gpt.base.BaseException;
-import com.ssafy.soljigi.game.gpt.base.BaseResponse;
+import com.ssafy.soljigi.base.error.BaseException;
+import com.ssafy.soljigi.game.dto.BaseResponse;
+import com.ssafy.soljigi.game.dto.ChatGptRes;
 import com.ssafy.soljigi.game.gpt.entity.ChatGptReq;
-import com.ssafy.soljigi.game.gpt.entity.ChatGptRes;
 import com.ssafy.soljigi.game.gpt.service.MyChatGPTService;
 import com.ssafy.soljigi.user.service.JwtService;
 

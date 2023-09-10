@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.gpt.base;
+package com.ssafy.soljigi.base.error;
 
 public class BaseException extends Exception {
 	private final BaseResponseStatus status;

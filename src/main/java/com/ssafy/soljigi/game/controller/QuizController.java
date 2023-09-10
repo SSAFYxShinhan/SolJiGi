@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.soljigi.base.error.BaseException;
 import com.ssafy.soljigi.game.dto.QuizDto;
 import com.ssafy.soljigi.game.service.QuizService;
 
@@ -23,7 +24,7 @@ public class QuizController {
 	private final QuizService quizService;
 
 	@GetMapping("/quizzes")
-	public List<QuizDto> getQuizzes() {
+	public List<QuizDto> getQuizzes() throws BaseException {
 		return quizService.getQuizzes(5, 5, 1L);
 	}
 
@@ -33,11 +34,4 @@ public class QuizController {
 		return "redirect:/quiz";
 	}
 
-	// @GetMapping("/fetchTransaction/{userId}")
-	// public TransactionResponse fetchTransaction(@PathVariable("userId") Long userId) {
-	// 	log.info("userId= {}", userId);
-	// 	TransactionResponse response = quizService.fetchTransactionData(userId);
-	// 	quizService.makeQuizzes(response);
-	// 	return quizService.fetchTransactionData(userId);
-	// }
 }

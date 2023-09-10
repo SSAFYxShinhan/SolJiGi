@@ -1,6 +1,5 @@
-package com.ssafy.soljigi.game.gpt.service;
+package com.ssafy.soljigi.game.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.base.error.BaseException;
@@ -8,15 +7,13 @@ import com.ssafy.soljigi.base.error.BaseResponseStatus;
 import com.ssafy.soljigi.game.dto.ChatGptRes;
 
 import io.github.flashvayne.chatgpt.service.ChatgptService;
+import lombok.AllArgsConstructor;
 
 @Service
-public class MyChatGPTService {
-	private ChatgptService chatgptService;
+@AllArgsConstructor
+public class ChatGPTService {
 
-	@Autowired
-	public MyChatGPTService(ChatgptService chatgptService) {
-		this.chatgptService = chatgptService;
-	}
+	private ChatgptService chatgptService;
 
 	public ChatGptRes getChatResponse(String prompt) throws BaseException {
 		try {

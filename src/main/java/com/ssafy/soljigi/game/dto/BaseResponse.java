@@ -1,4 +1,6 @@
-package com.ssafy.soljigi.game.gpt.base;
+package com.ssafy.soljigi.game.dto;
+
+import com.ssafy.soljigi.base.error.BaseResponseStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
