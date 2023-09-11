@@ -21,6 +21,12 @@ public class DiagnosisResultService {
 	private final UserRepository userRepository;
 	private final DiagnosisResultRepository resultRepository;
 
+	public List<DiagnosisResultResponse> findAll(Long userId) {
+		return resultRepository.findAllByUserId(userId).stream()
+			.map(DiagnosisResultResponse::of)
+			.toList();
+	}
+
 	public Long save(DiagnosisResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);
