@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.SMS.Service;
+package com.ssafy.soljigi.sms.service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -23,9 +23,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.soljigi.SMS.DTO.MessageDTO;
-import com.ssafy.soljigi.SMS.DTO.SmsRequestDTO;
-import com.ssafy.soljigi.SMS.DTO.SmsResponseDTO;
+import com.ssafy.soljigi.sms.dto.MessageDTO;
+import com.ssafy.soljigi.sms.dto.SmsRequestDTO;
+import com.ssafy.soljigi.sms.dto.SmsResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -91,7 +91,7 @@ public class SmsService {
 		messages.add(messageDto);
 
 		SmsRequestDTO request = SmsRequestDTO.builder()
-			.type("SMS")
+			.type("sms")
 			.contentType("COMM")
 			.countryCode("82")
 			.from(phone)

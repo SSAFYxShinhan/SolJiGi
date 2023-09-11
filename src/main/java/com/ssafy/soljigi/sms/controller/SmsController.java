@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.SMS.Controller;
+package com.ssafy.soljigi.sms.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ssafy.soljigi.SMS.DTO.MessageDTO;
-import com.ssafy.soljigi.SMS.DTO.SmsResponseDTO;
-import com.ssafy.soljigi.SMS.Service.SmsService;
+import com.ssafy.soljigi.sms.dto.MessageDTO;
+import com.ssafy.soljigi.sms.service.SmsService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +34,7 @@ public class SmsController {
 		RestClientException,
 		URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		// messageDto.setTo("01088373012");
-		// messageDto.setContent("신한은행 해커톤 SMS 테스트");
+		// messageDto.setContent("신한은행 해커톤 sms 테스트");
 		// SmsResponseDTO response = smsService.sendSms(messageDto);
 		// model.addAttribute("response", response);
 		return "SMS/result";

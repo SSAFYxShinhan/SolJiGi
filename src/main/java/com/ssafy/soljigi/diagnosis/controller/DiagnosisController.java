@@ -57,7 +57,7 @@ public class DiagnosisController {
 	public ApiResponse<?> saveResult(@RequestBody DiagnosisResultSaveRequest saveRequest) {
 		log.info("saveRequest={}", saveRequest);
 		resultService.save(saveRequest);
-		// 보호자에게 SMS 문자 전송 기능 추가
+		// 보호자에게 sms 문자 전송 기능 추가
 		return ApiResponse.ofSuccess();
 	}
 

@@ -1,7 +1,6 @@
-package com.ssafy.soljigi.SMS.DTO;
+package com.ssafy.soljigi.sms.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
