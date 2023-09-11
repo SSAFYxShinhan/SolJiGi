@@ -92,7 +92,7 @@ function result() {
             total : 100,
         })
     }
-    fetch("test/result",score)
+    fetch("diagnosis/saveResult",score)
         .then((response) => {
             if(!response.ok) {
                 throw new Error("400또는 500 에러 발생!");

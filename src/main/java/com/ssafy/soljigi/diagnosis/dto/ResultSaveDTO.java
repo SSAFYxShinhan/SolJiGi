@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.dementiaTest.dto;
+package com.ssafy.soljigi.diagnosis.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
-public class SaveDTO {
+public class ResultSaveDTO {
 	private int orient;
 	private int memory;
 	private int attention;
