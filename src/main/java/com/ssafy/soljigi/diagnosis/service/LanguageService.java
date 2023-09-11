@@ -1,10 +1,14 @@
 package com.ssafy.soljigi.diagnosis.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
+
+import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,18 +26,28 @@ public class LanguageService {
 	};
 	static final String[] answer = new String[] {"바나나", "시소", "칫솔","비행기","사과","태권도"};
 
-	public static HashMap<String, Object> getQuiz(HashMap<String, Object> map) {
+	public List<DiagnosisQuizDto> getQuiz() {
 		Random random = new Random();
+		List<DiagnosisQuizDto> quizzes = new ArrayList<>(3);
 
-		// Q_img : 이미지로 이름 맞추기
-		ArrayList<String> quiz_img = new ArrayList<>();
-		int qIndex = random.nextInt(srcImg.length);
+		int index = random.nextInt(srcImg.length);
+		quizzes.add(generateImgQuiz(index));
+		index++;
+		if(index >= srcImg.length)  index -= srcImg.length;
+		quizzes.add(generateImgQuiz(index));
+		index++;
+		if(index >= srcImg.length)  index -= srcImg.length;
+		quizzes.add(generateImgQuiz(index));
 
-		quiz_img.add(srcImg[qIndex]); // src img
-		quiz_img.add(answer[qIndex]); // answer
+		return quizzes;
+	}
 
-		map.put("q_img", quiz_img);
+	private static DiagnosisQuizDto generateImgQuiz(int index) {
 
-		return map;
+		return DiagnosisQuizDto.builder()
+			.type(DiagnosisType.LANGUAGE)
+			.question("다음 이미지를 보고 무엇인지 말해보세요.<br><img src=" + srcImg[index] + " alt=\"quiz_img\">")
+			.shortAnswer(Collections.singletonList(answer[index]))
+			.build();
 	}
 }
