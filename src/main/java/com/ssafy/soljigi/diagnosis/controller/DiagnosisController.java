@@ -52,13 +52,13 @@ public class DiagnosisController {
 		return "diagnosis/diagnosis";
 	}
 
-	// form 방식으로 변경 예정
+	@ResponseBody
 	@PostMapping
-	public String saveResult(@RequestBody DiagnosisResultSaveRequest saveRequest) {
-		System.out.println(saveRequest);
+	public ApiResponse<?> saveResult(@RequestBody DiagnosisResultSaveRequest saveRequest) {
 		log.info("saveRequest={}", saveRequest);
 		resultService.save(saveRequest);
-		return "redirect:view/main";	// 진단 검사 결과 창으로 redirect해야 함
+		// 보호자에게 SMS 문자 전송 기능 추가
+		return ApiResponse.ofSuccess();
 	}
 
 	@ResponseBody
