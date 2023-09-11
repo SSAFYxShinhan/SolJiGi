@@ -82,21 +82,21 @@
                 <h2 class="text-white fw-bold m-0">솔직이</h2>
             </a>
             <div class="ms-auto d-flex align-items-center">
-                <span sec:authorize="isAuthenticated()"><span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span>
+                <span sec:authorize="isAuthenticated()">
+                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span>
+
+                </span>
                 <span sec:authorize="isAnonymous()">로그인하지 않은 사용자는 볼 수 있습니다.</span>
-<!--                <span sec:authentication="isAuthenticated()">로그인 한 사용자</span>-->
-<!--                <span sec:authentication="isAnonymous()">로그인 하지 않은 사용자</span>-->
-                <small class="ms-4"><i class="fa fa-envelope me-3"></i></small>
+
                 <small class="ms-4"><i class="fa fa-envelope me-3"></i>info@example.com</small>
                 <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</small>
                 <div class="ms-3 d-flex">
-                    <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                            class="fab fa-linkedin-in"></i></a>
+
+                    <span sec:authorize="isAuthenticated()">
+                        <button class="btn btn-light text-primary rounded-pill">로그아웃</button>
+                    </span>
                 </div>
+
             </div>
         </div>
     </div>
@@ -167,7 +167,10 @@
                                     <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
                                         <span class="display-1 text-white animated slideInRight">까지</span></p>
                                 </div>
-                                <a th:href="@{/view/sign-in}"
+                                <a sec:authorize="isAnonymous()" th:href="@{/view/sign-in}"
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
+                                    시작하기</a>
+                                <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
                                     시작하기</a>
                             </div>
@@ -188,8 +191,11 @@
                             <div>
                                 <p class="display-1 text-white animated slideInLeft">제공</p>
                             </div>
-                            <a th:href="@{/view/sign-in}"
-                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInRight">진단 서비스
+                            <a sec:authorize="isAnonymous()" th:href="@{/view/sign-in}"
+                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
+                                시작하기</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/game}"
+                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
                                 시작하기</a>
                         </div>
                     </div>
