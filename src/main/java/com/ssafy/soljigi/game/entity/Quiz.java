@@ -34,7 +34,6 @@ public class Quiz {
 	@BatchSize(size = 10)
 	private List<String> choice;
 
-	@Column(nullable = false)
 	private int choiceAnswer;
 
 	@ElementCollection(fetch = FetchType.LAZY)
@@ -44,18 +43,14 @@ public class Quiz {
 	protected Quiz() {
 	}
 
-	@Builder(builderMethodName = "choiceBuilder")
-	public Quiz(Type type, String question, List<String> choice, int choiceAnswer) {
+	@Builder
+	public Quiz(Type type, String question, List<String> choice, int choiceAnswer, List<String> shortAnswer) {
 		this.type = type;
 		this.question = question;
-		this.choice = choice;
+		if (choice != null)
+			this.choice = choice;
 		this.choiceAnswer = choiceAnswer;
-	}
-
-	@Builder(builderMethodName = "shortBuilder")
-	public Quiz(Type type, String question, List<String> shortAnswer) {
-		this.type = type;
-		this.question = question;
-		this.shortAnswer = shortAnswer;
+		if (shortAnswer != null)
+			this.shortAnswer = shortAnswer;
 	}
 }
