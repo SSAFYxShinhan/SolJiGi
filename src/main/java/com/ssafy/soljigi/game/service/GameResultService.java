@@ -1,7 +1,11 @@
 package com.ssafy.soljigi.game.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
+import com.ssafy.soljigi.game.dto.GameResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
 import com.ssafy.soljigi.game.entity.GameResult;
 import com.ssafy.soljigi.game.repository.GameResultRepository;
@@ -16,6 +20,12 @@ public class GameResultService {
 
 	private final UserRepository userRepository;
 	private final GameResultRepository resultRepository;
+
+	public List<GameResultResponse> findAll(Long userId) {
+		return resultRepository.findAllByUserId(userId).stream()
+			.map(GameResultResponse::of)
+			.toList();
+	}
 
 	public Long save(GameResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())

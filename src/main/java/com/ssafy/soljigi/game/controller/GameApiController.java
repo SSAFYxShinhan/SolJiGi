@@ -1,11 +1,16 @@
 package com.ssafy.soljigi.game.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.base.api.response.ApiResponse;
+import com.ssafy.soljigi.game.dto.GameResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
 import com.ssafy.soljigi.game.service.GameResultService;
 
@@ -30,5 +35,11 @@ public class GameApiController {
 			return ApiResponse.ofError("존재하지 않는 회원입니다.");
 		}
 		return ApiResponse.ofSuccess(savedId);
+	}
+
+	@GetMapping("result/{userId}")
+	public ApiResponse<?> searchResult(@PathVariable("userId") Long userId) {
+		List<GameResultResponse> data = resultService.findAll(userId);
+		return ApiResponse.ofSuccess(data);
 	}
 }
