@@ -1,14 +1,5 @@
 package com.ssafy.soljigi.diagnosis.service;
 
-// @RequiredArgsConstructor
-// public class LanguageService {
-//
-// 	public Map<String, String> getQuiz() {
-// 		return null;
-// 	}
-// }
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;

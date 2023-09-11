@@ -44,7 +44,7 @@ public class DiagnosisController {
 		return "diagnosis/diagnosis";
 	}
 
-	@GetMapping("/diagnosis/resultPage")
+	@GetMapping("/resultPage")
 	public String getDiagnosisPage() {
 		return "diagnosis/diagnosisResult";
 	}
