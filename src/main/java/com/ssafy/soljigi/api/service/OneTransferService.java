@@ -1,12 +1,12 @@
 package com.ssafy.soljigi.api.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.api.dto.request.OneTransferRequest;
+import com.ssafy.soljigi.api.dto.request.SearchTransactionRequest;
+import com.ssafy.soljigi.api.dto.response.OneTransferMemoResponse;
 import com.ssafy.soljigi.api.dto.response.OneTransferResponse;
 import com.ssafy.soljigi.api.entity.Account;
 import com.ssafy.soljigi.api.entity.Transaction;
@@ -40,5 +40,15 @@ public class OneTransferService {
 			.branchName("1원 인증")
 			.build());
 		return OneTransferResponse.of(dataBody.getBankCode(), accountNumber);
+	}
+
+	public OneTransferMemoResponse getLatestOneTransferMemo(SearchTransactionRequest.DataBody dataBody) {
+		Account account = accountRepository.findByAccountNumber(dataBody.getAccountNumber())
+			.orElseThrow(IllegalArgumentException::new);
+
+		String content = transactionRepository.findLatestOneTransfer(account)
+			.orElseThrow(IllegalArgumentException::new)
+			.getContent();
+		return OneTransferMemoResponse.of(content);
 	}
 }
