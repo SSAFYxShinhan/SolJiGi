@@ -32,18 +32,21 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	//입력
 	@Column(unique = true)
 	private String username;
 	private String password;
+	private int educationLevel;
+	private String careGiverPhoneNumber;
+
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	private String name;
 	private LocalDate birthDate;
 	private Address address;
-	private String number;
-	private Long educationLevel;
+	private String phoneNumber;
 	private String accountNumber;
-	private Boolean accountVerification;
-	private String careGiverNumber;
+
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
