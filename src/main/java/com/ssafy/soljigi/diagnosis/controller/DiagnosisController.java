@@ -25,6 +25,7 @@ import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
 import com.ssafy.soljigi.diagnosis.service.AttentionService;
 import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
 import com.ssafy.soljigi.diagnosis.service.ExecutiveService;
+import com.ssafy.soljigi.diagnosis.service.LanguageService;
 import com.ssafy.soljigi.diagnosis.service.MemoryService;
 import com.ssafy.soljigi.diagnosis.service.OrientService;
 import com.ssafy.soljigi.sms.dto.SmsResponseDTO;
@@ -44,7 +45,7 @@ public class DiagnosisController {
 	private final AttentionService attentionService;
 	// private final SpacetimeService spacetimeService;
 	private final ExecutiveService executiveService;
-	// private final LanguageService languageService;
+	private final LanguageService languageService;
 	private final DiagnosisResultService resultService;
 	private final SmsService smsService;
 
@@ -56,8 +57,9 @@ public class DiagnosisController {
 		model.addAttribute("memory", memoryService.getQuiz(memory4w1h));
 		model.addAttribute("attention", attentionService.getQuiz());
 		model.addAttribute("spacetime", -1);
-		model.addAttribute("executive", executiveService.getQuiz());
-		// model.addAttribute("language", languageService.getQuiz());
+		model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
+		model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
+		model.addAttribute("language", languageService.getQuiz());
 		return "diagnosis/diagnosis";
 	}
 
