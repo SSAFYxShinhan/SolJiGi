@@ -5,7 +5,7 @@ $(function() {
         var sources = function () {
             var result = [];
 
-            for (var i = 1; i < 196; i++) {
+            for (var i = 1; i < 2; i++) {
                 result.push({
                     id: i,
                     nameData: "test"
@@ -20,7 +20,7 @@ $(function() {
             callback: function (response, pagination) {
                 window.console && console.log(response, pagination);
 
-                var dataHtml = '<table className="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
+                var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
 
                 $.each(response, function (index, item) {
                     dataHtml += '<tbody>';

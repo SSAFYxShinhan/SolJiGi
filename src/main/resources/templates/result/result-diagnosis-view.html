@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -167,7 +168,11 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">김순자씨</span>
+                            <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                <span sec:authentication="Principal.username"></span>
+                            </span>
+                            <span sec:authorize="isAnonymous()">로그인 하지 않았습니다.</span>
+
                             <img class="img-profile rounded-circle"
                                  src="img/undraw_profile.svg">
                         </a>
@@ -181,10 +186,6 @@
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -215,7 +216,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             오늘의 한마디
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">뒤통수를 조심해라</div>
+                                        <div id="todayMention" class="h5 mb-0 font-weight-bold text-gray-800">뒤통수를 조심해라</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -236,7 +237,7 @@
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">11</div>
+                                                <div id="weekPayCount" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">11</div>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +259,7 @@
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                             이번달 진단검사 / 게임여부 여부
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
+                                        <div id="monthIsDone" class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -274,7 +275,7 @@
                 <div class="row">
 
                     <!-- Area Chart -->
-                    <div class="col-xl-12 col-lg-7">
+                    <div class="col-xl-12 col-lg-12">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div
@@ -372,28 +373,8 @@
                             </div>
 
                                     <div class="data-container"></div>
-                                    <div id="pagination-demo1"></div>
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th><a href="game-detail-form.html">날짜</a></th>-->
-<!--                                    <th>점수</th>-->
-<!--                                    <th>비고</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tfoot>-->
-<!--                                <tr>-->
-<!--                                    <th>Name</th>-->
-<!--                                    <th>Position</th>-->
-<!--                                    <th>Office</th>-->
-<!--                                </tr>-->
-<!--                                </tfoot>-->
-<!--                                <tbody>-->
-<!--                                <tr>-->
-<!--                                    <td>Tiger Nixon</td>-->
-<!--                                    <td>System Architect</td>-->
-<!--                                    <td>Edinburgh</td>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
+                                    <div id="pagination-demo1" class="d-flex justify-content-center"></div>
+
                         </div>
 
                     </div>
