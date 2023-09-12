@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-// @Service
+// @service
 @RequiredArgsConstructor
 public class LanguageService {
 
