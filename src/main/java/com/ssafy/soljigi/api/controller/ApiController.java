@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.soljigi.api.dto.AccountTransactionDto;
+import com.ssafy.soljigi.api.dto.response.AccountTransactionResponse;
 import com.ssafy.soljigi.api.dto.request.OneTransferRequest;
-import com.ssafy.soljigi.api.dto.request.SearchRequest;
+import com.ssafy.soljigi.api.dto.request.SearchTransactionRequest;
 import com.ssafy.soljigi.api.dto.response.OneTransferResponse;
 import com.ssafy.soljigi.api.service.AccountService;
 import com.ssafy.soljigi.api.service.OneTransferService;
@@ -28,20 +28,18 @@ public class ApiController {
 	private final OneTransferService oneTransferService;
 
 	@PostMapping("/search/transaction")
-	public AccountTransactionDto search(@RequestBody SearchRequest request) {
-		log.info("{}", request);
+	public AccountTransactionResponse search(@RequestBody SearchTransactionRequest request) {
 		if (!request.getDataHeader().getApikey().equals(API_KEY)) {
-			return AccountTransactionDto.ofFail();
+			return AccountTransactionResponse.ofFail();
 		}
 
-		AccountTransactionDto resp = AccountTransactionDto.ofFail();
-
+		AccountTransactionResponse response = AccountTransactionResponse.ofFail();
 		try {
-			resp = accountService.get(request.getDataBody().getAccountNumber());
+			response = accountService.get(request.getDataBody().getAccountNumber());
 		} catch (IllegalArgumentException e) {
 
 		}
-		return resp;
+		return response;
 	}
 
 	@PostMapping("/auth/1transfer")

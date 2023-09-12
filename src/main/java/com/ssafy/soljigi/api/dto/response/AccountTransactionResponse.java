@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.api.dto;
+package com.ssafy.soljigi.api.dto.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +9,7 @@ import com.ssafy.soljigi.api.entity.Transaction;
 import lombok.Data;
 
 @Data
-public class AccountTransactionDto {
+public class AccountTransactionResponse {
 
 	private DataHeader dataHeader;
 	private DataBody dataBody;
@@ -44,15 +44,15 @@ public class AccountTransactionDto {
 		}
 	}
 
-	public static AccountTransactionDto of(Account account) {
-		AccountTransactionDto response = new AccountTransactionDto();
+	public static AccountTransactionResponse of(Account account) {
+		AccountTransactionResponse response = new AccountTransactionResponse();
 
-		AccountTransactionDto.DataHeader header = new AccountTransactionDto.DataHeader();
+		AccountTransactionResponse.DataHeader header = new AccountTransactionResponse.DataHeader();
 		header.setSuccessCode(0);
 		header.setResultCode(0);
 		header.setResultMessage("Success");
 
-		AccountTransactionDto.DataBody body = new AccountTransactionDto.DataBody();
+		AccountTransactionResponse.DataBody body = new AccountTransactionResponse.DataBody();
 		body.set계좌번호(account.getAccountNumber());
 		body.set상품명(account.getProductName());
 		body.set계좌잔액(account.getBalance());
@@ -81,10 +81,10 @@ public class AccountTransactionDto {
 		return response;
 	}
 
-	public static AccountTransactionDto ofFail() {
-		AccountTransactionDto response = new AccountTransactionDto();
+	public static AccountTransactionResponse ofFail() {
+		AccountTransactionResponse response = new AccountTransactionResponse();
 
-		AccountTransactionDto.DataHeader header = new AccountTransactionDto.DataHeader();
+		AccountTransactionResponse.DataHeader header = new AccountTransactionResponse.DataHeader();
 		header.setSuccessCode(1);
 		header.setResultCode(1);
 		header.setResultMessage("Fail");

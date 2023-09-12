@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class SearchRequest {
+public class SearchTransactionRequest {
 
 	private DataHeader dataHeader;
 	private DataBody dataBody;
