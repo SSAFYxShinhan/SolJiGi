@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.game.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ssafy.soljigi.game.entity.Quiz;
@@ -9,7 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class QuizDto {
 
 	private Long id;
@@ -18,6 +18,19 @@ public class QuizDto {
 	private List<String> choice;
 	private int choiceAnswer;
 	private List<String> shortAnswer;
+
+	@Builder
+	public QuizDto(Long id, Type type, String question, List<String> choice, int choiceAnswer,
+		List<String> shortAnswer) {
+		this.id = id;
+		this.type = type;
+		this.question = question;
+		if (choice != null)
+			this.choice = new ArrayList<>(choice);
+		this.choiceAnswer = choiceAnswer;
+		if (shortAnswer != null)
+			this.shortAnswer = new ArrayList<>(shortAnswer);
+	}
 
 	public static QuizDto of(Quiz quiz) {
 		return QuizDto.builder()

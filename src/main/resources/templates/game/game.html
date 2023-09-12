@@ -16,6 +16,7 @@
     <script src="/js/game/same-picture.js"></script>
     <script src="/js/game/choice-quiz.js"></script>
     <script src="/js/game/short-answer-quiz.js"></script>
+    <script src="/js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
 <div id="layout">
@@ -28,6 +29,7 @@
 
 <script th:inline="javascript">
     let result = [0, 0, 0, 0];
+    let gameTotal = [0, 0, 0, 0];
     const container = document.querySelector('.gameContainer');
     const questions = [[${quizzes}]];
     const matchCardCount = [[${matchCard}]];
@@ -54,23 +56,27 @@
             c = matchCardGameLevel[random][1];
             time = matchCardGameLevel[random][2];
             currGame = new MatchCardGame(container, r, c, time, result, nextGame);
+            ++gameTotal[gameType.MATCH_CARD];
         } else if (game === gameType.SAME_PICTURE) {
             const random = rand(0, samePictureGameLevel.length);
             r = samePictureGameLevel[random][0];
             c = samePictureGameLevel[random][1];
             time = samePictureGameLevel[random][2];
             currGame = new SamePictureGame(container, r, c, time, result, nextGame);
+            ++gameTotal[gameType.SAME_PICTURE];
         } else if (game.type === 'SHORT') {
             currGame = new ShortAnswerQuizGame(container, game, 10, result, nextGame);
+            ++gameTotal[gameType.SHORT_ANSWER_QUIZ];
         } else if (game.type === 'CHOICE') {
             currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
+            ++gameTotal[gameType.CHOICE_QUIZ];
         }
     }
 
     function nextGame() {
         if (gameIdx === questions.length) {
-            alert('게임이 종료되었습니다.');
-            container.innerHTML = `결과 화면 이동 로직 작성 ${result}`;
+            container.innerHTML = ``;
+            saveResult();
             return;
         }
         currGame = null;
@@ -83,6 +89,47 @@
 
     function shuffle(array) {
         array.sort(() => Math.random() - 0.5);
+    }
+
+    function saveResult() {
+        const obj = {
+            userId: 1,
+            choiceCorrect: result[gameType.CHOICE_QUIZ],
+            choiceTotal: gameTotal[gameType.CHOICE_QUIZ],
+            shortAnsCorrect: result[gameType.SHORT_ANSWER_QUIZ],
+            shortAnsTotal: gameTotal[gameType.SHORT_ANSWER_QUIZ],
+            matchCardCorrect: result[gameType.MATCH_CARD],
+            matchCardTotal: gameTotal[gameType.MATCH_CARD],
+            samePictureCorrect: result[gameType.SAME_PICTURE],
+            samePictureTotal: gameTotal[gameType.SAME_PICTURE],
+        };
+
+        let flag = false;
+        $.ajax({
+            url: "/game/result",
+            headers: {'Content-Type': 'application/json'},
+            type: 'post',
+            async: false,
+            data: JSON.stringify(obj),
+            success: function (result) {
+                console.log(result);
+                if (result.status === 'success') {
+                    flag = true;
+                    console.log(result);
+                } else if(result.status === 'fail') {
+                    alert('error!!!')
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("error!!!");
+            }
+        });
+
+        if (flag) {
+            location.href = "/view/main";   // 게임 결과 페이지로 이동해야 함.
+        }
     }
 </script>
 

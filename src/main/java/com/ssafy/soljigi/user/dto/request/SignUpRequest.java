@@ -15,4 +15,11 @@ public class SignUpRequest {
 	private String username;
 	private String password;
 	private String email;
+	private String grade;
+	private String parentNumber;
+	private String gender;
+	private String birth;
+	private String address;
+	private String phoneNumber;
+	private String accountNumber;
 }

@@ -1,8 +1,9 @@
-package com.ssafy.soljigi.SMS.Service;
+package com.ssafy.soljigi.sms.service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -23,9 +24,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.soljigi.SMS.DTO.MessageDTO;
-import com.ssafy.soljigi.SMS.DTO.SmsRequestDTO;
-import com.ssafy.soljigi.SMS.DTO.SmsResponseDTO;
+import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
+import com.ssafy.soljigi.sms.dto.MessageDTO;
+import com.ssafy.soljigi.sms.dto.SmsRequestDTO;
+import com.ssafy.soljigi.sms.dto.SmsResponseDTO;
+import com.ssafy.soljigi.user.entity.User;
+import com.ssafy.soljigi.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,39 +50,30 @@ public class SmsService {
 	@Value("${naver-cloud-sms.senderPhone}")
 	private String phone;
 
-	public String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
-		String space = " ";
-		String newLine = "\n";
-		String method = "POST";
-		String url = "/sms/v2/services/"+ this.serviceId+"/messages";
-		String timestamp = time.toString();
-		String accessKey = this.accessKey;
-		String secretKey = this.secretKey;
+	private final UserRepository userRepository;
 
-		String message = new StringBuilder()
-			.append(method)
-			.append(space)
-			.append(url)
-			.append(newLine)
-			.append(timestamp)
-			.append(newLine)
-			.append(accessKey)
-			.toString();
+	public SmsResponseDTO sendDiagnosticResult(Long userId, String content) {
+		User user = userRepository.findById(userId)
+			.orElseThrow(IllegalArgumentException::new);
 
-		SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
-		Mac mac = Mac.getInstance("HmacSHA256");
-		mac.init(signingKey);
-
-		byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
-		String encodeBase64String = Base64.encodeBase64String(rawHmac);
-
-		return encodeBase64String;
+		// String phoneNumber = user.getCareGiverNumber();
+		String phoneNumber = "01089258114";
+		SmsResponseDTO response;
+		try {
+			response = sendSms(new MessageDTO(phoneNumber, content));
+ 		} catch (UnsupportedEncodingException | URISyntaxException | NoSuchAlgorithmException | InvalidKeyException |
+				 JsonProcessingException e) {
+			// throw new RuntimeException(e);
+			return null;
+		}
+		return response;
 	}
 
 	public SmsResponseDTO sendSms(MessageDTO messageDto) throws
 		JsonProcessingException,
 		RestClientException,
 		URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
 		Long time = System.currentTimeMillis();
 
 		HttpHeaders headers = new HttpHeaders();
@@ -91,7 +86,7 @@ public class SmsService {
 		messages.add(messageDto);
 
 		SmsRequestDTO request = SmsRequestDTO.builder()
-			.type("SMS")
+			.type("sms")
 			.contentType("COMM")
 			.countryCode("82")
 			.from(phone)
@@ -108,5 +103,30 @@ public class SmsService {
 		SmsResponseDTO response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ serviceId +"/messages"), httpBody, SmsResponseDTO.class);
 
 		return response;
+	}
+
+	private String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+		String space = " ";
+		String newLine = "\n";
+		String method = "POST";
+		String url = "/sms/v2/services/"+ this.serviceId+"/messages";
+		String timestamp = time.toString();
+		String accessKey = this.accessKey;
+		String secretKey = this.secretKey;
+
+		String message = method
+			+ space
+			+ url
+			+ newLine
+			+ timestamp
+			+ newLine
+			+ accessKey;
+
+		SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
+		Mac mac = Mac.getInstance("HmacSHA256");
+		mac.init(signingKey);
+
+		byte[] rawHmac = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
+		return Base64.encodeBase64String(rawHmac);
 	}
 }

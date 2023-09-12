@@ -17,6 +17,7 @@ import com.ssafy.soljigi.game.dto.ChatGptResponse;
 import com.ssafy.soljigi.game.dto.QuizDto;
 import com.ssafy.soljigi.game.dto.TransactionResponse;
 import com.ssafy.soljigi.game.entity.Quiz;
+import com.ssafy.soljigi.game.entity.Type;
 import com.ssafy.soljigi.game.repository.QuizRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -33,27 +34,26 @@ public class QuizService {
 	private final String TRANSACTION_URL = "http://localhost:8080/v1/search/transaction";
 	private final QuizRepository quizRepository;
 
-	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) throws BaseException {
-
-		// List<QuizDto> randomQuizzes = getRandomQuizzes(finance).stream()
-		// 	.map(QuizDto::of)
-		// 	.toList();
+	public List<QuizDto> getQuizzes(int finance, int transaction, Long userId) {
 		List<QuizDto> randomQuizzes = new ArrayList<>(getRandomQuizzes(finance).stream().map(QuizDto::of).toList());
+		try {
+			List<QuizDto> transactionQuizzes = makeTransactionQuizzes(userId, transaction);
+			randomQuizzes.addAll(transactionQuizzes);
+		} catch (BaseException ignored) {
 
-		List<QuizDto> transactionQuizzes = makeTransactionQuizzes(userId, transaction);
-
-		randomQuizzes.addAll(transactionQuizzes);
+		}
 		Collections.shuffle(randomQuizzes);
 		return randomQuizzes;
 	}
 
-	public List<Quiz> getRandomQuizzes(int count) {
+	private List<Quiz> getRandomQuizzes(int count) {
 		return quizRepository.findRandomQuizzes(count);
 	}
 
+	////////////////////// ?
 	@Transactional
 	public void saveQuiz(QuizDto quizDto) {
-		Quiz quiz = Quiz.choiceBuilder()
+		Quiz quiz = Quiz.builder()
 			.question(quizDto.getQuestion())
 			.choice(quizDto.getChoice())
 			.choiceAnswer(quizDto.getChoiceAnswer())
@@ -61,7 +61,7 @@ public class QuizService {
 		quizRepository.save(quiz);
 	}
 
-	public List<QuizDto> makeTransactionQuizzes(Long userId, int count) throws BaseException {
+	private List<QuizDto> makeTransactionQuizzes(Long userId, int count) throws BaseException {
 		List<TransactionResponse.DataBody.TransactionDetail> details;
 
 		try {
@@ -90,14 +90,15 @@ public class QuizService {
 
 			if (choices.length == 4) {
 				quizzes.add(QuizDto.builder()
+					.type(Type.CHOICE)
 					.question("최근에 어디서 식사를 했나요?")
 					.choice(new ArrayList<>(Arrays.asList(choices)))
 					.choiceAnswer(Arrays.asList(choices).indexOf(content))
 					.build());
 			}
 
-
 			quizzes.add(QuizDto.builder()
+				.type(Type.CHOICE)
 				.question("최근에 " + content + "(에)서 얼마를 사용하셨나요?")
 				.choice(new ArrayList<>(Arrays.asList("0~1999", "2000~4999", "5000~7999", "8000~9999")))
 				.choiceAnswer(1)
@@ -106,18 +107,16 @@ public class QuizService {
 		Collections.shuffle(quizzes);
 		log.info("quizzes={}", quizzes);
 
-
 		return quizzes.subList(0, Math.min(count, quizzes.size()));
 	}
 
-	public List<TransactionResponse.DataBody.TransactionDetail> fetchTransactionData(Long userId) {
+	private List<TransactionResponse.DataBody.TransactionDetail> fetchTransactionData(Long userId) {
 		RestTemplate restTemplate = new RestTemplate();
 
 		/**
 		 * TO DO : 회원의 아이디로 계좌번호 가져오기
 		 */
 		String accountNumber = "1234";
-
 
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();

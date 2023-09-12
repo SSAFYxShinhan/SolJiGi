@@ -38,25 +38,21 @@
                 <div class="card shadow p-3 mb-5 bg-body rounded text-black" style="border-radius: 25px;">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                            <div class="col-md-10 col-lg-6 col-xl-5">
                                 <form class="mx-1 mx-md-4">
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="username" name="username" class="form-control"/>
-                                            <label class="form-label" for="username">Your Name</label>
+                                            <input type="text" id="username" class="form-control"/>
+                                            <label class="form-label" for="username">이름</label>
                                         </div>
                                     </div>
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="email" id="email" name="email" class="form-control"/>
-                                            <label class="form-label" for="email">Your Email</label>
+                                            <input type="email" id="email" class="form-control"/>
+                                            <label class="form-label" for="email">Email</label>
                                         </div>
                                     </div>
 
@@ -71,37 +67,79 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4cd" class="form-control"/>
-                                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                                            <input type="text" id="grade" class="form-control"/>
+                                            <label class="form-label" for="grade">교육등급</label>
                                         </div>
                                     </div>
 
-                                    <div class="form-check d-flex justify-content-center mb-5">
-                                        <input class="form-check-input me-2" type="checkbox" value=""
-                                               id="form2Example3c"/>
-                                        <label class="form-check-label" for="form2Example3c">
-                                            I agree all statements in <a href="#!">Terms of service</a>
-                                        </label>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="parent-number" class="form-control"/>
+                                            <label class="form-label" for="parent-number">부모번호</label>
+                                        </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <a th:href="@{/user/sign-in}" type="button"
-                                           class="btn btn-primary btn-lg">sign
-                                            in</a>
-                                        <button type="button" class="btn btn-primary btn-lg" id="sign-up-btn">Register
-                                        </button>
+                                    <div class="d-flex flex-row mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline mb-0">
+                                            <input type="text" id="gender" class="form-control"/>
+                                            <label class="form-label" for="gender">성별</label>
+                                        </div>
                                     </div>
 
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="birth" class="form-control"/>
+                                            <label class="form-label" for="birth">생일</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="address" class="form-control"/>
+                                            <label class="form-label" for="address">주소(3개로 입력받아야함)</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="phone-number" class="form-control"/>
+                                            <label class="form-label" for="phone-number">휴대폰 번호</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="input-group px-6 mb-3" style="display: flex;">
+                                            <button class="btn btn-outline-primary" type="button" id="one-auth-btn">인증
+                                            </button>
+                                            <input type="text" class="form-control" id="account-number">
+                                        </div>
+                                        <label class="form-label" for="account-number">계좌번호</label>
+                                    </div>
                                 </form>
 
                             </div>
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                                <a th:href="@{/view/index}"><img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                        class="img-fluid" alt="Sample image"></a>
-
+                            <div class="d-flex align-items-end justify-content-center mx-5">
+                                <div class="input-group px-6 mb-3" style="display: flex;">
+                                    <button class="btn btn-outline-primary" type="button" id="one-auth-check-btn">인증하기
+                                    </button>
+                                    <input type="text" class="form-control" placeholder="" id="one-auth-check-key">
+                                </div>
                             </div>
+                            <div class="d-flex align-items-end justify-content-center ">
+                                <a href="signin.html" type="button" class="btn btn-primary btn-lg">sign in</a>
+                                <button type="button" id="sign-up-btn" class="btn btn-primary btn-lg disabled">
+                                    Register
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ import com.ssafy.soljigi.api.entity.Transaction;
 import com.ssafy.soljigi.api.repository.AccountRepository;
 import com.ssafy.soljigi.api.repository.TransactionRepository;
 import com.ssafy.soljigi.game.entity.Quiz;
+import com.ssafy.soljigi.game.entity.Type;
 import com.ssafy.soljigi.game.repository.QuizRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -41,7 +42,8 @@ public class NotProd {
 
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
-					Quiz.choiceBuilder()
+					Quiz.builder()
+						.type(Type.CHOICE)
 						.question("quiz" + i)
 						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
 						.choiceAnswer(0)

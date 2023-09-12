@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.SMS.DTO;
+package com.ssafy.soljigi.sms.dto;
 
 import java.util.List;
 

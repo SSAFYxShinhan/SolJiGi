@@ -30,7 +30,7 @@ class SamePictureGame {
                 if (this.isDiagnosis) {
                     ++result[diagnosisType.SPACETIME];
                 } else {
-                    ++result[gameType.MATCH_CARD];
+                    ++result[gameType.SAME_PICTURE];
                 }
                 alert('정답입니다!');
             } else {
