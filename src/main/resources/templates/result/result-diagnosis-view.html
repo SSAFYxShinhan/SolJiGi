@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+
 <head>
 
     <meta charset="utf-8">
@@ -23,6 +24,7 @@
 
     <!-- Pagination style-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.css" integrity="sha512-TH+vnrhByFI2RzNvaHSqt6EwoJ9Bp+yGAGTWp84qTuTx315ebnypxtyGHpli55Rm4N4J+N/0W9xAL2b5RZ2ZSA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 </head>
 
@@ -168,10 +170,12 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                             <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 <span sec:authentication="Principal.username"></span>
                             </span>
                             <span sec:authorize="isAnonymous()">로그인 하지 않았습니다.</span>
+
 
                             <img class="img-profile rounded-circle"
                                  src="img/undraw_profile.svg">
@@ -187,6 +191,7 @@
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -217,6 +222,7 @@
                                             오늘의 한마디
                                         </div>
                                         <div id="todayMention" class="h5 mb-0 font-weight-bold text-gray-800">뒤통수를 조심해라</div>
+
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -238,6 +244,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <div id="weekPayCount" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">11</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -260,6 +267,7 @@
                                             이번달 진단검사 / 게임여부 여부
                                         </div>
                                         <div id="monthIsDone" class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
+
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -276,6 +284,7 @@
 
                     <!-- Area Chart -->
                     <div class="col-xl-12 col-lg-12">
+
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div
@@ -354,6 +363,7 @@
                                     <span id="resultData6Text" class="float-right">40%</span></h4>
                                 <div class="progress">
                                     <div id="resultData6" class="progress-bar bg-success" role="progressbar" style="width: 100%"
+
                                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
@@ -366,6 +376,7 @@
                             <section>
                             </section>
                         </div>
+
                         <!-- Illustrations -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -374,6 +385,7 @@
 
                                     <div class="data-container"></div>
                                     <div id="pagination-demo1" class="d-flex justify-content-center"></div>
+
 
                         </div>
 
@@ -448,6 +460,7 @@
     <script src="../../view-data/js/result-diagnosis-info-list.js"></script>
 
 <!--    <script src="../../view-data/js/demo/chart-pie-demo.js"></script>-->
+
 </div>
 </body>
 

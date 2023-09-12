@@ -14,6 +14,7 @@
     <script src="/js/game/choice-quiz.js"></script>
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
+    <script src="/js/jquery-3.6.3.min.js"></script>
 </head>
 <body>
 
@@ -27,11 +28,13 @@
 
 <script th:inline="javascript">
     let result = [0, 0, 0, 0, 0, 0];
+    let scoreField = ['orientScore', 'memoryScore', 'attentionScore', 'spacetimeScore', 'executiveScore', 'languageScore'];
     let memoryResult = [0, 0, 0, 0, 0];
     let mqIdx = 0;
     const container = document.querySelector('.diagnosisContainer');
 
     const questions = generateDiagnosis();
+
 
     let gameIdx = 0;
     updateView(questions[gameIdx++]);
@@ -85,30 +88,98 @@
         memoryQuiz.forEach(diagnosisQuiz => {
             questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
         });
-        console.log(questions);
-
-
         return questions;
-        // return orientQuiz
-        //     .concat({type: diagnosisType.MEMORY, read: true, memoryQuiz})
-        //     .concat(attentionQuiz)
-        //     .concat(gameType.MATCH_CARD)
-        //     .concat(gameType.SAME_PICTURE)
-        //     .concat(executiveQuiz)
-        //     .concat({type: diagnosisType.MEMORY, read: false, memoryQuiz})
-        //     .concat(languageQuiz)
     }
 
     function nextGame() {
         if (gameIdx === questions.length) {
-            alert('게임이 종료되었습니다.');
             container.innerHTML = `결과 화면 이동 로직 작성 ${result}`;
+            saveResult();
             return;
         }
         currGame = null;
         updateView(questions[gameIdx++]);
     }
 
+    function saveResult() {
+        const obj = {
+            userId: 1,
+            age: 20,            // 나이, 학력 필드 삭제 예정
+            educationLevel: 1,
+            orientScore: result[diagnosisType.ORIENT],
+            attentionScore: result[diagnosisType.ATTENTION],
+            spacetimeScore: result[diagnosisType.SPACETIME],
+            executiveScore: result[diagnosisType.EXECUTIVE],
+            languageScore: result[diagnosisType.LANGUAGE],
+            memoryScore: result[diagnosisType.MEMORY],
+        };
+
+        let flag = false;
+        $.ajax({
+            url: "/diagnosis",
+            headers: {'Content-Type': 'application/json'},
+            type: 'post',
+            async: false,
+            data: JSON.stringify(obj),
+            success: function (result) {
+                console.log(result);
+                if (result.status === 'success') {
+                    flag = true;
+                    console.log(result);
+                } else if(result.status === 'fail') {
+                    alert('error!!!')
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("error!!!");
+            }
+        });
+
+        if (flag) {
+            location.href = "/view/main";   // 진단 결과 페이지로 이동해야 함.
+        }
+        // const form = document.createElement("form");
+        //
+        // form.setAttribute("charset", "UTF-8");
+        // form.setAttribute("accept-charset", "UTF-8");
+        // form.setAttribute("method", "POST");
+        // form.setAttribute("action", "/diagnosis");
+
+        // orientScore: result[diagnosisType.ORIENT],
+        //     attentionScore: result[diagnosisType.ATTENTION],
+        //     spacetimeScore: result[diagnosisType.SPACETIME],
+        //     executiveScore: result[diagnosisType.EXECUTIVE],
+        //     languageScore: result[diagnosisType.LANGUAGE],
+        //     memoryScore: result[diagnosisType.MEMORY],
+        //
+        //
+        // const input1 = document.createElement("input");
+        // input1.setAttribute("type", "hidden");
+        // input1.setAttribute("name", "userId");
+        // input1.setAttribute("value", 1);
+        // form.appendChild(input1);
+        // const input2 = document.createElement("input");
+        // input2.setAttribute("type", "hidden");
+        // input2.setAttribute("name", "age");
+        // input2.setAttribute("value", 20);
+        // form.appendChild(input2);
+        // const input3 = document.createElement("input");
+        // input3.setAttribute("type", "hidden");
+        // input3.setAttribute("name", "educationLevel");
+        // input3.setAttribute("value", 1);
+        // form.appendChild(input3);
+        // for (let i = 0; i < 6; ++i) {
+        //     const input = document.createElement("input");
+        //     input.setAttribute("type", "hidden");
+        //     input.setAttribute("name", scoreField[i]);
+        //     input.setAttribute("value", result[i]);
+        //     form.appendChild(input);
+        // }
+        // document.body.appendChild(form);
+        // form.submit();
+    }
 </script>
 
 </body>
