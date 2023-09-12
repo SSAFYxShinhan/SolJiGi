@@ -26,6 +26,9 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../view-data/css/bootstrap.min.css" rel="stylesheet">
 
+    <!--    Try Toast -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <!-- Template Stylesheet -->
     <link href="../view-data/css/style.css" rel="stylesheet">
 </head>
@@ -40,101 +43,106 @@
                         <div class="row justify-content-center">
                             <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
                             <div class="col-md-10 col-lg-6 col-xl-5">
-                                <form class="mx-1 mx-md-4">
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="username" class="form-control"/>
-                                            <label class="form-label" for="username">이름</label>
-                                        </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="text" id="username" class="form-control"/>
+                                        <label class="form-label" for="username">아이디</label>
                                     </div>
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="email" id="email" class="form-control"/>
-                                            <label class="form-label" for="email">Email</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="password" class="form-control"/>
-                                            <label class="form-label" for="password">Password</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="grade" class="form-control"/>
-                                            <label class="form-label" for="grade">교육등급</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="parent-number" class="form-control"/>
-                                            <label class="form-label" for="parent-number">부모번호</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline mb-0">
-                                            <input type="text" id="gender" class="form-control"/>
-                                            <label class="form-label" for="gender">성별</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="birth" class="form-control"/>
-                                            <label class="form-label" for="birth">생일</label>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="address" class="form-control"/>
-                                            <label class="form-label" for="address">주소(3개로 입력받아야함)</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="phone-number" class="form-control"/>
-                                            <label class="form-label" for="phone-number">휴대폰 번호</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div class="input-group px-6 mb-3" style="display: flex;">
-                                            <button class="btn btn-outline-primary" type="button" id="one-auth-btn">인증
-                                            </button>
-                                            <input type="text" class="form-control" id="account-number">
-                                        </div>
-                                        <label class="form-label" for="account-number">계좌번호</label>
-                                    </div>
-                                </form>
-
-                            </div>
-
-                            <div class="d-flex align-items-end justify-content-center mx-5">
-                                <div class="input-group px-6 mb-3" style="display: flex;">
-                                    <button class="btn btn-outline-primary" type="button" id="one-auth-check-btn">인증하기
-                                    </button>
-                                    <input type="text" class="form-control" placeholder="" id="one-auth-check-key">
                                 </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="password" id="password" class="form-control"/>
+                                        <label class="form-label" for="password">Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                    <div class="dropdown">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>학력</option>
+                                            <option value="1">미취학</option>
+                                            <option value="2">중졸</option>
+                                            <option value="3">고졸</option>
+                                            <option value="4">대졸</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="text" id="parent-number" class="form-control"/>
+                                        <label class="form-label" for="parent-number">부모번호</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="input-group px-6 mb-3" style="display: flex;">
+                                        <div class="input-group mb-3">
+                                            <input type="text" id="account-number" name="accountNumber"
+                                                   class="form-control"
+                                                   placeholder="계좌번호를 입력하세요."
+                                                   aria-label="Recipient's username"
+                                                   aria-describedby="basic-addon2">
+                                            <button class="btn btn-primary" id="one-auth-btn">1원인증서비스</button>
+                                        </div>
+                                        <button class="btn btn-light" id="getTransAction">입금내역 확인하기</button>
+                                        <label for="configKey">인증하기</label><input type="text" id="configKey"
+                                                                                  class="form-control">
+                                        <button class="btn btn-primary" id="accountConfig">인증하기</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-flex flex-row mb-4">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline mb-0">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>성별</option>
+                                            <option value="1">남</option>
+                                            <option value="2">여</option>
+                                        </select>
+                                        성별
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="text" id="birth" class="form-control"/>
+                                        <label class="form-label" for="birth">생일</label>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="text" id="name" class="form-control"/>
+                                        이름
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input class="form-control" type="text" id="address_kakao" name="address"
+                                               readonly/>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input type="text" id="phone-number" class="form-control"/>
+                                        <label class="form-label" for="phone-number">휴대폰 번호</label>
+                                    </div>
+                                </div>
+
+
                             </div>
+
+
                             <div class="d-flex align-items-end justify-content-center ">
-                                <a href="signin.html" type="button" class="btn btn-primary btn-lg">sign in</a>
                                 <button type="button" id="sign-up-btn" class="btn btn-primary btn-lg disabled">
                                     Register
                                 </button>
@@ -162,8 +170,27 @@
 <script src="../view-data/lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="../view-data/lib/lightbox/js/lightbox.min.js"></script>
 
+<!--주소api-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    window.onload = function () {
+        document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면
+            //카카오 지도 발생
+            new daum.Postcode({
+                oncomplete: function (data) { //선택시 입력값 세팅
+                    document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                }
+            }).open();
+        });
+    }
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 <!-- Template Javascript -->
-<script src="../view-data/js/main.js"></script>
-<script src="../view-data/js/sign-up.js"></script>
+<script src="/view-data/js/main.js"></script>
+<script src="/view-data/js/one-auth.js"></script>
+<script src="/view-data/js/sign-up.js"></script>
 </body>
 </html>
