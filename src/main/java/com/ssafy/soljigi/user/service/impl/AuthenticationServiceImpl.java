@@ -10,6 +10,7 @@ import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.dto.request.SignUpRequest;
 import com.ssafy.soljigi.user.dto.request.SigninRequest;
 import com.ssafy.soljigi.user.dto.response.JwtAuthenticationResponse;
+import com.ssafy.soljigi.user.entity.Gender;
 import com.ssafy.soljigi.user.entity.Role;
 import com.ssafy.soljigi.user.entity.User;
 import com.ssafy.soljigi.user.repository.UserRepository;
@@ -43,6 +44,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		var user = User.builder()
 			.username(request.getUsername())
 			.password(passwordEncoder.encode(request.getPassword()))
+			.gender(Gender.isGenderType(request.getGender()))
+			// .address(new Address())
+			.careGiverNumber(request.getParentNumber())
+			// .birthDate()
+			// .educationLevel(request.getGrade())
+			.number(request.getPhoneNumber())
+			.accountNumber(request.getAccountNumber())
+			.accountVerification(true)
 			.role(Role.USER).build();
 		userRepository.save(user);
 		var jwt = jwtService.generateToken(user);
