@@ -9,5 +9,4 @@ class SoljigiApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
