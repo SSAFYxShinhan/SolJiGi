@@ -46,12 +46,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			.password(passwordEncoder.encode(request.getPassword()))
 			.gender(Gender.isGenderType(request.getGender()))
 			// .address(new Address())
-			.careGiverNumber(request.getParentNumber())
+			// .careGiverNumber(request.getParentNumber())
 			// .birthDate()
 			// .educationLevel(request.getGrade())
-			.number(request.getPhoneNumber())
+			// .number(request.getPhoneNumber())
 			.accountNumber(request.getAccountNumber())
-			.accountVerification(true)
+			// .accountVerification(true)
 			.role(Role.USER).build();
 		userRepository.save(user);
 		var jwt = jwtService.generateToken(user);
