@@ -1,5 +1,7 @@
 package com.ssafy.soljigi.api.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +19,7 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String transactionDate;
-	private String transactionTime;
+	private LocalDateTime transactionDateTime;
 	private String summary;
 	private long withdraw;
 	private long deposit;
@@ -32,10 +33,9 @@ public class Transaction {
 	private Account account;
 
 	@Builder
-	public Transaction(String transactionDate, String transactionTime, String summary, long withdraw, long deposit,
-		String content, long balance, int inOutType, String branchName, Account account) {
-		this.transactionDate = transactionDate;
-		this.transactionTime = transactionTime;
+	public Transaction(LocalDateTime transactionDateTime, String summary, long withdraw, long deposit, String content,
+		long balance, int inOutType, String branchName, Account account) {
+		this.transactionDateTime = transactionDateTime;
 		this.summary = summary;
 		this.withdraw = withdraw;
 		this.deposit = deposit;

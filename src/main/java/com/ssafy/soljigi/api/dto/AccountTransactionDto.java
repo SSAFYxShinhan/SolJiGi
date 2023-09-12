@@ -63,8 +63,8 @@ public class AccountTransactionDto {
 		body.set거래내역(transactions.stream()
 			.map(transaction -> {
 				DataBody.TransactionDetail detail = new DataBody.TransactionDetail();
-				detail.set거래일자(transaction.getTransactionDate());
-				detail.set거래시간(transaction.getTransactionTime());
+				// detail.set거래일자(transaction.getTransactionDate());
+				// detail.set거래시간(transaction.getTransactionTime());
 				detail.set적요(transaction.getSummary());
 				detail.set출금금액(transaction.getWithdraw());
 				detail.set입금금액(transaction.getDeposit());

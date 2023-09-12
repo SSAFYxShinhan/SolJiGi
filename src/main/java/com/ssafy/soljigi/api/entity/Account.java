@@ -41,6 +41,10 @@ public class Account {
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions = new ArrayList<>();
 
+	protected Account() {
+
+	}
+
 	@Builder
 	public Account(String accountNumber, String productName, long balance, String customerName, String name,
 		Address address, Gender gender, String phoneNumber, LocalDate birthDate) {
@@ -55,7 +59,7 @@ public class Account {
 		this.birthDate = birthDate;
 	}
 
-	protected Account() {
-
+	public void addBalance(long money) {
+		this.balance += money;
 	}
 }
