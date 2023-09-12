@@ -1,6 +1,7 @@
 package com.ssafy.soljigi.api.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,6 +33,10 @@ public class Transaction {
 	@JoinColumn(name = "account_id")
 	private Account account;
 
+	protected Transaction() {
+
+	}
+
 	@Builder
 	public Transaction(LocalDateTime transactionDateTime, String summary, long withdraw, long deposit, String content,
 		long balance, int inOutType, String branchName, Account account) {
@@ -51,7 +56,11 @@ public class Transaction {
 		this.account = account;
 	}
 
-	protected Transaction() {
+	public String getTransactionDate() {
+		return transactionDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	}
 
+	public String getTransactionTime() {
+		return transactionDateTime.format(DateTimeFormatter.ofPattern("HHmmss"));
 	}
 }

@@ -30,14 +30,14 @@ public class ApiController {
 	@PostMapping("/search/transaction")
 	public AccountTransactionResponse search(@RequestBody SearchTransactionRequest request) {
 		if (!request.getDataHeader().getApikey().equals(API_KEY)) {
-			return AccountTransactionResponse.ofFail();
+			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_API);
 		}
 
-		AccountTransactionResponse response = AccountTransactionResponse.ofFail();
+		AccountTransactionResponse response;
 		try {
-			response = accountService.get(request.getDataBody().getAccountNumber());
+			response = accountService.search(request.getDataBody());
 		} catch (IllegalArgumentException e) {
-
+			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_ACCOUNT);
 		}
 		return response;
 	}

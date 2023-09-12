@@ -11,15 +11,8 @@ import lombok.Data;
 @Data
 public class AccountTransactionResponse {
 
-	private DataHeader dataHeader;
+	private ResponseDataHeader dataHeader;
 	private DataBody dataBody;
-
-	@Data
-	public static class DataHeader {
-		private int successCode;
-		private int resultCode;
-		private String resultMessage;
-	}
 
 	@Data
 	public static class DataBody {
@@ -47,24 +40,21 @@ public class AccountTransactionResponse {
 	public static AccountTransactionResponse of(Account account) {
 		AccountTransactionResponse response = new AccountTransactionResponse();
 
-		AccountTransactionResponse.DataHeader header = new AccountTransactionResponse.DataHeader();
-		header.setSuccessCode(0);
-		header.setResultCode(0);
-		header.setResultMessage("Success");
+		ResponseDataHeader dataHeader = ResponseDataHeader.ofSuccess();
 
-		AccountTransactionResponse.DataBody body = new AccountTransactionResponse.DataBody();
-		body.set계좌번호(account.getAccountNumber());
-		body.set상품명(account.getProductName());
-		body.set계좌잔액(account.getBalance());
-		body.set고객명(account.getCustomerName());
+		AccountTransactionResponse.DataBody dataBody = new AccountTransactionResponse.DataBody();
+		dataBody.set계좌번호(account.getAccountNumber());
+		dataBody.set상품명(account.getProductName());
+		dataBody.set계좌잔액(account.getBalance());
+		dataBody.set고객명(account.getCustomerName());
 
 		List<Transaction> transactions = account.getTransactions();
-		body.set거래내역반복횟수(transactions.size());
-		body.set거래내역(transactions.stream()
+		dataBody.set거래내역반복횟수(transactions.size());
+		dataBody.set거래내역(transactions.stream()
 			.map(transaction -> {
 				DataBody.TransactionDetail detail = new DataBody.TransactionDetail();
-				// detail.set거래일자(transaction.getTransactionDate());
-				// detail.set거래시간(transaction.getTransactionTime());
+				detail.set거래일자(transaction.getTransactionDate());
+				detail.set거래시간(transaction.getTransactionTime());
 				detail.set적요(transaction.getSummary());
 				detail.set출금금액(transaction.getWithdraw());
 				detail.set입금금액(transaction.getDeposit());
@@ -76,20 +66,14 @@ public class AccountTransactionResponse {
 			})
 			.collect(Collectors.toList()));
 
-		response.setDataHeader(header);
-		response.setDataBody(body);
+		response.setDataHeader(dataHeader);
+		response.setDataBody(dataBody);
 		return response;
 	}
 
-	public static AccountTransactionResponse ofFail() {
+	public static AccountTransactionResponse ofFail(String message) {
 		AccountTransactionResponse response = new AccountTransactionResponse();
-
-		AccountTransactionResponse.DataHeader header = new AccountTransactionResponse.DataHeader();
-		header.setSuccessCode(1);
-		header.setResultCode(1);
-		header.setResultMessage("Fail");
-
-		response.setDataHeader(header);
+		response.setDataHeader(ResponseDataHeader.ofFail(message));
 		response.setDataBody(null);
 		return response;
 	}
