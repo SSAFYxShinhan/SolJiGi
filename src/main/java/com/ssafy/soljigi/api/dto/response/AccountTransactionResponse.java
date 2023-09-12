@@ -48,7 +48,8 @@ public class AccountTransactionResponse {
 		dataBody.set계좌잔액(account.getBalance());
 		dataBody.set고객명(account.getCustomerName());
 
-		List<Transaction> transactions = account.getTransactions();
+		List<Transaction> transactions = account.getTransactions().stream()
+			.sorted((o1, o2) -> o1.getTransactionDateTime().compareTo(o2.getTransactionDateTime()) * -1).toList();
 		dataBody.set거래내역반복횟수(transactions.size());
 		dataBody.set거래내역(transactions.stream()
 			.map(transaction -> {
