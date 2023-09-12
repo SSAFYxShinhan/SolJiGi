@@ -33,9 +33,27 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // 라벨에 날짜에 대한 데이터를 넣고
 // data 에 결과에 대한 데이터를 넣으면 됨
 var ctx = document.getElementById("myAreaChart");
+
+var resultData1 = document.getElementById("resultData1");
+var resultData1Text = document.getElementById("resultData1Text");
+var resultData2 = document.getElementById("resultData2");
+var resultData2Text = document.getElementById("resultData2Text");
+var resultData3 = document.getElementById("resultData3");
+var resultData3Text = document.getElementById("resultData3Text");
+var resultData4 = document.getElementById("resultData4");
+var resultData4Text = document.getElementById("resultData4Text");
+var resultData5 = document.getElementById("resultData5");
+var resultData5Text = document.getElementById("resultData5Text");
+var resultData6 = document.getElementById("resultData6");
+var resultData6Text = document.getElementById("resultData6Text");
+
+
+
 var chartDatas;
 
+function renderStickChart(){
 
+}
 
 async function getDataFromJson() {
     let response = await fetch('https://jsonplaceholder.typicode.com/todos')
@@ -43,6 +61,8 @@ async function getDataFromJson() {
         let json = await response.json();
         console.log(json)
         chartDatas = json.map(jsonData => jsonData.id);
+        chartDatas = chartDatas.filter(id => id < 10)
+
         new Chart(ctx, {
             //비동기 통신 넣기
             type: 'line',
