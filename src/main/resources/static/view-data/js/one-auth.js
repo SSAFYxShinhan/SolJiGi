@@ -2,6 +2,7 @@ document.getElementById("one-auth-btn").addEventListener("click", oneAuth)
 document.getElementById("getTransAction").addEventListener("click", getTransaction);
 document.getElementById("accountConfig").addEventListener("click", oneAuthCheck);
 
+
 function getTransaction() {
     Toastify({
         text: "입금된 KEY는 1 입니다.\n 안녕하세요",
@@ -67,13 +68,26 @@ async function oneAuthCheck() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            configKey: document.getElementById("configKey").value
+            accountNumber: 1
+            // configKey: document.getElementById("configKey").value
+
         })
     })
     if (response.ok) {
         console.log(response);
         let json = await response.json();
-        location.replace("/game");
+
+        let btnList = [];
+        btnList.push(document.getElementById("sign-up-btn"));
+        btnList.push(document.getElementById("quizBtn"));
+        btnList.push(document.getElementById("diagnosisBtn"));
+
+        for (const elementBtn of btnList) {
+            if (elementBtn != null) {
+                elementBtn.disabled = false;
+            }
+        }
+
         //     Game view 화면
     } else {
         console.log(response);

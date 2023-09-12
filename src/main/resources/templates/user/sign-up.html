@@ -41,22 +41,20 @@
                 <div class="card shadow p-3 mb-5 bg-body rounded text-black" style="border-radius: 25px;">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
-                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                            <div class="col-md-10 col-lg-6 col-xl-5">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">회원 가입</p>
+                            <div class="col-md-10">
 
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="username" class="form-control"/>
-                                        <label class="form-label" for="username">아이디</label>
+                                        <input type="text" id="username" class="form-control" placeholder="아이디"/>
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="password" id="password" class="form-control"/>
-                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" id="password" class="form-control" placeholder="비밀번호"/>
                                     </div>
                                 </div>
 
@@ -72,25 +70,26 @@
                                         </select>
                                     </div>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="parent-number" class="form-control"/>
-                                        <label class="form-label" for="parent-number">부모번호</label>
+                                        <input type="text" id="parent-number" class="form-control"
+                                               placeholder="보호자 번호"/>
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <div class="input-group px-6 mb-3" style="display: flex;">
                                         <div class="input-group mb-3">
-                                            <input type="text" id="account-number" name="accountNumber"
+                                            <input type="text" id="account-number-input" name="accountNumber"
                                                    class="form-control"
                                                    placeholder="계좌번호를 입력하세요."
                                                    aria-label="Recipient's username"
                                                    aria-describedby="basic-addon2">
                                             <button class="btn btn-primary" id="one-auth-btn">1원인증서비스</button>
                                         </div>
-                                        <button class="btn btn-light" id="getTransAction">입금내역 확인하기</button>
-                                        <label for="configKey">인증하기</label><input type="text" id="configKey"
-                                                                                  class="form-control">
-                                        <button class="btn btn-primary" id="accountConfig">인증하기</button>
+                                        <div class="input-group mb-3">
+                                            <button class="btn btn-light" id="getTransAction">입금내역 조회</button>
+                                            <input type="text" id="configKey" class="form-control" placeholder="4자리 입력">
+                                            <button class="btn btn-primary" id="accountConfig">인증하기</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -103,23 +102,23 @@
                                             <option value="1">남</option>
                                             <option value="2">여</option>
                                         </select>
-                                        성별
+
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="birth" class="form-control"/>
-                                        <label class="form-label" for="birth">생일</label>
+                                        <input type="text" id="birth" class="form-control" placeholder="생일 971022"/>
+
                                     </div>
 
                                 </div>
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="name" class="form-control"/>
-                                        이름
+                                        <input type="text" id="name" class="form-control" placeholder="성명"/>
+
                                     </div>
                                 </div>
                                 <div class="d-flex flex-row align-items-center mb-4">
@@ -133,17 +132,15 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="phone-number" class="form-control"/>
-                                        <label class="form-label" for="phone-number">휴대폰 번호</label>
+                                        <input type="text" id="phone-number" class="form-control" placeholder="전화번호"/>
+
                                     </div>
                                 </div>
-
-
                             </div>
 
 
                             <div class="d-flex align-items-end justify-content-center ">
-                                <button type="button" id="sign-up-btn" class="btn btn-primary btn-lg disabled">
+                                <button type="button" id="sign-up-btn" class="btn btn-primary btn-lg" disabled>
                                     Register
                                 </button>
                             </div>
