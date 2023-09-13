@@ -101,6 +101,26 @@ async function getMyPayPattern(){
                 + '</div>'
     }else{
         // fetch
+        let url = "/v1/search/transaction";
+        let response = await fetch(url,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dataHeader: {
+                    apikey: "2023_Shinhan_SSAFY_Hackathon"
+                },
+                dataBody: {
+                }
+            })
+        })
+        if(response.ok){
+            let json = await response.json();
+            console.log(json);
+        }
+
+
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
