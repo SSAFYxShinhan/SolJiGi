@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -21,6 +23,7 @@ public class DiagnosisResultResponse {
 	private int languageScore;        // 언어
 	private int memoryScore;        // 기억력
 	private DiagnosisResultType type;
+	private LocalDateTime registrationDate;
 
 	public static DiagnosisResultResponse of(DiagnosisResult diagnosisResult) {
 		return DiagnosisResultResponse.builder()
@@ -33,6 +36,7 @@ public class DiagnosisResultResponse {
 			.languageScore(diagnosisResult.getLanguageScore())
 			.memoryScore(diagnosisResult.getMemoryScore())
 			.type(diagnosisResult.getType())
+			.registrationDate(diagnosisResult.getRegistrationDate())
 			.build();
 	}
 }
