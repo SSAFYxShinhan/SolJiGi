@@ -100,7 +100,7 @@ async function getDataFromResultPagination() {
         let json = await response.json();
         let paginationData = json;
         totalList = json.data.map(e => e.totalScore);
-        let timeData = json.data.map(e => e.registrationDate);
+        let timeData = json.data.map(e => e.registrationDateString);
         json.data.map(e => {
             orientList.push(e.orientScore);
             attentionList.push(e.attentionScore);
@@ -232,7 +232,7 @@ async function getDataFromResultPagination() {
                             dataHtml += '<th>' + (index + 1) + '</th>';
                             dataHtml += '<th>' + item.type + '</th>';
                             dataHtml += '<th>' + item.totalScore + '</th>';
-                            dataHtml += '<th>' + item.registrationDate + '</th>';
+                            dataHtml += '<th>' + item.registrationDateString + '</th>';
                             dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
