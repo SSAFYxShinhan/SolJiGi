@@ -52,6 +52,7 @@ public class DiagnosisController {
 	private final DiagnosisResultService resultService;
 //	private final SmsService smsService;
 
+
 	@GetMapping
 	public String diagnosis(Model model) {
 		Map<String, String> memory4w1h = memoryService.getQuiz4W1H();
@@ -94,10 +95,12 @@ public class DiagnosisController {
 
 	@ResponseBody
 	@GetMapping("/data")
-	public ApiResponse<?> searchByUserName(Principal principal){
+	public ApiResponse<?> searchByUser(Principal principal){
+
 		if(principal == null)
 			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		String principalName = principal.getName();
+		log.info("principalName : " + principalName);
 		List<DiagnosisResultResponse> data = resultService.findByUserName(principalName);
 		return ApiResponse.ofSuccess(data);
 	}

@@ -12,6 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class DiagnosisResultResponse {
 
+	private Long id;
 	private int age;
 	private int educationLevel;
 	private int orientScore;        // 지남력
@@ -25,6 +26,7 @@ public class DiagnosisResultResponse {
 
 	public static DiagnosisResultResponse of(DiagnosisResult diagnosisResult) {
 		return DiagnosisResultResponse.builder()
+				.id(diagnosisResult.getId())
 			.age(diagnosisResult.getAge())
 			.educationLevel(diagnosisResult.getEducationLevel())
 			.orientScore(diagnosisResult.getOrientScore())

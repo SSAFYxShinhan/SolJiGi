@@ -2,6 +2,8 @@ package com.ssafy.soljigi.diagnosis.service;
 
 import java.util.List;
 
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
@@ -29,7 +31,8 @@ public class DiagnosisResultService {
 
 	//Creditial 데이터로 추출한 username
 	public List<DiagnosisResultResponse> findByUserName(String username){
-		return resultRepository.findByUserName(username).stream()
+		User foundUser = userRepository.findByUsername(username).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+		return resultRepository.findByUser(foundUser).stream()
 				.map(DiagnosisResultResponse::of)
 				.toList();
 	}
