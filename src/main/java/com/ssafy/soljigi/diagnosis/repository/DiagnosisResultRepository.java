@@ -12,4 +12,6 @@ public interface DiagnosisResultRepository extends JpaRepository<DiagnosisResult
 
 	@Query("select dr from DiagnosisResult dr where dr.user.id = :userId")
 	List<DiagnosisResult> findAllByUserId(@Param("userId") Long userId);
+
+	List<DiagnosisResult> findByUserName(String username);
 }

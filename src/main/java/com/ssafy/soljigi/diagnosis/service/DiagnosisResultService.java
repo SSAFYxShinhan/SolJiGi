@@ -27,6 +27,13 @@ public class DiagnosisResultService {
 			.toList();
 	}
 
+	//Creditial 데이터로 추출한 username
+	public List<DiagnosisResultResponse> findByUserName(String username){
+		return resultRepository.findByUserName(username).stream()
+				.map(DiagnosisResultResponse::of)
+				.toList();
+	}
+
 	public Long save(DiagnosisResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);

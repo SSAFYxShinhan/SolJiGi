@@ -56,13 +56,13 @@ function renderStickChart(){
 }
 
 async function getDataFromJson() {
-    let response = await fetch('https://jsonplaceholder.typicode.com/todos')
+    let url = "/diagnosis/data"
+    let response = await fetch(url)
     if(response.ok){
         let json = await response.json();
         console.log(json)
-        chartDatas = json.map(jsonData => jsonData.id);
-        chartDatas = chartDatas.filter(id => id < 10)
-
+        chartDatas = json.map(jsonData => jsonData);
+        let totalScore = chartDatas.filter(data => data.totalScore);
         new Chart(ctx, {
             //비동기 통신 넣기
             type: 'line',
@@ -81,7 +81,7 @@ async function getDataFromJson() {
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: chartDatas,
+                    data: totalScore,
                 }],
             },
             options: {

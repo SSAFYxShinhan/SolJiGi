@@ -20,6 +20,7 @@ public class DiagnosisResultResponse {
 	private int executiveScore;        // 집행기능
 	private int languageScore;        // 언어
 	private int memoryScore;        // 기억력
+	private int totalScore;
 	private DiagnosisResultType type;
 
 	public static DiagnosisResultResponse of(DiagnosisResult diagnosisResult) {
@@ -33,6 +34,13 @@ public class DiagnosisResultResponse {
 			.languageScore(diagnosisResult.getLanguageScore())
 			.memoryScore(diagnosisResult.getMemoryScore())
 			.type(diagnosisResult.getType())
+				.totalScore(diagnosisResult.getEducationLevel()
+				+ diagnosisResult.getOrientScore()
+				+ diagnosisResult.getAttentionScore()
+				+ diagnosisResult.getSpacetimeScore()
+				+ diagnosisResult.getExecutiveScore()
+				+ diagnosisResult.getLanguageScore()
+				+ diagnosisResult.getMemoryScore())
 			.build();
 	}
 }
