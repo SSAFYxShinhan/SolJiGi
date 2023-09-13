@@ -122,7 +122,12 @@
                     <a href="#project" class="nav-item nav-link">Projects</a>
                 </div>
                 <div class="ms-auto d-none d-lg-block">
-                    <a th:href="@{/view/sign-in}" class="btn btn-primary rounded-pill py-2 px-3">시작하기</a>
+                    <span sec:authorize="isAnonymous()">
+                        <a th:href="@{/view/sign-in}" class="btn btn-primary rounded-pill py-2 px-3">시작하기</a>
+                    </span>
+                    <span sec:authorize="isAuthenticated()">
+                        <a th:href="@{/view/diagnosis/detail}" class="btn btn-primary rounded-pill py-2 px-3">결과보기</a>
+                    </span>
                 </div>
             </div>
         </nav>
@@ -158,7 +163,6 @@
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
                                     시작하기</a>
                                 <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
-
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
                                     시작하기</a>
                             </div>
@@ -213,7 +217,6 @@
             <div class="col-md-6 text-center text-md-end">
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                 Designed By <a class="fw-medium text-light" href="">SOLJIGI</a>
-                Distributed By <a class="fw-medium text-light" href="">SOLJIGI</a>
             </div>
         </div>
     </div>
