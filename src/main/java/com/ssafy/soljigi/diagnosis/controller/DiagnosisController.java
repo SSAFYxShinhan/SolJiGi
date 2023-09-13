@@ -100,9 +100,15 @@ public class DiagnosisController {
 		if(principal == null)
 			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		String principalName = principal.getName();
-		log.info("principalName : " + principalName);
 		List<DiagnosisResultResponse> data = resultService.findByUserName(principalName);
 		return ApiResponse.ofSuccess(data);
+	}
+
+	@ResponseBody
+	@GetMapping("/data/{id}")
+	public ApiResponse<?> searchByUser(@PathVariable Long id){
+		DiagnosisResultResponse response = resultService.findById(id);
+		return ApiResponse.ofSuccess(response);
 	}
 
 

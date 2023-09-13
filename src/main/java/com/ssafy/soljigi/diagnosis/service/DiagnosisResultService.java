@@ -37,6 +37,11 @@ public class DiagnosisResultService {
 				.toList();
 	}
 
+	public DiagnosisResultResponse findById(Long id){
+		DiagnosisResult diagnosisResult = resultRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.DIAGNOSIS_RESULT_NOT_FOUND));
+		return DiagnosisResultResponse.of(diagnosisResult);
+	}
+
 	public Long save(DiagnosisResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);
