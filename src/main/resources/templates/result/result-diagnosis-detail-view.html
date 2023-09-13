@@ -1,5 +1,11 @@
+<!--
+html 이 우선일까 JS 가 우선일까 ?
+
+-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -19,7 +25,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/view-data/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <input type="hidden" id="resultIndexValue" th:value="${id}">
 </head>
 
 <body id="page-top">
@@ -251,40 +257,12 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">현황판</h1>
-                </div> -->
-
-                <!-- Content Row -->
-                <!-- <div class="row"> -->
-
-                <!-- Earnings (Monthly) Card Example -->
-
-
-                <!-- Pending Requests Card Example -->
-                <!-- <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            이번달 진단검사 여부</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- </div> -->
 
                 <!-- Content Row -->
                 <div class="card shadow mb-3">
                     <div class="card-header py-4 d-flex justify-content-between">
-                        <h2 class="m-0 font-weight-bold text-primary">00일 종합 결과 점수는 "500" 몇점입니다.</h2>
+
+                        <h2 class="m-0 font-weight-bold text-primary"> 종합 결과 점수는 "500" 몇점입니다.</h2>
                     </div>
                 </div>
 
@@ -465,11 +443,11 @@
 <script src="/view-data/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="/view-data/vendor/chart.js/Chart.min.js"></script>
+<script src="/view-data/vendor/chart.js/chart.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/view-data/js/result-diagnosis-info.js"></script>
-<!--<script src="../view-data/js/demo/chart-pie-demo.js"></script>-->
+<script src="/view-data/js/diagnosis/detail/result-diagnosis-detail-info.js"></script>
+<script src="/view-data/js/demo/chart-pie-demo.js"></script>
 
 
 </body>

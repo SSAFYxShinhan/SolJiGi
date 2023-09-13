@@ -1,3 +1,9 @@
+/**
+ * getDataFromResultPagination(); 페이징 처리, 포인트 그래프 렌더링
+ * renderStickChart(); 막대바 렌더링
+ *
+ */
+
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -89,11 +95,14 @@ function renderStickChart(){
 }
 
 
-async function getDataFromJson() {
+
+async function getDataFromResultPagination(){
     let url = "/diagnosis/data"
-    let response = await fetch(url)
+    let response = await fetch(url);
+    let paginationData;
     if(response.ok){
         let json = await response.json();
+        let paginationData = json;
         totalList = json.data.map(e => e.totalScore);
         let timeData = json.data.map(e => e.registrationDate);
         json.data.map(e => {
@@ -105,11 +114,11 @@ async function getDataFromJson() {
             memoryList.push(e.memoryScore);
         });
 
-
+        // 막대 바 렌더링
         renderStickChart();
 
+        // 차트 렌더링
         new Chart(ctx, {
-            //비동기 통신 넣기
             type: 'line',
             data: {
                 labels: timeData,
@@ -198,15 +207,9 @@ async function getDataFromJson() {
                 }
             }
         });
-    }
-}
 
-async function getDataFromResultPagination(){
-    let url = "/diagnosis/data"
-    let paginationData;
-    let response = await fetch(url);
-    if(response.ok){
-        paginationData = await response.json();
+
+        // 페이징처리 렌더링
         $(function() {
             (function(name) {
                 var container = $('#pagination-' + name);
@@ -226,6 +229,7 @@ async function getDataFromResultPagination(){
                             dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
+
                         });
 
                         dataHtml += '</table>';
@@ -250,7 +254,4 @@ async function getDataFromResultPagination(){
     }
 }
 
-
-
-getDataFromJson();
 getDataFromResultPagination();
