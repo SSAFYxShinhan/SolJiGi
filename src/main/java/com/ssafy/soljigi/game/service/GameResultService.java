@@ -3,8 +3,6 @@ package com.ssafy.soljigi.game.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
-import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
 import com.ssafy.soljigi.game.entity.GameResult;
