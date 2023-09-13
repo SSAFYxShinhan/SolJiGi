@@ -26,7 +26,7 @@ public class DiagnosisController {
 	private final MemoryService memoryService;
 	private final AttentionService attentionService;
 	// private final SpacetimeService spacetimeService;
-	private final ExecutiveService executiveService;
+	// private final ExecutiveService executiveService;
 	private final LanguageService languageService;
 
 	@GetMapping
@@ -37,8 +37,8 @@ public class DiagnosisController {
 		model.addAttribute("memory", memoryService.getQuiz(memory4w1h));
 		model.addAttribute("attention", attentionService.getQuiz());
 		model.addAttribute("spacetime", -1);
-		model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
-		model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
+		// model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
+		// model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
 		model.addAttribute("language", languageService.getQuiz());
 		return "diagnosis/diagnosis";
 	}

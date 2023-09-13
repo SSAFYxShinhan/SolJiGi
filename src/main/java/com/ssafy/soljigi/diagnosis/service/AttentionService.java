@@ -41,9 +41,12 @@ public class AttentionService {
 	private DiagnosisQuizDto generateReverseQuiz() {
 		Random random = new Random();
 		String word = list4Word[random.nextInt(list4Word.length)];
+		ArrayList<String> keyword = new ArrayList<>();
+		keyword.add(word);
 		return DiagnosisQuizDto.builder()
-			.question("제가 불러드리는 말을<br>끝에서부터 거꾸로 따라해주세요.<br><span>" + word + "</span>")
+			.question("제가 불러드리는 말을 끝에서부터 거꾸로 따라해주세요.")
 			.shortAnswer(List.of(new StringBuffer(word).reverse().toString()))
+			.choice(keyword)
 			.build();
 	}
 
@@ -55,15 +58,17 @@ public class AttentionService {
 
 		for (int i = 0; i < count; ++i) {
 			nums[i] = random.nextInt(9) + 1;
-			problem.append(nums[i]).append(" ");
+			problem.append(nums[i]);
 			answer.append(nums[i]);
 		}
-
+		ArrayList<String> keyword = new ArrayList<>();
+		keyword.add(problem.toString());
 		return DiagnosisQuizDto.builder()
-				.type(DiagnosisType.ATTENTION)
-				.question("제가 불러드리는 숫자를<br>그대로 따라해주세요.<br><span>" + problem.toString() + "</span>")
-				.shortAnswer(getNumberQuizAnswerCandidate(answer.toString()))
-				.build();
+			.type(DiagnosisType.ATTENTION)
+			.question("제가 불러드리는 숫자를 그대로 따라해주세요.")
+			.shortAnswer(getNumberQuizAnswerCandidate(answer.toString()))
+			.choice(keyword)
+			.build();
 	}
 
 	private List<String> getNumberQuizAnswerCandidate(String answer) {
