@@ -46,9 +46,7 @@ class MemoryDiagnosisRead {
     </div>
     <div class="diagnosis-memory__content">
         <div class="diagnosis-memory__problem">
-            <p>지금부터 외우셔야 하는 문장 하나를 보여드리겠습니다.</p>
-            <p>소리내어 읽어보시고 문장을 외워주세요.</p>
-            <p>제가 이 문장을 나중에 여쭤보겠습니다. 잘 기억하세요.</p>
+            <p>다음 문장을 읽고 기억해 주세요</p> 
         </div>
         <div class="diagnosis-memory__question">
             <p class="diagnosis-memory__sentence">
@@ -123,11 +121,13 @@ class MemoryDiagnosisQuiz {
         <div class="diagnosis-memory__timer">${this.time}</div>
     </div>
     <div class="diagnosis-memory__content">
-    <span class="diagnosis-memory__question">제가 아까 전에 외우라고<br>불러드렸던 문장을 말씀해주세요.</span>
+    <span class="diagnosis-memory__question">아까 외웠던 문장을 떠올려서 다음 문제들을 풀어주세요.</span>
     <form class="diagnosis-memory__input-form">`;
-        content += `
+        content += `  
         <input type="text" class="diagnosis-memory__input"/>
-        <input type="submit" class="diagnosis-memory__submit-btn" value="제출">
+        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">
+<!--        <input type="text" class="diagnosis-memory__input"/>-->
+<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="제출">-->
     </div>
     <div class="diagnosis-memory-quiz__footer"></div>
     `;

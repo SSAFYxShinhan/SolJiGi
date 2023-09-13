@@ -71,8 +71,10 @@
             speech(diagnosis.quiz["choice"][0]);
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
+                window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
+                window.speechSynthesis.cancel();
             currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
         }
     }
