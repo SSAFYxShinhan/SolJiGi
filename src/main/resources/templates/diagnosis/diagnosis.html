@@ -37,11 +37,11 @@
 
 
     let gameIdx = 0;
-    setVoiceList();
     updateView(questions[gameIdx++]);
 
     function updateView(diagnosis) {
         if (diagnosis.type === diagnosisType.ORIENT) {
+            window.speechSynthesis.cancel();
             speech(diagnosis.quiz["question"])
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
@@ -59,8 +59,10 @@
                 }
             }
         } else if (diagnosis.type === diagnosisType.ATTENTION) {
+            window.speechSynthesis.cancel();
             speech(diagnosis.quiz["question"])
             speech(diagnosis.quiz["choice"][0])
+            speech("다시 읽어 드리겠습니다.")
             speech(diagnosis.quiz["choice"][0])
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
@@ -71,6 +73,7 @@
     }
 
     function generateDiagnosis() {
+        setVoiceList();
         const questions = []
         const orientQuiz = [[${orient}]];
         const memory4w1h = [[${memory4w1h}]];
