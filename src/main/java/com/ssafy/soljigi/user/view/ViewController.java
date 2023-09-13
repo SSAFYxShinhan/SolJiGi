@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -42,6 +44,17 @@ public class ViewController {
 	@GetMapping("/one-auth")
 	public String oneAuthPage() {
 		return "user/one-auth";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpServletResponse response) {
+		Cookie cookie = new Cookie("token", null);
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+
+		response.addCookie(cookie);
+
+		return "redirect:/view/index";
 	}
 
 }

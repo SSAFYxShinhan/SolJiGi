@@ -92,7 +92,7 @@
                 <div class="ms-3 d-flex">
 
                     <span sec:authorize="isAuthenticated()">
-                        <button class="btn btn-light text-primary rounded-pill">로그아웃</button>
+                        <a type="button" class="btn btn-light text-primary rounded-pill" th:href="@{/view/logout}">로그아웃</a>
                     </span>
                 </div>
 
@@ -122,7 +122,7 @@
                     <a href="#project" class="nav-item nav-link">Projects</a>
                 </div>
                 <div class="ms-auto d-none d-lg-block">
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-3">Get A Quote</a>
+                    <a th:href="@{/view/sign-in}" class="btn btn-primary rounded-pill py-2 px-3">시작하기</a>
                 </div>
             </div>
         </nav>
