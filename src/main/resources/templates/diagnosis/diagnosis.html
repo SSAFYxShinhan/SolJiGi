@@ -41,16 +41,24 @@
     updateView(questions[gameIdx++]);
 
     function updateView(diagnosis) {
-        if (diagnosis.type === diagnosisType.ORIENT) {
-            speech(diagnosis.quiz["question"])
+            if (diagnosis.type === diagnosisType.ORIENT) {
+            window.speechSynthesis.cancel();
+            speech(diagnosis.quiz["question"]);
+
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
             if (diagnosis.step === 'READ') {
+                window.speechSynthesis.cancel();
+                speech("다음 문장을 읽고 기억해 주세요");
                 currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
             } else if (diagnosis.step === 'ANSWER') {
+                window.speechSynthesis.cancel();
+                speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
                 currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
                 mqIdx = 0;
             } else if (diagnosis.step === 'CHOICE') {
+                window.speechSynthesis.cancel();
+                speech(diagnosis.quiz["question"]);
                 if (memoryResult[mqIdx++] === 2) {
                     nextGame();
                 } else {
@@ -58,18 +66,24 @@
                 }
             }
         } else if (diagnosis.type === diagnosisType.ATTENTION) {
-            speech(diagnosis.quiz["question"])
-            speech(diagnosis.quiz["choice"][0])
-            speech(diagnosis.quiz["choice"][0])
+            window.speechSynthesis.cancel();
+            speech(diagnosis.quiz["question"]);
+            speech(diagnosis.quiz["choice"][0]);
+            speech("다시 읽어 드리겠습니다.");
+            speech(diagnosis.quiz["choice"][0]);
+
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
+                window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
+                window.speechSynthesis.cancel();
             currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
         }
     }
 
     function generateDiagnosis() {
+        setVoiceList();
         const questions = []
         const orientQuiz = [[${orient}]];
         const memory4w1h = [[${memory4w1h}]];
