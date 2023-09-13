@@ -2,7 +2,7 @@ package com.ssafy.soljigi.diagnosis.service;
 
 import java.util.*;
 
-import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisQuizDto;
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 import org.springframework.stereotype.Service;
 

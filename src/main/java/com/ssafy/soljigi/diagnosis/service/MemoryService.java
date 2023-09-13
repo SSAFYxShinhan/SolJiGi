@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.soljigi.diagnosis.dto.DiagnosisQuizDto;
+import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisQuizDto;
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
 import lombok.RequiredArgsConstructor;

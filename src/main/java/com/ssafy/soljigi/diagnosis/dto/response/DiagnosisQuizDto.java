@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.diagnosis.dto;
+package com.ssafy.soljigi.diagnosis.dto.response;
 
 import java.util.ArrayList;
 import java.util.List;
