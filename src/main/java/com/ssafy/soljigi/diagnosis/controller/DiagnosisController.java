@@ -1,9 +1,15 @@
 package com.ssafy.soljigi.diagnosis.controller;
 
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +27,8 @@ import com.ssafy.soljigi.diagnosis.service.ExecutiveService;
 import com.ssafy.soljigi.diagnosis.service.LanguageService;
 import com.ssafy.soljigi.diagnosis.service.MemoryService;
 import com.ssafy.soljigi.diagnosis.service.OrientService;
-import com.ssafy.soljigi.sms.dto.SmsResponseDTO;
-import com.ssafy.soljigi.sms.service.SmsService;
+//import com.ssafy.soljigi.sms.dto.SmsResponseDTO;
+//import com.ssafy.soljigi.sms.service.SmsService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +46,8 @@ public class DiagnosisController {
 	private final ExecutiveService executiveService;
 	private final LanguageService languageService;
 	private final DiagnosisResultService resultService;
-	private final SmsService smsService;
+//	private final SmsService smsService;
+
 
 	@GetMapping
 	public String diagnosis(Model model) {
@@ -65,9 +72,9 @@ public class DiagnosisController {
 			Long savedId = resultService.save(saveRequest);
 			data.put("id", savedId);
 
-			SmsResponseDTO response = smsService.sendDiagnosticResult(saveRequest.getUserId(),
-				saveRequest.getDiagnosticResult());
-			data.put("smsSend", response);
+//			SmsResponseDTO response = smsService.sendDiagnosticResult(saveRequest.getUserId(),
+//				saveRequest.getDiagnosticResult());
+//			data.put("smsSend", response);
 		} catch (IllegalArgumentException e) {
 			ApiResponse.ofError("존재하지 않는 회원입니다.");
 		}
@@ -81,4 +88,24 @@ public class DiagnosisController {
 		List<DiagnosisResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);
 	}
+
+	@ResponseBody
+	@GetMapping("/data")
+	public ApiResponse<?> searchByUser(Principal principal){
+
+		if(principal == null)
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
+		String principalName = principal.getName();
+		List<DiagnosisResultResponse> data = resultService.findByUserName(principalName);
+		return ApiResponse.ofSuccess(data);
+	}
+
+	@ResponseBody
+	@GetMapping("/data/{id}")
+	public ApiResponse<?> searchByUser(@PathVariable Long id){
+		DiagnosisResultResponse response = resultService.findById(id);
+		return ApiResponse.ofSuccess(response);
+	}
+
+
 }

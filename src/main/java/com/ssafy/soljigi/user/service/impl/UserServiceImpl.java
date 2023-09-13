@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.user.service.impl;
 
+import com.ssafy.soljigi.user.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
+
+	public User findByUsername(String username){
+		return userRepository.findByUsername(username)
+				.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+	}
 
 	@Override
 	public UserDetailsService userDetailsService() {

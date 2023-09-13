@@ -1,3 +1,9 @@
+/**
+ * getDataFromResultPagination(); 페이징 처리, 포인트 그래프 렌더링
+ * renderStickChart(); 막대바 렌더링
+ *
+ */
+
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -49,25 +55,73 @@ var resultData6Text = document.getElementById("resultData6Text");
 
 
 
-var chartDatas;
+
+var orientList = [];
+var attentionList = [];
+var spacetimeList = [];
+var executiveList = [];
+var languageList = [];
+var memoryList = [];
+var totalList = [];
 
 function renderStickChart(){
+    //연산해서 넣기
+    const orient = 5;
+    const attention = 3;
+    const spacetime = 2;
+    const executive = 4;
+    const language = 4;
+    const memory = 4;
+
+    let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
+    resultData1.style = `width: ${orientWidth}%`;
+    resultData1Text.innerText = orientWidth;
+    let attentionWidth = Math.round((attentionList[attentionList.length - 1] / attention) * 100);
+    resultData2.style = `width: ${attentionWidth}%`;
+    resultData2Text.innerText = attentionWidth;
+    let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 1] / spacetime) * 100);
+    resultData3.style = `width: ${spacetimeWidth}%`;
+    resultData3Text.innerText = spacetimeWidth;
+    let executiveWidth = Math.round((executiveList[executiveList.length - 1] / executive) * 100);
+    resultData4.style = `width: ${executiveWidth}%`;
+    resultData4Text.innerText = executiveWidth;
+    let languageWidth = Math.round((languageList[languageList.length - 1] / language) * 100)
+    resultData5.style = `width: ${languageWidth}%`;
+    resultData5Text.innerText = languageWidth;
+    let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
+    resultData6.style = `width: ${memoryWidth}%`;
+    resultData6Text.innerText = memoryWidth;
 
 }
 
-async function getDataFromJson() {
-    let response = await fetch('https://jsonplaceholder.typicode.com/todos')
+
+
+async function getDataFromResultPagination(){
+    let url = "/diagnosis/data"
+    let response = await fetch(url);
+    let paginationData;
     if(response.ok){
         let json = await response.json();
-        console.log(json)
-        chartDatas = json.map(jsonData => jsonData.id);
-        chartDatas = chartDatas.filter(id => id < 10)
+        let paginationData = json;
+        totalList = json.data.map(e => e.totalScore);
+        let timeData = json.data.map(e => e.registrationDate);
+        json.data.map(e => {
+            orientList.push(e.orientScore);
+            attentionList.push(e.attentionScore);
+            spacetimeList.push(e.spacetimeScore);
+            executiveList.push(e.executiveScore);
+            languageList.push(e.languageScore);
+            memoryList.push(e.memoryScore);
+        });
 
+        // 막대 바 렌더링
+        renderStickChart();
+
+        // 차트 렌더링
         new Chart(ctx, {
-            //비동기 통신 넣기
             type: 'line',
             data: {
-                labels: chartDatas,
+                labels: timeData,
                 datasets: [{
                     label: "Earnings",
                     lineTension: 0.3,
@@ -81,7 +135,7 @@ async function getDataFromJson() {
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: chartDatas,
+                    data: totalList,
                 }],
             },
             options: {
@@ -153,7 +207,51 @@ async function getDataFromJson() {
                 }
             }
         });
+
+
+        // 페이징처리 렌더링
+        $(function() {
+            (function(name) {
+                var container = $('#pagination-' + name);
+                if (!container.length) return;
+                let pageColumn = paginationData.data.filter(e => e.totalScore);
+                var options = {
+                    dataSource: pageColumn,
+                    callback: function (response, pagination) {
+                        window.console && console.log(response, pagination);
+
+                        var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
+                        $.each(response, function (index, item) {
+                            dataHtml += '<tbody>';
+                            dataHtml += '<tr>';
+                            dataHtml += '<th>' + (index+1) + '</th>';
+                            dataHtml += '<th>' + item.type + '</th>';
+                            dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
+                            dataHtml += '</tr>';
+                            dataHtml += '</tbody>';
+
+                        });
+
+                        dataHtml += '</table>';
+                        container.prev().html(dataHtml);
+                    }
+                };
+
+                //$.pagination(container, options);
+
+                container.addHook('beforeInit', function () {
+                    window.console && console.log('beforeInit...');
+                });
+                container.pagination(options);
+
+                container.addHook('beforePageOnClick', function () {
+                    window.console && console.log('beforePageOnClick...');
+                    //return false
+                });
+            })('demo1');
+
+        })
     }
 }
 
-getDataFromJson();
+getDataFromResultPagination();

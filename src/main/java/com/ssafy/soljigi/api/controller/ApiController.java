@@ -1,6 +1,10 @@
 package com.ssafy.soljigi.api.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.ssafy.soljigi.user.entity.User;
+import com.ssafy.soljigi.user.service.UserService;
+import com.ssafy.soljigi.user.service.impl.UserServiceImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,8 @@ import com.ssafy.soljigi.base.api.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.security.Principal;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1")
@@ -28,6 +34,7 @@ public class ApiController {
 	private static final String FAIL_MESSAGE_INVALID_API = "This Api Key is not validate.";
 	private static final String FAIL_MESSAGE_INVALID_ACCOUNT = "This Account Number is not validate.";
 	private final AccountService accountService;
+	private final UserServiceImpl userService;
 	private final OneTransferService oneTransferService;
 
 	@PostMapping("/search/transaction")
