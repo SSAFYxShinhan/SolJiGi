@@ -12,10 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.ssafy.soljigi.base.error.BaseException;
-import com.ssafy.soljigi.game.dto.ChatGptResponse;
-
-import com.ssafy.soljigi.game.dto.QuizDto;
-import com.ssafy.soljigi.game.dto.TransactionResponse;
+import com.ssafy.soljigi.game.dto.response.ChatGptResponse;
+import com.ssafy.soljigi.game.dto.response.QuizDto;
+import com.ssafy.soljigi.game.dto.response.TransactionResponse;
 import com.ssafy.soljigi.game.entity.Quiz;
 import com.ssafy.soljigi.game.entity.Type;
 import com.ssafy.soljigi.game.repository.QuizRepository;

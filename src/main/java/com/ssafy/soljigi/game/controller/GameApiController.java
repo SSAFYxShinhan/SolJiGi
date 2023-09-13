@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.base.api.response.ApiResponse;
-import com.ssafy.soljigi.game.dto.GameResultResponse;
-import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
+import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
+import com.ssafy.soljigi.game.dto.response.GameResultResponse;
 import com.ssafy.soljigi.game.service.GameResultService;
 
 import lombok.RequiredArgsConstructor;

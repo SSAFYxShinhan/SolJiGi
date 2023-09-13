@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.dto;
+package com.ssafy.soljigi.game.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

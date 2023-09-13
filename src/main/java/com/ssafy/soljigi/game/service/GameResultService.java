@@ -3,8 +3,9 @@ package com.ssafy.soljigi.game.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.ssafy.soljigi.game.dto.GameResultResponse;
-import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
+
+import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
+import com.ssafy.soljigi.game.dto.response.GameResultResponse;
 import com.ssafy.soljigi.game.entity.GameResult;
 import com.ssafy.soljigi.game.repository.GameResultRepository;
 import com.ssafy.soljigi.user.entity.User;
@@ -28,8 +29,8 @@ public class GameResultService {
 	public Long save(GameResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);
-		
-		user.increasePoint(saveRequest.getCorrectCount());	// 맞춘 문제 수 만큼 포인트 증가
+
+		user.increasePoint(saveRequest.getCorrectCount());    // 맞춘 문제 수 만큼 포인트 증가
 
 		GameResult saved = resultRepository.save(GameResult.builder()
 			.user(user)

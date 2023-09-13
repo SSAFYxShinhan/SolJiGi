@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.game.dto;
+package com.ssafy.soljigi.game.dto.response;
 
 import com.ssafy.soljigi.base.error.BaseResponseStatus;
 

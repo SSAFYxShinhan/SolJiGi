@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.base.error.BaseException;
 import com.ssafy.soljigi.base.error.BaseResponseStatus;
-import com.ssafy.soljigi.game.dto.ChatGptResponse;
+import com.ssafy.soljigi.game.dto.response.ChatGptResponse;
 
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.AllArgsConstructor;

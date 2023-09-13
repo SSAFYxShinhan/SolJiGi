@@ -1,13 +1,12 @@
-package com.ssafy.soljigi.game.dto;
+package com.ssafy.soljigi.game.dto.response;
 
-import com.ssafy.soljigi.diagnosis.entity.DiagnosisResultType;
+import java.time.LocalDateTime;
+
 import com.ssafy.soljigi.game.entity.GameResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
