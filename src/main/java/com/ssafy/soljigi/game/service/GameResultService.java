@@ -28,8 +28,9 @@ public class GameResultService {
 	public Long save(GameResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);
+		
+		user.increasePoint(saveRequest.getCorrectCount());	// 맞춘 문제 수 만큼 포인트 증가
 
-		// age, educationLevel -> userEntity getter로 변경 예정
 		GameResult saved = resultRepository.save(GameResult.builder()
 			.user(user)
 			.choiceCorrect(saveRequest.getChoiceCorrect())

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class GameResultResponse {
 	private int samePictureTotal;
 	private int correctCount;
 	private int totalCount;
+	private LocalDateTime registrationDate;
 
 	public static GameResultResponse of(GameResult gameResult) {
 		return GameResultResponse.builder()
@@ -35,6 +38,7 @@ public class GameResultResponse {
 			.samePictureTotal(gameResult.getSamePictureTotal())
 			.correctCount(gameResult.getCorrectCount())
 			.totalCount(gameResult.getTotalCount())
+			.registrationDate(gameResult.getRegistrationDate())
 			.build();
 	}
 }
