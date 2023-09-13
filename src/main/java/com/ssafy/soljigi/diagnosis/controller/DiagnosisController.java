@@ -37,8 +37,8 @@ public class DiagnosisController {
 		model.addAttribute("memory", memoryService.getQuiz(memory4w1h));
 		model.addAttribute("attention", attentionService.getQuiz());
 		model.addAttribute("spacetime", -1);
-		model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
-		model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
+		// model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
+		// model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
 		model.addAttribute("language", languageService.getQuiz());
 		return "diagnosis/diagnosis";
 	}
