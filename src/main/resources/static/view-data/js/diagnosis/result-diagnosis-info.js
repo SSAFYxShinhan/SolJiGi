@@ -34,7 +34,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 
-
 // Area Chart Example
 // 라벨에 날짜에 대한 데이터를 넣고
 // data 에 결과에 대한 데이터를 넣으면 됨
@@ -54,8 +53,6 @@ var resultData6 = document.getElementById("resultData6");
 var resultData6Text = document.getElementById("resultData6Text");
 
 
-
-
 var orientList = [];
 var attentionList = [];
 var spacetimeList = [];
@@ -64,7 +61,7 @@ var languageList = [];
 var memoryList = [];
 var totalList = [];
 
-function renderStickChart(){
+function renderStickChart() {
     //연산해서 넣기
     const orient = 5;
     const attention = 3;
@@ -95,12 +92,11 @@ function renderStickChart(){
 }
 
 
-
-async function getDataFromResultPagination(){
+async function getDataFromResultPagination() {
     let url = "/diagnosis/data"
     let response = await fetch(url);
     let paginationData;
-    if(response.ok){
+    if (response.ok) {
         let json = await response.json();
         let paginationData = json;
         totalList = json.data.map(e => e.totalScore);
@@ -123,7 +119,7 @@ async function getDataFromResultPagination(){
             data: {
                 labels: timeData,
                 datasets: [{
-                    label: "Earnings",
+                    label: "총 맞춘 횟수",
                     lineTension: 0.3,
                     backgroundColor: "rgba(78, 115, 223, 0.05)",
                     borderColor: "rgba(78, 115, 223, 1)",
@@ -201,7 +197,7 @@ async function getDataFromResultPagination(){
                     callbacks: {
                         label: function (tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                            return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + '점';
                         }
                     }
                 }
@@ -210,22 +206,33 @@ async function getDataFromResultPagination(){
 
 
         // 페이징처리 렌더링
-        $(function() {
-            (function(name) {
+        $(function () {
+            (function (name) {
                 var container = $('#pagination-' + name);
                 if (!container.length) return;
-                let pageColumn = paginationData.data.filter(e => e.totalScore);
+
                 var options = {
-                    dataSource: pageColumn,
+                    dataSource: paginationData.data,
                     callback: function (response, pagination) {
                         window.console && console.log(response, pagination);
 
                         var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
+                        dataHtml += '<thead>';
+                        dataHtml += '<tr>';
+                        dataHtml += '<th>' + '순서' + '</th>';
+                        dataHtml += '<th>' + '결과타입' + '</th>';
+                        dataHtml += '<th>' + '전체점수' + '</th>';
+                        dataHtml += '<th>' + '기록시간' + '</th>';
+                        dataHtml += '<th>' + '세부정보' + '</th>';
+                        dataHtml += '</tr>';
+                        dataHtml += '</thead>';
                         $.each(response, function (index, item) {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
-                            dataHtml += '<th>' + (index+1) + '</th>';
+                            dataHtml += '<th>' + (index + 1) + '</th>';
                             dataHtml += '<th>' + item.type + '</th>';
+                            dataHtml += '<th>' + item.totalScore + '</th>';
+                            dataHtml += '<th>' + item.registrationDate + '</th>';
                             dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
@@ -253,5 +260,6 @@ async function getDataFromResultPagination(){
         })
     }
 }
+
 
 getDataFromResultPagination();
