@@ -28,16 +28,10 @@ public class ApiController {
 	private final UserServiceImpl userService;
 
 	@PostMapping("/v1/search/transaction")
-	public AccountTransactionDto search(@RequestBody SearchRequest request, Principal principal) {
+	public AccountTransactionDto search(@RequestBody SearchRequest request) {
 		log.info("{}", request);
 		if (!request.getDataHeader().getApikey().equals(apiKey)) {
 			return AccountTransactionDto.ofFail();
-		}
-
-		if( principal != null ){
-			String username = principal.getName();
-			User user = userService.findByUsername(username);
-            return accountService.get(user.getAccountNumber());
 		}
 
 		AccountTransactionDto resp = AccountTransactionDto.ofFail();
