@@ -58,7 +58,7 @@ public class AttentionService {
 
 		for (int i = 0; i < count; ++i) {
 			nums[i] = random.nextInt(9) + 1;
-			problem.append(nums[i]);
+			problem.append(nums[i]).append(",");
 			answer.append(nums[i]);
 		}
 		ArrayList<String> keyword = new ArrayList<>();

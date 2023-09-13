@@ -45,6 +45,7 @@
             speech(diagnosis.quiz["question"])
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
+            console.log(diagnosis)
             if (diagnosis.step === 'READ') {
                 currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
             } else if (diagnosis.step === 'ANSWER') {
