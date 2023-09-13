@@ -3,6 +3,13 @@ package com.ssafy.soljigi.base.initdata;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
+import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
+import com.ssafy.soljigi.user.entity.Gender;
+import com.ssafy.soljigi.user.entity.Role;
+import com.ssafy.soljigi.user.entity.User;
+import com.ssafy.soljigi.user.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +44,30 @@ public class NotProd {
 		private final AccountRepository accountRepository;
 		private final TransactionRepository transactionRecordRepository;
 
+		private final UserRepository userRepository;
+		private final DiagnosisResultService diagnosisResultService;
+		private final PasswordEncoder passwordEncoder;
 		public void dbInit() {
 			int quizCount = 9;
+
+//			user 생성
+
+			userRepository.save(User.builder()
+					.password(passwordEncoder.encode("1"))
+					.username("1")
+					.role(Role.USER)
+					.gender(Gender.MALE)
+					.build());
+
+			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+					1L,2,2,2,2,2,2,2,2
+			));
+			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+					1L,3,3,3,3,3,2,5,2
+			));
+			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+					1L,5,3,1,3,2,2,5,2
+			));
 
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
