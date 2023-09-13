@@ -49,11 +49,48 @@ var resultData6Text = document.getElementById("resultData6Text");
 
 
 
+
 var chartDatas;
 
 function renderStickChart(){
+    //연산해서 넣기
+    const orient = 5;
+    const attention = 3;
+    const spacetime = 2;
+    const executive = 4;
+    const language = 4;
+    const memory = 4;
+
+    let orientWidth = (orientList[orientList.length - 1] / orient) * 100;
+    resultData1.style = `width: ${orientWidth}%`;
+    resultData1Text.innerText = orientWidth;
+    let attentionWidth = (attentionList[attentionList.length - 1] / attention) * 100;
+    resultData2.style = `width: ${attentionWidth}%`;
+    resultData2Text.innerText = attentionWidth;
+    let spacetimeWidth = (spacetimeList[spacetimeList.length - 1] / spacetime) * 100;
+    resultData3.style = `width: ${spacetimeWidth}%`;
+    resultData3Text.innerText = spacetimeWidth;
+    let executiveWidth = (executiveList[executiveList.length - 1] / executive) * 100;
+    resultData4.style = `width: ${executiveWidth}%`;
+    resultData4Text.innerText = executiveWidth;
+    let languageWidth = (languageList[languageList.length - 1] / language) * 100;
+    resultData5.style = `width: ${languageWidth}%`;
+    resultData5Text.innerText = languageWidth;
+    let memoryWidth = (memoryList[memoryList.length - 1] / memory) * 100;
+    resultData6.style = `width: ${memoryWidth}%`;
+    resultData6Text.innerText = memoryWidth;
 
 }
+
+
+
+var orientList = [];
+var attentionList = [];
+var spacetimeList = [];
+var executiveList = [];
+var languageList = [];
+var memoryList = [];
+var totalList = [];
 
 async function getDataFromJson() {
     let url = "/diagnosis/data"
@@ -61,13 +98,21 @@ async function getDataFromJson() {
     if(response.ok){
         let json = await response.json();
         console.log(json)
-        chartDatas = json.map(jsonData => jsonData);
-        let totalScore = chartDatas.filter(data => data.totalScore);
+        totalList = json.filter(data => data.totalScore);
+        chartDatas.map(chartdata => {
+            orientList.push(chartdata.orientScore);
+            attentionList.push(chartdata.attentionScore);
+            spacetimeList.push(chartdata.spacetimeScore);
+            executiveList.push(chartdata.executiveScore);
+            languageList.push(chartdata.languageScore);
+            memoryList.push(chartdata.memoryScore);
+        });
+
         new Chart(ctx, {
             //비동기 통신 넣기
             type: 'line',
             data: {
-                labels: chartDatas,
+                labels: "시간",
                 datasets: [{
                     label: "Earnings",
                     lineTension: 0.3,
@@ -81,7 +126,7 @@ async function getDataFromJson() {
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: totalScore,
+                    data: totalList,
                 }],
             },
             options: {
@@ -155,5 +200,46 @@ async function getDataFromJson() {
         });
     }
 }
+
+
+$(function() {
+    (function(name) {
+        var container = $('#pagination-' + name);
+        if (!container.length) return;
+
+        var options = {
+            dataSource: totalList,
+            callback: function (response, pagination) {
+                window.console && console.log(response, pagination);
+
+                var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
+                $.each(response, function (index, item) {
+                    dataHtml += '<tbody>';
+                    dataHtml += '<tr>';
+                    dataHtml += '<th>' + index + '</th>';
+                    dataHtml += '<th>' + item + '</th>';
+                    dataHtml += '</tr>';
+                    dataHtml += '</tbody>';
+                });
+
+                dataHtml += '</table>';
+                container.prev().html(dataHtml);
+            }
+        };
+
+        //$.pagination(container, options);
+
+        container.addHook('beforeInit', function () {
+            window.console && console.log('beforeInit...');
+        });
+        container.pagination(options);
+
+        container.addHook('beforePageOnClick', function () {
+            window.console && console.log('beforePageOnClick...');
+            //return false
+        });
+    })('demo1');
+
+})
 
 getDataFromJson();
