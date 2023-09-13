@@ -26,6 +26,7 @@ html 이 우선일까 JS 가 우선일까 ?
     <!-- Custom styles for this template-->
     <link href="/view-data/css/sb-admin-2.min.css" rel="stylesheet">
     <input type="hidden" id="resultIndexValue" th:value="${id}">
+    <input type="hidden" sec:authorize="isAuthenticated()" id="isLogin" th:value="1">
 </head>
 
 <body id="page-top">
@@ -262,7 +263,7 @@ html 이 우선일까 JS 가 우선일까 ?
                 <div class="card shadow mb-3">
                     <div class="card-header py-4 d-flex justify-content-between">
 
-                        <h2 class="m-0 font-weight-bold text-primary"> 종합 결과 점수는 "500" 몇점입니다.</h2>
+                        <h2 id="resultTotalScore" class="m-0 font-weight-bold text-primary"> 종합 결과 점수는 "500" 몇점입니다.</h2>
                     </div>
                 </div>
 
@@ -327,8 +328,8 @@ html 이 우선일까 JS 가 우선일까 ?
                         <div class="card shadow mb-7">
                             <!-- Card Header - Dropdown -->
                             <div
-                                    class="card-header py-4 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">00일 소비습관</h6>
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 id="circleChartTitle" class="m-0 font-weight-bold text-primary">00일 소비습관</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -349,17 +350,8 @@ html 이 우선일까 JS 가 우선일까 ?
                                 <div class="chart-pie pt-4 pb-2">
                                     <canvas id="myPieChart"></canvas>
                                 </div>
-                                <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> 음식
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> 커피
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> 교통
-                                        </span>
-                                </div>
+                                <div id ="myPieChartLegend"></div>
+
                             </div>
                         </div>
                     </div>
@@ -456,7 +448,6 @@ html 이 우선일까 JS 가 우선일까 ?
 
 <!-- Page level custom scripts -->
 <script src="/view-data/js/diagnosis/detail/result-diagnosis-detail-info.js"></script>
-<script src="/view-data/js/demo/chart-pie-demo.js"></script>
 
 
 </body>

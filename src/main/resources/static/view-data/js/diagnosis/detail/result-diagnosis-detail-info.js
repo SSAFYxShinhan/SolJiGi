@@ -2,6 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+var ctx = document.getElementById("myPieChart");
 
 var resultData1 = document.getElementById("resultData1");
 var resultData1Text = document.getElementById("resultData1Text");
@@ -24,15 +25,17 @@ var languageList = [];
 var memoryList = [];
 var totalList = [];
 
+
+const orient = 5;
+const attention = 3;
+const spacetime = 2;
+const executive = 4;
+const language = 4;
+const memory = 4;
+const total = orient + attention + spacetime + executive + language + memory;
+
 function renderStickChart(){
     //연산해서 넣기
-    const orient = 5;
-    const attention = 3;
-    const spacetime = 2;
-    const executive = 4;
-    const language = 4;
-    const memory = 4;
-
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
     resultData1.style = `width: ${orientWidth}%`;
     resultData1Text.innerText = orientWidth;
@@ -51,8 +54,85 @@ function renderStickChart(){
     let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
     resultData6.style = `width: ${memoryWidth}%`;
     resultData6Text.innerText = memoryWidth;
-
 }
+
+
+
+async function getMyPayPattern(){
+    let isLogin = document.getElementById("isLogin");
+    if(isLogin == null){
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["로그인 필요"],
+                datasets: [{
+                    data: [1],
+                    // hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+        document.getElementById("circleChartTitle").innerText = "로그인 하고 소비패턴 알기";
+        document.getElementById("myPieChartLegend").innerHTML =
+                '<div class="mt-4 text-center small">'
+                + '<span class="mr-2">'
+                + '<i class="fas fa-circle text-primary"></i> '
+                + '음식'
+                + '</span> '
+                + '<span class="mr-2"> <i class="fas fa-circle text-success"></i> 커피 </span>'
+                + '<span class="mr-2">'
+                + '<i class="fas fa-circle text-info"></i> 교통 </span>'
+                + '</div>'
+    }else{
+        // fetch
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Direct", "Referral", "Social"],
+                datasets: [{
+                    data: [3, 4, 5, 5, 6, 7],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    }
+}
+
 
 async function getDataFromResult(){
     let requestId = document.getElementById("resultIndexValue").value;
@@ -61,12 +141,15 @@ async function getDataFromResult(){
     if(response.ok){
         let json = await response.json();
         let e= json.data;
+        console.log(e);
             orientList.push(e.orientScore);
             attentionList.push(e.attentionScore);
             spacetimeList.push(e.spacetimeScore);
             executiveList.push(e.executiveScore);
             languageList.push(e.languageScore);
             memoryList.push(e.memoryScore);
+
+            document.getElementById("resultTotalScore").innerText = e.totalScore + " / " + total;
         // 막대 바 렌더링
         renderStickChart();
 
@@ -74,38 +157,10 @@ async function getDataFromResult(){
 }
 
 getDataFromResult();
-
+getMyPayPattern();
 
 // Pie Chart Example
 // 데이터에 자동 비율
 //
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ["Direct", "Referral", "Social"],
-        datasets: [{
-            data: [3, 4, 5, 5, 6, 7],
-            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-            hoverBorderColor: "rgba(234, 236, 244, 1)",
-        }],
-    },
-    options: {
-        maintainAspectRatio: false,
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
-        },
-        legend: {
-            display: false
-        },
-        cutoutPercentage: 80,
-    },
-});
+
+
