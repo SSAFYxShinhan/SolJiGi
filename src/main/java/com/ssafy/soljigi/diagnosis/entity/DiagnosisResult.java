@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.diagnosis.entity;
 
+import com.ssafy.soljigi.base.entity.BaseEntity;
 import com.ssafy.soljigi.user.entity.User;
 
 import jakarta.persistence.Entity;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class DiagnosisResult {
+public class DiagnosisResult extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

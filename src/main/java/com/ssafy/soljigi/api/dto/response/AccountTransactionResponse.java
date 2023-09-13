@@ -1,4 +1,4 @@
-package com.ssafy.soljigi.api.dto;
+package com.ssafy.soljigi.api.dto.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,17 +9,10 @@ import com.ssafy.soljigi.api.entity.Transaction;
 import lombok.Data;
 
 @Data
-public class AccountTransactionDto {
+public class AccountTransactionResponse {
 
-	private DataHeader dataHeader;
+	private ResponseDataHeader dataHeader;
 	private DataBody dataBody;
-
-	@Data
-	public static class DataHeader {
-		private int successCode;
-		private int resultCode;
-		private String resultMessage;
-	}
 
 	@Data
 	public static class DataBody {
@@ -44,23 +37,21 @@ public class AccountTransactionDto {
 		}
 	}
 
-	public static AccountTransactionDto of(Account account) {
-		AccountTransactionDto response = new AccountTransactionDto();
+	public static AccountTransactionResponse of(Account account) {
+		AccountTransactionResponse response = new AccountTransactionResponse();
 
-		AccountTransactionDto.DataHeader header = new AccountTransactionDto.DataHeader();
-		header.setSuccessCode(0);
-		header.setResultCode(0);
-		header.setResultMessage("Success");
+		ResponseDataHeader dataHeader = ResponseDataHeader.ofSuccess();
 
-		AccountTransactionDto.DataBody body = new AccountTransactionDto.DataBody();
-		body.set계좌번호(account.getAccountNumber());
-		body.set상품명(account.getProductName());
-		body.set계좌잔액(account.getBalance());
-		body.set고객명(account.getCustomerName());
+		AccountTransactionResponse.DataBody dataBody = new AccountTransactionResponse.DataBody();
+		dataBody.set계좌번호(account.getAccountNumber());
+		dataBody.set상품명(account.getProductName());
+		dataBody.set계좌잔액(account.getBalance());
+		dataBody.set고객명(account.getCustomerName());
 
-		List<Transaction> transactions = account.getTransactions();
-		body.set거래내역반복횟수(transactions.size());
-		body.set거래내역(transactions.stream()
+		List<Transaction> transactions = account.getTransactions().stream()
+			.sorted((o1, o2) -> o1.getTransactionDateTime().compareTo(o2.getTransactionDateTime()) * -1).toList();
+		dataBody.set거래내역반복횟수(transactions.size());
+		dataBody.set거래내역(transactions.stream()
 			.map(transaction -> {
 				DataBody.TransactionDetail detail = new DataBody.TransactionDetail();
 				detail.set거래일자(transaction.getTransactionDate());
@@ -76,20 +67,14 @@ public class AccountTransactionDto {
 			})
 			.collect(Collectors.toList()));
 
-		response.setDataHeader(header);
-		response.setDataBody(body);
+		response.setDataHeader(dataHeader);
+		response.setDataBody(dataBody);
 		return response;
 	}
 
-	public static AccountTransactionDto ofFail() {
-		AccountTransactionDto response = new AccountTransactionDto();
-
-		AccountTransactionDto.DataHeader header = new AccountTransactionDto.DataHeader();
-		header.setSuccessCode(1);
-		header.setResultCode(1);
-		header.setResultMessage("Fail");
-
-		response.setDataHeader(header);
+	public static AccountTransactionResponse ofFail(String message) {
+		AccountTransactionResponse response = new AccountTransactionResponse();
+		response.setDataHeader(ResponseDataHeader.ofFail(message));
 		response.setDataBody(null);
 		return response;
 	}

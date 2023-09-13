@@ -3,8 +3,6 @@ package com.ssafy.soljigi.game.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
-import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultResponse;
 import com.ssafy.soljigi.game.dto.GameResultSaveRequest;
 import com.ssafy.soljigi.game.entity.GameResult;
@@ -30,8 +28,9 @@ public class GameResultService {
 	public Long save(GameResultSaveRequest saveRequest) {
 		User user = userRepository.findById(saveRequest.getUserId())
 			.orElseThrow(IllegalArgumentException::new);
+		
+		user.increasePoint(saveRequest.getCorrectCount());	// 맞춘 문제 수 만큼 포인트 증가
 
-		// age, educationLevel -> userEntity getter로 변경 예정
 		GameResult saved = resultRepository.save(GameResult.builder()
 			.user(user)
 			.choiceCorrect(saveRequest.getChoiceCorrect())

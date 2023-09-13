@@ -2,24 +2,17 @@ package com.ssafy.soljigi.diagnosis.entity;
 
 import java.util.List;
 
+import com.ssafy.soljigi.base.entity.BaseEntity;
+import jakarta.persistence.*;
 import org.hibernate.annotations.BatchSize;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-// @Entity
+@Entity
 @Getter
-@ToString
-public class DiagnosisQuiz {
+public class DiagnosisQuiz extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

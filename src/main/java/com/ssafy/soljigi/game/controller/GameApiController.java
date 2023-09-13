@@ -37,7 +37,7 @@ public class GameApiController {
 		return ApiResponse.ofSuccess(savedId);
 	}
 
-	@GetMapping("result/{userId}")
+	@GetMapping("/result/{userId}")
 	public ApiResponse<?> searchResult(@PathVariable("userId") Long userId) {
 		List<GameResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);

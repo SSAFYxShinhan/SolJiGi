@@ -8,6 +8,8 @@ import com.ssafy.soljigi.user.entity.Address;
 import com.ssafy.soljigi.user.entity.Gender;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,12 +32,18 @@ public class Account {
 
 	private String name;
 	private Address address;
+
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private String phoneNumber;
 	private LocalDate birthDate;
 
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions = new ArrayList<>();
+
+	protected Account() {
+
+	}
 
 	@Builder
 	public Account(String accountNumber, String productName, long balance, String customerName, String name,
@@ -51,7 +59,7 @@ public class Account {
 		this.birthDate = birthDate;
 	}
 
-	protected Account() {
-
+	public void addBalance(long money) {
+		this.balance += money;
 	}
 }
