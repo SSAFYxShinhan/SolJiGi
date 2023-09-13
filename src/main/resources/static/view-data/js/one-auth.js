@@ -11,14 +11,37 @@ let key = "";
  * @returns {Promise<void>}
  */
 async function getTransaction() {
-    let url = ""
-    let response = await fetch(url);
+    let accountNumber = document.getElementById("account-number-input").value
+    if (accountNumber == null || accountNumber === "") {
+        toastErrorMessage("계좌번호를 입력해주세요");
+    }
+    let url = "/v1/search/1transfer"
+    let response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            dataHeader: {
+                apikey: "2023_Shinhan_SSAFY_Hackathon"
+            },
+            dataBody: {
+                "계좌번호": accountNumber
+            }
+        })
+    });
     if (response.ok) {
-        let json = response.json();
-        // json response를 text
-        toastSuccessMessage("성공")
-    }else{
-        let json = response.json();
+        let json = await response.json();
+        if (json.dataHeader.resultCode == 1) {
+            toastErrorMessage("없는 계좌번호입니다.");
+        } else {
+            console.log(json)
+            toastSuccessMessage("최근 거래내역 조회 결과 : " + json.dataBody.입금통장메모);
+            document.getElementById("configKey").value = json.dataBody.입금통장메모;
+
+        }
+    } else {
+        let json = await response.json();
         // error 코드를 입력
         toastErrorMessage("에러");
     }
@@ -29,20 +52,38 @@ async function getTransaction() {
  * 실제 DB 1원 코드와 거래내역을 남긴다.
  * @returns {Promise<void>}
  */
+
 async function oneAuth() {
-    let response = await fetch("/api/v1/auth/one", {
+    let accountNumber = document.getElementById("account-number-input").value
+    if (accountNumber == null || accountNumber === "") {
+        toastErrorMessage("계좌번호를 입력해주세요");
+    }
+    let response = await fetch("/v1/auth/1transfer", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            accountNumber: document.getElementById("account-number-input").value
+            dataHeader: {
+                apikey: "2023_Shinhan_SSAFY_Hackathon"
+            },
+            dataBody: {
+                "입금은행코드": "088",
+                "입금계좌번호": accountNumber,
+                "입금통장메모": "dummy"
+            }
         })
     })
     if (response.ok) {
         console.log(response);
         let json = await response.json();
-        toastSuccessMessage("1원이 입금되었습니다");
+        if (json.dataHeader.resultCode === "1") {
+            toastErrorMessage("없는 계좌번호입니다.");
+        } else {
+            console.log(json)
+            document.getElementById("account-number-input").disabled = true;
+            toastSuccessMessage("1원이 입금되었습니다");
+        }
     } else {
         console.log(response);
         let json = await response.text();
@@ -57,26 +98,53 @@ async function oneAuth() {
  * @returns {Promise<void>}
  */
 async function oneAuthCheck() {
-    let inputKey = document.getElementById("configKey").value;
-    if(inputKey === key){
-        toastSuccessMessage("인증성공");
-        let btnList = [];
-        btnList.push(document.getElementById("sign-up-btn"));
-        btnList.push(document.getElementById("quizBtn"));
-        btnList.push(document.getElementById("diagnosisBtn"));
-        for (const elementBtn of btnList) {
-            if (elementBtn != null) {
-                elementBtn.disabled = false;
+    let getKey = document.getElementById("configKey").value
+    let accountNumber = document.getElementById("account-number-input").value
+    if (accountNumber == null || accountNumber === "") {
+        toastErrorMessage("계좌번호를 입력해주세요");
+    }
+    let url = "/v1/search/1transfer"
+    let response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            dataHeader: {
+                apikey: "2023_Shinhan_SSAFY_Hackathon"
+            },
+            dataBody: {
+                "계좌번호": accountNumber
             }
+        })
+    });
+    if (response.ok) {
+        let json = await response.json();
+        if (json.dataHeader.resultCode == 1) {
+            toastErrorMessage(json.dataBody.입금통장메모);
+        } else {
+            if (getKey === json.dataBody.입금통장메모) {
+                toastSuccessMessage("인증성공");
+                let btnList = [];
+                btnList.push(document.getElementById("sign-up-btn"));
+                btnList.push(document.getElementById("quizBtn"));
+                btnList.push(document.getElementById("diagnosisBtn"));
+                for (const elementBtn of btnList) {
+                    if (elementBtn != null) {
+                        elementBtn.disabled = false;
+                    }
+                }
+            } else {
+                toastErrorMessage("잘못된 정보");
+            }
+
         }
-    }else{
-        toastErrorMessage("잘못된 정보");
     }
 
 
 }
 
-function toastSuccessMessage(text){
+function toastSuccessMessage(text) {
     Toastify({
         text: text,
         duration: 3000,
@@ -93,7 +161,8 @@ function toastSuccessMessage(text){
         } // Callback after click
     }).showToast();
 }
-function toastErrorMessage(text){
+
+function toastErrorMessage(text) {
     Toastify({
         text: text,
         duration: 3000,
