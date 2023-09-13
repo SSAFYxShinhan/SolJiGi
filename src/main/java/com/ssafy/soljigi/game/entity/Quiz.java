@@ -2,6 +2,7 @@ package com.ssafy.soljigi.game.entity;
 
 import java.util.List;
 
+import com.ssafy.soljigi.base.entity.BaseEntity;
 import org.hibernate.annotations.BatchSize;
 
 import jakarta.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Quiz {
+public class Quiz extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

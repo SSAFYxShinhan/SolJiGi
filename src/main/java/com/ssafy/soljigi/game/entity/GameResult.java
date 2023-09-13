@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.game.entity;
 
+import com.ssafy.soljigi.base.entity.BaseEntity;
 import com.ssafy.soljigi.user.entity.User;
 
 import jakarta.persistence.Entity;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class GameResult {
+public class GameResult extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
