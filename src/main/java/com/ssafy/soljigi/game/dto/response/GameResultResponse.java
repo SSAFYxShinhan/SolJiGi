@@ -13,6 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GameResultResponse {
 
+	private long id;
 	private int financeCorrect;
 	private int financeTotal;
 	private int transactionCorrect;
@@ -27,6 +28,7 @@ public class GameResultResponse {
 
 	public static GameResultResponse of(GameResult gameResult) {
 		return GameResultResponse.builder()
+			.id(gameResult.getId())
 			.financeCorrect(gameResult.getFinanceCorrect())
 			.financeTotal(gameResult.getFinanceTotal())
 			.transactionCorrect(gameResult.getTransactionCorrect())
