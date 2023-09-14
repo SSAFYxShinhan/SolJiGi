@@ -1,7 +1,17 @@
+/**
+ * getDataFromResultPagination(); 페이징 처리, 포인트 그래프 렌더링
+ * renderStickChart(); 막대바 렌더링
+ *
+ */
+
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+
+// Area Chart Example
+// 라벨에 날짜에 대한 데이터를 넣고
+// data 에 결과에 대한 데이터를 넣으면 됨
 var ctx = document.getElementById("myPieChart");
 
 var resultData1 = document.getElementById("resultData1");
@@ -12,50 +22,55 @@ var resultData3 = document.getElementById("resultData3");
 var resultData3Text = document.getElementById("resultData3Text");
 var resultData4 = document.getElementById("resultData4");
 var resultData4Text = document.getElementById("resultData4Text");
-var resultData5 = document.getElementById("resultData5");
-var resultData5Text = document.getElementById("resultData5Text");
-var resultData6 = document.getElementById("resultData6");
-var resultData6Text = document.getElementById("resultData6Text");
+
 
 var orientList = [];
 var attentionList = [];
 var spacetimeList = [];
 var executiveList = [];
-var languageList = [];
-var memoryList = [];
 var totalList = [];
 
 
-const orient = 5;
-const attention = 3;
-const spacetime = 2;
-const executive = 4;
-const language = 4;
-const memory = 4;
-const total = orient + attention + spacetime + executive + language + memory;
-
 function renderStickChart() {
     //연산해서 넣기
-    let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
+
+    let orientWidth = Math.round((orientList[orientList.length - 2] / orientList[orientList.length - 1]) * 100);
     resultData1.style = `width: ${orientWidth}%`;
     resultData1Text.innerText = orientWidth;
-    let attentionWidth = Math.round((attentionList[attentionList.length - 1] / attention) * 100);
+    let attentionWidth = Math.round((attentionList[attentionList.length - 2] / attentionList[attentionList.length - 1]) * 100);
     resultData2.style = `width: ${attentionWidth}%`;
     resultData2Text.innerText = attentionWidth;
-    let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 1] / spacetime) * 100);
+    let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 2] / spacetimeList[spacetimeList.length - 1]) * 100);
     resultData3.style = `width: ${spacetimeWidth}%`;
     resultData3Text.innerText = spacetimeWidth;
-    let executiveWidth = Math.round((executiveList[executiveList.length - 1] / executive) * 100);
+    let executiveWidth = Math.round((executiveList[executiveList.length - 2] / executiveList[executiveList.length - 1]) * 100);
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
-    let languageWidth = Math.round((languageList[languageList.length - 1] / language) * 100)
-    resultData5.style = `width: ${languageWidth}%`;
-    resultData5Text.innerText = languageWidth;
-    let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
-    resultData6.style = `width: ${memoryWidth}%`;
-    resultData6Text.innerText = memoryWidth;
+
 }
 
+
+async function getDataFromResultPagination() {
+    let requestId = document.getElementById("resultIndexValue").value;
+    let url = `/game/data/${requestId}`;
+    let response = await fetch(url);
+    let paginationData;
+    if (response.ok) {
+        let json = await response.json();
+        let e = json.data;
+
+        orientList.push(e.financeCorrect, e.financeTotal);
+        attentionList.push(e.matchCardCorrect, e.matchCardTotal);
+        spacetimeList.push(e.samePictureCorrect, e.samePictureTotal);
+        executiveList.push(e.transactionCorrect, e.transactionTotal);
+
+
+        if (orientList.length >= 1) {
+            // 막대 바 렌더링
+            renderStickChart();
+        }
+    }
+}
 
 async function getMyPayPattern() {
     let isLogin = document.getElementById("isLogin");
@@ -137,33 +152,5 @@ async function getMyPayPattern() {
 }
 
 
-async function getDataFromResult() {
-    let requestId = document.getElementById("resultIndexValue").value;
-    let url = `/diagnosis/data/${requestId}`;
-    let response = await fetch(url);
-    if (response.ok) {
-        let json = await response.json();
-        let e = json.data;
-        console.log(e);
-        orientList.push(e.orientScore);
-        attentionList.push(e.attentionScore);
-        spacetimeList.push(e.spacetimeScore);
-        executiveList.push(e.executiveScore);
-        languageList.push(e.languageScore);
-        memoryList.push(e.memoryScore);
-
-        document.getElementById("resultTotalScore").innerText = e.totalScore + " / " + total;
-        // 막대 바 렌더링
-        renderStickChart();
-
-    }
-}
-
-getDataFromResult();
+getDataFromResultPagination();
 getMyPayPattern();
-
-// Pie Chart Example
-// 데이터에 자동 비율
-//
-
-
