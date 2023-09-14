@@ -47,6 +47,7 @@ function renderStickChart() {
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
 
+    document.getElementById("resultTotalScore").innerText = totalList[0] + "/" + totalList[1] + "점"
 }
 
 
@@ -58,12 +59,12 @@ async function getDataFromResultPagination() {
     if (response.ok) {
         let json = await response.json();
         let e = json.data;
-
+        console.log(e);
         orientList.push(e.financeCorrect, e.financeTotal);
-        attentionList.push(e.matchCardCorrect, e.matchCardTotal);
-        spacetimeList.push(e.samePictureCorrect, e.samePictureTotal);
-        executiveList.push(e.transactionCorrect, e.transactionTotal);
-
+        attentionList.push(e.transactionCorrect, e.transactionTotal);
+        spacetimeList.push(e.matchCardCorrect, e.matchCardTotal);
+        executiveList.push(e.samePictureCorrect, e.samePictureTotal);
+        totalList.push(e.correctCount, e.totalCount);
 
         if (orientList.length >= 1) {
             // 막대 바 렌더링
