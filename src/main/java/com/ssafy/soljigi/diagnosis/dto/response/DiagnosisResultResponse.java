@@ -2,6 +2,7 @@ package com.ssafy.soljigi.diagnosis.dto.response;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisResult;
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisResultType;
@@ -28,6 +29,7 @@ public class DiagnosisResultResponse {
 	private DiagnosisResultType type;
 	private LocalDateTime registrationDate;
 	private String registrationDateString;
+	private boolean isDoneInMonth;
 
 	public static DiagnosisResultResponse of(DiagnosisResult diagnosisResult) {
 		return DiagnosisResultResponse.builder()
@@ -51,6 +53,11 @@ public class DiagnosisResultResponse {
 			.registrationDate(diagnosisResult.getRegistrationDate())
 			.registrationDateString(diagnosisResult.getRegistrationDate()
 				.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+				.isDoneInMonth(isDone(diagnosisResult.getRegistrationDate()))
 			.build();
+	}
+	private static boolean isDone(LocalDateTime time){
+		long hours = ChronoUnit.HOURS.between(time, LocalDateTime.now());
+        return hours < 720;
 	}
 }
