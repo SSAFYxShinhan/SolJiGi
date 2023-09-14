@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GameResultSaveRequest {
 
-	private Long userId;
 	private int financeCorrect;
 	private int financeTotal;
 	private int transactionCorrect;

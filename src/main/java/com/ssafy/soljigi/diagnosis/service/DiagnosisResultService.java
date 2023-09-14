@@ -46,15 +46,15 @@ public class DiagnosisResultService {
 		return DiagnosisResultResponse.of(diagnosisResult);
 	}
 
-	public Long save(DiagnosisResultSaveRequest saveRequest) {
-		User user = userRepository.findById(saveRequest.getUserId())
+	public Long save(Long userId, DiagnosisResultSaveRequest saveRequest) {
+		User user = userRepository.findById(userId)
 			.orElseThrow(IllegalArgumentException::new);
 
 		// age, educationLevel -> userEntity getter로 변경 예정
 		DiagnosisResult savedId = resultRepository.save(DiagnosisResult.builder()
 			.user(user)
-			.age(saveRequest.getAge())
-			.educationLevel(saveRequest.getEducationLevel())
+			.age(10)
+			.educationLevel(user.getEducationLevel())
 			.orientScore(saveRequest.getOrientScore())
 			.attentionScore(saveRequest.getAttentionScore())
 			.spacetimeScore(saveRequest.getSpacetimeScore())

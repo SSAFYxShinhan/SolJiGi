@@ -26,8 +26,8 @@ public class GameResultService {
 			.toList();
 	}
 
-	public Long save(GameResultSaveRequest saveRequest) {
-		User user = userRepository.findById(saveRequest.getUserId())
+	public Long save(Long userId, GameResultSaveRequest saveRequest) {
+		User user = userRepository.findById(userId)
 			.orElseThrow(IllegalArgumentException::new);
 
 		user.increasePoint(saveRequest.getCorrectCount());    // 맞춘 문제 수 만큼 포인트 증가
