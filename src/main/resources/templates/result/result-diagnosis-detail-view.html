@@ -27,6 +27,30 @@ html 이 우선일까 JS 가 우선일까 ?
     <link href="/view-data/css/sb-admin-2.min.css" rel="stylesheet">
     <input type="hidden" id="resultIndexValue" th:value="${id}">
     <input type="hidden" sec:authorize="isAuthenticated()" id="isLogin" th:value="1">
+    <style>
+        @font-face {
+            font-family: 'GongGothicMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+            font-weight: 100;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'GongGothicMedium';
+        }
+
+        h1 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h2 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h5 {
+            font-family: 'GongGothicMedium';
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -299,7 +323,7 @@ html 이 우선일까 JS 가 우선일까 ?
                                 <h4 class="small font-weight-bold">시공간
                                     <span id="resultData6Text" class="float-right">40%</span></h4>
                                 <div class="progress">
-                                    <div id="resultData6" class="progress-bar bg-success" role="progressbar"
+                                    <div id="resultData6" class="progress-bar bg-secondary" role="progressbar"
                                          style="width: 100%"
 
                                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
