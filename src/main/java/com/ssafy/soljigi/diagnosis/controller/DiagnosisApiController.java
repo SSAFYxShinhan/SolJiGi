@@ -38,12 +38,11 @@ public class DiagnosisApiController {
 	public ApiResponse<?> saveResult(Principal principal,
 									 @RequestBody DiagnosisResultSaveRequest saveRequest) {
 
-		String name = principal.getName();
-		Optional<User> optional = userRepository.findByUsername(name);
-		if (optional.isEmpty()) {
-			return ApiResponse.ofError("존재하지 않는 회원입니다.");
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		}
-		Long userId = optional.get().getId();
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 
 		Map<String, Object> data = new HashMap<>();
 		try {
@@ -62,12 +61,11 @@ public class DiagnosisApiController {
 
 	@GetMapping("/result")
 	public ApiResponse<?> search(Principal principal) {
-		String name = principal.getName();
-		Optional<User> optional = userRepository.findByUsername(name);
-		if (optional.isEmpty()) {
-			return ApiResponse.ofError("존재하지 않는 회원입니다.");
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		}
-		Long userId = optional.get().getId();
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 		List<DiagnosisResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);
 	}

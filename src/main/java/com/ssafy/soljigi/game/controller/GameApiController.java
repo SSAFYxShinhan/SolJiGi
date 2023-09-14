@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
 import com.ssafy.soljigi.user.entity.User;
 import com.ssafy.soljigi.user.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +35,11 @@ public class GameApiController {
 	@PostMapping("/result")
 	public ApiResponse<?> saveResult(Principal principal,
 									 @RequestBody GameResultSaveRequest saveRequest) {
-		String name = principal.getName();
-		Optional<User> optional = userRepository.findByUsername(name);
-		if (optional.isEmpty()) {
-			return ApiResponse.ofError("존재하지 않는 회원입니다.");
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		}
-		Long userId = optional.get().getId();
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 		Long savedId;
 		try {
 			savedId = resultService.save(userId, saveRequest);
@@ -50,12 +51,11 @@ public class GameApiController {
 
 	@GetMapping("/result")
 	public ApiResponse<?> searchResult(Principal principal) {
-		String name = principal.getName();
-		Optional<User> optional = userRepository.findByUsername(name);
-		if (optional.isEmpty()) {
-			return ApiResponse.ofError("존재하지 않는 회원입니다.");
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
 		}
-		Long userId = optional.get().getId();
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 		List<GameResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);
 	}
