@@ -80,6 +80,7 @@ public class ExecutiveService {
 			+"</div><br>")
 			.choice(pattern)
 			.choiceAnswer(answer)
+			.shortAnswer(Collections.singletonList(pattern.get(answer)))
 			.build();
 	}
 }

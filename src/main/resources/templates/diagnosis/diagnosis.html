@@ -110,23 +110,23 @@
         orientQuiz.forEach(diagnosisQuiz => {
             questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
         });
-        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        // attentionQuiz.forEach(diagnosisQuiz => {
-        //     if (diagnosisQuiz !== null)
-        //         questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
-        // })
-        // questions.push(gameType.MATCH_CARD);
-        // questions.push(gameType.SAME_PICTURE);
-        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        // memoryQuiz.forEach(diagnosisQuiz => {
-        //     questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
-        // });
-        // languageQuiz.forEach(diagnosisQuiz => {
-        //     questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
-        // })
-        // executiveVirtualQuiz.forEach(diagnosisQuiz => {
-        //     questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
-        // })
+        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        attentionQuiz.forEach(diagnosisQuiz => {
+            if (diagnosisQuiz !== null)
+                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
+        })
+        questions.push(gameType.MATCH_CARD);
+        questions.push(gameType.SAME_PICTURE);
+        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        memoryQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
+        });
+        languageQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
+        })
+        executiveVirtualQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
+        })
         executiveFluencyQuiz.forEach(diagnosisQuiz => {
             console.log("Fluent 로딩 성공")
             questions.push( {type: diagnosisType.EXECUTIVE_FLUENT, quiz: diagnosisQuiz});
@@ -152,7 +152,7 @@
             orientScore: result[diagnosisType.ORIENT],
             attentionScore: result[diagnosisType.ATTENTION],
             spacetimeScore: result[diagnosisType.SPACETIME],
-            executiveScore: result[diagnosisType.EXECUTIVE],
+            executiveScore: result[diagnosisType.EXECUTIVE_FLUENT] + result[diagnosisType.EXECUTIVE_VIRTUAL],
             languageScore: result[diagnosisType.LANGUAGE],
             memoryScore: result[diagnosisType.MEMORY],
         };
