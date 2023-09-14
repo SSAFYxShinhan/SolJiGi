@@ -199,6 +199,7 @@
 
                             <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 <span sec:authentication="Principal.username"></span>
+                                <span> 님</span>
                             </span>
                             <span sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/sign-in}'|">로그인 후 결과를 관리하세요!</span>
 
