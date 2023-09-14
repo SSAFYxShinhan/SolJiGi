@@ -82,7 +82,12 @@
                 window.speechSynthesis.cancel();
                 speech("다음 이미지를 보고 무엇인지 말해보세요");
                 currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
-        }
+        } else if (diagnosis.type === diagnosisType.EXECUTIVE_VIRTUAL) {
+                console.log(diagnosis);
+                window.speechSynthesis.cancel();
+                speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
+                currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+            }
     }
 
     function generateDiagnosis() {
@@ -97,9 +102,9 @@
         const executiveVirtualQuiz = [[${executiveVirtual}]];
         const languageQuiz = [[${language}]];
 
-        // orientQuiz.forEach(diagnosisQuiz => {
-        //     questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
-        // });
+        orientQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
+        });
         // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
         // attentionQuiz.forEach(diagnosisQuiz => {
         //     if (diagnosisQuiz !== null)
@@ -114,6 +119,9 @@
         // languageQuiz.forEach(diagnosisQuiz => {
         //     questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
         // })
+        executiveVirtualQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
+        })
         return questions;
     }
 

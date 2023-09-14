@@ -15,8 +15,9 @@ const diagnosisType = {
     MEMORY: 1,
     ATTENTION: 2,
     SPACETIME: 3,
-    EXECUTIVE: 4,
-    LANGUAGE: 5
+    LANGUAGE: 4,
+    EXECUTIVE_VIRTUAL: 5,
+    EXECUTIVE_FLUENT: 6,
 }
 
 const memory4w1h = ['who', 'how', 'where', 'when', 'what']
