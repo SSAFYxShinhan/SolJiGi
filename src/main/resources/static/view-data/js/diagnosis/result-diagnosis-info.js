@@ -102,12 +102,14 @@ async function getDataFromResultPagination() {
         console.log(json);
         totalList = json.data.map(e => e.totalScore);
         let timeData = json.data.map(e => e.registrationDateString);
-        let currentDateTime = json.data[0].doneInMonth;
-        console.log(currentDateTime)
-        if(currentDateTime){
-            document.getElementById("monthIsDone").innerText = "완료"
-        }else{
-            document.getElementById("monthIsDone").innerText = "미완료"
+        if (json.data[0] != null) {
+            let currentDateTime = json.data[0].doneInMonth;
+            console.log(currentDateTime)
+            if (currentDateTime) {
+                document.getElementById("monthIsDone").innerText = "완료"
+            } else {
+                document.getElementById("monthIsDone").innerText = "미완료"
+            }
         }
         json.data.map(e => {
             orientList.push(e.orientScore);
