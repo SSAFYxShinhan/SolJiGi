@@ -78,15 +78,20 @@
             window.speechSynthesis.cancel();
             currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
         } else if (diagnosis.type === diagnosisType.LANGUAGE) {
-                console.log(diagnosis);
-                window.speechSynthesis.cancel();
-                speech("다음 이미지를 보고 무엇인지 말해보세요");
-                currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("다음 이미지를 보고 무엇인지 말해보세요");
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_VIRTUAL) {
-                console.log(diagnosis);
-                window.speechSynthesis.cancel();
-                speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
-                currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+        } else if (diagnosis.type === diagnosisType.EXECUTIVE_FLUENT) {
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("과일 이름을 생각나는대로 최대한 많이 말해주세요.");
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
             }
     }
 
@@ -119,8 +124,12 @@
         // languageQuiz.forEach(diagnosisQuiz => {
         //     questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
         // })
-        executiveVirtualQuiz.forEach(diagnosisQuiz => {
-            questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
+        // executiveVirtualQuiz.forEach(diagnosisQuiz => {
+        //     questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
+        // })
+        executiveFluencyQuiz.forEach(diagnosisQuiz => {
+            console.log("Fluent 로딩 성공")
+            questions.push( {type: diagnosisType.EXECUTIVE_FLUENT, quiz: diagnosisQuiz});
         })
         return questions;
     }

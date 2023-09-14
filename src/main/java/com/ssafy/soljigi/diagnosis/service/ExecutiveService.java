@@ -23,14 +23,11 @@ public class ExecutiveService {
 
 	static final String[] shapeName = new String[] {"동그라미","네모","세모", "마름모", "별"};
 
-	public String getFluencyQuiz() {
-		Random random = new Random();
+	public List<DiagnosisQuizDto> getFluencyQuiz() {
+		List<DiagnosisQuizDto> quizzes = new ArrayList<>(1);
+		quizzes.add(generateFluencyQuiz());
 
-		// Q_exec : 특정 키워드 단어 계속 말하기
-		// int qIndex = random.nextInt(keywordList.length);
-		int qIndex = 0;
-
-		return keywordList[qIndex];
+		return quizzes;
 	}
 
 	public List<DiagnosisQuizDto> getVisualQuiz() {
@@ -38,6 +35,20 @@ public class ExecutiveService {
 		quizzes.add(generateVirtualQuiz());
 
 		return quizzes;
+	}
+
+	private DiagnosisQuizDto generateFluencyQuiz() {
+		Random random = new Random();
+		// Q_exec : 특정 키워드 단어 계속 말하기
+		// int qIndex = random.nextInt(keywordList.length);
+		int qIndex = 0;
+
+		// keywordList[qIndex];
+		return DiagnosisQuizDto.builder()
+				.type(DiagnosisType.EXECUTIVE_FLUENT)
+				.question("과일 이름을 생각나는대로 최대한 많이 말해주세요.")
+				.shortAnswer(Collections.singletonList(keywordList[qIndex]))
+				.build();
 	}
 
 	private DiagnosisQuizDto generateVirtualQuiz() {
