@@ -44,7 +44,6 @@
             if (diagnosis.type === diagnosisType.ORIENT) {
             window.speechSynthesis.cancel();
             speech(diagnosis.quiz["question"]);
-
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
             if (diagnosis.step === 'READ') {
@@ -71,14 +70,18 @@
             speech(diagnosis.quiz["choice"][0]);
             speech("다시 읽어 드리겠습니다.");
             speech(diagnosis.quiz["choice"][0]);
-
             currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
-                window.speechSynthesis.cancel();
+            window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
-                window.speechSynthesis.cancel();
+            window.speechSynthesis.cancel();
             currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
+        } else if (diagnosis.type === diagnosisType.LANGUAGE) {
+                console.log(diagnosis);
+                window.speechSynthesis.cancel();
+                speech("다음 이미지를 보고 무엇인지 말해보세요");
+                currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
         }
     }
 
@@ -90,23 +93,27 @@
         const memoryQuiz = [[${memory}]];
         const attentionQuiz = [[${attention}]];
         const spacetimeQuiz = [[${spacetime}]];
-        const executiveQuiz = [[${executive}]];
+        const executiveFluencyQuiz = [[${executiveFluency}]];
+        const executiveVirtualQuiz = [[${executiveVirtual}]];
         const languageQuiz = [[${language}]];
 
-        orientQuiz.forEach(diagnosisQuiz => {
-            questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
-        });
-        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        attentionQuiz.forEach(diagnosisQuiz => {
-            if (diagnosisQuiz !== null)
-                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
-        })
-        questions.push(gameType.MATCH_CARD);
-        questions.push(gameType.SAME_PICTURE);
-        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        memoryQuiz.forEach(diagnosisQuiz => {
-            questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
-        });
+        // orientQuiz.forEach(diagnosisQuiz => {
+        //     questions.push( {type: diagnosisType.ORIENT, quiz: diagnosisQuiz} )
+        // });
+        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        // attentionQuiz.forEach(diagnosisQuiz => {
+        //     if (diagnosisQuiz !== null)
+        //         questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
+        // })
+        // questions.push(gameType.MATCH_CARD);
+        // questions.push(gameType.SAME_PICTURE);
+        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        // memoryQuiz.forEach(diagnosisQuiz => {
+        //     questions.push( {type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz} )
+        // });
+        // languageQuiz.forEach(diagnosisQuiz => {
+        //     questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
+        // })
         return questions;
     }
 
