@@ -136,7 +136,7 @@ public class NotProd {
 						.withdraw(0)
 						.inOutType(1)
 						// .content("content..." + i + "-" + j)
-						.content("content")
+						.content("content" + i)
 						.summary("summary..." + i + "-" + j)
 						.branchName("branch..." + i + "-" + j)
 						.build());

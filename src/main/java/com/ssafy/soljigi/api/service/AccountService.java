@@ -3,6 +3,7 @@ package com.ssafy.soljigi.api.service;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.api.dto.request.SearchTransactionRequest;
+import com.ssafy.soljigi.api.dto.request.TodaySearchTransactionRequest;
 import com.ssafy.soljigi.api.dto.response.AccountTransactionResponse;
 import com.ssafy.soljigi.api.entity.Account;
 import com.ssafy.soljigi.api.repository.AccountRepository;
@@ -19,5 +20,11 @@ public class AccountService {
 		Account account = accountRepository.findByAccountNumber(dataBody.getAccountNumber())
 			.orElseThrow(IllegalArgumentException::new);
 		return AccountTransactionResponse.of(account);
+	}
+
+	public AccountTransactionResponse searchByDateTime(TodaySearchTransactionRequest.DataBody dataBody) {
+		Account account = accountRepository.findByAccountNumber(dataBody.getAccountNumber())
+			.orElseThrow(IllegalArgumentException::new);
+		return AccountTransactionResponse.of(account, dataBody.getDateTime());
 	}
 }

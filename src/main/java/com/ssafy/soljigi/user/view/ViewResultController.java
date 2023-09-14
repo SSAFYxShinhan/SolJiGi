@@ -45,7 +45,7 @@ public class ViewResultController {
 		if (principal != null) {
 			DiagnosisResultResponse diagnosisResultResponse = diagnosisResultService.findById(id);
 			LocalDateTime date = diagnosisResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName());
+			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
 			model.addAttribute("transactionResponse", pattern);
 		}
 		return "result/result-diagnosis-detail-view";
@@ -57,7 +57,7 @@ public class ViewResultController {
 		if (principal != null) {
 			GameResultResponse gameResultResponse = gameResultService.findById(id);
 			LocalDateTime date = gameResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName());
+			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
 			model.addAttribute("transactionResponse", pattern);
 		}
 		return "result/result-game-detail-view";

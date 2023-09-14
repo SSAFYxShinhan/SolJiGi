@@ -1,5 +1,6 @@
 package com.ssafy.soljigi.user.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		return response;
 	}
 
-	public Response<?> findPaymentPatternByTransaction(String username) {
+	public Response<?> findPaymentPatternByTransaction(String username, LocalDateTime dateTime) {
 		User user = userRepository.findByUsername(username)
 			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 		String accountNumber = user.getAccountNumber();
@@ -63,11 +64,12 @@ public class UserServiceImpl implements UserService {
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();
 		requestBody.put("dataHeader", Map.of("apikey", "2023_Shinhan_SSAFY_Hackathon"));
-		requestBody.put("dataBody", Map.of("계좌번호", accountNumber));
+		requestBody.put("dataBody", Map.of("계좌번호", accountNumber
+			, "검색날짜", dateTime));
 
 		// API 호출 및 응답 받기
 		RestTemplate restTemplate = new RestTemplate();
-		TransactionResponse response = restTemplate.postForObject(TRANSACTION_URL + "/v1/search/transaction",
+		TransactionResponse response = restTemplate.postForObject(TRANSACTION_URL + "/v1/search/transaction/today",
 			requestBody,
 			TransactionResponse.class);
 

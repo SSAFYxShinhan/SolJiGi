@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.api.dto.request.OneTransferRequest;
 import com.ssafy.soljigi.api.dto.request.SearchTransactionRequest;
+import com.ssafy.soljigi.api.dto.request.TodaySearchTransactionRequest;
 import com.ssafy.soljigi.api.dto.response.AccountTransactionResponse;
 import com.ssafy.soljigi.api.dto.response.OneTransferMemoResponse;
 import com.ssafy.soljigi.api.dto.response.OneTransferResponse;
@@ -39,6 +40,21 @@ public class ApiController {
 		AccountTransactionResponse response;
 		try {
 			response = accountService.search(request.getDataBody());
+		} catch (IllegalArgumentException e) {
+			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_ACCOUNT);
+		}
+		return response;
+	}
+
+	@PostMapping("/search/transaction/today")
+	public AccountTransactionResponse searchByDateTime(@RequestBody TodaySearchTransactionRequest request) {
+		if (!request.getDataHeader().getApikey().equals(API_KEY)) {
+			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_API);
+		}
+
+		AccountTransactionResponse response;
+		try {
+			response = accountService.searchByDateTime(request.getDataBody());
 		} catch (IllegalArgumentException e) {
 			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_ACCOUNT);
 		}
