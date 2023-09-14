@@ -11,21 +11,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GameResultSaveRequest {
 
-	private Long userId;
-	private int choiceCorrect;
-	private int choiceTotal;
-	private int shortAnsCorrect;
-	private int shortAnsTotal;
+	private int financeCorrect;
+	private int financeTotal;
+	private int transactionCorrect;
+	private int transactionTotal;
 	private int matchCardCorrect;
 	private int matchCardTotal;
 	private int samePictureCorrect;
 	private int samePictureTotal;
 
 	public int getCorrectCount() {
-		return choiceCorrect + shortAnsCorrect + matchCardCorrect + samePictureCorrect;
+		return financeCorrect + transactionCorrect + matchCardCorrect + samePictureCorrect;
 	}
 
 	public int getTotalCount() {
-		return choiceTotal + shortAnsTotal + matchCardTotal + samePictureTotal;
+		return financeTotal + transactionTotal + matchCardTotal + samePictureTotal;
 	}
 }

@@ -31,10 +31,10 @@ public class GameResult extends BaseEntity {
 	@JoinColumn(name = "user_id")	// ???
 	private User user;
 
-	private int choiceCorrect;
-	private int choiceTotal;
-	private int shortAnsCorrect;
-	private int shortAnsTotal;
+	private int financeCorrect;
+	private int financeTotal;
+	private int transactionCorrect;
+	private int transactionTotal;
 	private int matchCardCorrect;
 	private int matchCardTotal;
 	private int samePictureCorrect;

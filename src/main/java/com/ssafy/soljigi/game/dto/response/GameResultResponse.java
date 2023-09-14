@@ -13,10 +13,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GameResultResponse {
 
-	private int choiceCorrect;
-	private int choiceTotal;
-	private int shortAnsCorrect;
-	private int shortAnsTotal;
+	private long id;
+	private int financeCorrect;
+	private int financeTotal;
+	private int transactionCorrect;
+	private int transactionTotal;
 	private int matchCardCorrect;
 	private int matchCardTotal;
 	private int samePictureCorrect;
@@ -27,10 +28,11 @@ public class GameResultResponse {
 
 	public static GameResultResponse of(GameResult gameResult) {
 		return GameResultResponse.builder()
-			.choiceCorrect(gameResult.getChoiceCorrect())
-			.choiceTotal(gameResult.getChoiceTotal())
-			.shortAnsCorrect(gameResult.getShortAnsCorrect())
-			.shortAnsTotal(gameResult.getShortAnsTotal())
+			.id(gameResult.getId())
+			.financeCorrect(gameResult.getFinanceCorrect())
+			.financeTotal(gameResult.getFinanceTotal())
+			.transactionCorrect(gameResult.getTransactionCorrect())
+			.transactionTotal(gameResult.getTransactionTotal())
 			.matchCardCorrect(gameResult.getMatchCardCorrect())
 			.matchCardTotal(gameResult.getMatchCardTotal())
 			.samePictureCorrect(gameResult.getSamePictureCorrect())

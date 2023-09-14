@@ -26,18 +26,18 @@ public class GameResultService {
 			.toList();
 	}
 
-	public Long save(GameResultSaveRequest saveRequest) {
-		User user = userRepository.findById(saveRequest.getUserId())
+	public Long save(Long userId, GameResultSaveRequest saveRequest) {
+		User user = userRepository.findById(userId)
 			.orElseThrow(IllegalArgumentException::new);
 
 		user.increasePoint(saveRequest.getCorrectCount());    // 맞춘 문제 수 만큼 포인트 증가
 
 		GameResult saved = resultRepository.save(GameResult.builder()
 			.user(user)
-			.choiceCorrect(saveRequest.getChoiceCorrect())
-			.choiceTotal(saveRequest.getChoiceTotal())
-			.shortAnsCorrect(saveRequest.getShortAnsCorrect())
-			.shortAnsTotal(saveRequest.getShortAnsTotal())
+			.financeCorrect(saveRequest.getFinanceCorrect())
+			.financeTotal(saveRequest.getFinanceTotal())
+			.transactionCorrect(saveRequest.getTransactionCorrect())
+			.transactionTotal(saveRequest.getTransactionTotal())
 			.matchCardCorrect(saveRequest.getMatchCardCorrect())
 			.matchCardTotal(saveRequest.getMatchCardTotal())
 			.samePictureCorrect(saveRequest.getSamePictureCorrect())

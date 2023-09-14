@@ -4,7 +4,10 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import com.ssafy.soljigi.user.entity.User;
+import com.ssafy.soljigi.user.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +31,22 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/diagnosis")
 public class DiagnosisApiController {
 	private final DiagnosisResultService resultService;
+	private final UserRepository userRepository;
 
 	// private final SmsService smsService;
 	@PostMapping
-	public ApiResponse<?> saveResult(@RequestBody DiagnosisResultSaveRequest saveRequest) {
-		log.info("saveRequest={}", saveRequest);
+	public ApiResponse<?> saveResult(Principal principal,
+									 @RequestBody DiagnosisResultSaveRequest saveRequest) {
+
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
+		}
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
+
 		Map<String, Object> data = new HashMap<>();
 		try {
-			Long savedId = resultService.save(saveRequest);
+			Long savedId = resultService.save(userId, saveRequest);
 			data.put("id", savedId);
 
 			//			SmsResponseDTO response = smsService.sendDiagnosticResult(saveRequest.getUserId(),
@@ -48,8 +59,13 @@ public class DiagnosisApiController {
 		return ApiResponse.ofSuccess(data);
 	}
 
-	@GetMapping("/{userId}")
-	public ApiResponse<?> search(@PathVariable("userId") Long userId) {
+	@GetMapping("/result")
+	public ApiResponse<?> search(Principal principal) {
+		if (principal == null) {
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
+		}
+		String name = principal.getName();
+		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 		List<DiagnosisResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);
 	}
