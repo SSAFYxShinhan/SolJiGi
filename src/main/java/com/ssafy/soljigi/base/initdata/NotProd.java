@@ -74,18 +74,18 @@ public class NotProd {
 				.accountNumber("110222999993")
 				.build());
 
-			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-				1L, 2, 2, 2, 2, 2, 2, 2, 2
-			));
-			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-				1L, 3, 3, 3, 3, 3, 2, 5, 2
-			));
-			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-				2L, 5, 3, 1, 3, 2, 2, 5, 2
-			));
-			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-				1L, 5, 3, 1, 3, 2, 2, 5, 2
-			));
+//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+//				1L, 2, 2, 2, 2, 2, 2, 2, 2
+//			));
+//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+//				1L, 3, 3, 3, 3, 3, 2, 5, 2
+//			));
+//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+//				2L, 5, 3, 1, 3, 2, 2, 5, 2
+//			));
+//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+//				1L, 5, 3, 1, 3, 2, 2, 5, 2
+//			));
 
 
 			gameResultService.save(new GameResultSaveRequest(
@@ -104,7 +104,7 @@ public class NotProd {
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
 					Quiz.builder()
-						.type(Type.CHOICE)
+						.type(Type.FINANCE)
 						.question("quiz" + i)
 						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
 						.choiceAnswer(0)

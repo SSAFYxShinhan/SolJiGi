@@ -26,7 +26,7 @@ public class DiagnosisResultResponse {
 	private int languageScore;        // 언어
 	private int memoryScore;        // 기억력
 	private int totalScore;
-	private DiagnosisResultType type;
+	private DiagnosisResultType result;
 	private LocalDateTime registrationDate;
 	private String registrationDateString;
 	private boolean isDoneInMonth;
@@ -42,9 +42,8 @@ public class DiagnosisResultResponse {
 			.executiveScore(diagnosisResult.getExecutiveScore())
 			.languageScore(diagnosisResult.getLanguageScore())
 			.memoryScore(diagnosisResult.getMemoryScore())
-			.type(diagnosisResult.getType())
-			.totalScore(diagnosisResult.getEducationLevel()
-				+ diagnosisResult.getOrientScore()
+			.result(diagnosisResult.getType())
+			.totalScore(diagnosisResult.getOrientScore()
 				+ diagnosisResult.getAttentionScore()
 				+ diagnosisResult.getSpacetimeScore()
 				+ diagnosisResult.getExecutiveScore()

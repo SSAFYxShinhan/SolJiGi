@@ -26,7 +26,7 @@ public class GameController {
 	@GetMapping
 	public String game(Model model) {
 		// userID 설정 변경해야함
-		List<QuizDto> quizzes = quizService.getQuizzes(0, 10, 1L);
+		List<QuizDto> quizzes = quizService.getQuizzes(3, 3, 1L);
 		log.info("quizzes={}", quizzes);
 		model.addAttribute("quizzes", quizzes);
 		model.addAttribute("matchCard", 2);

@@ -22,7 +22,8 @@ class ChoiceQuizGame {
                     if (diagnosisType !== -1) {
                         ++result[this.diagnosisType];
                     } else {
-                        ++result[gameType.CHOICE_QUIZ];
+                        const type = this.quiz.type === 'FINANCE' ? gameType.FINANCE : gameType.TRANSACTION;
+                        ++result[type];
                     }
                     alert("정답입니다.");
                 } else {

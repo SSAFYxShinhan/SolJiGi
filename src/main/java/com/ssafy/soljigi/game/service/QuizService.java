@@ -121,7 +121,7 @@ public class QuizService {
 		List<String> choice = generateRandomDateChoice(answerDate);
 		String answer = convertDateFormat(date);
 		return QuizDto.builder()
-			.type(Type.CHOICE)
+			.type(Type.TRANSACTION)
 			.question(question.toString())
 			.choice(choice)
 			.choiceAnswer(choice.indexOf(answer))
@@ -151,7 +151,7 @@ public class QuizService {
 
 		List<String> choice = generateRandomPlaceChoice(type, content);
 		return QuizDto.builder()
-			.type(Type.CHOICE)
+			.type(Type.TRANSACTION)
 			.question(question.toString())
 			.choice(choice)
 			.choiceAnswer(choice.indexOf(content))

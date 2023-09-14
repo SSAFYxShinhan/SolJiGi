@@ -64,12 +64,12 @@
             time = samePictureGameLevel[random][2];
             currGame = new SamePictureGame(container, r, c, time, result, nextGame);
             ++gameTotal[gameType.SAME_PICTURE];
-        } else if (game.type === 'SHORT') {
-            currGame = new ShortAnswerQuizGame(container, game, 10, result, nextGame);
-            ++gameTotal[gameType.SHORT_ANSWER_QUIZ];
-        } else if (game.type === 'CHOICE') {
+        } else if (game.type === 'FINANCE') {
             currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
-            ++gameTotal[gameType.CHOICE_QUIZ];
+            ++gameTotal[gameType.FINANCE];
+        } else if (game.type === 'TRANSACTION') {
+            currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
+            ++gameTotal[gameType.TRANSACTION];
         }
     }
 
@@ -94,10 +94,10 @@
     function saveResult() {
         const obj = {
             userId: 1,
-            choiceCorrect: result[gameType.CHOICE_QUIZ],
-            choiceTotal: gameTotal[gameType.CHOICE_QUIZ],
-            shortAnsCorrect: result[gameType.SHORT_ANSWER_QUIZ],
-            shortAnsTotal: gameTotal[gameType.SHORT_ANSWER_QUIZ],
+            financeCorrect: result[gameType.FINANCE],
+            financeTotal: gameTotal[gameType.FINANCE],
+            transactionCorrect: result[gameType.TRANSACTION],
+            transactionTotal: gameTotal[gameType.TRANSACTION],
             matchCardCorrect: result[gameType.MATCH_CARD],
             matchCardTotal: gameTotal[gameType.MATCH_CARD],
             samePictureCorrect: result[gameType.SAME_PICTURE],
