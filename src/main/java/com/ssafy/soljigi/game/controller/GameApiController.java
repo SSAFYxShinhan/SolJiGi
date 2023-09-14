@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.ssafy.soljigi.base.error.AppException;
 import com.ssafy.soljigi.base.error.ErrorCode;
+import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
 import com.ssafy.soljigi.user.entity.User;
 import com.ssafy.soljigi.user.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +59,20 @@ public class GameApiController {
 		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 		List<GameResultResponse> data = resultService.findAll(userId);
 		return ApiResponse.ofSuccess(data);
+	}
+
+	@GetMapping("/data")
+	public ApiResponse<?> searchByUser(Principal principal) {
+		if (principal == null)
+			throw new AppException(ErrorCode.USER_NOT_FOUND);
+		String principalName = principal.getName();
+		List<GameResultResponse> data = resultService.findByUserName(principalName);
+		return ApiResponse.ofSuccess(data);
+	}
+
+	@GetMapping("/data/{id}")
+	public ApiResponse<?> searchByUser(@PathVariable Long id) {
+		GameResultResponse response = resultService.findById(id);
+		return ApiResponse.ofSuccess(response);
 	}
 }

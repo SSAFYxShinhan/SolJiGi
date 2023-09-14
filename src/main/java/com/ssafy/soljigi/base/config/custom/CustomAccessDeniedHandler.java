@@ -26,14 +26,14 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		log.warn("1. CustomAccessDeniedHandler start");
+//		log.warn("1. CustomAccessDeniedHandler start");
 		ResponseEntity<?> body = ResponseEntity.badRequest()
 			.body(accessDeniedException.getMessage());
 
 		response.setStatus(HttpStatus.FORBIDDEN.value());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		log.warn("2. CustomAccessDeniedHandler end" + response);
+//		log.warn("2. CustomAccessDeniedHandler end" + response);
 		response.getWriter().write(objectMapper.writeValueAsString(body));
 
 	}

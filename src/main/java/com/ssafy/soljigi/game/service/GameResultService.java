@@ -2,6 +2,10 @@ package com.ssafy.soljigi.game.service;
 
 import java.util.List;
 
+import com.ssafy.soljigi.base.error.AppException;
+import com.ssafy.soljigi.base.error.ErrorCode;
+import com.ssafy.soljigi.diagnosis.dto.response.DiagnosisResultResponse;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisResult;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
@@ -47,4 +51,22 @@ public class GameResultService {
 			.build());
 		return saved.getId();
 	}
+
+	public List<GameResultResponse> findByUserName(String username) {
+		User foundUser = userRepository.findByUsername(username)
+				.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+		return resultRepository.findByUser(foundUser)
+				.stream()
+				.map(GameResultResponse::of)
+				.sorted(((o1, o2) -> o2.getRegistrationDate().compareTo(o1.getRegistrationDate())))
+				.toList();
+	}
+
+	public GameResultResponse findById(Long id) {
+		GameResult gameResult = resultRepository.findById(id)
+				.orElseThrow(() -> new AppException(ErrorCode.GAME_RESULT_NOT_FOUND));
+		return GameResultResponse.of(gameResult);
+	}
+
+
 }

@@ -47,64 +47,46 @@ var resultData3 = document.getElementById("resultData3");
 var resultData3Text = document.getElementById("resultData3Text");
 var resultData4 = document.getElementById("resultData4");
 var resultData4Text = document.getElementById("resultData4Text");
-var resultData5 = document.getElementById("resultData5");
-var resultData5Text = document.getElementById("resultData5Text");
-var resultData6 = document.getElementById("resultData6");
-var resultData6Text = document.getElementById("resultData6Text");
 
 
 var orientList = [];
 var attentionList = [];
 var spacetimeList = [];
 var executiveList = [];
-var languageList = [];
-var memoryList = [];
 var totalList = [];
+
 
 function renderStickChart() {
     //연산해서 넣기
-    const orient = 5;
-    const attention = 3;
-    const spacetime = 2;
-    const executive = 4;
-    const language = 4;
-    const memory = 4;
 
-    let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
+    let orientWidth = Math.round((orientList[orientList.length - 2] / orientList[orientList.length - 1]) * 100);
     resultData1.style = `width: ${orientWidth}%`;
     resultData1Text.innerText = orientWidth;
-    let attentionWidth = Math.round((attentionList[attentionList.length - 1] / attention) * 100);
+    let attentionWidth = Math.round((attentionList[attentionList.length - 2] / attentionList[attentionList.length - 1]) * 100);
     resultData2.style = `width: ${attentionWidth}%`;
     resultData2Text.innerText = attentionWidth;
-    let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 1] / spacetime) * 100);
+    let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 2] / spacetimeList[spacetimeList.length - 1]) * 100);
     resultData3.style = `width: ${spacetimeWidth}%`;
     resultData3Text.innerText = spacetimeWidth;
-    let executiveWidth = Math.round((executiveList[executiveList.length - 1] / executive) * 100);
+    let executiveWidth = Math.round((executiveList[executiveList.length - 2] / executiveList[executiveList.length - 1]) * 100);
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
-    let languageWidth = Math.round((languageList[languageList.length - 1] / language) * 100)
-    resultData5.style = `width: ${languageWidth}%`;
-    resultData5Text.innerText = languageWidth;
-    let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
-    resultData6.style = `width: ${memoryWidth}%`;
-    resultData6Text.innerText = memoryWidth;
 
 }
 
 
 async function getDataFromResultPagination() {
-    let url = "/diagnosis/data"
+    let url = "/game/data"
     let response = await fetch(url);
     let paginationData;
     if (response.ok) {
         let json = await response.json();
         let paginationData = json;
         console.log(json);
-        totalList = json.data.map(e => e.totalScore);
+        totalList = json.data.map(e => e.correctCount);
         let timeData = json.data.map(e => e.registrationDateString);
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
-            console.log(currentDateTime)
             if (currentDateTime) {
                 document.getElementById("monthIsDone").innerText = "완료"
             } else {
@@ -112,16 +94,16 @@ async function getDataFromResultPagination() {
             }
         }
         json.data.map(e => {
-            orientList.push(e.orientScore);
-            attentionList.push(e.attentionScore);
-            spacetimeList.push(e.spacetimeScore);
-            executiveList.push(e.executiveScore);
-            languageList.push(e.languageScore);
-            memoryList.push(e.memoryScore);
+            orientList.push(e.choiceCorrect, e.choiceTotal);
+            attentionList.push(e.matchCardCorrect, e.matchCardTotal);
+            spacetimeList.push(e.samePictureCorrect, e.samePictureTotal);
+            executiveList.push(e.shortAnsCorrect,e.shortAnsTotal);
         });
 
+        if(orientList.length >= 1){
         // 막대 바 렌더링
-        renderStickChart();
+            renderStickChart();
+        }
 
         // 차트 렌더링
         new Chart(ctx, {
@@ -230,7 +212,7 @@ async function getDataFromResultPagination() {
                         dataHtml += '<thead>';
                         dataHtml += '<tr>';
                         dataHtml += '<th>' + '순서' + '</th>';
-                        dataHtml += '<th>' + '결과타입' + '</th>';
+                        dataHtml += '<th>' + '맞춘점수' + '</th>';
                         dataHtml += '<th>' + '전체점수' + '</th>';
                         dataHtml += '<th>' + '기록시간' + '</th>';
                         dataHtml += '<th>' + '세부정보' + '</th>';
@@ -240,10 +222,10 @@ async function getDataFromResultPagination() {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
                             dataHtml += '<th>' + (index + 1) + '</th>';
-                            dataHtml += '<th>' + item.type + '</th>';
-                            dataHtml += '<th>' + item.totalScore + '</th>';
+                            dataHtml += '<th>' + item.correctCount + '</th>';
+                            dataHtml += '<th>' + item.totalCount + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
-                            dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
+                            dataHtml += '<th>' + `<a href=/view/game/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
 

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
+import com.ssafy.soljigi.game.repository.GameResultRepository;
+import com.ssafy.soljigi.game.service.GameResultService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +52,7 @@ public class NotProd {
 		private final UserRepository userRepository;
 		private final DiagnosisResultService diagnosisResultService;
 		private final PasswordEncoder passwordEncoder;
+		private final GameResultService gameResultService;
 
 		public void dbInit() {
 			int quizCount = 9;
@@ -82,6 +86,20 @@ public class NotProd {
 //			diagnosisResultService.save(new DiagnosisResultSaveRequest(
 //				1L, 5, 3, 1, 3, 2, 2, 5, 2
 //			));
+
+
+			gameResultService.save(new GameResultSaveRequest(
+					1L, 5, 3, 1, 3, 2,2,3,4
+			));
+			gameResultService.save(new GameResultSaveRequest(
+					1L, 3, 3, 1, 3, 2,2,3,4
+			));
+			gameResultService.save(new GameResultSaveRequest(
+					1L, 5, 3, 0, 0, 0,2,3,4
+			));
+			gameResultService.save(new GameResultSaveRequest(
+					1L, 5, 3, 0, 3, 0,2,3,4
+			));
 
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
