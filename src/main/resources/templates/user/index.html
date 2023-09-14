@@ -174,7 +174,7 @@
                         <a th:href="@{/view/sign-in}" class="nav-link">로그인</a>
                     </li>
                     <li sec:authorize="isAnonymous()" class="nav-item">
-                        <a th:href="@{/view/sign-up}" class="nav-link">로그인</a>
+                        <a th:href="@{/view/sign-up}" class="nav-link">회원가입</a>
                     </li>
                     <!-- 로그인된 상태에서 보여줄 항목 -->
                     <li sec:authorize="isAuthenticated()" class="nav-item">
