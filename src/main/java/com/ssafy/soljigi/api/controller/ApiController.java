@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.soljigi.api.dto.request.OneTransferRequest;
-import com.ssafy.soljigi.api.dto.request.SearchTodayTransactionRequest;
 import com.ssafy.soljigi.api.dto.request.SearchTransactionRequest;
 import com.ssafy.soljigi.api.dto.response.AccountTransactionResponse;
 import com.ssafy.soljigi.api.dto.response.OneTransferMemoResponse;
 import com.ssafy.soljigi.api.dto.response.OneTransferResponse;
 import com.ssafy.soljigi.api.service.AccountService;
 import com.ssafy.soljigi.api.service.OneTransferService;
-import com.ssafy.soljigi.base.error.ErrorCode;
-import com.ssafy.soljigi.user.dto.response.Response;
 import com.ssafy.soljigi.user.service.impl.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -46,18 +43,6 @@ public class ApiController {
 			return AccountTransactionResponse.ofFail(FAIL_MESSAGE_INVALID_ACCOUNT);
 		}
 		return response;
-	}
-
-	@PostMapping("/search/transaction/detail")
-	public Response<?> searchByDate(@RequestBody SearchTodayTransactionRequest request) {
-		if (!request.getDataHeader().getApikey().equals(API_KEY)) {
-			return Response.success(ErrorCode.NOT_TRUSTED_TOKEN);
-		}
-		try {
-			return Response.success(accountService.searchByDate(request.getDataBody()));
-		} catch (IllegalArgumentException e) {
-			return Response.error(ErrorCode.USER_NOT_FOUND);
-		}
 	}
 
 	@PostMapping("/auth/1transfer")
