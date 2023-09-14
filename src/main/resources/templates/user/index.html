@@ -25,15 +25,15 @@
 
     <!-- Libraries Stylesheet -->
     <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
-    <link href="/view-data/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="/view-data/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/view-data/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="../view-data/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../view-data/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../view-data/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/view-data/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../view-data/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="/view-data/css/style.css" rel="stylesheet">
+    <link href="../view-data/css/style.css" rel="stylesheet">
 
     <style>
         @font-face {
@@ -58,6 +58,51 @@
         h5 {
             font-family: 'GongGothicMedium';
         }
+
+        .navbar-nav .nav-link {
+            font-size: xx-large;
+        }
+
+        .carousel-item img {
+            height: 720px;
+            width: auto;
+            object-fit: cover;
+        }
+
+        #header-carousel {
+            margin-bottom: 100px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-y: hidden;
+        }
+
+        main {
+            flex: 1;
+            overflow-y: auto;
+            min-height: calc(100vh - 200px);
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            color: #666;
+        }
+
+        /* 버튼의 크기와 글씨 조절 */
+        .carousel-item .btn {
+            font-size: 30px;
+            padding: 30px 50px;
+        }
+
+        .copyright a {
+            color: #666;
+        }
     </style>
 </head>
 
@@ -69,11 +114,6 @@
 </div>
 <!-- Spinner End -->
 
-
-
-
-</div>
-
 <!-- Topbar Start -->
 <div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
     <div class="container py-3">
@@ -81,22 +121,24 @@
             <a th:href="@{/view/index}">
                 <h2 class="text-white fw-bold m-0">솔직이</h2>
             </a>
-            <div class="ms-auto d-flex align-items-center">
-                <span sec:authorize="isAuthenticated()">
-                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>
+            <!--            <div class="ms-auto d-flex align-items-center">-->
+            <!--                <span sec:authorize="isAuthenticated()">-->
+            <!--                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>-->
 
-                </span>
-                <a th:type="button" sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/one-auth}'|">한번의 계좌인증으로 시작하기</a>
+            <!--                </span>-->
+            <!--                <a th:type="button" sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/one-auth}'|">한번의-->
+            <!--                    계좌인증으로 시작하기</a>-->
 
 
-                <div class="ms-3 d-flex">
+            <!--                <div class="ms-3 d-flex">-->
 
-                    <span sec:authorize="isAuthenticated()">
-                        <a type="button" class="btn btn-light text-primary rounded-pill" th:href="@{/view/logout}">로그아웃</a>
-                    </span>
-                </div>
+            <!--                    <span sec:authorize="isAuthenticated()">-->
+            <!--                        <a type="button" class="btn btn-light text-primary rounded-pill"-->
+            <!--                           th:href="@{/view/logout}">로그아웃</a>-->
+            <!--                    </span>-->
+            <!--                </div>-->
 
-            </div>
+            <!--            </div>-->
         </div>
     </div>
 </div>
@@ -115,25 +157,33 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a href="#index" class="nav-item nav-link active">Home</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
-                    <a href="#service" class="nav-item nav-link">Services</a>
-                    <a href="#project" class="nav-item nav-link">Projects</a>
-                </div>
-                <div class="ms-auto d-none d-lg-block">
-                    <span sec:authorize="isAnonymous()">
-                        <a th:href="@{/view/sign-in}" class="btn btn-primary rounded-pill py-2 px-3">시작하기</a>
-                    </span>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#index" class="nav-link active">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#service" class="nav-link">서비스 소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#project" class="nav-link">개발 과정</a>
+                    </li>
+                </ul>
 
-                    <span sec:authorize="isAuthenticated()">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a th:href="@{/view/game/result}" class="btn btn-primary rounded-pill py-2 px-3">게임결과보기</a>
-                            <a th:href="@{/view/diagnosis/result}" class="btn btn-primary rounded-pill py-2 px-3">진단결과보기</a>
-                        </div>
-
-                    </span>
-                </div>
+                <ul class="navbar-nav ms-auto d-flex">
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a th:href="@{/view/sign-in}" class="nav-link">로그인</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a th:href="@{/view/sign-up}" class="nav-link">로그인</a>
+                    </li>
+                    <!-- 로그인된 상태에서 보여줄 항목 -->
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a th:href="@{/view/logout}" class="nav-link">로그아웃</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a th:href=# class="nav-link">내정보</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>
@@ -142,86 +192,92 @@
 
 
 <!-- Carousel Start -->
-<div class="container-fluid px-0">
-    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" style="{opacity: 30}" src="../view-data/img/main_pic1.jpg" alt="Image">
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="flex text-start">
-                                <p class="fs-4 text-white animated slideInRight">신한은행
-                                    <strong style="background-color: blue;">치매예방 서비스</strong>
-                                </p>
-                                <div class="flex">
-                                    <p class="display-1 mb-4 animated slideInRight" style="color: blue;">하나의 계좌 <span
-                                            style="color: white;"
-                                            class="display-1  mb-4 animated slideInRight">로,</span></p>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="container-fluid px-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" style="{opacity: 40}" src="../view-data/img/main_pic1.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="flex text-start my-5">
+                                    <p class="fs-4 text-white animated slideInRight">신한은행
+                                        <strong style="background-color: blue;">치매예방 서비스</strong>
+                                    </p>
+                                    <div class="flex">
+                                        <p class="display-1 mb-4 animated slideInRight" style="color: blue;">하나의 계좌
+                                            <span
+                                                    style="color: white;"
+                                                    class="display-1  mb-4 animated slideInRight">로,</span></p>
 
+                                    </div>
+                                    <div class="flex">
+                                        <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
+                                            <span class="display-1 text-white animated slideInRight">까지</span></p>
+                                    </div>
+                                    <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
+                                       class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
+                                        시작하기</a>
+                                    <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
+                                       class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
+                                        시작하기</a>
                                 </div>
-                                <div class="flex">
-                                    <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
-                                        <span class="display-1 text-white animated slideInRight">까지</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-70" src="../view-data/img/main_pic4.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="flex text-end">
+                                <p class="fs-4 text-white animated slideInLeft">신한은행<strong>치매진단</strong>
+                                </p>
+                                <div>
+                                    <p class="display-1 text-white animated slideInLeft">진단서비스</p>
+                                </div>
+                                <div>
+                                    <p class="display-1 text-white animated slideInLeft">제공</p>
                                 </div>
                                 <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
-                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
                                     시작하기</a>
-                                <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
-                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
+                                <a sec:authorize="isAuthenticated()" th:href="@{/game}"
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
                                     시작하기</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img class="w-70" src="../view-data/img/main_pic4.jpg" alt="Image">
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="flex text-end">
-                            <p class="fs-4 text-white animated slideInLeft">신한은행<strong>치매진단</strong>
-                            </p>
-                            <div>
-                                <p class="display-1 text-white animated slideInLeft">진단서비스</p>
-                            </div>
-                            <div>
-                                <p class="display-1 text-white animated slideInLeft">제공</p>
-                            </div>
-                            <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
-                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
-                                시작하기</a>
-                            <a sec:authorize="isAuthenticated()" th:href="@{/game}"
-                               class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 서비스
-
-                                시작하기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
-</div>
+</main>
 <!-- Carousel End -->
 
+<!-- Back to Top -->
+<!--<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i-->
+<!--        class="bi bi-arrow-up"></i></a>-->
+
 <!-- Copyright Start -->
-<div class="container-fluid copyright py-4">
+<div class="container-fluid copyright py-4 fixed-bottom">
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <a class="fw-medium text-light" href="#">SOLJIGI</a>, All Right Reserved.
+                &copy; <a class="fw-medium" href="#">SOLJIGI</a>, All Right Reserved.
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a class="fw-medium text-light" href="">SOLJIGI</a>
+                Designed By <a class="fw-medium" href="">SOLJIGI</a>
             </div>
         </div>
     </div>
@@ -229,22 +285,17 @@
 <!-- Copyright End -->
 
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
-        class="bi bi-arrow-up"></i></a>
-
-
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/view-data/lib/wow/wow.min.js"></script>
-<script src="/view-data/lib/easing/easing.min.js"></script>
-<script src="/view-data/lib/waypoints/waypoints.min.js"></script>
-<script src="/view-data/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="/view-data/lib/lightbox/js/lightbox.min.js"></script>
+<script src="../view-data/lib/wow/wow.min.js"></script>
+<script src="../view-data/lib/easing/easing.min.js"></script>
+<script src="../view-data/lib/waypoints/waypoints.min.js"></script>
+<script src="../view-data/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../view-data/lib/lightbox/js/lightbox.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="/view-data/js/main.js"></script>
+<script src="../view-data/js/main.js"></script>
 </body>
 
 </html>
