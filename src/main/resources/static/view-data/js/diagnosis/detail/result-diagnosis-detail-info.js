@@ -34,7 +34,7 @@ const language = 4;
 const memory = 4;
 const total = orient + attention + spacetime + executive + language + memory;
 
-function renderStickChart(){
+function renderStickChart() {
     //연산해서 넣기
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
     resultData1.style = `width: ${orientWidth}%`;
@@ -57,10 +57,9 @@ function renderStickChart(){
 }
 
 
-
-async function getMyPayPattern(){
+async function getMyPayPattern() {
     let isLogin = document.getElementById("isLogin");
-    if(isLogin == null){
+    if (isLogin == null) {
         var chart = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -90,89 +89,70 @@ async function getMyPayPattern(){
         });
         document.getElementById("circleChartTitle").innerText = "로그인 하고 소비패턴 알기";
         document.getElementById("myPieChartLegend").innerHTML =
-                '<div class="mt-4 text-center small">'
-                + '<span class="mr-2">'
-                + '<i class="fas fa-circle text-primary"></i> '
-                + '음식'
-                + '</span> '
-                + '<span class="mr-2"> <i class="fas fa-circle text-success"></i> 커피 </span>'
-                + '<span class="mr-2">'
-                + '<i class="fas fa-circle text-info"></i> 교통 </span>'
-                + '</div>'
-    }else{
+            '<div class="mt-4 text-center small">'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-primary"></i> '
+            + '음식'
+            + '</span> '
+            + '<span class="mr-2"> <i class="fas fa-circle text-success"></i> 커피 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-info"></i> 교통 </span>'
+            + '</div>'
+    } else {
         // fetch
-        let url = "/v1/search/transaction";
-        let response = await fetch(url,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+        console.log(transactionData);
+        //동그란바 렌더링
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(transactionData.result),
+                datasets: [{
+                    data: Object.values(transactionData.result),
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#F09440', '#751A33'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#F0B36A', '#B34233'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
             },
-            body: JSON.stringify({
-                dataHeader: {
-                    apikey: "2023_Shinhan_SSAFY_Hackathon"
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
                 },
-                dataBody: {
-                }
-            })
-        })
-        if(response.ok){
-            let json = await response.json();
-            console.log(json);
-
-            //동그란바 렌더링
-            var myPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["Direct", "Referral", "Social"],
-                    datasets: [{
-                        data: [3, 4, 5, 5, 6, 7],
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-                        hoverBorderColor: "rgba(234, 236, 244, 1)",
-                    }],
+                legend: {
+                    display: false
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        caretPadding: 10,
-                    },
-                    legend: {
-                        display: false
-                    },
-                    cutoutPercentage: 80,
-                },
-            });
-
-        }
+                cutoutPercentage: 80,
+            },
+        });
 
 
     }
 }
 
 
-async function getDataFromResult(){
+async function getDataFromResult() {
     let requestId = document.getElementById("resultIndexValue").value;
     let url = `/diagnosis/data/${requestId}`;
     let response = await fetch(url);
-    if(response.ok){
+    if (response.ok) {
         let json = await response.json();
-        let e= json.data;
+        let e = json.data;
         console.log(e);
-            orientList.push(e.orientScore);
-            attentionList.push(e.attentionScore);
-            spacetimeList.push(e.spacetimeScore);
-            executiveList.push(e.executiveScore);
-            languageList.push(e.languageScore);
-            memoryList.push(e.memoryScore);
+        orientList.push(e.orientScore);
+        attentionList.push(e.attentionScore);
+        spacetimeList.push(e.spacetimeScore);
+        executiveList.push(e.executiveScore);
+        languageList.push(e.languageScore);
+        memoryList.push(e.memoryScore);
 
-            document.getElementById("resultTotalScore").innerText = e.totalScore + " / " + total;
+        document.getElementById("resultTotalScore").innerText = e.totalScore + " / " + total;
         // 막대 바 렌더링
         renderStickChart();
 

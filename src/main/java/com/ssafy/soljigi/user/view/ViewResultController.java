@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.soljigi.game.dto.response.TransactionResponse;
+import com.ssafy.soljigi.user.dto.response.Response;
 import com.ssafy.soljigi.user.service.impl.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,13 @@ public class ViewResultController {
 	}
 
 	@GetMapping("/diagnosis/result/detail/{id}")
-	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model) {
+	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
+		if (principal != null) {
+			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName());
+			userService.findPaymentPatternByTransaction(principal.getName());
+			model.addAttribute("transactionResponse", pattern);
+		}
 		return "result/result-diagnosis-detail-view";
 	}
 
