@@ -28,6 +28,29 @@
           integrity="sha512-TH+vnrhByFI2RzNvaHSqt6EwoJ9Bp+yGAGTWp84qTuTx315ebnypxtyGHpli55Rm4N4J+N/0W9xAL2b5RZ2ZSA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
+    <style>
+        @font-face {
+            font-family: 'GongGothicMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+            font-weight: 100;
+            font-style: normal;
+        }
+        * {
+            font-family: 'GongGothicMedium';
+        }
+
+        h1 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h2 {
+            font-family: 'GongGothicMedium';
+        }
+
+        h5 {
+            font-family: 'GongGothicMedium';
+        }
+    </style>
 
 </head>
 
@@ -105,7 +128,7 @@
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        현황판
+                        <h2 class="text-white fw-bold m-0">진단검사결과</h2>
 
                     </div>
                 </form>
@@ -177,7 +200,7 @@
                             <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 <span sec:authentication="Principal.username"></span>
                             </span>
-                            <span sec:authorize="isAnonymous()">로그인 하지 않았습니다.</span>
+                            <span sec:authorize="isAnonymous()">로그인 후 결과를 관리하세요!</span>
 
 
                             <img class="img-profile rounded-circle"
@@ -224,8 +247,8 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             오늘의 한마디
                                         </div>
-                                        <div id="todayMention" class="h5 mb-0 font-weight-bold text-gray-800">뒤통수를
-                                            조심해라
+                                        <div id="todayMention" class="h5 mb-0 font-weight-bold text-gray-800">
+                                            한마디를 넣어주세요
                                         </div>
 
                                     </div>
@@ -251,6 +274,7 @@
                                                 <div id="weekPayCount"
                                                      class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
                                                     <span th:text="${transActionCount}"></span>
+                                                    <span> 번</span>
                                                 </div>
 
                                             </div>
@@ -272,7 +296,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            이번달 진단검사 / 게임여부 여부
+                                            이번달 진단검사 여부
                                         </div>
                                         <div id="monthIsDone" class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
 
@@ -297,7 +321,7 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">치매진단 검사 결과랑 치매예방 게임 결과는 따로</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">치매진단검사 결과</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -334,7 +358,7 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">최근 데이터</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">가장 최근의 결과</h6>
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">지남력
@@ -393,7 +417,7 @@
                         <!-- Illustrations -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">히스토리</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">결과 종합</h6>
                             </div>
 
                             <div class="data-container"></div>
