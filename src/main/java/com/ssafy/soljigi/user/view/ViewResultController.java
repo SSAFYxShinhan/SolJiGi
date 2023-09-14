@@ -21,7 +21,7 @@ public class ViewResultController {
 	private final UserServiceImpl userService;
 
 	@GetMapping("/diagnosis/result")
-	public String resultPage(Model model, Principal principal) {
+	public String resultDiagnosisPage(Model model, Principal principal) {
 		model.addAttribute("transActionCount", 0);
 		if (principal != null) {
 			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
@@ -32,9 +32,20 @@ public class ViewResultController {
 	}
 
 	@GetMapping("/diagnosis/result/detail/{id}")
-	public String resultDetailPage(@PathVariable Long id, Model model) {
+	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model) {
 		model.addAttribute("id", id);
 		return "result/result-diagnosis-detail-view";
+	}
+
+	@GetMapping("/game/result")
+	public String resultGamePage(Model model, Principal principal) {
+		model.addAttribute("transActionCount", 0);
+		if (principal != null) {
+			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
+			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+		}
+
+		return "result/result-game-view";
 	}
 
 }

@@ -20,7 +20,8 @@ public enum ErrorCode {
 	NOT_TRUSTED_TOKEN(HttpStatus.UNAUTHORIZED, "신뢰할 수 없는 토큰입니다."),
 
 	UNREACHABLE_SERVICE(HttpStatus.UNAUTHORIZED, "접근 방식이 잘못되었습니다."),
-	DIAGNOSIS_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 진단 결과를 찾지 못했습니다.");
+	DIAGNOSIS_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 진단 결과를 찾지 못했습니다."),
+	GAME_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND,"해당 게임 결과를 찾지 못했습니다.");
 	private HttpStatus httpStatus;
 	private String message;
 }
