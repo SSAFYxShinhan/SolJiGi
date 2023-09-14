@@ -1,13 +1,14 @@
 package com.ssafy.soljigi.diagnosis.dto.response;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisResult;
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisResultType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -26,10 +27,11 @@ public class DiagnosisResultResponse {
 	private int totalScore;
 	private DiagnosisResultType type;
 	private LocalDateTime registrationDate;
+	private String registrationDateString;
 
 	public static DiagnosisResultResponse of(DiagnosisResult diagnosisResult) {
 		return DiagnosisResultResponse.builder()
-				.id(diagnosisResult.getId())
+			.id(diagnosisResult.getId())
 			.age(diagnosisResult.getAge())
 			.educationLevel(diagnosisResult.getEducationLevel())
 			.orientScore(diagnosisResult.getOrientScore())
@@ -39,7 +41,7 @@ public class DiagnosisResultResponse {
 			.languageScore(diagnosisResult.getLanguageScore())
 			.memoryScore(diagnosisResult.getMemoryScore())
 			.type(diagnosisResult.getType())
-				.totalScore(diagnosisResult.getEducationLevel()
+			.totalScore(diagnosisResult.getEducationLevel()
 				+ diagnosisResult.getOrientScore()
 				+ diagnosisResult.getAttentionScore()
 				+ diagnosisResult.getSpacetimeScore()
@@ -47,6 +49,8 @@ public class DiagnosisResultResponse {
 				+ diagnosisResult.getLanguageScore()
 				+ diagnosisResult.getMemoryScore())
 			.registrationDate(diagnosisResult.getRegistrationDate())
+			.registrationDateString(diagnosisResult.getRegistrationDate()
+				.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
 			.build();
 	}
 }

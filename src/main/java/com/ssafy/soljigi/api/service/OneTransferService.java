@@ -35,7 +35,7 @@ public class OneTransferService {
 			.deposit(1)
 			.withdraw(0)
 			.inOutType(1)
-			.content(dataBody.getMemo())
+			.content(generateNumber())
 			.summary("1원 인증")
 			.branchName("1원 인증")
 			.build());
@@ -50,5 +50,9 @@ public class OneTransferService {
 			.orElseThrow(IllegalArgumentException::new)
 			.getContent();
 		return OneTransferMemoResponse.of(content);
+	}
+
+	private String generateNumber() {
+		return (int)(Math.random() * 8999) + 1000 + "";
 	}
 }

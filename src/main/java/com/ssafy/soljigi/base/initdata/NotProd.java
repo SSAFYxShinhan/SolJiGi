@@ -3,14 +3,7 @@ package com.ssafy.soljigi.base.initdata;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
-import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
-import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
-import com.ssafy.soljigi.user.entity.Gender;
-import com.ssafy.soljigi.user.entity.Role;
-import com.ssafy.soljigi.user.entity.User;
-import com.ssafy.soljigi.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +12,16 @@ import com.ssafy.soljigi.api.entity.Account;
 import com.ssafy.soljigi.api.entity.Transaction;
 import com.ssafy.soljigi.api.repository.AccountRepository;
 import com.ssafy.soljigi.api.repository.TransactionRepository;
+import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
+import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
 import com.ssafy.soljigi.game.entity.Quiz;
 import com.ssafy.soljigi.game.entity.Type;
 import com.ssafy.soljigi.game.repository.QuizRepository;
 import com.ssafy.soljigi.user.entity.Address;
 import com.ssafy.soljigi.user.entity.Gender;
+import com.ssafy.soljigi.user.entity.Role;
+import com.ssafy.soljigi.user.entity.User;
+import com.ssafy.soljigi.user.repository.UserRepository;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -51,26 +49,38 @@ public class NotProd {
 		private final UserRepository userRepository;
 		private final DiagnosisResultService diagnosisResultService;
 		private final PasswordEncoder passwordEncoder;
+
 		public void dbInit() {
 			int quizCount = 9;
 
-//			user 생성
+			//			user 생성
 
 			userRepository.save(User.builder()
-					.password(passwordEncoder.encode("1"))
-					.username("1")
-					.role(Role.USER)
-					.gender(Gender.MALE)
-					.build());
+				.password(passwordEncoder.encode("1"))
+				.username("1")
+				.role(Role.USER)
+				.gender(Gender.MALE)
+				.accountNumber("110222999995")
+				.build());
+			userRepository.save(User.builder()
+				.password(passwordEncoder.encode("1"))
+				.username("2")
+				.role(Role.USER)
+				.gender(Gender.MALE)
+				.accountNumber("110222999993")
+				.build());
 
 			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-					1L,2,2,2,2,2,2,2,2
+				1L, 2, 2, 2, 2, 2, 2, 2, 2
 			));
 			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-					1L,3,3,3,3,3,2,5,2
+				1L, 3, 3, 3, 3, 3, 2, 5, 2
 			));
 			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-					1L,5,3,1,3,2,2,5,2
+				2L, 5, 3, 1, 3, 2, 2, 5, 2
+			));
+			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+				1L, 5, 3, 1, 3, 2, 2, 5, 2
 			));
 
 			for (int i = 0; i <= quizCount; ++i) {
@@ -125,7 +135,6 @@ public class NotProd {
 				}
 				accountRepository.save(account);
 			}
-
 
 			// List<Transaction> transactions = Arrays.asList(
 			// 	Transaction.builder()
