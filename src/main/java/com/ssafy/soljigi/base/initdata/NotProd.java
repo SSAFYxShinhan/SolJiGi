@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
-import com.ssafy.soljigi.game.repository.GameResultRepository;
-import com.ssafy.soljigi.game.service.GameResultService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +12,12 @@ import com.ssafy.soljigi.api.entity.Account;
 import com.ssafy.soljigi.api.entity.Transaction;
 import com.ssafy.soljigi.api.repository.AccountRepository;
 import com.ssafy.soljigi.api.repository.TransactionRepository;
-import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
 import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
+import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
 import com.ssafy.soljigi.game.entity.Quiz;
 import com.ssafy.soljigi.game.entity.Type;
 import com.ssafy.soljigi.game.repository.QuizRepository;
+import com.ssafy.soljigi.game.service.GameResultService;
 import com.ssafy.soljigi.user.entity.Address;
 import com.ssafy.soljigi.user.entity.Gender;
 import com.ssafy.soljigi.user.entity.Role;
@@ -74,31 +72,30 @@ public class NotProd {
 				.accountNumber("110222999993")
 				.build());
 
-//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-//				1L, 2, 2, 2, 2, 2, 2, 2, 2
-//			));
-//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-//				1L, 3, 3, 3, 3, 3, 2, 5, 2
-//			));
-//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-//				2L, 5, 3, 1, 3, 2, 2, 5, 2
-//			));
-//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-//				1L, 5, 3, 1, 3, 2, 2, 5, 2
-//			));
+			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+			//				1L, 2, 2, 2, 2, 2, 2, 2, 2
+			//			));
+			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+			//				1L, 3, 3, 3, 3, 3, 2, 5, 2
+			//			));
+			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+			//				2L, 5, 3, 1, 3, 2, 2, 5, 2
+			//			));
+			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
+			//				1L, 5, 3, 1, 3, 2, 2, 5, 2
+			//			));
 
-
-			gameResultService.save(new GameResultSaveRequest(
-					1L, 5, 3, 1, 3, 2,2,3,4
+			gameResultService.save(1L, new GameResultSaveRequest(
+				5, 3, 1, 3, 2, 2, 3, 4
 			));
-			gameResultService.save(new GameResultSaveRequest(
-					1L, 3, 3, 1, 3, 2,2,3,4
+			gameResultService.save(1L, new GameResultSaveRequest(
+				3, 3, 1, 3, 2, 2, 3, 4
 			));
-			gameResultService.save(new GameResultSaveRequest(
-					1L, 5, 3, 0, 0, 0,2,3,4
+			gameResultService.save(1L, new GameResultSaveRequest(
+				5, 3, 0, 0, 0, 2, 3, 4
 			));
-			gameResultService.save(new GameResultSaveRequest(
-					1L, 5, 3, 0, 3, 0,2,3,4
+			gameResultService.save(1L, new GameResultSaveRequest(
+				5, 3, 0, 3, 0, 2, 3, 4
 			));
 
 			for (int i = 0; i <= quizCount; ++i) {
