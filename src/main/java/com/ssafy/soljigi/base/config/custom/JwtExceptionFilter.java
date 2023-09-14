@@ -28,7 +28,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 		try {
 			filterChain.doFilter(request, response);
 		} catch (AppException e) {
-			log.warn("ex. JwtExceptionFilter" + " " + e.getErrorCode() + " " + e.getErrorCode().getMessage());
+//			log.warn("ex. JwtExceptionFilter" + " " + e.getErrorCode() + " " + e.getErrorCode().getMessage());
 			response.setStatus(e.getErrorCode().getHttpStatus().value());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding("UTF-8");

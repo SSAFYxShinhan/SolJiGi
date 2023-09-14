@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(@NonNull HttpServletRequest request,
 		@NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
 		throws ServletException, IOException, AppException {
-		log.warn("1. JwtAuthenticationFilter : start");
+//		log.warn("1. JwtAuthenticationFilter : start");
 		String authHeader = null;
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
@@ -48,12 +48,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		final String jwt;
 		final String username;
 		if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer+")) {
-			log.warn("2. JwtAuthenticationFilter : Empty or Not Start Bearer " + authHeader);
+//			log.warn("2. JwtAuthenticationFilter : Empty or Not Start Bearer " + authHeader);
 			filterChain.doFilter(request, response);
 			return;
 		}
 		jwt = authHeader.substring(7);
-		log.warn("3. JwtAuthenticationFilter : Put Out JWT" + authHeader);
+//		log.warn("3. JwtAuthenticationFilter : Put Out JWT" + authHeader);
 		username = jwtService.extractUserName(jwt);
 
 		if (io.micrometer.common.util.StringUtils.isNotEmpty(username)
