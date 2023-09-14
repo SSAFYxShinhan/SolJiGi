@@ -12,6 +12,7 @@ import com.ssafy.soljigi.api.entity.Account;
 import com.ssafy.soljigi.api.entity.Transaction;
 import com.ssafy.soljigi.api.repository.AccountRepository;
 import com.ssafy.soljigi.api.repository.TransactionRepository;
+import com.ssafy.soljigi.diagnosis.dto.request.DiagnosisResultSaveRequest;
 import com.ssafy.soljigi.diagnosis.service.DiagnosisResultService;
 import com.ssafy.soljigi.game.dto.request.GameResultSaveRequest;
 import com.ssafy.soljigi.game.entity.Quiz;
@@ -72,31 +73,22 @@ public class NotProd {
 				.accountNumber("110222999993")
 				.build());
 
-			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-			//				1L, 2, 2, 2, 2, 2, 2, 2, 2
-			//			));
-			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-			//				1L, 3, 3, 3, 3, 3, 2, 5, 2
-			//			));
-			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-			//				2L, 5, 3, 1, 3, 2, 2, 5, 2
-			//			));
-			//			diagnosisResultService.save(new DiagnosisResultSaveRequest(
-			//				1L, 5, 3, 1, 3, 2, 2, 5, 2
-			//			));
+			for (int i = 0; i < 50; i++) {
+				int v1 = (int)Math.random() * 5;
+				int v2 = (int)Math.random() * 5;
+				int v3 = (int)Math.random() * 5;
+				int v4 = (int)Math.random() * 5;
+				int v5 = (int)(Math.random() * 5);
+				int v6 = (int)(Math.random() * 5);
 
-			gameResultService.save(1L, new GameResultSaveRequest(
-				5, 3, 1, 3, 2, 2, 3, 4
-			));
-			gameResultService.save(1L, new GameResultSaveRequest(
-				3, 3, 1, 3, 2, 2, 3, 4
-			));
-			gameResultService.save(1L, new GameResultSaveRequest(
-				5, 3, 0, 0, 0, 2, 3, 4
-			));
-			gameResultService.save(1L, new GameResultSaveRequest(
-				5, 3, 0, 3, 0, 2, 3, 4
-			));
+				diagnosisResultService.save(1L, new DiagnosisResultSaveRequest(
+					v1, v2, v3, v4, v5, v6
+				));
+				gameResultService.save(1L, new GameResultSaveRequest(
+					v1, v2, v3, v4, v5, v6, v1, v2
+				));
+
+			}
 
 			for (int i = 0; i <= quizCount; ++i) {
 				quizRepository.save(
