@@ -93,7 +93,11 @@ public class UserServiceImpl implements UserService {
 		ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
 		entries.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 		Map<String, Integer> result = new HashMap<>();
-		for (int i = 0; i < 5; i++) {
+		int size = 5;
+		if (entries.size() < 5) {
+			size = entries.size();
+		}
+		for (int i = 0; i < size; i++) {
 			result.put(entries.get(i).getKey(), entries.get(i).getValue());
 		}
 		return Response.success(result);
