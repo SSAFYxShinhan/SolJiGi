@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,109 +31,231 @@
 
     <!-- Template Stylesheet -->
     <link href="../view-data/css/style.css" rel="stylesheet">
-</head>
-<body>
+    <style>
+        .custom-btn {
+            font-size: 16px;        /* 글씨 크기 조정 */
+            padding: 10px 10px;     /* 패딩 조정 */
+            height: auto;           /* 자동 높이 */
+            width: 200px;
+        }
 
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+        #account-number-input, .custom-btn {
+            height: 38px; /* 예: 38px */
+            padding: 6px 12px;
+        }
+
+        .accordion-button {
+            font-weight: bold;      /* 글씨 두껍게 */
+            background-color: #f1f1f1; /* 배경색 변경 */
+            border: none;          /* 테두리 제거 */
+            border-radius: 5px;    /* 모서리 둥글게 */
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #fff;            /* 활성화 상태 텍스트 색상 */
+            background-color: #007bff; /* 활성화 상태 배경색 */
+        }
+
+        .accordion-body {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* 아코디언 클릭 시 색상 변경 */
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(200, 200, 200, 0.5);  /* 원하는 색상으로 수정 */
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #333;  /* 글자 색상을 원하는 색상으로 수정 */
+            background-color: #e9ecef;  /* 배경색을 원하는 색상으로 수정 */
+        }
+
+        /* 드롭다운 간격 추가 */
+        #birthYear, #birthMonth, #birthDay {
+            margin-bottom: 5px;  /* 원하는 간격으로 조정 */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;  /* 위에서 아래로 내용을 정렬 */
+            align-items: center;
+            background: #eee;
+            min-height: 100vh;  /* 브라우저 높이를 100%로 설정 */
+        }
+
+        .main-content {
+            flex-grow: 1;  /* 가능한 모든 공간을 차지하도록 설정 */
+            display: flex;
+            align-items: center;  /* 중앙에 수직으로 정렬 */
+            justify-content: center;  /* 중앙에 수평으로 정렬 */
+        }
+    </style>
+</head>
+
+<body>
+<section style="height: 100vh" class="d-flex align-items-center">
+    <div class="container" style="width: 1000px">
+        <div class="row d-flex align-items-center">
             <div class="col-lg-12 col-xl-11">
-                <div class="card shadow p-3 mb-5 bg-body rounded text-black" style="border-radius: 25px;">
-                    <div class="card-body p-md-5">
+                <div class="card shadow bg-body rounded text-black" style="border-radius: 25px;">
+                    <div class="card-body">
                         <div class="row justify-content-center">
-                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">회원 가입</p>
+                            <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-2">회원 가입</p>
                             <div class="col-md-10">
 
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="d-flex flex-column mb-4">
+                                    <div>
+                                        <i class="fas fa-user fa-lg mb-1 fa-fw"></i>
+                                        <label for="username" class="form-label">아이디</label>
+                                    </div>
                                     <div class="form-outline flex-fill mb-0">
                                         <input type="text" id="username" class="form-control" placeholder="아이디"/>
                                     </div>
                                 </div>
 
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                <div class="d-flex flex-column mb-4">
+                                    <div>
+                                        <i class="fas fa-lock fa-lg mb-3 fa-fw"></i>
+                                        <label for="password" class="form-label">비밀번호</label>
+                                    </div>
                                     <div class="form-outline flex-fill mb-0">
                                         <input type="password" id="password" class="form-control" placeholder="비밀번호"/>
                                     </div>
                                 </div>
 
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                    <div class="dropdown">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>학력</option>
-                                            <option value="1">미취학</option>
-                                            <option value="2">중졸</option>
-                                            <option value="3">고졸</option>
-                                            <option value="4">대졸</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="parent-number" class="form-control"
-                                               placeholder="보호자 번호"/>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="d-flex flex-row align-items-center">
                                     <div class="input-group px-6 mb-3" style="display: flex;">
-                                        <div class="input-group mb-3">
-                                            <input type="text" id="account-number-input" name="accountNumber"
-                                                   class="form-control"
-                                                   placeholder="계좌번호를 입력하세요."
-                                                   aria-label="Recipient's username"
-                                                   aria-describedby="basic-addon2">
-                                            <button class="btn btn-primary" id="one-auth-btn">1원인증서비스</button>
+                                        <div class="input-group mb-3 d-flex flex-column">
+                                            <div>
+                                                <i class="fas fa-key fa-lg fa-fw"></i>
+                                                <label for="account-number-input" class="form-label">계좌번호</label>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="input-group" style="margin-right: 10px">
+                                                <input type="text" id="account-number-input" name="accountNumber"
+                                                       class="form-control"
+                                                       placeholder="계좌번호 입력"
+                                                       aria-label="Recipient's username"
+                                                       aria-describedby="basic-addon2">
+                                                <button class="btn btn-primary custom-btn" id="one-auth-btn" style="width: 100px">확인</button>
+                                                </div>
+                                                    <button class="btn btn-primary custom-btn" id="getTransAction" style="width: 200px">입금 내역 조회</button>
+                                            </div>
                                         </div>
-                                        <div class="input-group mb-3">
-                                            <button class="btn btn-light" id="getTransAction">입금내역 조회</button>
+                                        <div class="input-group">
                                             <input type="text" id="configKey" class="form-control" placeholder="4자리 입력">
                                             <button class="btn btn-primary" id="accountConfig">인증하기</button>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <i class="fas fa-info-circle me-2"></i> 부가 정보
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
 
-                                <div class="d-flex flex-row mb-4">
-                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                    <div class="form-outline mb-0">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>성별</option>
-                                            <option value="1">남</option>
-                                            <option value="2">여</option>
+                                                <!-- 성별 영역 시작 -->
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-user fa-lg mb-2 fa-fw"></i>
+                                                        <label class="form-label">성별</label>
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender" id="male" value="1">
+                                                            <label class="form-check-label" for="male">남</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender" id="female" value="2">
+                                                            <label class="form-check-label" for="female">여</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 성별 영역 끝 -->
+
+                                                <!-- 생일 영역 시작 -->
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-birthday-cake fa-lg mb-2 fa-fw"></i>
+                                                        <label class="form-label">생일</label>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <select class="form-select mr-2" id="birthYear" aria-label="Year" style="margin-right: 10px">
+                                                            <option value="">년</option>
+                                                        </select>
+                                                        <select class="form-select mr-2" id="birthMonth" aria-label="Month" style="margin-right: 10px">
+                                                            <option value="">월</option>
+                                                        </select>
+                                                        <select class="form-select" id="birthDay" aria-label="Day">
+                                                            <option value="">일</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-envelope fa-lg mb-2 fa-fw"></i>
+                                                        <label for="name" class="form-label">성명</label>
+                                                    </div>
+                                                    <input type="text" id="name" class="form-control" placeholder="성명"/>
+                                                </div>
+
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-home fa-lg mb-2 fa-fw"></i>
+                                                        <label for="address_kakao" class="form-label">주소</label>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="address_kakao" name="address" readonly placeholder="주소"/>
+                                                </div>
+
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-phone-alt fa-lg mb-2 fa-fw"></i>
+                                                        <label for="phone-number" class="form-label">전화번호</label>
+                                                    </div>
+                                                    <input type="text" id="phone-number" class="form-control" placeholder="전화번호"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 학력 영역 시작 -->
+                                <div class="d-flex flex-column mb-4">
+                                    <div>
+                                        <i class="fas fa-key fa-lg mb-2 fa-fw"></i>
+                                        <label for="education" class="form-label">학력</label>
+                                    </div>
+                                    <div class="dropdown">
+                                        <select class="form-select" id="education" aria-label="Education select example">
+                                            <option selected>학력 선택</option>
+                                            <option value="1">비문해</option>
+                                            <option value="2">무학/문해</option>
+                                            <option value="3">초졸</option>
+                                            <option value="4">중졸</option>
+                                            <option value="5">고졸</option>
+                                            <option value="6">대졸</option>
                                         </select>
-
                                     </div>
                                 </div>
+                                <!-- 학력 영역 끝 -->
 
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                    <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="birth" class="form-control" placeholder="생일 971022"/>
-
+                                <!-- 보호자 번호 영역 시작 -->
+                                <div class="d-flex flex-column mb-4">
+                                    <div>
+                                        <i class="fas fa-phone-alt fa-lg mb-2 fa-fw"></i>
+                                        <label for="parent-number" class="form-label">보호자 번호 (선택)</label>
                                     </div>
-
-                                </div>
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="name" class="form-control" placeholder="성명"/>
-
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                    <div class="form-outline flex-fill mb-0">
-                                        <input class="form-control" type="text" id="address_kakao" name="address"
-                                               readonly/>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                    <div class="form-outline flex-fill mb-0">
-                                        <input type="text" id="phone-number" class="form-control" placeholder="전화번호"/>
-
+                                        <input type="text" id="parent-number" class="form-control" placeholder="보호자 번호 입력">
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +263,7 @@
 
                             <div class="d-flex align-items-end justify-content-center ">
                                 <button type="button" id="sign-up-btn" class="btn btn-primary btn-lg" disabled>
-                                    Register
+                                    가입 하기
                                 </button>
                             </div>
 
@@ -152,11 +274,7 @@
         </div>
     </div>
 </section>
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
-        class="bi bi-arrow-up"></i></a>
-
+</body>
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -189,5 +307,46 @@
 <script src="/view-data/js/main.js"></script>
 <script src="/view-data/js/one-auth.js"></script>
 <script src="/view-data/js/sign-up.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentYear = new Date().getFullYear();
+        const yearSelect = document.getElementById("birthYear");
+        const monthSelect = document.getElementById("birthMonth");
+        const daySelect = document.getElementById("birthDay");
+
+        // 년도 생성: 1900년부터 현재년도까지
+        for (let i = currentYear; i >= 1900; i--) {
+            let option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+
+        // 월 생성
+        for (let i = 1; i <= 12; i++) {
+            let option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            monthSelect.appendChild(option);
+        }
+
+        // 월에 따른 일자 갱신
+        monthSelect.addEventListener("change", function() {
+            // 이전에 선택된 일자 옵션들을 제거
+            daySelect.innerHTML = '<option value="">일</option>';
+
+            let selectedYear = yearSelect.value;  // 선택된 년도를 기준으로 설정
+            let daysInMonth = new Date(selectedYear, monthSelect.value, 0).getDate();
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                let option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                daySelect.appendChild(option);
+            }
+        });
+    });
+</script>
 </body>
 </html>
