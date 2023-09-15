@@ -112,6 +112,7 @@
 
 
 
+
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -208,8 +209,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                            <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                <span sec:authentication="Principal.username"></span>
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <span sec:authorize="isAuthenticated()">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${name}"></span>
                             </span>
                             <span sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/sign-in}'|">로그인 후 결과를 관리하세요!</span>
 
@@ -452,6 +454,9 @@
         </div>
     </div>
 
+    <script th:inline="javascript">
+        let name = [[${name}]];
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="/view-data/vendor/jquery/jquery.min.js"></script>
     <script src="/view-data/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -105,6 +105,8 @@ async function getDataFromResultPagination() {
             renderStickChart();
         }
 
+
+
         // 차트 렌더링
         var myChart = new Chart(ctx, {
             type: 'line',
@@ -289,6 +291,8 @@ async function getDataFromResultPagination() {
         })
     }
 }
+
+
 
 
 getDataFromResultPagination();

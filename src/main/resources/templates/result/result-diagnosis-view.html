@@ -204,9 +204,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                            <span sec:authorize="isAuthenticated()" class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                <span sec:authentication="Principal.username"></span>
-                                <span> 님</span>
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <span sec:authorize="isAuthenticated()">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${name}"></span>
                             </span>
                             <span sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/sign-in}'|">로그인 후 결과를 관리하세요!</span>
 
@@ -486,7 +486,9 @@
     <script src="/view-data/js/diagnosis/result-diagnosis-info.js"></script>
 
     <!--    <script src="../../view-data/js/demo/chart-pie-demo.js"></script>-->
-
+    <script th:inline="javascript">
+        let name = [[${name}]];
+    </script>
 </div>
 </body>
 

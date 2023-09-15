@@ -29,12 +29,27 @@ public class ViewResultController {
 	private final DiagnosisResultService diagnosisResultService;
 	private final GameResultService gameResultService;
 
+	@GetMapping("/game/result")
+	public String resultGamePage(Model model, Principal principal) {
+		model.addAttribute("transActionCount", 0);
+		if (principal != null) {
+			User user = userService.findByUsername(principal.getName());
+			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
+			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+			model.addAttribute("name",user.getName());
+		}
+
+		return "result/result-game-view";
+	}
+
 	@GetMapping("/diagnosis/result")
 	public String resultDiagnosisPage(Model model, Principal principal) {
 		model.addAttribute("transActionCount", 0);
 		if (principal != null) {
-			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
+			User user = userService.findByUsername(principal.getName());
+			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+			model.addAttribute("name",user.getName());
 		}
 
 		return "result/result-diagnosis-view";
@@ -70,15 +85,6 @@ public class ViewResultController {
 		return "result/result-game-detail-view";
 	}
 
-	@GetMapping("/game/result")
-	public String resultGamePage(Model model, Principal principal) {
-		model.addAttribute("transActionCount", 0);
-		if (principal != null) {
-			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
-			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
-		}
 
-		return "result/result-game-view";
-	}
 
 }

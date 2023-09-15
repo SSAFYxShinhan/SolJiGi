@@ -219,7 +219,8 @@ html 이 우선일까 JS 가 우선일까 ?
                             <span sec:authorize="isAuthenticated()">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${name}"></span>
                             </span>
-                            <span sec:authorize="isAnonymous()">로그인</span>
+                            <span sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/sign-in}'|">로그인 후 결과를 관리하세요!</span>
+
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -424,12 +425,10 @@ html 이 우선일까 JS 가 우선일까 ?
         </div>
     </div>
 </div>
-
 <script th:inline="javascript">
-    let transactionData = [[${transactionResponse}]];
-    let datetime = [[${datetime}]];
     let name = [[${name}]];
 </script>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="/view-data/vendor/jquery/jquery.min.js"></script>
