@@ -3,6 +3,7 @@ package com.ssafy.soljigi.user.view;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
+import com.ssafy.soljigi.user.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,11 +56,13 @@ public class ViewResultController {
 	public String resultGameDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
+			User user = userService.findByUsername(principal.getName());
 			GameResultResponse gameResultResponse = gameResultService.findById(id);
 			LocalDateTime date = gameResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
+			Response<?> pattern = userService.findPaymentPatternByTransaction(user.getAccountNumber(), date);
 			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
+			model.addAttribute("name",user.getName());
 		}
 		return "result/result-game-detail-view";
 	}

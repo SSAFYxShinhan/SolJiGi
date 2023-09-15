@@ -208,8 +208,12 @@ html 이 우선일까 JS 가 우선일까 ?
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">김순자씨</span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <span sec:authorize="isAuthenticated()">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${name}"></span>
+                            </span>
+                            <span sec:authorize="isAnonymous()">로그인</span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -260,8 +264,8 @@ html 이 우선일까 JS 가 우선일까 ?
                         <!-- Project Card Example -->
                         <!-- 데이터 받아와서 width 설정 -->
 
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
+                        <div class="card shadow">
+                            <div class="card-header">
                                 <h2 class="m-0 font-weight-bold text-primary">최근 데이터</h2>
                             </div>
                             <div class="card-body">
@@ -300,10 +304,10 @@ html 이 우선일까 JS 가 우선일까 ?
 
                     <!-- Pie Chart -->
                     <div class="col-xl-4 col-lg-4">
-                        <div class="card shadow mb-7">
+                        <div class="card shadow">
                             <!-- Card Header - Dropdown -->
                             <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    class="card-header d-flex flex-row align-items-center justify-content-between">
                                 <h3 id="circleChartTitle" class="m-0 font-weight-bold text-primary">00일 소비습관</h3>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -321,8 +325,8 @@ html 이 우선일까 JS 가 우선일까 ?
                                 </div>
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body mb-5">
-                                <div class="chart-pie pt-4 pb-2">
+                            <div class="card-body">
+                                <div class="chart-pie ">
                                     <canvas id="myPieChart"></canvas>
                                 </div>
                                 <div id="myPieChartLegend"></div>
@@ -418,7 +422,7 @@ html 이 우선일까 JS 가 우선일까 ?
 <script th:inline="javascript">
     let transactionData = [[${transactionResponse}]];
     let datetime = [[${datetime}]];
-
+    let name = [[${name}]];
 </script>
 
 <!-- Bootstrap core JavaScript-->

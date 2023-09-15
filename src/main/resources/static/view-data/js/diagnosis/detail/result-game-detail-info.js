@@ -68,8 +68,8 @@ function renderStickChart() {
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
 
-    document.getElementById("resultTotalScore").innerText = "최종점수는 = " + totalList[0] + "/" + totalList[1] + "점"
-    document.getElementById("circleChartTitle").innerText = datetime + " 의 소비"
+    document.getElementById("resultTotalScore").innerText = datetime + "/ 종합 결과"
+    document.getElementById("circleChartTitle").innerText = "소비 패턴 분석"
 
     let sum = 0;
     Object.values(transactionData.result).forEach(e=> sum = sum + e);
