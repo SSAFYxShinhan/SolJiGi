@@ -81,7 +81,7 @@
         if (diagnosis.type === diagnosisType.ORIENT) {
             window.speechSynthesis.cancel();
             speech(diagnosis.quiz["question"]);
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
             if (diagnosis.step === 'READ') {
                 window.speechSynthesis.cancel();
@@ -98,7 +98,7 @@
                 if (memoryResult[mqIdx++] === 2) {
                     nextGame();
                 } else {
-                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.MEMORY);
+                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 20, result, nextGame, diagnosisType.MEMORY);
                 }
             }
         } else if (diagnosis.type === diagnosisType.ATTENTION) {
@@ -107,7 +107,7 @@
             speech(diagnosis.quiz["choice"][0]);
             speech("다시 읽어 드리겠습니다.");
             speech(diagnosis.quiz["choice"][0]);
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 30, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
             window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
@@ -118,22 +118,21 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("다음 이미지를 보고 무엇인지 말해보세요");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.LANGUAGE);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_VIRTUAL) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_FLUENT) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("과일 이름을 생각나는대로 최대한 많이 말해주세요.");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 40, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
             }
     }
 
     function generateDiagnosis() {
-        setVoiceList();
         const questions = []
         const orientQuiz = [[${orient}]];
         const memory4w1h = [[${memory4w1h}]];

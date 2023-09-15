@@ -128,7 +128,7 @@ class MemoryDiagnosisQuiz {
 <!--        <input type="text" class="diagnosis-memory__input"/>-->
         <p class="diagnosis-memory__input"> </p> 
         <div>
-        <button type="button" onclick="sendSpeech();">녹음</button> 
+        <button type="button" onclick="sendSpeechMemory();">녹음</button> 
         <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
 <!--        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">-->
 <!--        <input type="text" class="diagnosis-memory__input"/>--> 
@@ -145,7 +145,7 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-function sendSpeech() {
+function sendSpeechMemory() {
     var recognition = new SpeechRecognition();
     var speechRecognitionList = new SpeechGrammarList();
     var diagnosticPara = document.querySelector('.diagnosis-memory__input');

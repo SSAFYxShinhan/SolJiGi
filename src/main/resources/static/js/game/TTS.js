@@ -3,7 +3,7 @@ function setVoiceList() {
     voices = window.speechSynthesis.getVoices();
 }
 
-// setVoiceList();
+setVoiceList();
 
 if (window.speechSynthesis.onvoiceschanged !== undefined) {
     window.speechSynthesis.onvoiceschanged = setVoiceList;
@@ -35,10 +35,10 @@ function speech(txt) {
             voiceFound = true;
         }
     }
-    if(!voiceFound) {
-        alert('voice not found');
-        return;
-    }
+    // if(!voiceFound) {
+    //     alert('voice not found');
+    //     return;
+    // }
 
     utterThis.lang = lang;
     utterThis.pitch = 1;

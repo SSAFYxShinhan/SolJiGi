@@ -67,7 +67,7 @@ class ShortAnswerQuizGame {
     content += ` 
     <p class="short-answer-quiz__input"> </p> 
     <div>
-    <button type="button" onclick="sendSpeech();">녹음</button> 
+    <button type="button" onclick="sendSpeechShort();">녹음</button> 
     <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
     </div>
@@ -81,7 +81,7 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-function sendSpeech() {
+function sendSpeechShort() {
   var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   var diagnosticPara = document.querySelector('.short-answer-quiz__input');
