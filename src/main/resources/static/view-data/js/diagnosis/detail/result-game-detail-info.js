@@ -30,7 +30,28 @@ var spacetimeList = [];
 var executiveList = [];
 var totalList = [];
 
-
+var contentString = [
+    "함께 산책하며 시간을 즐기자!",
+    "자연 속에서 신선한 공기 마시며 걷는 건 어때요?",
+    "우리 강아지 친구와 함께 걷기 좋은 날이에요!",
+    "휴식을 즐기면서 걷는 건 어떨까요?",
+    "자연의 아름다움을 느끼며 걸어보세요.",
+    "마음을 정화하고 에너지를 충전하는 산책을 시작해봐요.",
+    "걷면서 새로운 발견을 해보세요!",
+    "산책은 몸과 마음에 좋아요.",
+    "걷기를 시작하면 스트레스가 덜해질 거예요.",
+    "산책 중에 좋은 음악이나 오디오북을 듣는 건 어때요?",
+    "산책을 통해 몸과 마음을 활기차게 만들어봐요.",
+    "우리의 모험을 시작해봅시다!",
+    "이 아름다운 경로에서 함께 걸어요.",
+    "산책은 일상 속에서 작은 여행이에요.",
+    "같이 걷면서 얘기하며 시간을 보내는 건 어때요?",
+    "산책은 건강한 라이프스타일의 일부에요.",
+    "바깥 공기를 마음껏 즐기는 시간이에요.",
+    "새로운 경치를 발견하면서 걷는 것은 흥미로워요.",
+    "산책은 스트레스 해소에 좋아요.",
+    "우리의 건강을 위해 함께 걷는 것이 중요해요."
+]
 function renderStickChart() {
     //연산해서 넣기
 
@@ -47,7 +68,13 @@ function renderStickChart() {
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
 
-    document.getElementById("resultTotalScore").innerText = totalList[0] + "/" + totalList[1] + "점"
+    document.getElementById("resultTotalScore").innerText = "최종점수는 = " + totalList[0] + "/" + totalList[1] + "점"
+    document.getElementById("circleChartTitle").innerText = datetime + " 의 소비"
+
+    let sum = 0;
+    Object.values(transactionData.result).forEach(e=> sum = sum + e);
+    const randomValue = Math.floor(Math.random() * contentString.length);
+    document.getElementById("recommendTextArea").innerText = contentString[randomValue];
 }
 
 
@@ -117,6 +144,7 @@ async function getMyPayPattern() {
     } else {
         // fetch
         console.log(transactionData);
+        console.log(datetime);
         //동그란바 렌더링
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
@@ -147,6 +175,23 @@ async function getMyPayPattern() {
                 cutoutPercentage: 80,
             },
         });
+        document.getElementById("myPieChartLegend").innerHTML =
+            '<div class="mt-4 text-center small">'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-primary"></i> '
+            + '음식'
+            + '</span> '
+            + '<span class="mr-2"> '
+            + '<i class="fas fa-circle text-success"></i> 커피 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-info"></i> 교통 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-danger"></i> 옷 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-warning"></i> 병원 </span>'
+            + '</div>'
+            + '</div>'
+
 
 
     }

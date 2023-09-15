@@ -205,6 +205,7 @@ async function getDataFromResultPagination() {
 
                 var options = {
                     dataSource: paginationData.data,
+                    pageSize: 4,
                     callback: function (response, pagination) {
                         window.console && console.log(response, pagination);
 

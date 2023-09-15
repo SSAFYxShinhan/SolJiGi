@@ -153,6 +153,7 @@ async function getDataFromResult() {
         memoryList.push(e.memoryScore);
 
         document.getElementById("resultTotalScore").innerText = e.totalScore + " / " + total;
+
         // 막대 바 렌더링
         renderStickChart();
 

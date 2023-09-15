@@ -58,6 +58,7 @@ public class ViewResultController {
 			GameResultResponse gameResultResponse = gameResultService.findById(id);
 			LocalDateTime date = gameResultResponse.getRegistrationDate();
 			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
+			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
 		}
 		return "result/result-game-detail-view";
