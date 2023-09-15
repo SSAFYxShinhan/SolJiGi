@@ -16,10 +16,6 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @RequestMapping("/view")
 public class ViewController {
-	@GetMapping("/main")
-	public String mainTestPage() {
-		return "user/main";
-	}
 
 	@GetMapping("/index")
 	public String mainPage(@AuthenticationPrincipal Principal principal, Model model) {
