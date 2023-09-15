@@ -54,6 +54,9 @@ function renderStickChart() {
     let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
     resultData6.style = `width: ${memoryWidth}%`;
     resultData6Text.innerText = memoryWidth;
+
+
+    document.getElementById("resultTotalScore").innerText = datetime +  " / 종합결과"
 }
 
 

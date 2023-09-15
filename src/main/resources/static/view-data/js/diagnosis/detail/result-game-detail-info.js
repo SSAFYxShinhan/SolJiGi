@@ -68,7 +68,7 @@ function renderStickChart() {
     resultData4.style = `width: ${executiveWidth}%`;
     resultData4Text.innerText = executiveWidth;
 
-    document.getElementById("resultTotalScore").innerText = datetime + "/ 종합 결과"
+    document.getElementById("resultTotalScore").innerText = datetime + " / 종합 결과"
     document.getElementById("circleChartTitle").innerText = "소비 패턴 분석"
 
     let sum = 0;
