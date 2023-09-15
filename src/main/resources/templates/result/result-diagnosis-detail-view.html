@@ -104,6 +104,13 @@ html 이 우선일까 JS 가 우선일까 ?
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="https://www.shinhan.com/hpe/index.jsp">
+                <i class="fas fa-fw fa-address-card"></i>
+                <span>신한은행 고객센터</span>
+            </a>
+        </li>
+
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -230,8 +237,11 @@ html 이 우선일까 JS 가 우선일까 ?
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">김순자씨</span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <span sec:authorize="isAuthenticated()">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${name}"></span>
+                            </span>
+                            <span sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/sign-in}'|">로그인 후 결과를 관리하세요!</span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -451,7 +461,8 @@ html 이 우선일까 JS 가 우선일까 ?
 
 <script th:inline="javascript">
     let transactionData = [[${transactionResponse}]];
-
+    let datetime = [[${datetime}]];
+    let name = [[${name}]];
 </script>
 
 <!-- Bootstrap core JavaScript-->

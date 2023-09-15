@@ -61,14 +61,17 @@ var languageList = [];
 var memoryList = [];
 var totalList = [];
 
+
+const orient = 5;
+const attention = 3;
+const spacetime = 2;
+const executive = 4;
+const language = 4;
+const memory = 4;
+
 function renderStickChart() {
     //연산해서 넣기
-    const orient = 5;
-    const attention = 3;
-    const spacetime = 2;
-    const executive = 4;
-    const language = 4;
-    const memory = 4;
+
 
     console.log(orientList);
 
@@ -126,7 +129,7 @@ async function getDataFromResultPagination() {
         renderStickChart();
 
         // 차트 렌더링
-        new Chart(ctx, {
+        var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeData,
@@ -147,7 +150,7 @@ async function getDataFromResultPagination() {
                 }],
             },
             options: {
-                // event: ['click'],
+                event: ['click'],
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
@@ -193,6 +196,7 @@ async function getDataFromResultPagination() {
                     display: false
                 },
                 tooltips: {
+                    events: ['click'],
                     backgroundColor: "rgb(255,255,255)",
                     bodyFontColor: "#858796",
                     titleMarginBottom: 10,
@@ -216,7 +220,44 @@ async function getDataFromResultPagination() {
             }
         });
 
+        document.getElementById("myAreaChart").onclick = function(evt){
+            var activePoints = myChart.getElementsAtEvent(evt);
 
+            if(activePoints.length > 0)
+            {
+                var clickedElementindex = activePoints[0]["_index"];
+
+                let clickData = json.data[clickedElementindex];
+
+                let orientData = clickData.orientScore;
+                let attentionData = clickData.attentionScore;
+                let spacetimeData = clickData.spacetimeScore;
+                let executiveData = clickData.executiveScore;
+                let languageData = clickData.languageScore;
+                let memoryData = clickData.memoryScore;
+
+                let orientWidth = Math.round((orientData / orient ) * 100);
+                resultData1.style = `width: ${orientWidth}%`;
+                resultData1Text.innerText = orientWidth;
+                let attentionWidth = Math.round((attentionData / attention) * 100);
+                resultData2.style = `width: ${attentionWidth}%`;
+                resultData2Text.innerText = attentionWidth;
+                let spacetimeWidth = Math.round((spacetimeData / spacetime) * 100);
+                resultData3.style = `width: ${spacetimeWidth}%`;
+                resultData3Text.innerText = spacetimeWidth;
+                let executiveWidth = Math.round((executiveData / executive) * 100);
+                resultData4.style = `width: ${executiveWidth}%`;
+                resultData4Text.innerText = executiveWidth;
+                let languageWidth = Math.round((languageData / language) * 100)
+                resultData5.style = `width: ${languageWidth}%`;
+                resultData5Text.innerText = languageWidth;
+                let memoryWidth = Math.round((memoryData / memory) * 100);
+                resultData6.style = `width: ${memoryWidth}%`;
+                resultData6Text.innerText = memoryWidth;
+
+                document.getElementById("clickToChangeDateTime").innerText = clickData.registrationDateString + " 결과";
+            }
+        }
         // 페이징처리 렌더링
         $(function () {
             (function (name) {
@@ -225,6 +266,7 @@ async function getDataFromResultPagination() {
 
                 var options = {
                     dataSource: paginationData.data,
+                    pageSize: 6,
                     callback: function (response, pagination) {
                         window.console && console.log(response, pagination);
 

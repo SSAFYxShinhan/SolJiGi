@@ -3,6 +3,7 @@ package com.ssafy.soljigi.user.view;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
+import com.ssafy.soljigi.user.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,31 @@ public class ViewResultController {
 	private final DiagnosisResultService diagnosisResultService;
 	private final GameResultService gameResultService;
 
+	@GetMapping("/game/result")
+	public String resultGamePage(Model model, Principal principal) {
+		try {
+			model.addAttribute("transActionCount", 0);
+			if (principal != null) {
+				User user = userService.findByUsername(principal.getName());
+				TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
+				model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+				model.addAttribute("name", user.getName());
+			}
+		}catch (Exception e){
+			return "error/404";
+		}
+
+		return "result/result-game-view";
+	}
+
 	@GetMapping("/diagnosis/result")
 	public String resultDiagnosisPage(Model model, Principal principal) {
 		model.addAttribute("transActionCount", 0);
 		if (principal != null) {
-			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
+			User user = userService.findByUsername(principal.getName());
+			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+			model.addAttribute("name",user.getName());
 		}
 
 		return "result/result-diagnosis-view";
@@ -43,10 +63,13 @@ public class ViewResultController {
 	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
+			User user = userService.findByUsername(principal.getName());
 			DiagnosisResultResponse diagnosisResultResponse = diagnosisResultService.findById(id);
 			LocalDateTime date = diagnosisResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
+			Response<?> pattern = userService.findPaymentPatternByTransaction(user.getAccountNumber(), date);
+			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
+			model.addAttribute("name",user.getName());
 		}
 		return "result/result-diagnosis-detail-view";
 	}
@@ -55,23 +78,17 @@ public class ViewResultController {
 	public String resultGameDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
+			User user = userService.findByUsername(principal.getName());
 			GameResultResponse gameResultResponse = gameResultService.findById(id);
 			LocalDateTime date = gameResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
+			Response<?> pattern = userService.findPaymentPatternByTransaction(user.getAccountNumber(), date);
+			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
+			model.addAttribute("name",user.getName());
 		}
 		return "result/result-game-detail-view";
 	}
 
-	@GetMapping("/game/result")
-	public String resultGamePage(Model model, Principal principal) {
-		model.addAttribute("transActionCount", 0);
-		if (principal != null) {
-			TransactionResponse byTransactionCount = userService.findByTransactionCount(principal.getName());
-			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
-		}
 
-		return "result/result-game-view";
-	}
 
 }
