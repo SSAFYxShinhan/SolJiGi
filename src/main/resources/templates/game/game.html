@@ -113,6 +113,7 @@
         };
 
         let flag = false;
+        let gameId = -1;
         $.ajax({
             url: "/game/result",
             headers: {'Content-Type': 'application/json'},
@@ -123,6 +124,7 @@
                 console.log(result);
                 if (result.status === 'success') {
                     flag = true;
+                    gameId = result.data;
                     console.log(result);
                 } else if (result.status === 'fail') {
                     alert('error!!!')
@@ -136,7 +138,7 @@
         });
 
         if (flag) {
-            location.href = "/view/main";   // 게임 결과 페이지로 이동해야 함.
+            location.href = "/view/game/result/" + gameId;   // 게임 결과 페이지로 이동해야 함.
         }
     }
 </script>
