@@ -21,7 +21,9 @@ public enum ErrorCode {
 
 	UNREACHABLE_SERVICE(HttpStatus.UNAUTHORIZED, "접근 방식이 잘못되었습니다."),
 	DIAGNOSIS_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 진단 결과를 찾지 못했습니다."),
-	GAME_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND,"해당 게임 결과를 찾지 못했습니다.");
+	GAME_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 게임 결과를 찾지 못했습니다."),
+	API_KEY_NOT_VALID(HttpStatus.NOT_ACCEPTABLE, "신한은행 API 키가 올바르지 않습니다."),
+	TRANSACTION_ERROR(HttpStatus.FORBIDDEN, "트랜잭션 에러가 발생했습니다.");
 	private HttpStatus httpStatus;
 	private String message;
 }

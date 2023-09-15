@@ -70,6 +70,8 @@ function renderStickChart() {
     const language = 4;
     const memory = 4;
 
+    console.log(orientList);
+
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
     resultData1.style = `width: ${orientWidth}%`;
     resultData1Text.innerText = orientWidth;
@@ -240,7 +242,7 @@ async function getDataFromResultPagination() {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
                             dataHtml += '<th>' + (index + 1) + '</th>';
-                            dataHtml += '<th>' + item.type + '</th>';
+                            dataHtml += '<th>' + item.result + '</th>';
                             dataHtml += '<th>' + item.totalScore + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
                             dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';

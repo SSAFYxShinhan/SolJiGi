@@ -82,11 +82,12 @@ class MemoryDiagnosisQuiz {
         this.form.addEventListener("submit", () => {
             event.preventDefault();
             this.clearTimer();
-            const userAnswer = document.querySelector('.diagnosis-memory__input').value.trim();
+            const userAnswer = document.querySelector('.diagnosis-memory__input').textContent;
             console.log(userAnswer)
             for (let i = 0; i < 5; ++i) {
                 console.log(this.quiz[memory4w1h[i]])
                 if (userAnswer.indexOf(this.quiz[memory4w1h[i]]) > -1) {
+                    console.log(i + "번 키워드 정답!")
                     memoryResult[i] += 2;
                     result[diagnosisType.MEMORY] += 2;
                 }
@@ -121,16 +122,45 @@ class MemoryDiagnosisQuiz {
         <div class="diagnosis-memory__timer">${this.time}</div>
     </div>
     <div class="diagnosis-memory__content">
-    <span class="diagnosis-memory__question">아까 외웠던 문장을 떠올려서 다음 문제들을 풀어주세요.</span>
+    <span class="diagnosis-memory__question">아까 외웠던 문장을 기억나는대로 말해주세요.</span>
     <form class="diagnosis-memory__input-form">`;
         content += `  
-        <input type="text" class="diagnosis-memory__input"/>
-        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">
 <!--        <input type="text" class="diagnosis-memory__input"/>-->
+        <p class="diagnosis-memory__input"> </p> 
+        <div>
+        <button type="button" onclick="sendSpeech();">녹음</button> 
+        <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
+<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">-->
+<!--        <input type="text" class="diagnosis-memory__input"/>--> 
 <!--        <input type="submit" class="diagnosis-memory__submit-btn" value="제출">-->
+    </form>
     </div>
     <div class="diagnosis-memory-quiz__footer"></div>
     `;
         this.container.innerHTML = content;
     }
+}
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
+function sendSpeech() {
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    var diagnosticPara = document.querySelector('.diagnosis-memory__input');
+    recognition.grammars = speechRecognitionList;
+    recognition.lang = 'ko-KR';
+    recognition.interimResults = false; // true: 중간 결과를 반환, false: 최종 결과만 반환
+    recognition.continious = false; // true: 음성인식을 계속해서 수행, false: 음성인식을 한번만 수행
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        var speechResult = event.results[0][0].transcript.toLowerCase();
+        console.log('Speech Result: ' + speechResult);
+        diagnosticPara.textContent = speechResult;
+    }
+
 }
