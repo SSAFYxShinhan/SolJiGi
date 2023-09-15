@@ -32,6 +32,7 @@
     <!-- Template Stylesheet -->
     <link href="../view-data/css/style.css" rel="stylesheet">
     <style>
+
         .custom-btn {
             font-size: 16px;
             padding: 10px 10px;
@@ -100,7 +101,7 @@
                 <div class="card shadow bg-body rounded text-black" style="border-radius: 25px;">
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-2">회원 가입</p>
+                            <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-2" style="color:blue; font-family: 'GongGothicMedium';">회원<span>가입</span> </p>
                             <div class="col-md-10">
 
                                 <div class="d-flex flex-column mb-4">
@@ -187,15 +188,20 @@
                                                         <label class="form-label">생일</label>
                                                     </div>
                                                     <div class="d-flex">
-                                                        <select class="form-select mr-2" id="birthYear" aria-label="Year" style="margin-right: 10px">
-                                                            <option value="">년</option>
-                                                        </select>
-                                                        <select class="form-select mr-2" id="birthMonth" aria-label="Month" style="margin-right: 10px">
-                                                            <option value="">월</option>
-                                                        </select>
-                                                        <select class="form-select" id="birthDay" aria-label="Day">
-                                                            <option value="">일</option>
-                                                        </select>
+                                                        <input type="date"
+                                                               id="date"
+                                                               max="2077-06-20"
+                                                               min="2077-06-05"
+                                                               value="20-06-15">
+<!--                                                        <select class="form-select mr-2" id="birthYear" aria-label="Year" style="margin-right: 10px">-->
+<!--                                                            <option value="">년</option>-->
+<!--                                                        </select>-->
+<!--                                                        <select class="form-select mr-2" id="birthMonth" aria-label="Month" style="margin-right: 10px">-->
+<!--                                                            <option value="">월</option>-->
+<!--                                                        </select>-->
+<!--                                                        <select class="form-select" id="birthDay" aria-label="Day">-->
+<!--                                                            <option value="">일</option>-->
+<!--                                                        </select>-->
                                                     </div>
                                                 </div>
 
@@ -225,7 +231,7 @@
                                 <!-- 학력 영역 시작 -->
                                 <div class="d-flex flex-column mb-4">
                                     <div>
-                                        <i class="fas fa-key fa-lg mb-2 fa-fw"></i>
+                                        <i class="fas fa-graduation-cap fa-lg mb-2 fa-fw"></i>
                                         <label for="education" class="form-label">학력</label>
                                     </div>
                                     <div class="dropdown">
@@ -299,48 +305,7 @@
 
 <!-- Template Javascript -->
 <script src="/view-data/js/main.js"></script>
-<script src="/view-data/js/one-auth.js"></script>
 <script src="/view-data/js/sign-up.js"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const currentYear = new Date().getFullYear();
-        const yearSelect = document.getElementById("birthYear");
-        const monthSelect = document.getElementById("birthMonth");
-        const daySelect = document.getElementById("birthDay");
-
-        // 년도 생성: 1900년부터 현재년도까지
-        for (let i = currentYear; i >= 1900; i--) {
-            let option = document.createElement("option");
-            option.value = i;
-            option.textContent = i;
-            yearSelect.appendChild(option);
-        }
-
-        // 월 생성
-        for (let i = 1; i <= 12; i++) {
-            let option = document.createElement("option");
-            option.value = i;
-            option.textContent = i;
-            monthSelect.appendChild(option);
-        }
-
-        // 월에 따른 일자 갱신
-        monthSelect.addEventListener("change", function() {
-            // 이전에 선택된 일자 옵션들을 제거
-            daySelect.innerHTML = '<option value="">일</option>';
-
-            let selectedYear = yearSelect.value;  // 선택된 년도를 기준으로 설정
-            let daysInMonth = new Date(selectedYear, monthSelect.value, 0).getDate();
-
-            for (let i = 1; i <= daysInMonth; i++) {
-                let option = document.createElement("option");
-                option.value = i;
-                option.textContent = i;
-                daySelect.appendChild(option);
-            }
-        });
-    });
-</script>
 </body>
 </html>
