@@ -1,6 +1,7 @@
 package com.ssafy.soljigi.user.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,6 +61,17 @@ public class User extends BaseEntity implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+
+	public int getAge() {
+		LocalDate now = LocalDate.now();
+		int age = now.getYear() - birthDate.getYear();
+		if (now.getMonthValue() < birthDate.getMonthValue()) {
+			--age;
+		} else if (now.getMonthValue() == birthDate.getMonthValue() &&
+					now.getDayOfMonth() < birthDate.getDayOfMonth())
+			--age;
+		return age;
 	}
 
 	@Override

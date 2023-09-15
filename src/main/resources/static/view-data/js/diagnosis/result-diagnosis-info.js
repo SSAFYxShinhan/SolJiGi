@@ -231,6 +231,7 @@ async function getDataFromResultPagination() {
 
                 let clickData = json.data[clickedElementindex];
 
+
                 let orientData = clickData.orientScore;
                 let attentionData = clickData.attentionScore;
                 let spacetimeData = clickData.spacetimeScore;

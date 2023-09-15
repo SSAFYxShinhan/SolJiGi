@@ -63,13 +63,16 @@ public class NotProd {
 				.username("1")
 				.role(Role.USER)
 				.gender(Gender.MALE)
+					.birthDate(LocalDate.of(1950, 3, 5))
 				.accountNumber("110222999995")
+				.educationLevel(1)
 				.build());
 			userRepository.save(User.builder()
 				.password(passwordEncoder.encode("1"))
 				.username("2")
 				.role(Role.USER)
 				.gender(Gender.MALE)
+				.birthDate(LocalDate.of(1950, 3, 5))
 				.accountNumber("110222999993")
 				.build());
 

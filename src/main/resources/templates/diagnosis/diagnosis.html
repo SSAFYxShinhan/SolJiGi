@@ -15,7 +15,7 @@
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/game/TTS.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
-    <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/jquery-3.6.3.min.js" defer></script>
 
 
     <style>
@@ -24,6 +24,13 @@
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
             font-weight: 100;
             font-style: normal;
+        }
+
+        body {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none
         }
 
         span {
@@ -58,7 +65,7 @@
 </div>
 
 <script th:inline="javascript">
-    let result = [0, 0, 0, 0, 0, 0];
+    let result = [0, 0, 0, 0, 0, 0, 0];
     let scoreField = ['orientScore', 'memoryScore', 'attentionScore', 'spacetimeScore', 'executiveScore', 'languageScore'];
     let memoryResult = [0, 0, 0, 0, 0];
     let mqIdx = 0;
