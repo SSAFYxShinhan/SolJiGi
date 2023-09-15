@@ -33,28 +33,28 @@
     <link href="../view-data/css/style.css" rel="stylesheet">
     <style>
         .custom-btn {
-            font-size: 16px;        /* 글씨 크기 조정 */
-            padding: 10px 10px;     /* 패딩 조정 */
-            height: auto;           /* 자동 높이 */
+            font-size: 16px;
+            padding: 10px 10px;
+            height: auto;
             width: 200px;
         }
 
         #account-number-input, .custom-btn {
-            height: 38px; /* 예: 38px */
+            height: 38px;
             padding: 6px 12px;
         }
 
         .accordion-button {
-            font-weight: bold;      /* 글씨 두껍게 */
-            background-color: #f1f1f1; /* 배경색 변경 */
-            border: none;          /* 테두리 제거 */
-            border-radius: 5px;    /* 모서리 둥글게 */
-            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            font-weight: bold;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
         }
 
         .accordion-button:not(.collapsed) {
-            color: #fff;            /* 활성화 상태 텍스트 색상 */
-            background-color: #007bff; /* 활성화 상태 배경색 */
+            color: #fff;
+            background-color: #007bff;
         }
 
         .accordion-body {
@@ -62,34 +62,32 @@
             padding-right: 0;
         }
 
-        /* 아코디언 클릭 시 색상 변경 */
         .accordion-button:focus {
-            box-shadow: 0 0 0 0.25rem rgba(200, 200, 200, 0.5);  /* 원하는 색상으로 수정 */
+            box-shadow: 0 0 0 0.25rem rgba(200, 200, 200, 0.5);
         }
 
         .accordion-button:not(.collapsed) {
-            color: #333;  /* 글자 색상을 원하는 색상으로 수정 */
-            background-color: #e9ecef;  /* 배경색을 원하는 색상으로 수정 */
+            color: #333;
+            background-color: #e9ecef;
         }
 
-        /* 드롭다운 간격 추가 */
         #birthYear, #birthMonth, #birthDay {
-            margin-bottom: 5px;  /* 원하는 간격으로 조정 */
+            margin-bottom: 5px;
         }
 
         body {
             display: flex;
-            flex-direction: column;  /* 위에서 아래로 내용을 정렬 */
+            flex-direction: column;
             align-items: center;
             background: #eee;
-            min-height: 100vh;  /* 브라우저 높이를 100%로 설정 */
+            min-height: 100vh;
         }
 
         .main-content {
-            flex-grow: 1;  /* 가능한 모든 공간을 차지하도록 설정 */
+            flex-grow: 1;
             display: flex;
-            align-items: center;  /* 중앙에 수직으로 정렬 */
-            justify-content: center;  /* 중앙에 수평으로 정렬 */
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -160,8 +158,13 @@
                                         </h2>
                                         <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
-
-                                                <!-- 성별 영역 시작 -->
+                                                <div class="d-flex flex-column mb-4">
+                                                    <div>
+                                                        <i class="fas fa-envelope fa-lg mb-2 fa-fw"></i>
+                                                        <label for="name" class="form-label">이름</label>
+                                                    </div>
+                                                    <input type="text" id="name" class="form-control" placeholder="성명"/>
+                                                </div>
                                                 <div class="d-flex flex-column mb-4">
                                                     <div>
                                                         <i class="fas fa-user fa-lg mb-2 fa-fw"></i>
@@ -178,9 +181,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- 성별 영역 끝 -->
-
-                                                <!-- 생일 영역 시작 -->
                                                 <div class="d-flex flex-column mb-4">
                                                     <div>
                                                         <i class="fas fa-birthday-cake fa-lg mb-2 fa-fw"></i>
@@ -199,13 +199,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="d-flex flex-column mb-4">
-                                                    <div>
-                                                        <i class="fas fa-envelope fa-lg mb-2 fa-fw"></i>
-                                                        <label for="name" class="form-label">성명</label>
-                                                    </div>
-                                                    <input type="text" id="name" class="form-control" placeholder="성명"/>
-                                                </div>
+
 
                                                 <div class="d-flex flex-column mb-4">
                                                     <div>
