@@ -1,3 +1,4 @@
+
 .choice-quiz__header {
     display: flex;
     flex-direction: column;
@@ -52,7 +53,8 @@
 .choice-quiz__question {
     width: 100%;
     flex-grow: 1;
-    background-color: #127bbd;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
     font-size: 40px;
     display: flex;
     justify-content: center;
@@ -92,7 +94,8 @@
 .short-answer-quiz__question {
     width: 100%;
     flex-grow: 4;
-    background-color: #127bbd;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
     font-size: 40px;
     display: flex;
     flex-direction: column;
@@ -128,6 +131,22 @@
     height: 50px;
     font-size: 30px;
     text-align: center;
+}
+
+.short-answer-quiz__input-box {
+    position: relative;
+    width: 100%;
+}
+
+.short-answer-quiz__record-btn {
+    color: #bd1212;
+    position: absolute;
+    font-size: 30px;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    top: 8px;
+    right: 10px;
 }
 
 .short-answer-quiz__submit-btn {

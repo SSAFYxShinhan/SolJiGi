@@ -15,42 +15,15 @@
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/game/TTS.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
+    <script src="/js/fontawesome.js"></script>
     <script src="/js/jquery-3.6.3.min.js" defer></script>
 
-
     <style>
-        @font-face {
-            font-family: 'GongGothicMedium';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-            font-weight: 100;
-            font-style: normal;
-        }
-
         body {
             -webkit-user-select:none;
             -moz-user-select:none;
             -ms-user-select:none;
-            user-select:none
-        }
-
-        span {
-            font-family: 'GongGothicMedium';
-        }
-
-        * {
-            font-family: 'GongGothicMedium';
-        }
-
-        h1 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h2 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h5 {
-            font-family: 'GongGothicMedium';
+            user-select:none;
         }
     </style>
 </head>
@@ -66,7 +39,6 @@
 
 <script th:inline="javascript">
     let result = [0, 0, 0, 0, 0, 0, 0];
-    let scoreField = ['orientScore', 'memoryScore', 'attentionScore', 'spacetimeScore', 'executiveScore', 'languageScore'];
     let memoryResult = [0, 0, 0, 0, 0];
     let mqIdx = 0;
     const container = document.querySelector('.diagnosisContainer');
@@ -220,45 +192,6 @@
         if (flag) {
             location.href = "/view/main";   // 진단 결과 페이지로 이동해야 함.
         }
-        // const form = document.createElement("form");
-        //
-        // form.setAttribute("charset", "UTF-8");
-        // form.setAttribute("accept-charset", "UTF-8");
-        // form.setAttribute("method", "POST");
-        // form.setAttribute("action", "/diagnosis");
-
-        // orientScore: result[diagnosisType.ORIENT],
-        //     attentionScore: result[diagnosisType.ATTENTION],
-        //     spacetimeScore: result[diagnosisType.SPACETIME],
-        //     executiveScore: result[diagnosisType.EXECUTIVE],
-        //     languageScore: result[diagnosisType.LANGUAGE],
-        //     memoryScore: result[diagnosisType.MEMORY],
-        //
-        //
-        // const input1 = document.createElement("input");
-        // input1.setAttribute("type", "hidden");
-        // input1.setAttribute("name", "userId");
-        // input1.setAttribute("value", 1);
-        // form.appendChild(input1);
-        // const input2 = document.createElement("input");
-        // input2.setAttribute("type", "hidden");
-        // input2.setAttribute("name", "age");
-        // input2.setAttribute("value", 20);
-        // form.appendChild(input2);
-        // const input3 = document.createElement("input");
-        // input3.setAttribute("type", "hidden");
-        // input3.setAttribute("name", "educationLevel");
-        // input3.setAttribute("value", 1);
-        // form.appendChild(input3);
-        // for (let i = 0; i < 6; ++i) {
-        //     const input = document.createElement("input");
-        //     input.setAttribute("type", "hidden");
-        //     input.setAttribute("name", scoreField[i]);
-        //     input.setAttribute("value", result[i]);
-        //     form.appendChild(input);
-        // }
-        // document.body.appendChild(form);
-        // form.submit();
     }
 </script>
 
