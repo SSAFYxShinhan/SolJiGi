@@ -44,10 +44,13 @@ public class ViewResultController {
 	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
+			User user = userService.findByUsername(principal.getName());
 			DiagnosisResultResponse diagnosisResultResponse = diagnosisResultService.findById(id);
 			LocalDateTime date = diagnosisResultResponse.getRegistrationDate();
-			Response<?> pattern = userService.findPaymentPatternByTransaction(principal.getName(), date);
+			Response<?> pattern = userService.findPaymentPatternByTransaction(user.getAccountNumber(), date);
+			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
+			model.addAttribute("name",user.getName());
 		}
 		return "result/result-diagnosis-detail-view";
 	}
