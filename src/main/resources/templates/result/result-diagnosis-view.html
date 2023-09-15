@@ -101,6 +101,12 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="https://www.shinhan.com/hpe/index.jsp">
+                <i class="fas fa-fw fa-address-card"></i>
+                <span>신한은행 고객센터</span>
+            </a>
+        </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -129,7 +135,7 @@
                 <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <h2 class="text-white fw-bold m-0">진단검사결과</h2>
+                        <h2 class="text fw-bold m-0">진단검사결과</h2>
 
                     </div>
                 </form>
@@ -228,10 +234,10 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
                                             오늘의 한마디
                                         </div>
-                                        <div id="todayMention" class="h5 mb-0 font-weight-bold text-gray-800">
+                                        <div id="todayMention" class="h4  mb-0 font-weight-bold text-gray-800">
                                             한마디를 넣어주세요
                                         </div>
 
@@ -250,13 +256,13 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
                                             이번 주 결제건 수
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <div id="weekPayCount"
-                                                     class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                     class="h4 mb-0 mr-3 font-weight-bold text-gray-800">
                                                     <span th:text="${transActionCount}"></span>
                                                     <span> 번</span>
                                                 </div>
@@ -279,10 +285,10 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        <div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
                                             이번달 검사는?
                                         </div>
-                                        <div id="monthIsDone" class="h5 mb-0 font-weight-bold text-gray-800">완료</div>
+                                        <div id="monthIsDone" class="h4 mb-0 font-weight-bold text-gray-800">완료</div>
 
                                     </div>
                                     <div class="col-auto">
@@ -305,7 +311,7 @@
                             <!-- Card Header - Dropdown -->
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">치매진단검사 결과</h6>
+                                <h2 class="m-0 font-weight-bold text-primary">치매진단검사 결과</h2>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -342,7 +348,7 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 id="clickToChangeDateTime" class="m-0 font-weight-bold text-primary">가장 최근의 결과</h6>
+                                <h2 id="clickToChangeDateTime" class="m-0 font-weight-bold text-primary">가장 최근의 결과</h2>
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">지남력
@@ -401,7 +407,7 @@
                         <!-- Illustrations -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">결과 종합</h6>
+                                <h2 class="m-0 font-weight-bold text-primary">결과 종합</h2>
                             </div>
 
                             <div class="data-container"></div>
