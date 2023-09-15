@@ -1,192 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="utf-8">
-    <title>솔직이</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
-            rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
-    <link href="../view-data/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../view-data/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../view-data/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="../view-data/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="../view-data/css/style.css" rel="stylesheet">
-
-    <style>
-        @font-face {
-            font-family: 'GongGothicMedium';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-            font-weight: 100;
-            font-style: normal;
-        }
-
-        * {
-            font-family: 'GongGothicMedium';
-        }
-
-        h1 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h2 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h5 {
-            font-family: 'GongGothicMedium';
-        }
-
-        .navbar-nav .nav-link {
-            font-size: xx-large;
-        }
-
-        .carousel-item img {
-            width: auto;
-            object-fit: cover;
-        }
-
-        #header-carousel {
-            margin-bottom: 100px;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-y: hidden;
-        }
-
-        main {
-            flex: 1;
-            overflow-y: auto;
-            min-height: calc(100vh - 200px);
-        }
-
-        .copyright {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f5f5f5;
-            color: #666;
-        }
-
-        /* 버튼의 크기와 글씨 조절 */
-        .carousel-item .btn {
-            font-size: 30px;
-            padding: 30px 50px;
-        }
-
-        .copyright a {
-            color: #666;
-        }
-    </style>
+<head th:replace="~{/user/fragments/header :: headerFragment}">
 </head>
 
 <body>
-<!-- Spinner Start -->
-<div id="spinner"
-     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-</div>
-<!-- Spinner End -->
-
-<!-- Topbar Start -->
-<div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
-    <div class="container py-3">
-        <div class="d-flex align-items-center">
-            <a th:href="@{/view/index}">
-                <h2 class="text-white fw-bold m-0">솔직이</h2>
-            </a>
-            <!--            <div class="ms-auto d-flex align-items-center">-->
-            <!--                <span sec:authorize="isAuthenticated()">-->
-            <!--                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>-->
-
-            <!--                </span>-->
-            <!--                <a th:type="button" sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/one-auth}'|">한번의-->
-            <!--                    계좌인증으로 시작하기</a>-->
-
-
-            <!--                <div class="ms-3 d-flex">-->
-
-            <!--                    <span sec:authorize="isAuthenticated()">-->
-            <!--                        <a type="button" class="btn btn-light text-primary rounded-pill"-->
-            <!--                           th:href="@{/view/logout}">로그아웃</a>-->
-            <!--                    </span>-->
-            <!--                </div>-->
-
-            <!--            </div>-->
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
-
-
-<!-- Navbar Start -->
-<div class="container-fluid bg-white sticky-top">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
-            <a href="index.html" class="navbar-brand d-lg-none">
-                <h1 class="fw-bold m-0 ">솔직이</h1>
-            </a>
-            <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a href="#index" class="nav-link active">홈</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#service" class="nav-link">서비스 소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#project" class="nav-link">개발 과정</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-auto d-flex">
-                    <li sec:authorize="isAnonymous()" class="nav-item">
-                        <a th:href="@{/view/sign-in}" class="nav-link">로그인</a>
-                    </li>
-                    <li sec:authorize="isAnonymous()" class="nav-item">
-                        <a th:href="@{/view/sign-up}" class="nav-link">회원가입</a>
-                    </li>
-                    <!-- 로그인된 상태에서 보여줄 항목 -->
-                    <li sec:authorize="isAuthenticated()" class="nav-item">
-                        <a th:href="@{/view/logout}" class="nav-link">로그아웃</a>
-                    </li>
-                    <li sec:authorize="isAuthenticated()" class="nav-item">
-                        <a th:href="@{/view/game/result}" class="nav-link">내정보</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- Navbar End -->
+<!-- navbar Start -->
+<div th:replace="~{/user/fragments/navbar :: navFragment}"></div>
 
 
 <!-- Carousel Start -->
@@ -266,22 +86,9 @@
 <!--<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i-->
 <!--        class="bi bi-arrow-up"></i></a>-->
 
-<!-- Copyright Start -->
-<div class="container-fluid copyright py-4 fixed-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <a class="fw-medium" href="#">SOLJIGI</a>, All Right Reserved.
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a class="fw-medium" href="">SOLJIGI</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Copyright End -->
 
+<!-- Copyright End -->
+<footer th:replace="~{/user/fragments/footer :: footerFragment}"></footer>
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
