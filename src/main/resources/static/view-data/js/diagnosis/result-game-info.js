@@ -106,7 +106,7 @@ async function getDataFromResultPagination() {
         }
 
         // 차트 렌더링
-        new Chart(ctx, {
+        var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeData,
@@ -127,7 +127,8 @@ async function getDataFromResultPagination() {
                 }],
             },
             options: {
-                // event: ['click'],
+
+                event: ['click'],
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
@@ -173,6 +174,7 @@ async function getDataFromResultPagination() {
                     display: false
                 },
                 tooltips: {
+                    events: ['click'],
                     backgroundColor: "rgb(255,255,255)",
                     bodyFontColor: "#858796",
                     titleMarginBottom: 10,
@@ -195,6 +197,40 @@ async function getDataFromResultPagination() {
                 }
             }
         });
+
+        document.getElementById("myAreaChart").onclick = function(evt){
+            var activePoints = myChart.getElementsAtEvent(evt);
+
+            if(activePoints.length > 0)
+            {
+                var clickedElementindex = activePoints[0]["_index"];
+
+                let clickData = json.data[clickedElementindex];
+                let fin = clickData.financeCorrect;
+                let finTotal = clickData.financeTotal;
+                let trans = clickData.transactionCorrect;
+                let transTotal = clickData.transactionTotal;
+                let match = clickData.matchCardCorrect;
+                let matchTotal = clickData.matchCardTotal;
+                let same = clickData.samePictureCorrect;
+                let sameTotal = clickData.samePictureTotal;
+
+                let orientWidth = Math.round((fin / finTotal) * 100);
+                resultData1.style = `width: ${orientWidth}%`;
+                resultData1Text.innerText = orientWidth;
+                let attentionWidth = Math.round((trans / transTotal) * 100);
+                resultData2.style = `width: ${attentionWidth}%`;
+                resultData2Text.innerText = attentionWidth;
+                let spacetimeWidth = Math.round((match / matchTotal) * 100);
+                resultData3.style = `width: ${spacetimeWidth}%`;
+                resultData3Text.innerText = spacetimeWidth;
+                let executiveWidth = Math.round((same / sameTotal) * 100);
+                resultData4.style = `width: ${executiveWidth}%`;
+                resultData4Text.innerText = executiveWidth;
+
+                document.getElementById("clickToChangeDateTime").innerText = clickData.registrationDateString + " 결과";
+            }
+        }
 
 
         // 페이징처리 렌더링
