@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -59,6 +59,18 @@
         h5 {
             font-family: 'GongGothicMedium';
         }
+
+        .copyright {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            color: #666;
+        }
+
+        .copyright a {
+            color: #666;
+        }
     </style>
 </head>
 
@@ -70,17 +82,31 @@
 </div>
 <!-- Spinner End -->
 
-
 <!-- Topbar Start -->
-<div class="container-fluid bg-primary text-white d-none d-lg-flex">
+<div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
     <div class="container py-3">
         <div class="d-flex align-items-center">
             <a th:href="@{/view/index}">
                 <h2 class="text-white fw-bold m-0">솔직이</h2>
             </a>
-            <div class="ms-auto d-flex align-items-center">
-                <div>시큐리티 적용해줘야됨</div>
-            </div>
+            <!--            <div class="ms-auto d-flex align-items-center">-->
+            <!--                <span sec:authorize="isAuthenticated()">-->
+            <!--                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>-->
+
+            <!--                </span>-->
+            <!--                <a th:type="button" sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/one-auth}'|">한번의-->
+            <!--                    계좌인증으로 시작하기</a>-->
+
+
+            <!--                <div class="ms-3 d-flex">-->
+
+            <!--                    <span sec:authorize="isAuthenticated()">-->
+            <!--                        <a type="button" class="btn btn-light text-primary rounded-pill"-->
+            <!--                           th:href="@{/view/logout}">로그아웃</a>-->
+            <!--                    </span>-->
+            <!--                </div>-->
+
+            <!--            </div>-->
         </div>
     </div>
 </div>
@@ -99,26 +125,33 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a href="#index" class="nav-item nav-link active">Home</a>
-                    <!--                    &lt;!&ndash; <a href="#about" class="nav-item nav-link">About</a>-->
-                    <a href="#service" class="nav-item nav-link">Services</a>
-                    <a href="#project" class="nav-item nav-link">Projects</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-                            <a href="feature.html" class="dropdown-item">Features</a>
-                            <a href="team.html" class="dropdown-item">Our Team</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="quote.html" class="dropdown-item">Quotation</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class="ms-auto d-none d-lg-block">
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-3">Get A Quote</a>
-                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="#index" class="nav-link active">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#service" class="nav-link">서비스 소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#project" class="nav-link">개발 과정</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto d-flex">
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a th:href="@{/view/sign-in}" class="nav-link">로그인</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a th:href="@{/view/sign-up}" class="nav-link">회원가입</a>
+                    </li>
+                    <!-- 로그인된 상태에서 보여줄 항목 -->
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a th:href="@{/view/logout}" class="nav-link">로그아웃</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a th:href="@{/view/game/result}" class="nav-link">내정보</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>
@@ -126,49 +159,40 @@
 <!-- Navbar End -->
 
 
+
 <!-- Carousel Start -->
 <a name="index"></a>
-<div class="container-fluid px-0">
-    <div class="card bg-dark text-white">
-        <img class="card" style="opacity: 0.65;" src="/view-data/img/one-auth-img.jpg"
-             alt="Card image">
-        <div class="card-img-overlay">
-            <div class="d-flex flex-column">
-                <div class="col-sm-12">
-                    <p class="display-1 mb-4 animated slideInRight" style="color: white;">한 번의
-                        <span style="background-color: blue;"
-                              class="display-1  mb-4 animated slideInRight">계좌 인증으로</span></p>
-                </div>
-                <div class="col-sm-12">
-                    <p class="fs-4 text-white animated slideInRight">쉽고 재미있는
-                        <strong style="background-color: blue;">치매 진단 / 치매 예방 게임</strong>
-                    </p>
-                </div>
-                <div class="d-flex row justify-content-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="account-number-input" name="accountNumber" class="form-control"
-                               placeholder="계좌번호를 입력하세요."
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <button class="btn btn-primary" id="one-auth-btn">1원인증서비스</button>
-                        <button class="btn btn-light" id="getTransAction">입금내역 확인하기</button>
+<div class="container-fluid px-0 mt-5">
+    <div class="d-flex justify-content-center align-items-center" style="height: 80vh;"> <!-- 화면의 80% 높이만큼 중앙 정렬을 위한 스타일 추가 -->
+        <div class="card shadow-lg" style="max-width: 600px;">
+            <div class="card-body">
+                <p class="display-5 mb-4 text-center">
+                    <span>계좌 인증으로 시작하기</span>
+                </p>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="input-group mb-3 d-flex flex-column">
+                        <div class="mb-2">
+                            <i class="fas fa-key fa-lg fa-fw"></i>
+                            <label for="account-number-input" class="form-label">계좌번호</label>
+                        </div>
+                        <div class="d-flex">
+                            <div class="input-group mb-2 mr-2">
+                                <input type="text" id="account-number-input" name="accountNumber"
+                                       class="form-control"
+                                       placeholder="계좌번호 입력"
+                                       aria-label="Recipient's username"
+                                       aria-describedby="basic-addon2">
+                                <button class="btn btn-primary custom-btn" id="one-auth-btn" style="width: 100px">확인</button>
+                            </div>
+                            <button class="btn btn-primary custom-btn mb-2" id="getTransAction" style="width: 200px">입금 내역 조회</button>
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="text" id="configKey" class="form-control" placeholder="4자리 입력">
+                            <button class="btn btn-primary ml-2" id="accountConfig">인증하기</button>
+                        </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="configKey" class="form-control">
-                        <button class="btn btn-primary" id="accountConfig">인증하기</button>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button id="quizBtn" class="btn btn-outline-primary" disabled
-                            th:onclick="|location.href='@{/game}'|"> 퀴즈게임
-                    </button>
-                    <button id="diagnosisBtn" class="btn btn-outline-primary" disabled
-                            th:onclick="|location.href='@{/diagnosis}'|">진단검사
-                    </button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -181,22 +205,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <a class="fw-medium text-light" href="#">Your Site Name</a>, All Right Reserved.
+                &copy; <a class="fw-medium" href="#">SOLJIGI</a>, All Right Reserved.
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a class="fw-medium text-light" href="https://htmlcodex.com">HTML Codex</a>
-                Distributed By <a class="fw-medium text-light" href="https://themewagon.com">ThemeWagon</a>
+                Designed By <a class="fw-medium" href="">SOLJIGI</a>
             </div>
         </div>
     </div>
 </div>
 <!-- Copyright End -->
 
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
-        class="bi bi-arrow-up"></i></a>
 
 
 <!-- JavaScript Libraries -->
