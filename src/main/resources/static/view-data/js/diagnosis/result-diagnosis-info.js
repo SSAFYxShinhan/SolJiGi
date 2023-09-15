@@ -73,7 +73,7 @@ function renderStickChart() {
     //연산해서 넣기
 
 
-    console.log(orientList);
+
 
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
     resultData1.style = `width: ${orientWidth}%`;
@@ -104,12 +104,14 @@ async function getDataFromResultPagination() {
     if (response.ok) {
         let json = await response.json();
         let paginationData = json;
-        console.log(json);
         totalList = json.data.map(e => e.totalScore);
+        let size = Math.min(30, totalList.length);
+        totalList = totalList.slice(0,size);
         let timeData = json.data.map(e => e.registrationDateString);
+        timeData = timeData.slice(0,size);
+
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
-            console.log(currentDateTime)
             if (currentDateTime) {
                 document.getElementById("monthIsDone").innerText = "완료"
             } else {
@@ -268,7 +270,7 @@ async function getDataFromResultPagination() {
                     dataSource: paginationData.data,
                     pageSize: 6,
                     callback: function (response, pagination) {
-                        window.console && console.log(response, pagination);
+                        // window.console && console.log(response, pagination);
 
                         var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
                         dataHtml += '<thead>';
@@ -283,7 +285,7 @@ async function getDataFromResultPagination() {
                         $.each(response, function (index, item) {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
-                            dataHtml += '<th>' + (index + 1) + '</th>';
+                            dataHtml += '<th>' + (Number(index+1) + ((pagination.pageNumber-1) * pagination.pageSize)) + '</th>';
                             dataHtml += '<th>' + item.result + '</th>';
                             dataHtml += '<th>' + item.totalScore + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
@@ -301,12 +303,12 @@ async function getDataFromResultPagination() {
                 //$.pagination(container, options);
 
                 container.addHook('beforeInit', function () {
-                    window.console && console.log('beforeInit...');
+                    // window.console && console.log('beforeInit...');
                 });
                 container.pagination(options);
 
                 container.addHook('beforePageOnClick', function () {
-                    window.console && console.log('beforePageOnClick...');
+                    // window.console && console.log('beforePageOnClick...');
                     //return false
                 });
             })('demo1');
