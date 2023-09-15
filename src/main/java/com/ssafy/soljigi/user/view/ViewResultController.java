@@ -59,7 +59,7 @@ public class ViewResultController {
 		return "result/result-diagnosis-view";
 	}
 
-	@GetMapping("/diagnosis/result/detail/{id}")
+	@GetMapping("/diagnosis/result/{id}")
 	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
@@ -74,7 +74,7 @@ public class ViewResultController {
 		return "result/result-diagnosis-detail-view";
 	}
 
-	@GetMapping("/game/result/detail/{id}")
+	@GetMapping("/game/result/{id}")
 	public String resultGameDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
