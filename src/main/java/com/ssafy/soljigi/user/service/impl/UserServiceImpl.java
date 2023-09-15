@@ -33,10 +33,7 @@ public class UserServiceImpl implements UserService {
 			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 	}
 
-	public TransactionResponse findByTransactionCount(String username) {
-		User user = userRepository.findByUsername(username)
-			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
-		String accountNumber = user.getAccountNumber();
+	public TransactionResponse findByTransactionCount(String accountNumber) {
 
 		// API 요청에 필요한 데이터 설정 (예시에 따른 요청 본문)
 		Map<String, Object> requestBody = new HashMap<>();

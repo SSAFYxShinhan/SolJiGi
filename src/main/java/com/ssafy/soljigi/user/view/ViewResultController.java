@@ -31,12 +31,16 @@ public class ViewResultController {
 
 	@GetMapping("/game/result")
 	public String resultGamePage(Model model, Principal principal) {
-		model.addAttribute("transActionCount", 0);
-		if (principal != null) {
-			User user = userService.findByUsername(principal.getName());
-			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
-			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
-			model.addAttribute("name",user.getName());
+		try {
+			model.addAttribute("transActionCount", 0);
+			if (principal != null) {
+				User user = userService.findByUsername(principal.getName());
+				TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
+				model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
+				model.addAttribute("name", user.getName());
+			}
+		}catch (Exception e){
+			return "error/404";
 		}
 
 		return "result/result-game-view";
