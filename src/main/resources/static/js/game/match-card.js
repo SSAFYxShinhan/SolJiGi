@@ -23,6 +23,7 @@ class MatchCardGame {
         this.C = col;
         this.timeLimit = timeLimit;
         this.time = timeLimit;
+        this.showTime = this.CARD_SHOW_TIME;
         this.gameMap = null;
         this.imgSrcMap = null;
         this.cardOpened = null;
@@ -46,12 +47,14 @@ class MatchCardGame {
         this.start();
     }
 
-    countDown(timerElement, time, countDownTimer) {
+    countDown(timerElement, time, countDownTimer, game) {
         timerElement.innerText = time;
         if (time === 0) {
             if (countDownTimer != null) {
                 clearInterval(countDownTimer);
             }
+            if (game === false)
+                return;
             this.container.innerHTML = '';
             alert('시간 초과입니다!');
             this.gameState = state.READY;
@@ -68,6 +71,18 @@ class MatchCardGame {
     start() {
         this.gameState = state.GAME;
         this.cardAllOpen();
+
+        const timer = setInterval(
+            () =>
+                this.countDown(
+                    this.timerElement,
+                    --this.showTime,
+                    timer,
+                    false
+                ),
+            1000
+        );
+
         setTimeout(() => {
             this.cardAllHide();
             this.timer = this.timeLimit;
@@ -165,9 +180,13 @@ class MatchCardGame {
 
         const headerElement = document.createElement('div');
         headerElement.classList.add('match-card__header');
+        const problemElement = document.createElement('div');
+        problemElement.classList.add('match-card__problem');
+        problemElement.innerText = '그림의 짝을 외우세요';
         const timerElement = document.createElement('div');
         timerElement.classList.add('match-card__timer');
-        timerElement.innerText = '그림의 짝을 외우세요';
+        timerElement.innerText = this.CARD_SHOW_TIME;
+        headerElement.appendChild(problemElement);
         headerElement.appendChild(timerElement);
 
         const contentElement = document.createElement('div');
