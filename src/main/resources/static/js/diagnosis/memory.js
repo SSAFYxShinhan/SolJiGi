@@ -126,13 +126,14 @@ class MemoryDiagnosisQuiz {
     <form class="diagnosis-memory__input-form">`;
         content += `  
 <!--        <input type="text" class="diagnosis-memory__input"/>-->
-        <p class="diagnosis-memory__input"> </p> 
-        <div>
-        <button type="button" onclick="sendSpeech();">녹음</button> 
+
+        <div class="short-answer-quiz__input-box">
+          <p class="diagnosis-memory__input"></p> 
+          <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeech();">
+            <i class="fas fa-solid fa-microphone"></i>
+          </button> 
+        </div>
         <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
-<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">-->
-<!--        <input type="text" class="diagnosis-memory__input"/>--> 
-<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="제출">-->
     </form>
     </div>
     <div class="diagnosis-memory-quiz__footer"></div>
