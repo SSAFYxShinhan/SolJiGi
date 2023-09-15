@@ -74,10 +74,10 @@ public class NotProd {
 				.build());
 
 			for (int i = 0; i < 50; i++) {
-				int v1 = (int)Math.random() * 5;
-				int v2 = (int)Math.random() * 5;
-				int v3 = (int)Math.random() * 5;
-				int v4 = (int)Math.random() * 5;
+				int v1 = (int)(Math.random() * 5);
+				int v2 = (int)(Math.random() * 5);
+				int v3 = (int)(Math.random() * 5);
+				int v4 = (int)(Math.random() * 5);
 				int v5 = (int)(Math.random() * 5);
 				int v6 = (int)(Math.random() * 5);
 
@@ -135,7 +135,8 @@ public class NotProd {
 						.deposit(deposit)
 						.withdraw(0)
 						.inOutType(1)
-						.content("content..." + i + "-" + j)
+						// .content("content..." + i + "-" + j)
+						.content("content" + i)
 						.summary("summary..." + i + "-" + j)
 						.branchName("branch..." + i + "-" + j)
 						.build());

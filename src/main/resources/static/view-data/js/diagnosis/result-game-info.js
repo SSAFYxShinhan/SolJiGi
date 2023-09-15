@@ -94,14 +94,14 @@ async function getDataFromResultPagination() {
             }
         }
         json.data.map(e => {
-            orientList.push(e.choiceCorrect, e.choiceTotal);
+            orientList.push(e.financeCorrect, e.financeTotal);
             attentionList.push(e.matchCardCorrect, e.matchCardTotal);
             spacetimeList.push(e.samePictureCorrect, e.samePictureTotal);
-            executiveList.push(e.shortAnsCorrect,e.shortAnsTotal);
+            executiveList.push(e.transactionCorrect, e.transactionTotal);
         });
 
-        if(orientList.length >= 1){
-        // 막대 바 렌더링
+        if (orientList.length >= 1) {
+            // 막대 바 렌더링
             renderStickChart();
         }
 
