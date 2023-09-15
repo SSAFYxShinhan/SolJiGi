@@ -23,6 +23,14 @@ public class DiagnosisResultService {
 	private final UserRepository userRepository;
 	private final DiagnosisResultRepository resultRepository;
 
+	private static final int[][] score = {
+			{ 0,  0,  0,  0,  0,  0,  0},
+			{ 0,  0,  0, 22, 24, 26, 27},
+			{ 0,  0, 16, 21, 23, 25, 26},
+			{ 0, 13, 14, 19, 22, 22, 25},
+			{ 0, 10, 11, 16, 18, 20, 22},
+	};
+
 	public List<DiagnosisResultResponse> findAll(Long userId) {
 		return resultRepository.findAllByUserId(userId).stream()
 			.map(DiagnosisResultResponse::of)
@@ -50,24 +58,41 @@ public class DiagnosisResultService {
 		User user = userRepository.findById(userId)
 			.orElseThrow(IllegalArgumentException::new);
 
-		// age, educationLevel -> userEntity getter로 변경 예정
+		int age = user.getAge();
+		int educationLevel = user.getEducationLevel();
+
 		DiagnosisResult savedId = resultRepository.save(DiagnosisResult.builder()
 			.user(user)
-			.age(10)
-			.educationLevel(user.getEducationLevel())
+			.age(age)
+			.educationLevel(educationLevel)
 			.orientScore(saveRequest.getOrientScore())
 			.attentionScore(saveRequest.getAttentionScore())
 			.spacetimeScore(saveRequest.getSpacetimeScore())
 			.executiveScore(saveRequest.getExecutiveScore())
 			.languageScore(saveRequest.getLanguageScore())
 			.memoryScore(saveRequest.getMemoryScore())
-			.type(getDiagnosticResult(saveRequest))
+			.type(getDiagnosticResult(age, educationLevel, saveRequest))
 			.build());
 		return savedId.getId();
 	}
 
-	private DiagnosisResultType getDiagnosticResult(DiagnosisResultSaveRequest saveRequest) {
-		// 진단 검사에 따른 결과값 반환 예정
-		return DiagnosisResultType.NORMAL;
+	private DiagnosisResultType getDiagnosticResult(int age, int educationLevel, DiagnosisResultSaveRequest saveRequest) {
+		int ageRange = getAgeRange(age);
+		int total = saveRequest.getOrientScore() + saveRequest.getAttentionScore() + saveRequest.getSpacetimeScore()
+					+ saveRequest.getMemoryScore() + saveRequest.getLanguageScore() + saveRequest.getExecutiveScore();
+		return score[ageRange][educationLevel] > total ? DiagnosisResultType.DOUBT : DiagnosisResultType.NORMAL;
+	}
+
+	private static int getAgeRange(int age) {
+		if (50 <= age && age < 60)
+			return 1;
+		else if (60 <= age && age < 70)
+			return 2;
+		else if (70 <= age && age < 80)
+			return 3;
+		else if (80 <= age)
+			return 4;
+		else
+			return 0;
 	}
 }
