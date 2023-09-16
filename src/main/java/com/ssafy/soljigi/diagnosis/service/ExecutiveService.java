@@ -21,19 +21,17 @@ public class ExecutiveService {
 		"빈칸", "https://lh3.googleusercontent.com/fife/AKsag4PI5PEeB-zSwNuxBLErNo3JEYNQxxF16QdLfbTAUH5gvmicNmwGhM1y-ynjuu3-wYWEZy7T6aIQzyZqb7eEkl_kMV37UaJOadvpqW_ss2J7jyTp07MAub2zoHUk6yp6rN1NyIwmoIbMscP6v_-OLXzkU1pMfg4BwKipLpiHZEH5bUPsF65JZVtqeHTsSXbyuMT2acqSHm0ASKH4yPVgNdMlXGRMUS7-MeTbOBHsKpqeDIOGTtSnGE9NG4cW9BQmLcpvKOaukqX6TzffAgbMDccMOZXp4GsyYtMcMQdJMHH1EbNStgN2dfNson0HWQyyc2wpqftVG9FghpJAo_QV5oXnpL3PutGrXgs7aaEw-RhgzxCSv0B927ORf-W1UfItrL3l4LZAnTEDR3Q-THqcYyF45KGkK7IgEb9lglQncOSHpeoj6ssbnwRehnkzoKNkt9njEgw4IRFQ-Gxn1_q4Qkk31ydfLtWezrYcDXS2JBk8uYoDXJMITwfTNuRxc857RvO-REjmyKrvXPoaPQgCGJOECZVkZrtuZpwlEYnIhp9HBazFH5hVoR3bvFd_v053_BvvWNK4IIKLpjCiwoTpGZUIQHrC1DuaaY17yVaW7DlTFaHH8_ov-yUNjDLum7d5ylryezi_3gxuDjha5AUxN42p2M9Mihac6JgNFDMJAbOH653dLXYIewIc5cTylpa_fcfKG0m8Xy00022XFH_AfY8kCjF3VHeUDnFaBBKyLsToh8aOZKEaf-VXs9MkaITPyYovPiPOgApa5HE2NKmtoC9gJNs-7us2dSABZQLs_YipKC2E4H3oCrEleO9zDH-S_sQYz5aDDgGUawshED82bdH4-lv1af23XzhHoUi46go_Hbs5Orsqq2ZHWwQtIbOZrLvdbR1pUdV3pZ4xENRvA6Hk4pADus4_0fRbPoqU1ptNexKNKOTzc90Du5d4I9RSrTxJEsJmkOr7q1qBSXIDMnfOU0G0I8U9P0laQUJcirAYDmmnSmYogY_kM_AXcy-YQda9VqXuwXIBlfw86MFbxf5pH67w2XIcA0Tou8qK371WnPr_Wy-5RP3zwFfpYx21FZFGQERI3e3sVRLoTUKzc5xoKfJQMuVlCURN2PHSQy-ufTUgNQN6QYFwvcRF7LMZhBdfdA9AC2ML3fnvKBxstvyIY8wlOsFcvEecreLnFAW3SH3hGgMX0a7zIrjIQ0iEwrObDxgnTFPCSbckpUqnFyQtIXw3Zmqg_0UNHlP-9puKJMIieU8FBBez0YEBVVX0ckgGtHoYbWYwbmeOYc2hNPIZqJuh14-R3DeiUog_hN004Qk7wWLT6XQ6TF1e6MnGmhdoHK_eZNTzVbbYPvNn7zqpwrYFESe_piFMrbj624xTj4Lk-jKhBvOE9x7F8Za25cnjxQ9EYPLtkBj-rhqcMzXArvZ--a0hjX1_TR9qbTWVK6c_L5KSB2YX3j5DhZyU-ai2HwbkgEbgYv4hajtstPPKd7cF39t_97c5duE9XQrR3r0zYXiHKJegfwuxPxN-HJAnA6zLTIq8Xp5__thl=w1444-h963"
 	);
 
-	static final String[] shapeName = new String[] {"동그라미","네모","세모", "마름모", "별"};
+	static final String[] shapeName = new String[] {"동그라미", "네모" , "세모", "마름모", "별"};
 
 	public List<DiagnosisQuizDto> getFluencyQuiz() {
 		List<DiagnosisQuizDto> quizzes = new ArrayList<>(1);
 		quizzes.add(generateFluencyQuiz());
-
 		return quizzes;
 	}
 
-	public List<DiagnosisQuizDto> getVisualQuiz() {
+	public List<DiagnosisQuizDto> getVirtualQuiz() {
 		List<DiagnosisQuizDto> quizzes = new ArrayList<>(1);
 		quizzes.add(generateVirtualQuiz());
-
 		return quizzes;
 	}
 
@@ -53,34 +51,44 @@ public class ExecutiveService {
 
 	private DiagnosisQuizDto generateVirtualQuiz() {
 		Random random = new Random();
-		List<String> pattern = new ArrayList<>(Arrays.asList(shapeName));
-		Collections.shuffle(pattern);
-		pattern.remove(4);
+		List<String> shapes = new ArrayList<>(Arrays.asList(shapeName));
+		Collections.shuffle(shapes);
+		System.out.println(shapes);
+		shapes = shapes.subList(0, 4);
+		System.out.println(shapes);
+		List<String> pattern = new ArrayList<>(shapes.subList(0, 3));
 		int answer = random.nextInt(3);
 
-		List<String> pattern2 = new ArrayList<>();
-		for (int i=0; i<3; i++) {
-			if(i == answer) {
-				pattern2.add("빈칸");
+		String answerShape = "";
+		for (int i = 0; i < 3; i++) {
+			if (i == answer) {
+				pattern.add("빈칸");
+				answerShape = pattern.get(i);
 			} else {
-				pattern2.add(pattern.get(i));
+				pattern.add(pattern.get(i));
 			}
 		}
 
+		StringBuilder question = new StringBuilder();
+		question.append("다음 빈칸에 들어올 그림은 무엇 일까요? <br><br><div>");
+		for (int i = 0; i < 6; ++i) {
+			question.append("<img src=\"")
+					.append(map.get(pattern.get(i)))
+					.append("\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">");
+		}
+		question.append("</div>");
+
+		System.out.println(shapes);
+		List<String> choice = shapes.stream().map(imgSrc ->
+				"<img src=\"" + map.get(imgSrc)
+				+ "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">").toList();
+		System.out.println(shapes);
+		System.out.println(choice);
 		return DiagnosisQuizDto.builder()
 			.type(DiagnosisType.EXECUTIVE_VIRTUAL)
-			.question("다음 빈칸에 들어올 그림은 무엇 일까요? <br><br>"
-			+ "<div>"
-			+ "<img src=\"" + map.get(pattern.get(0)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern.get(1)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern.get(2)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(0)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(1)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(2)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+"</div><br>")
-			.choice(pattern)
-			.choiceAnswer(answer)
-			.shortAnswer(Collections.singletonList(pattern.get(answer)))
+			.question(question.toString())
+			.choice(choice)
+			.choiceAnswer(shapes.indexOf(answerShape))
 			.build();
 	}
 }
