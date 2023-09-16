@@ -20,19 +20,20 @@ class FluentQuizGame {
             // const answer = document.querySelector('.short-answer-quiz__input').value.trim().replaceAll(' ', '');
             const answer = document.querySelector('.short-answer-quiz__input').textContent;
 
-            const fruits = answer.split(" ");
+            const fruits = new Set(answer.trim().split(" "));
+            console.log(fruits);
             let countAnswer =0;
             console.log("answer = " + answer);
-            fruits.forEach(value1 => {
-                if (value1 === "") {
-                    value1 = " ";
+            fruits.forEach(fruit => {
+                if (fruit === "") {
+                    fruit = " ";
                 }
-                FruitList.forEach(value2 => {
-                    if(value1 === value2) {
-                        console.log("정답 count : " + value1);
-                        countAnswer++;
-                    }
-                })
+
+                if (FruitSet.has(fruit)) {
+                    console.log("정답 count : " + fruit);
+                    countAnswer++;
+                }
+
             });
 
             if (this.dType !== -1) {
@@ -44,7 +45,7 @@ class FluentQuizGame {
             }
 
             this.container.innerHTML = "";
-            this.nextEvent();
+            // this.nextEvent();
         });
     }
 
@@ -76,9 +77,12 @@ class FluentQuizGame {
     <span class="short-answer-quiz__question">${this.quiz.question}</span>  
     <form class="short-answer-quiz__input-form">`;
         content += ` 
-    <p class="short-answer-quiz__input"> </p> 
-    <div>
-    <button type="button" onclick="sendSpeechFluent();">녹음</button> 
+    <div class="short-answer-quiz__input-box">
+          <p class="short-answer-quiz__input"></p> 
+          <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeechFluent();">
+            <i class="fas fa-solid fa-microphone"></i>
+          </button> 
+    </div>     
     <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
     </div>
@@ -112,7 +116,7 @@ function sendSpeechFluent() {
 
 }
 
-const FruitList = [
+const FruitSet = new Set([
     "석류",
     "감",
     "포도",
@@ -224,4 +228,5 @@ const FruitList = [
     "피망",
     "배추",
     "생강",
-];
+]);
+Object.freeze(FruitSet);

@@ -58,42 +58,26 @@ public class NotProd {
 
 			//			user 생성
 
-			userRepository.save(User.builder()
-				.password(passwordEncoder.encode("1"))
-				.username("1")
-					.name("name")
-					.address(new Address("tltl","dododo","cococo"))
-					.phoneNumber("123123124")
-				.role(Role.USER)
-				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
-				.accountNumber("110222999995")
-				.educationLevel(1)
-				.build());
-			userRepository.save(User.builder()
-				.password(passwordEncoder.encode("1"))
-				.username("2")
-				.role(Role.USER)
-				.gender(Gender.MALE)
-				.birthDate(LocalDate.of(1950, 3, 5))
-				.accountNumber("110222999993")
-				.build());
+//			userRepository.save(User.builder()
+//				.password(passwordEncoder.encode("1"))
+//				.username("1")
+//					.name("name")
+//					.address(new Address("tltl","dododo","cococo"))
+//					.phoneNumber("123123124")
+//				.role(Role.USER)
+//				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
+//				.accountNumber("110222999995")
+//				.educationLevel(1)
+//				.build());
+//			userRepository.save(User.builder()
+//				.password(passwordEncoder.encode("1"))
+//				.username("2")
+//				.role(Role.USER)
+//				.gender(Gender.MALE)
+//				.birthDate(LocalDate.of(1950, 3, 5))
+//				.accountNumber("110222999993")
+//				.build());
 
-			// List<Transaction> transactions = Arrays.asList(
-			// 	Transaction.builder()
-			// 		.transactionDate("20230318")
-			// 		.transactionTime("154602")
-			// 		.summary("이자")
-			// 		.withdraw(1)
-			// 		.deposit(1404)
-			// 		.content("백화점")
-			// 		.balance(331551)
-			// 		.inOutType(1)
-			// 		.branchName("영업부")
-			// 		.account(account)
-			// 		.build()
-			// );
-			// 거래 내역 저장
-			//transactionRecordRepository.saveAll(transactions);
 		}
 	}
 }
