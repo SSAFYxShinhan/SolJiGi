@@ -20,8 +20,7 @@
 </head>
 
 <body>
-
-<div class="container">
+<div class="container" style="position: relative">
     <div class="login-content">
         <div style="margin-bottom: 1rem;">
             <h2 class="title" style="color:#0e31f7">계좌 <span style="color:#0e0f1a">인증</span></h2>
@@ -51,9 +50,17 @@
 
             <div style="margin-top: 1rem;">
                 <button type="button" class="btn" id="one-auth-btn" style="margin-bottom: 1rem;">인증 번호 보내기</button>
-                <button type="button" class="btn" id="getTransAction">입금 내역 조회</button>
                 <button type="button" class="btn" id="accountConfig" style="margin-top: 1rem;">인증하기</button>
             </div>
+            <button type="button" class="btn" id="getTransAction"
+                    style="position: absolute;
+                           width: 100px;
+                           right: 10px;
+                           bottom: 10px;
+                           font-size: 0.7rem;
+                           padding: 5px 10px;
+                           color: #a0a0a0;
+                           background-image: linear-gradient(to right, #f0f0f0, #f0f0f0, #f0f0f0);">입금 내역 조회</button>
             <h5><span style="color:blue">S</span>HINHAN X <span style="color:blue">S</span>SAFY</h5>
         </form>
     </div>
