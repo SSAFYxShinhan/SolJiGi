@@ -8,7 +8,7 @@ class ShortAnswerQuizGame {
     this.result = result;
     this.nextEvent = nextEvent;
     this.dType = dType;
-    console.log(dType)
+
 
     this.countDownTimer = setInterval(
       () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -20,7 +20,7 @@ class ShortAnswerQuizGame {
       this.clearTimer();
       // const answer = document.querySelector('.short-answer-quiz__input').value.trim().replaceAll(' ', '');
       const answer = document.querySelector('.short-answer-quiz__input').textContent;
-      console.log(answer)
+      console.log("정답 : " + answer)
 
       if (this.quiz.shortAnswer.indexOf(answer) > -1) {
           if (this.dType !== -1) {
@@ -67,9 +67,10 @@ class ShortAnswerQuizGame {
     content += ` 
     <div class="short-answer-quiz__input-box">
       <p class="short-answer-quiz__input"></p> 
-      <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeech();">
+      <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeechShort();">
         <i class="fas fa-solid fa-microphone"></i>
       </button> 
+      <button type="button" class ="stopSpeech";">정지</button> 
     </div>
     <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
@@ -84,7 +85,7 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-function sendSpeech() {
+function sendSpeechShort() {
   var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   var diagnosticPara = document.querySelector('.short-answer-quiz__input');
@@ -96,9 +97,22 @@ function sendSpeech() {
 
   recognition.start();
 
+  // 중간에 중지 버튼을 눌렀을 때 음성 인식 중지
+  document.querySelector('.stopSpeech').addEventListener('click', function() {
+    recognition.stop();
+  });
+
+  // 일정 시간 후 음성 인식 중지
+  setTimeout(function() {
+    recognition.stop();
+  }, 60000); // 60초(1분) 후에 중지하도록 설정 (원하는 시간으로 변경 가능)
+
   recognition.onresult = function(event) {
     var speechResult = event.results[0][0].transcript.toLowerCase();
     console.log('Speech Result: ' + speechResult);
+    // 공백 제거 logic
+    speechResult.replace(" ","");
+    speechResult.replace("-","");
     diagnosticPara.textContent = speechResult;
   }
 
