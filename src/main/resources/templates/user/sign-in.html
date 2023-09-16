@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Animated Login Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/login/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Try Toast Alert !! -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+<!-- <img class="wave" src="img/sol2.png" style="background-color: ;"> -->
+<div class="container">
+    <div class="login-content">
+        <div style="margin-bottom: 2rem;">
+            <h2 class="title" style="color:#0e31f7">SOL <span style="color:#0e0f1a">JIGI</span></h2>
+        </div>
+        <form>
+            <img style="margin-bottom: 3rem;" src="/css/login/sol1.png">
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="div ">
+                    <h5>아이디</h5>
+                    <input id="username" type="text" class="input">
+                </div>
+            </div>
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                    <h5>비밀번호</h5>
+                    <input id="password" type="password" class="input">
+                </div>
+            </div>
+            <a th:href="@{/view/sign-up}">비밀번호를 잊어버리셨나요?</a>
+            <button id="login-btn" type="button" class="btn" value="Login">시작하기</button>
+            <h5><span style="color:blue">S</span>HINHAN X <span style="color:blue">S</span>SAFY</h5>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script type="text/javascript" src="/js/login/login.js"></script>
+<script src="/view-data/js/login.js"></script>
+
+
+</body>
+</html>

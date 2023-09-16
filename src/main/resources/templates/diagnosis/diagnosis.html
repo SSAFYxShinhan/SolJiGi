@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/game/match-card.css" rel="stylesheet">
+    <link href="/css/game/same-picture.css" rel="stylesheet">
+    <link href="/css/game/quiz.css" rel="stylesheet">
+    <link href="/css/diagnosis/diagnosis.css" rel="stylesheet">
+    <script src="/js/script.js"></script>
+    <script src="/js/game/match-card.js"></script>
+    <script src="/js/game/same-picture.js"></script>
+    <script src="/js/game/choice-quiz.js"></script>
+    <script src="/js/game/short-answer-quiz.js"></script>
+    <script src="/js/game/TTS.js"></script>
+    <script src="/js/diagnosis/memory.js"></script>
+    <script src="/js/diagnosis/fluent.js"></script>
+    <script src="/js/diagnosis/attention.js"></script>
+    <script src="/js/fontawesome.js"></script>
+    <script src="/js/jquery-3.6.3.min.js" defer></script>
+
+    <style>
+        body {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="layout">
+    <div class="game-form">
+        <div class="diagnosisContainer">
+
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    let result = [0, 0, 0, 0, 0, 0, 0];
+    let memoryResult = [0, 0, 0, 0, 0];
+    let mqIdx = 0;
+    const container = document.querySelector('.diagnosisContainer');
+    const questions = generateDiagnosis();
+
+
+    let gameIdx = 0;
+    setVoiceList();
+    updateView(questions[gameIdx++]);
+
+    function updateView(diagnosis) {
+        if (diagnosis.type === diagnosisType.ORIENT) {
+            window.speechSynthesis.cancel();
+            speech(diagnosis.quiz["question"]);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.ORIENT);
+        } else if (diagnosis.type === diagnosisType.MEMORY) {
+            if (diagnosis.step === 'READ') {
+                window.speechSynthesis.cancel();
+                speech("다음 문장을 읽고 기억해 주세요");
+                currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
+            } else if (diagnosis.step === 'ANSWER') {
+                window.speechSynthesis.cancel();
+                speech("아까 외웠던 문장을 기억나는대로 말해주세요.");
+                console.log(1)
+                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
+                mqIdx = 0;
+            } else if (diagnosis.step === 'CHOICE') {
+                window.speechSynthesis.cancel();
+                speech(diagnosis.quiz["question"]);
+                if (memoryResult[mqIdx++] === 2) {
+                    nextGame();
+                } else {
+                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 20, result, nextGame, diagnosisType.MEMORY);
+                }
+            }
+        } else if (diagnosis.type === diagnosisType.ATTENTION) {
+            window.speechSynthesis.cancel();
+            speech(diagnosis.quiz["question"]);
+            speech(diagnosis.quiz["choice"][0]);
+            speech("다시 읽어 드리겠습니다.");
+            speech(diagnosis.quiz["choice"][0]);
+            currGame = new AttentionQuizGame(container, diagnosis.quiz, 30, result, nextGame, diagnosisType.ATTENTION);
+        } else if (diagnosis === gameType.SAME_PICTURE) {
+            window.speechSynthesis.cancel();
+            currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
+        } else if (diagnosis === gameType.MATCH_CARD) {
+            window.speechSynthesis.cancel();
+            currGame = new MatchCardGame(container, 4, 4, 40, result, nextGame, true);
+        } else if (diagnosis.type === diagnosisType.LANGUAGE) {
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("다음 이미지를 보고 무엇인지 말해보세요");
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.LANGUAGE);
+        } else if (diagnosis.type === diagnosisType.EXECUTIVE_VIRTUAL) {
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
+            currGame = new ChoiceQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL, true);
+        } else if (diagnosis.type === diagnosisType.EXECUTIVE_FLUENT) {
+            console.log(diagnosis);
+            window.speechSynthesis.cancel();
+            speech("과일 이름을 생각나는대로 최대한 많이 말해주세요.");
+            currGame = new FluentQuizGame(container, diagnosis.quiz, 40, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
+            }
+    }
+
+    function generateDiagnosis() {
+        const questions = []
+        const orientQuiz = [[${orient}]];
+        const memory4w1h = [[${memory4w1h}]];
+        const memoryQuiz = [[${memory}]];
+        const attentionQuiz = [[${attention}]];
+        const spacetimeQuiz = [[${spacetime}]];
+        const executiveFluencyQuiz = [[${executiveFluency}]];
+        const executiveVirtualQuiz = [[${executiveVirtual}]];
+        const languageQuiz = [[${language}]];
+
+        orientQuiz.forEach(diagnosisQuiz => {
+            questions.push({type: diagnosisType.ORIENT, quiz: diagnosisQuiz})
+        });
+        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        attentionQuiz.forEach(diagnosisQuiz => {
+            if (diagnosisQuiz !== null)
+                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
+        })
+        questions.push(gameType.MATCH_CARD);
+        questions.push(gameType.SAME_PICTURE);
+        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        memoryQuiz.forEach(diagnosisQuiz => {
+            questions.push({type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz})
+        });
+        languageQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
+        })
+        executiveVirtualQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
+        })
+        executiveFluencyQuiz.forEach(diagnosisQuiz => {
+            questions.push( {type: diagnosisType.EXECUTIVE_FLUENT, quiz: diagnosisQuiz});
+        })
+        return questions;
+    }
+
+    function nextGame() {
+        if (gameIdx === questions.length) {
+            container.innerHTML = `결과 화면 이동 로직 작성 ${result}`;
+            saveResult();
+            return;
+        }
+        currGame = null;
+        updateView(questions[gameIdx++]);
+    }
+
+    function saveResult() {
+        const obj = {
+            userId: 1,
+            age: 20,            // 나이, 학력 필드 삭제 예정
+            educationLevel: 1,
+            orientScore: result[diagnosisType.ORIENT],
+            attentionScore: result[diagnosisType.ATTENTION],
+            spacetimeScore: result[diagnosisType.SPACETIME],
+            executiveScore: result[diagnosisType.EXECUTIVE_FLUENT] + result[diagnosisType.EXECUTIVE_VIRTUAL],
+            languageScore: result[diagnosisType.LANGUAGE],
+            memoryScore: result[diagnosisType.MEMORY],
+        };
+
+        let flag = false;
+        let diagnosisId = -1;
+        $.ajax({
+            url: "/diagnosis",
+            headers: {'Content-Type': 'application/json'},
+            type: 'post',
+            async: false,
+            data: JSON.stringify(obj),
+            success: function (result) {
+                console.log(result);
+                if (result.status === 'success') {
+                    flag = true;
+                    diagnosisId = result.data.id;
+                    console.log(result);
+                } else if (result.status === 'fail') {
+                    alert('error!!!')
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("error!!!");
+            }
+        });
+
+        if (flag) {
+            location.href = "/view/diagnosis/result/" + diagnosisId;   // 진단 결과 페이지로 이동해야 함.
+        }
+    }
+</script>
+
+</body>
+</html>

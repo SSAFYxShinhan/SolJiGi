@@ -1,0 +1,69 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+.match-card__header {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80px;
+}
+
+.match-card__problem {
+    font-size: 30px;
+}
+
+.match-card__timer {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+.match-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 8;
+}
+
+.match-card__content-row {
+    display: flex;
+}
+
+.match-card__flip {
+    width: 120px;
+    height: 120px;
+    perspective: 600px;
+    margin: 5px;
+}
+
+.match-card__card {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.4s;
+    transform-style: preserve-3d;
+}
+
+.match-card__card-front,
+.match-card__card-back {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.match-card__card-front {
+    transform: rotateY(180deg);
+}
+
+.match-card__card-open .match-card__card {
+    transform: rotateY(180deg);
+}

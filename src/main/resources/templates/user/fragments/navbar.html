@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<nav  th:fragment="navFragment">
+<div id="spinner"
+     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+</div>
+<!-- Spinner End -->
+
+<!-- Topbar Start -->
+  <div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
+    <div class="container py-3">
+      <div class="d-flex align-items-center justify-content-between"> <!-- align the content to space between -->
+
+        <!-- Logo -->
+        <a th:href="@{/view/index}" class="sidebar-brand d-flex">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">
+            <h2 class="text-white fw-bold m-0">솔직이 <sup>신한은행</sup></h2>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+      <!--            <div class="ms-auto d-flex align-items-center">-->
+      <!--                <span sec:authorize="isAuthenticated()">-->
+      <!--                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>-->
+
+      <!--                </span>-->
+      <!--                <a th:type="button" sec:authorize="isAnonymous()" th:onclick="|location.href='@{/view/one-auth}'|">한번의-->
+      <!--                    계좌인증으로 시작하기</a>-->
+
+
+      <!--                <div class="ms-3 d-flex">-->
+
+      <!--                    <span sec:authorize="isAuthenticated()">-->
+      <!--                        <a type="button" class="btn btn-light text-primary rounded-pill"-->
+      <!--                           th:href="@{/view/logout}">로그아웃</a>-->
+      <!--                    </span>-->
+      <!--                </div>-->
+
+      <!--            </div>-->
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid bg-white sticky-top">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
+      <a href="index.html" class="navbar-brand d-lg-none">
+        <h1 class="fw-bold m-0 ">솔직이</h1>
+      </a>
+      <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="#index" class="nav-link active">홈</a>
+          </li>
+          <li class="nav-item">
+            <a href="#service" class="nav-link">서비스 소개</a>
+          </li>
+          <li class="nav-item">
+            <a href="#project" class="nav-link">개발 과정</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto d-flex">
+          <li sec:authorize="isAnonymous()" class="nav-item">
+            <a th:href="@{/view/sign-in}" class="nav-link">로그인</a>
+          </li>
+          <li sec:authorize="isAnonymous()" class="nav-item">
+            <a th:href="@{/view/sign-up}" class="nav-link">회원가입</a>
+          </li>
+          <!-- 로그인된 상태에서 보여줄 항목 -->
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/view/logout}" class="nav-link">로그아웃</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/view/my-page}" class="nav-link">내정보</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+</nav>
+<!-- Navbar End -->
+</body>
+</html>

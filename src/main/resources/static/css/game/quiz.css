@@ -1,0 +1,201 @@
+
+.choice-quiz__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 40px;
+    height: 80px;
+}
+
+.choice-quiz__timer {
+    margin: 20px 10px;
+}
+
+.choice-quiz__content {
+    width: 90%;
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-quiz__btn-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.choice-quiz__text-choice {
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 55px;
+    transition: all 200ms ease-in;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-quiz__picture-btn-container {
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice {
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 200px;
+    transition: all 200ms ease-in;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice > img {
+    margin: 0;
+}
+
+.choice-quiz__choice:hover {
+    background-color: #0876bb;
+}
+
+.choice-quiz__question {
+    width: 100%;
+    flex-grow: 1;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.choice-quiz__footer {
+    flex-grow: 1;
+}
+
+.short-answer-quiz__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 40px;
+    height: 80px;
+}
+
+.short-answer-quiz__timer {
+    margin: 20px 10px;
+}
+
+.short-answer-quiz__content {
+    width: 90%;
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.short-answer-quiz__question {
+    width: 100%;
+    flex-grow: 4;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.short-answer-quiz__question > span {
+    font-size: 50px;
+    margin-top: 20px;
+    font-weight: 700;
+    color: darkred;
+}
+
+.short-answer-quiz__input-form {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.short-answer-quiz__input {
+    line-height: 50px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.short-answer-quiz__input-box {
+    position: relative;
+    width: 100%;
+}
+
+.short-answer-quiz__record-btn {
+    color: #bd1212;
+    position: absolute;
+    font-size: 30px;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    top: 8px;
+    right: 10px;
+}
+
+.short-answer-quiz__submit-btn {
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 25px 10px 10px 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 55px;
+    transition: all 200ms ease-in;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.short-answer-quiz__submit-btn:hover {
+    background-color: #0876bb;
+}
+
+.short-answer-quiz__footer {
+    flex-grow: 1;
+}

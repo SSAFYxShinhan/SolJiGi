@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{/user/fragments/header :: headerFragment}">
+</head>
+
+<body>
+<!-- navbar Start -->
+<div th:replace="~{/user/fragments/navbar :: navFragment}"></div>
+
+
+<!-- Carousel Start -->
+<main class="d-flex align-items-center justify-content-center">
+    <div class="container-fluid px-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" style="opacity: 60%" src="../view-data/img/main_pic1.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="flex text-start my-5">
+                                    <p class="fs-4 text-white animated slideInRight">신한은행
+                                        <strong style="background-color: blue;">치매 예방 서비스</strong>
+                                    </p>
+                                    <div class="flex">
+                                        <p class="display-1 mb-4 animated slideInRight" style="color: blue;">하나의 계좌
+                                            <span
+                                                    style="color: white;"
+                                                    class="display-1  mb-4 animated slideInRight">로,</span></p>
+
+                                    </div>
+                                    <div class="flex">
+                                        <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
+                                            <span class="display-1 text-white animated slideInRight">까지</span></p>
+                                    </div>
+                                    <a sec:authorize="isAnonymous()" onclick="anonyGame()" th:href="@{/view/one-auth}"
+                                       class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
+                                        시작하기</a>
+                                    <a sec:authorize="isAuthenticated()" th:href="@{/game}"
+                                       class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
+                                        시작하기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-70" style="opacity: 60%" src="../view-data/img/main_pic6.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="flex text-end">
+                                <p class="fs-4 text-white animated slideInLeft">신한은행<strong style="background-color: blue;">치매 진단 서비스</strong>
+                                </p>
+                                <div>
+                                    <p class="display-1 animated slideInLeft" style="color: blue;">진단서비스</p>
+                                </div>
+                                <div>
+                                    <p class="display-1 text-white animated slideInLeft">제공</p>
+                                </div>
+                                <a sec:authorize="isAnonymous()" onclick="anonyDiagnosis()" th:href="@{/view/one-auth}"
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
+                                    시작하기</a>
+                                <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
+                                   class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
+                                    시작하기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</main>
+<!-- Carousel End -->
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../view-data/lib/wow/wow.min.js"></script>
+<script src="../view-data/lib/easing/easing.min.js"></script>
+<script src="../view-data/lib/waypoints/waypoints.min.js"></script>
+<script src="../view-data/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../view-data/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="../view-data/js/main.js"></script>
+
+<script>
+    function anonyDiagnosis() {
+        localStorage.setItem("choice","d");
+    }
+
+    function anonyGame(){
+        localStorage.setItem("choice","g");
+    }
+</script>
+</body>
+
+</html>

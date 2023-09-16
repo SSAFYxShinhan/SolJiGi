@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="~{/result/fragments/header :: headerFragment}">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="~{/result/fragments/sidetapbar :: sideFragment ('1')} "></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Tap bar area-->
+            <div th:replace="~{/result/fragments/sidetapbar :: tapbarFragment('치매 진단 검사') }"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div th:replace="~{/result/fragments/diagnosis_container :: containerFragment }"></div>
+            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="~{/result/fragments/footer :: modalFragment}"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/view-data/vendor/jquery/jquery.min.js"></script>
+    <script src="/view-data/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/view-data/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/view-data/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/view-data/vendor/chart.js/chart.min.js"></script>
+
+    <!-- Pagination js-->
+    <script src="/view-data/vendor/pagination/pagination.min.js"></script>
+
+
+    <!-- Page level custom scripts -->
+    <script src="/view-data/js/diagnosis/result-diagnosis-info.js"></script>
+
+    <!--    <script src="../../view-data/js/demo/chart-pie-demo.js"></script>-->
+    <script th:inline="javascript">
+        let name = [[${name}]];
+    </script>
+</div>
+</body>
+
+</html>

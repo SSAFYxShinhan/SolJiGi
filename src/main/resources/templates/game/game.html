@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Game</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/game/match-card.css" rel="stylesheet">
+    <link href="/css/game/same-picture.css" rel="stylesheet">
+    <link href="/css/game/quiz.css" rel="stylesheet">
+    <script src="/js/script.js"></script>
+    <script src="/js/game/match-card.js"></script>
+    <script src="/js/game/same-picture.js"></script>
+    <script src="/js/game/choice-quiz.js"></script>
+    <script src="/js/game/short-answer-quiz.js"></script>
+    <script src="/js/jquery-3.6.3.min.js"></script>
+    <style>
+        body {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+    </style>
+</head>
+<body>
+<div id="layout">
+    <div class="game-form">
+        <div class="gameContainer">
+
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    let result = [0, 0, 0, 0];
+    let gameTotal = [0, 0, 0, 0];
+    const container = document.querySelector('.gameContainer');
+    const questions = [[${quizzes}]];
+    const matchCardCount = [[${matchCard}]];
+    const samePictureCount = [[${samePicture}]];
+    const matchCardGameLevel = [[2, 2, 5], [2, 3, 6], [2, 4, 10], [3, 4, 15], [4, 4, 20],];
+    const samePictureGameLevel = [[2, 2, 5], [3, 3, 7], [3, 4, 8], [4, 4, 10], [4, 5, 10], [4, 6, 15], [5, 5, 15],];
+    let currGame;
+
+    for (let i = 0; i < matchCardCount; ++i)
+        questions.push(gameType.MATCH_CARD);
+    for (let i = 0; i < samePictureCount; ++i)
+        questions.push(gameType.SAME_PICTURE);
+
+    shuffle(questions);
+
+    let gameIdx = 0;
+    updateView(questions[gameIdx++]);
+
+    function updateView(game) {
+        let r, c, time;
+        if (game === gameType.MATCH_CARD) {
+            const random = rand(0, matchCardGameLevel.length);
+            r = matchCardGameLevel[random][0];
+            c = matchCardGameLevel[random][1];
+            time = matchCardGameLevel[random][2];
+            currGame = new MatchCardGame(container, r, c, time, result, nextGame);
+            ++gameTotal[gameType.MATCH_CARD];
+        } else if (game === gameType.SAME_PICTURE) {
+            const random = rand(0, samePictureGameLevel.length);
+            r = samePictureGameLevel[random][0];
+            c = samePictureGameLevel[random][1];
+            time = samePictureGameLevel[random][2];
+            currGame = new SamePictureGame(container, r, c, time, result, nextGame);
+            ++gameTotal[gameType.SAME_PICTURE];
+        } else if (game.type === 'FINANCE') {
+            currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
+            ++gameTotal[gameType.FINANCE];
+        } else if (game.type === 'TRANSACTION') {
+            currGame = new ChoiceQuizGame(container, game, 10, result, nextGame);
+            ++gameTotal[gameType.TRANSACTION];
+        }
+    }
+
+    function nextGame() {
+        if (gameIdx === questions.length) {
+            container.innerHTML = ``;
+            saveResult();
+            return;
+        }
+        currGame = null;
+        updateView(questions[gameIdx++]);
+    }
+
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function saveResult() {
+        const obj = {
+            userId: 1,
+            financeCorrect: result[gameType.FINANCE],
+            financeTotal: gameTotal[gameType.FINANCE],
+            transactionCorrect: result[gameType.TRANSACTION],
+            transactionTotal: gameTotal[gameType.TRANSACTION],
+            matchCardCorrect: result[gameType.MATCH_CARD],
+            matchCardTotal: gameTotal[gameType.MATCH_CARD],
+            samePictureCorrect: result[gameType.SAME_PICTURE],
+            samePictureTotal: gameTotal[gameType.SAME_PICTURE],
+        };
+
+        let flag = false;
+        let gameId = -1;
+        $.ajax({
+            url: "/game/result",
+            headers: {'Content-Type': 'application/json'},
+            type: 'post',
+            async: false,
+            data: JSON.stringify(obj),
+            success: function (result) {
+                console.log(result);
+                if (result.status === 'success') {
+                    flag = true;
+                    gameId = result.data;
+                    console.log(result);
+                } else if (result.status === 'fail') {
+                    alert('error!!!')
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("error!!!");
+            }
+        });
+
+        if (flag) {
+            location.href = "/view/game/result/" + gameId;   // 게임 결과 페이지로 이동해야 함.
+        }
+    }
+</script>
+
+</body>
+
+</html>
