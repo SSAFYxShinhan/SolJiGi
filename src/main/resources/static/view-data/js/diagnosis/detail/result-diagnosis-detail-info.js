@@ -134,7 +134,22 @@ async function getMyPayPattern() {
                 cutoutPercentage: 80,
             },
         });
-
+        document.getElementById("myPieChartLegend").innerHTML =
+            '<div class="mt-4 text-center small">'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-primary"></i> '
+            + '음식'
+            + '</span> '
+            + '<span class="mr-2"> '
+            + '<i class="fas fa-circle text-success"></i> 커피 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-info"></i> 교통 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-danger"></i> 옷 </span>'
+            + '<span class="mr-2">'
+            + '<i class="fas fa-circle text-warning"></i> 병원 </span>'
+            + '</div>'
+            + '</div>'
 
     }
 }
