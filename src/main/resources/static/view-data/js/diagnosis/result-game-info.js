@@ -104,6 +104,7 @@ async function getDataFromResultPagination() {
 
         let timeData = ascdata.map(e => e.registrationDateString);
 
+
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
             if (currentDateTime) {
@@ -112,6 +113,7 @@ async function getDataFromResultPagination() {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
         } else {
+
             document.getElementById("monthIsDone").innerText = "미완료"
         }
         ascdata.map(e => {
@@ -265,6 +267,7 @@ async function getDataFromResultPagination() {
 
                 var options = {
                     dataSource: descData,
+
                     pageSize: 4,
                     callback: function (response, pagination) {
                         var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';

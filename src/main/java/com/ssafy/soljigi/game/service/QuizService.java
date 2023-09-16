@@ -51,23 +51,11 @@ public class QuizService {
 
 		}
 		Collections.shuffle(quizzes);
-		log.info("quizz={}", quizzes);
 		return quizzes;
 	}
 
 	private List<Quiz> getFinanceQuizzes(int count) {
 		return quizRepository.findRandomQuizzes(count);
-	}
-
-	////////////////////// ?
-	@Transactional
-	public void saveQuiz(QuizDto quizDto) {
-		Quiz quiz = Quiz.builder()
-			.question(quizDto.getQuestion())
-			.choice(quizDto.getChoice())
-			.choiceAnswer(quizDto.getChoiceAnswer())
-			.build();
-		quizRepository.save(quiz);
 	}
 
 	private List<QuizDto> makeTransactionQuizzes(Long userId, int count) throws BaseException {

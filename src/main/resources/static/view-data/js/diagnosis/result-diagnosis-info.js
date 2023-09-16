@@ -125,6 +125,7 @@ async function getDataFromResultPagination() {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
         } else {
+
             document.getElementById("monthIsDone").innerText = "미완료"
         }
         ascdata.map(e => {
@@ -239,6 +240,8 @@ async function getDataFromResultPagination() {
                 console.log(clickedElementindex);
                 let clickData = ascdata[clickedElementindex];
 
+         
+
 
                 let orientData = clickData.orientScore;
                 let attentionData = clickData.attentionScore;
@@ -249,6 +252,7 @@ async function getDataFromResultPagination() {
 
 
                 let orientWidth = Math.round((orientData / orient) * 100);
+
                 resultData1.style = `width: ${orientWidth}%`;
                 resultData1Text.innerText = orientWidth;
                 let attentionWidth = Math.round((attentionData / attention) * 100);
@@ -280,6 +284,7 @@ async function getDataFromResultPagination() {
 
                 var options = {
                     dataSource: descData,
+
                     pageSize: 6,
                     callback: function (response, pagination) {
                         // window.console && console.log(response, pagination);
