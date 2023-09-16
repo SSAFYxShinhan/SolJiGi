@@ -131,7 +131,6 @@ class MemoryDiagnosisQuiz {
           <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeechMemory();">
             <i class="fas fa-solid fa-microphone"></i>
           </button> 
-          <button type="button" class ="stopSpeech";">정지</button> 
         </div>
         <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
     </form>
@@ -158,11 +157,6 @@ function sendSpeechMemory() {
 
     recognition.start();
 
-    // 중간에 중지 버튼을 눌렀을 때 음성 인식 중지
-    document.querySelector('.stopSpeech').addEventListener('click', function() {
-        recognition.stop();
-    });
-
     // 일정 시간 후 음성 인식 중지
     setTimeout(function() {
         recognition.stop();
@@ -172,5 +166,6 @@ function sendSpeechMemory() {
         var speechResult = event.results[0][0].transcript.toLowerCase();
         console.log('Speech Result: ' + speechResult);
         diagnosticPara.textContent += (" " + speechResult);
+
     }
 }

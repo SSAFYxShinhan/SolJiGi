@@ -70,7 +70,6 @@ class ShortAnswerQuizGame {
       <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeechShort();">
         <i class="fas fa-solid fa-microphone"></i>
       </button> 
-      <button type="button" class ="stopSpeech";">정지</button> 
     </div>
     <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
@@ -96,11 +95,6 @@ function sendSpeechShort() {
   recognition.maxAlternatives = 1;
 
   recognition.start();
-
-  // 중간에 중지 버튼을 눌렀을 때 음성 인식 중지
-  document.querySelector('.stopSpeech').addEventListener('click', function() {
-    recognition.stop();
-  });
 
   // 일정 시간 후 음성 인식 중지
   setTimeout(function() {
