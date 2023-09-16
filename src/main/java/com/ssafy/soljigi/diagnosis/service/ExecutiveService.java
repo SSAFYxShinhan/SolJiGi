@@ -53,9 +53,7 @@ public class ExecutiveService {
 		Random random = new Random();
 		List<String> shapes = new ArrayList<>(Arrays.asList(shapeName));
 		Collections.shuffle(shapes);
-		System.out.println(shapes);
 		shapes = shapes.subList(0, 4);
-		System.out.println(shapes);
 		List<String> pattern = new ArrayList<>(shapes.subList(0, 3));
 		int answer = random.nextInt(3);
 
@@ -78,12 +76,9 @@ public class ExecutiveService {
 		}
 		question.append("</div>");
 
-		System.out.println(shapes);
 		List<String> choice = shapes.stream().map(imgSrc ->
 				"<img src=\"" + map.get(imgSrc)
 				+ "\" alt=\"quiz_img\" style = \"width:100px; height:100px\">").toList();
-		System.out.println(shapes);
-		System.out.println(choice);
 		return DiagnosisQuizDto.builder()
 			.type(DiagnosisType.EXECUTIVE_VIRTUAL)
 			.question(question.toString())

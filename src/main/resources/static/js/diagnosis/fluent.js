@@ -97,9 +97,9 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 function sendSpeechFluent(iconElement) {
-    const recognition = new SpeechRecognition();
-    const speechRecognitionList = new SpeechGrammarList();
-    const diagnosticPara = document.querySelector('.short-answer-quiz__input');
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    var diagnosticPara = document.querySelector('.short-answer-quiz__input');
     iconElement.classList.remove('fa-microphone');
     iconElement.classList.add('fa-circle');
     recognition.grammars = speechRecognitionList;
