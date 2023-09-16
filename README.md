@@ -138,7 +138,7 @@
 | --- | --- | --- | --- |
 | <img src="https://github.com/rnrudejr9.png" width="120" height="120" /> | <img src="https://github.com/h-spear.png" width="120" height="120" /> | <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> | <img src="https://github.com/JunJI97.png" width="120" height="120" /> |
 | 구경덕 | 김현창 | 김희연 | 지준영 |
-- 구경덕(팀장 / BE) : 프로젝트 총괄
-- 김현창(팀원 / BE) :
-- 김희연(팀원 / BE) :
-- 지준영(팀원 / BE) :
+- 구경덕(팀장 / BE) : 프로젝트 총괄, 인증/인가, 프론트, 배포
+- 김현창(팀원 / BE) : 치매 예방 게임, 거래 내역 기반 퀴즈, 치매 진단 검사
+- 김희연(팀원 / BE) : 금융 관련 퀴즈, 거래 내역 기반 퀴즈, 거래 내역 기반의 API 생성,  배포
+- 지준영(팀원 / BE) : 치매 진단 검사, 음성 인식, TTS, SMS 알림
