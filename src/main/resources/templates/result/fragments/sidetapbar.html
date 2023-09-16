@@ -154,8 +154,8 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                    <i class="fas fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <span class="mr-2 d-none d-lg-inline" th:text="${point}"></span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" th:href="@{/view/logout}" data-toggle="modal" data-target="#logoutModal">
@@ -165,19 +165,6 @@
             </div>
 
         </li>
-        <div class="topbar-divider d-none d-sm-block"></div>
-
-        <a class="nav-link dropdown-toggle" href="#" id="no" role="button"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-            <i class="fas fa-money fa-sm fa-fw mr-2 text-gray-400"></i>
-            <span sec:authorize="isAuthenticated()">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${point}"></span>
-                            </span>
-            <span sec:authorize="isAnonymous()"
-                  th:onclick="|location.href='@{/view/sign-in}'|"></span>
-
-        </a>
 
     </ul>
 
