@@ -30,6 +30,14 @@
         신한은행 서비스
     </div>
 
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item " th:classappend="${param1 == '3'} ? active">
+        <a class="nav-link collapsed" th:href="@{/view/my-page}">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>마이페이지</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item " th:classappend="${param1 == '1'} ? active">
         <a class="nav-link collapsed" th:href="@{/view/diagnosis/result}">
@@ -65,7 +73,7 @@
 
 <!-- Topbar Navbar -->
 <!-- Topbar -->
-<nav th:fragment="tapbarFragment" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav th:fragment="tapbarFragment(title)" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -76,7 +84,7 @@
     <form
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
-            <h2 class="text fw-bold m-0">결과 확인</h2>
+            <h2 class="text fw-bold m-0" th:text="${title}">결과 확인</h2>
 
         </div>
     </form>

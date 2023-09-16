@@ -117,23 +117,23 @@
         const executiveVirtualQuiz = [[${executiveVirtual}]];
         const languageQuiz = [[${language}]];
 
-        orientQuiz.forEach(diagnosisQuiz => {
-            questions.push({type: diagnosisType.ORIENT, quiz: diagnosisQuiz})
-        });
-        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        attentionQuiz.forEach(diagnosisQuiz => {
-            if (diagnosisQuiz !== null)
-                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
-        })
-        questions.push(gameType.MATCH_CARD);
-        questions.push(gameType.SAME_PICTURE);
-        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        memoryQuiz.forEach(diagnosisQuiz => {
-            questions.push({type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz})
-        });
-        languageQuiz.forEach(diagnosisQuiz => {
-            questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
-        })
+        // orientQuiz.forEach(diagnosisQuiz => {
+        //     questions.push({type: diagnosisType.ORIENT, quiz: diagnosisQuiz})
+        // });
+        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        // attentionQuiz.forEach(diagnosisQuiz => {
+        //     if (diagnosisQuiz !== null)
+        //         questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
+        // })
+        // questions.push(gameType.MATCH_CARD);
+        // questions.push(gameType.SAME_PICTURE);
+        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        // memoryQuiz.forEach(diagnosisQuiz => {
+        //     questions.push({type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz})
+        // });
+        // languageQuiz.forEach(diagnosisQuiz => {
+        //     questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
+        // })
         executiveVirtualQuiz.forEach(diagnosisQuiz => {
             questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
         })

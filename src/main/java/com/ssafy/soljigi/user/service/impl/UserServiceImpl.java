@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ssafy.soljigi.user.dto.response.UserDto;
 import com.ssafy.soljigi.user.dto.response.UserInfoResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,6 +33,11 @@ public class UserServiceImpl implements UserService {
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username)
 			.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+	}
+
+	public UserDto findUserInfo(Long id) {
+		return UserDto.of(userRepository.findById(id)
+				.orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND)));
 	}
 
 	public UserInfoResponse findByAccount(String accountNumber){
