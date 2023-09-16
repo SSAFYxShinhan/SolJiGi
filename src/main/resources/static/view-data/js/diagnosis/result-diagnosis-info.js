@@ -73,39 +73,49 @@ function renderStickChart() {
     //연산해서 넣기
 
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
-    resultData1.style = `width: ${orientWidth}%`;
-    resultData1Text.innerText = orientWidth;
+    resultData1.style = `width: 0%`;
+    resultData1Text.innerText = 0;
     let attentionWidth = Math.round((attentionList[attentionList.length - 1] / attention) * 100);
-    resultData2.style = `width: ${attentionWidth}%`;
-    resultData2Text.innerText = attentionWidth;
+    resultData2.style = `width: 0%`;
+    resultData2Text.innerText = 0;
     let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 1] / spacetime) * 100);
-    resultData3.style = `width: ${spacetimeWidth}%`;
-    resultData3Text.innerText = spacetimeWidth;
+    resultData3.style = `width: 0%`;
+    resultData3Text.innerText = 0;
     let executiveWidth = Math.round((executiveList[executiveList.length - 1] / executive) * 100);
-    resultData4.style = `width: ${executiveWidth}%`;
-    resultData4Text.innerText = executiveWidth;
+    resultData4.style = `width: 0%`;
+    resultData4Text.innerText = 0;
     let languageWidth = Math.round((languageList[languageList.length - 1] / language) * 100)
-    resultData5.style = `width: ${languageWidth}%`;
-    resultData5Text.innerText = languageWidth;
+    resultData5.style = `width: 0%`;
+    resultData5Text.innerText = 0;
     let memoryWidth = Math.round((memoryList[memoryList.length - 1] / memory) * 100);
-    resultData6.style = `width: ${memoryWidth}%`;
-    resultData6Text.innerText = memoryWidth;
+    resultData6.style = `width: 0%`;
+    resultData6Text.innerText = 0;
 
 }
 
-
+function ascCompareEvents(a, b){
+    var timeA = new Date(a.registrationDate)
+    var timeB = new Date(b.registrationDate)
+    return timeA - timeB
+}
+function descCompareEvents(a, b){
+    var timeA = new Date(a.registrationDate)
+    var timeB = new Date(b.registrationDate)
+    return timeB - timeA
+}
 async function getDataFromResultPagination() {
     let url = "/diagnosis/data"
     let response = await fetch(url);
     let paginationData;
+    let jsondata;
     if (response.ok) {
         let json = await response.json();
         let paginationData = json;
-        totalList = json.data.map(e => e.totalScore);
-       // let size = Math.min(30, totalList.length);
-        //totalList = totalList.slice(0,size);
-        let timeData = json.data.map(e => e.registrationDateString);
-       // timeData = timeData.slice(0,size);
+        jsondata = json.data;
+        let ascdata = jsondata.sort(ascCompareEvents);
+        totalList = ascdata.map(e => e.totalScore);
+
+        let timeData = ascdata.map(e => e.registrationDateString);
 
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
@@ -114,10 +124,10 @@ async function getDataFromResultPagination() {
             } else {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
-        }else{
+        } else {
             document.getElementById("monthIsDone").innerText = "미완료"
         }
-        json.data.map(e => {
+        ascdata.map(e => {
             orientList.push(e.orientScore);
             attentionList.push(e.attentionScore);
             spacetimeList.push(e.spacetimeScore);
@@ -221,14 +231,13 @@ async function getDataFromResultPagination() {
             }
         });
 
-        document.getElementById("myAreaChart").onclick = function(evt){
+        document.getElementById("myAreaChart").onclick = function (evt) {
             var activePoints = myChart.getElementsAtEvent(evt);
 
-            if(activePoints.length > 0)
-            {
+            if (activePoints.length > 0) {
                 var clickedElementindex = activePoints[0]["_index"];
                 console.log(clickedElementindex);
-                let clickData = json.data[clickedElementindex];
+                let clickData = ascdata[clickedElementindex];
 
 
                 let orientData = clickData.orientScore;
@@ -239,8 +248,7 @@ async function getDataFromResultPagination() {
                 let memoryData = clickData.memoryScore;
 
 
-
-                let orientWidth = Math.round((orientData / orient ) * 100);
+                let orientWidth = Math.round((orientData / orient) * 100);
                 resultData1.style = `width: ${orientWidth}%`;
                 resultData1Text.innerText = orientWidth;
                 let attentionWidth = Math.round((attentionData / attention) * 100);
@@ -267,10 +275,11 @@ async function getDataFromResultPagination() {
             (function (name) {
                 var container = $('#pagination-' + name);
                 if (!container.length) return;
-                let sampleData = paginationData.data.sort((a,b)=>(a.registrationDate - b.registrationDate));
+                let jsonData = paginationData.data;
+                let descData = jsonData.sort(descCompareEvents);
 
                 var options = {
-                    dataSource: sampleData,
+                    dataSource: descData,
                     pageSize: 6,
                     callback: function (response, pagination) {
                         // window.console && console.log(response, pagination);
@@ -288,7 +297,7 @@ async function getDataFromResultPagination() {
                         $.each(response, function (index, item) {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
-                            dataHtml += '<th>' + (Number(index+1) + ((pagination.pageNumber-1) * pagination.pageSize)) + '</th>';
+                            dataHtml += '<th>' + (Number(index + 1) + ((pagination.pageNumber - 1) * pagination.pageSize)) + '</th>';
                             dataHtml += '<th>' + item.result + '</th>';
                             dataHtml += '<th>' + item.totalScore + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';

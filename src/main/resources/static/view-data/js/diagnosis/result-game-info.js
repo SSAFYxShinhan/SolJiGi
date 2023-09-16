@@ -55,22 +55,31 @@ var spacetimeList = [];
 var executiveList = [];
 var totalList = [];
 
-
+function ascCompareEvents(a, b){
+    var timeA = new Date(a.registrationDate)
+    var timeB = new Date(b.registrationDate)
+    return timeA - timeB
+}
+function descCompareEvents(a, b){
+    var timeA = new Date(a.registrationDate)
+    var timeB = new Date(b.registrationDate)
+    return timeB - timeA
+}
 function renderStickChart() {
     //연산해서 넣기
 
     let orientWidth = Math.round((orientList[orientList.length - 2] / orientList[orientList.length - 1]) * 100);
-    resultData1.style = `width: ${orientWidth}%`;
-    resultData1Text.innerText = orientWidth;
+    resultData1.style = `width: 0%`;
+    resultData1Text.innerText = 0;
     let attentionWidth = Math.round((attentionList[attentionList.length - 2] / attentionList[attentionList.length - 1]) * 100);
-    resultData2.style = `width: ${attentionWidth}%`;
-    resultData2Text.innerText = attentionWidth;
+    resultData2.style = `width: 0%`;
+    resultData2Text.innerText = 0;
     let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 2] / spacetimeList[spacetimeList.length - 1]) * 100);
-    resultData3.style = `width: ${spacetimeWidth}%`;
-    resultData3Text.innerText = spacetimeWidth;
+    resultData3.style = `width: 0%`;
+    resultData3Text.innerText = 0;
     let executiveWidth = Math.round((executiveList[executiveList.length - 2] / executiveList[executiveList.length - 1]) * 100);
-    resultData4.style = `width: ${executiveWidth}%`;
-    resultData4Text.innerText = executiveWidth;
+    resultData4.style = `width: 0%`;
+    resultData4Text.innerText = 0;
 
 }
 
@@ -79,14 +88,21 @@ async function getDataFromResultPagination() {
     let url = "/game/data"
     let response = await fetch(url);
     let paginationData;
+    let jsondata;
     if (response.ok) {
+        // let json = await response.json();
+        // let paginationData = json;
+        // let jsondata = json.data;
+        // let ascGraphData = jsondata.sort(ascCompareEvents);
+        // totalList =ascGraphData.map(e => e.totalScore);
+        // let timeData = json.data.map(e => e.registrationDateString);
         let json = await response.json();
         let paginationData = json;
-        totalList = json.data.map(e => e.correctCount);
-        //let size = Math.min(30, totalList.length);
-        //totalList = totalList.slice(0,size);
-        let timeData = json.data.map(e => e.registrationDateString);
-        //timeData = timeData.slice(0,size);
+        jsondata = json.data;
+        let ascdata = jsondata.sort(ascCompareEvents);
+        totalList = ascdata.map(e => e.correctCount);
+
+        let timeData = ascdata.map(e => e.registrationDateString);
 
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
@@ -95,10 +111,10 @@ async function getDataFromResultPagination() {
             } else {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
-        }else{
+        } else {
             document.getElementById("monthIsDone").innerText = "미완료"
         }
-        json.data.map(e => {
+        ascdata.map(e => {
             orientList.push(e.financeCorrect, e.financeTotal);
             attentionList.push(e.transactionCorrect, e.transactionTotal);
             spacetimeList.push(e.matchCardCorrect, e.matchCardTotal);
@@ -109,7 +125,6 @@ async function getDataFromResultPagination() {
             // 막대 바 렌더링
             renderStickChart();
         }
-
 
 
         // 차트 렌더링
@@ -205,14 +220,13 @@ async function getDataFromResultPagination() {
             }
         });
 
-        document.getElementById("myAreaChart").onclick = function(evt){
+        document.getElementById("myAreaChart").onclick = function (evt) {
             var activePoints = myChart.getElementsAtEvent(evt);
 
-            if(activePoints.length > 0)
-            {
+            if (activePoints.length > 0) {
                 var clickedElementindex = activePoints[0]["_index"];
 
-                let clickData = json.data[clickedElementindex];
+                let clickData = ascdata[clickedElementindex];
                 let fin = clickData.financeCorrect;
                 let finTotal = clickData.financeTotal;
                 let trans = clickData.transactionCorrect;
@@ -245,10 +259,12 @@ async function getDataFromResultPagination() {
             (function (name) {
                 var container = $('#pagination-' + name);
                 if (!container.length) return;
-                let sampleData = paginationData.data.sort((a,b)=>(a.registrationDate - b.registrationDate));
+                let jsonData = paginationData.data;
+                let descData = jsonData.sort(descCompareEvents);
+
 
                 var options = {
-                    dataSource: sampleData,
+                    dataSource: descData,
                     pageSize: 4,
                     callback: function (response, pagination) {
                         var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
@@ -264,7 +280,7 @@ async function getDataFromResultPagination() {
                         $.each(response, function (index, item) {
                             dataHtml += '<tbody>';
                             dataHtml += '<tr>';
-                            dataHtml += '<th>' + (Number(index+1) + ((pagination.pageNumber-1) * pagination.pageSize)) + '</th>';
+                            dataHtml += '<th>' + (Number(index + 1) + ((pagination.pageNumber - 1) * pagination.pageSize)) + '</th>';
                             dataHtml += '<th>' + item.correctCount + '</th>';
                             dataHtml += '<th>' + item.totalCount + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';

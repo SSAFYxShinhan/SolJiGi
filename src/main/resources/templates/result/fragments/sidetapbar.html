@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<ul th:fragment="sideFragment (param1)" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul th:fragment="sideFragment (param1, title)" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
@@ -76,7 +76,7 @@
     <form
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
-            <h2 class="text fw-bold m-0">진단검사결과</h2>
+            <h2 class="text fw-bold m-0">결과 확인</h2>
 
         </div>
     </form>
