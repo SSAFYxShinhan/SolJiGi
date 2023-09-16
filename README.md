@@ -107,9 +107,9 @@
 
 ## DevOps
 
-| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/a0522a63-1ec7-4c14-9011-5df11053c31c" alt="Docker" width="60px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/7953b467-86aa-4ae7-bc52-eff5f3d1e05b" alt="Jenkins" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/0abc1fc8-ab52-4172-9507-2dcd125b3ffe" alt="Nginx" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/4952a8e3-a6dc-40ef-964a-352c8cf6065c" alt="AWS EC2" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/5771b88a-ef65-44d4-843d-1d757a92cc63" alt="AWS S3" width="70px" height="50px" /></div> |
-| --- | --- | --- | --- | --- |
-| Docker | Jenkins | NginX | AWS EC2 | AWS S3 |
+| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/a0522a63-1ec7-4c14-9011-5df11053c31c" alt="Docker" width="60px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/7953b467-86aa-4ae7-bc52-eff5f3d1e05b" alt="Jenkins" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/0abc1fc8-ab52-4172-9507-2dcd125b3ffe" alt="Nginx" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/4952a8e3-a6dc-40ef-964a-352c8cf6065c" alt="AWS EC2" width="50px" height="50px" /></div> |
+| --- | --- | --- | --- |
+| Docker | Jenkins | NginX | AWS EC2 |
 
 <br />
 
