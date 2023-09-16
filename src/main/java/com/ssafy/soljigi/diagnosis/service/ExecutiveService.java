@@ -51,7 +51,7 @@ public class ExecutiveService {
 
 	private DiagnosisQuizDto generateVirtualQuiz() {
 		Random random = new Random();
-		List<String> shapes = new ArrayList<>(Arrays
+		List<String> shapes = new ArrayList<>(Arrays.asList(shapeName));
 		shapes = shapes.subList(0, 4);
 		List<String> pattern = new ArrayList<>(shapes.subList(0, 3));
 		int answer = random.nextInt(3);
