@@ -58,113 +58,26 @@ public class NotProd {
 
 			//			user 생성
 
-			userRepository.save(User.builder()
-				.password(passwordEncoder.encode("1"))
-				.username("1")
-					.name("name")
-					.address(new Address("tltl","dododo","cococo"))
-					.phoneNumber("123123124")
-				.role(Role.USER)
-				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
-				.accountNumber("110222999995")
-				.educationLevel(1)
-				.build());
-			userRepository.save(User.builder()
-				.password(passwordEncoder.encode("1"))
-				.username("2")
-				.role(Role.USER)
-				.gender(Gender.MALE)
-				.birthDate(LocalDate.of(1950, 3, 5))
-				.accountNumber("110222999993")
-				.build());
+//			userRepository.save(User.builder()
+//				.password(passwordEncoder.encode("1"))
+//				.username("1")
+//					.name("name")
+//					.address(new Address("tltl","dododo","cococo"))
+//					.phoneNumber("123123124")
+//				.role(Role.USER)
+//				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
+//				.accountNumber("110222999995")
+//				.educationLevel(1)
+//				.build());
+//			userRepository.save(User.builder()
+//				.password(passwordEncoder.encode("1"))
+//				.username("2")
+//				.role(Role.USER)
+//				.gender(Gender.MALE)
+//				.birthDate(LocalDate.of(1950, 3, 5))
+//				.accountNumber("110222999993")
+//				.build());
 
-			for (int i = 0; i < 50; i++) {
-				int v1 = (int)(Math.random() * 5);
-				int v2 = (int)(Math.random() * 5);
-				int v3 = (int)(Math.random() * 5);
-				int v4 = (int)(Math.random() * 5);
-				int v5 = (int)(Math.random() * 5);
-				int v6 = (int)(Math.random() * 5);
-
-				diagnosisResultService.save(1L, new DiagnosisResultSaveRequest(
-					v1, v2, v3, v4, v5, v6
-				));
-				gameResultService.save(1L, new GameResultSaveRequest(
-					v1, v2, v3, v4, v5, v6, v1, v2
-				));
-
-			}
-
-//			for (int i = 0; i <= quizCount; ++i) {
-//				quizRepository.save(
-//					Quiz.builder()
-//						.type(Type.FINANCE)
-//						.question("quiz" + i)
-//						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
-//						.choiceAnswer(0)
-//						.build()
-//				);
-//			}
-
-			int accountCount = 10;
-			int transactionCountPerAccount = 10;
-			for (int i = 0; i < accountCount; ++i) {
-				Account account = Account.builder()
-					.accountNumber("11022299999" + i)
-					.productName("저축예금")
-					.balance(i * 1000000)
-					.customerName("tester" + i)
-					.name("tester" + i)
-					.gender(Gender.MALE)
-					.address(new Address("서울시", "역삼동", "123-456"))
-					.birthDate(LocalDate.of(2023, 9, 13))
-					.phoneNumber("010-1234-567" + i)
-					.build();
-
-				transactionRepository.save(Transaction.builder()
-					.account(account)
-					.transactionDateTime(LocalDateTime.of(2023, 5, 20, 23, 10))
-					.balance(account.getBalance())
-					.deposit(0)
-					.withdraw(0)
-					.inOutType(1)
-					.build());
-
-				for (int j = 0; j <= transactionCountPerAccount; ++j) {
-					long deposit = (j + 1) * 10000L;
-					account.addBalance(deposit);
-					transactionRepository.save(Transaction.builder()
-						.account(account)
-						.transactionDateTime(LocalDateTime.now())
-						.balance(account.getBalance())
-						.deposit(deposit)
-						.withdraw(0)
-						.inOutType(1)
-						// .content("content..." + i + "-" + j)
-						.content("content" + i)
-						.summary("summary..." + i + "-" + j)
-						.branchName("branch..." + i + "-" + j)
-						.build());
-				}
-				accountRepository.save(account);
-			}
-
-			// List<Transaction> transactions = Arrays.asList(
-			// 	Transaction.builder()
-			// 		.transactionDate("20230318")
-			// 		.transactionTime("154602")
-			// 		.summary("이자")
-			// 		.withdraw(1)
-			// 		.deposit(1404)
-			// 		.content("백화점")
-			// 		.balance(331551)
-			// 		.inOutType(1)
-			// 		.branchName("영업부")
-			// 		.account(account)
-			// 		.build()
-			// );
-			// 거래 내역 저장
-			//transactionRecordRepository.saveAll(transactions);
 		}
 	}
 }

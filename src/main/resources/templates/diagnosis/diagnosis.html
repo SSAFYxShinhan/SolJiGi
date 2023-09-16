@@ -15,6 +15,8 @@
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/game/TTS.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
+    <script src="/js/diagnosis/fluent.js"></script>
+    <script src="/js/diagnosis/attention.js"></script>
     <script src="/js/fontawesome.js"></script>
     <script src="/js/jquery-3.6.3.min.js" defer></script>
 
@@ -53,7 +55,7 @@
         if (diagnosis.type === diagnosisType.ORIENT) {
             window.speechSynthesis.cancel();
             speech(diagnosis.quiz["question"]);
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ORIENT);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.ORIENT);
         } else if (diagnosis.type === diagnosisType.MEMORY) {
             if (diagnosis.step === 'READ') {
                 window.speechSynthesis.cancel();
@@ -61,8 +63,8 @@
                 currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
             } else if (diagnosis.step === 'ANSWER') {
                 window.speechSynthesis.cancel();
-                speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
-                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
+                // speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
+                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 3000, result, memoryResult, nextGame);
                 mqIdx = 0;
             } else if (diagnosis.step === 'CHOICE') {
                 window.speechSynthesis.cancel();
@@ -70,7 +72,7 @@
                 if (memoryResult[mqIdx++] === 2) {
                     nextGame();
                 } else {
-                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.MEMORY);
+                    currGame = new ChoiceQuizGame(container, diagnosis.quiz, 20, result, nextGame, diagnosisType.MEMORY);
                 }
             }
         } else if (diagnosis.type === diagnosisType.ATTENTION) {
@@ -79,7 +81,7 @@
             speech(diagnosis.quiz["choice"][0]);
             speech("다시 읽어 드리겠습니다.");
             speech(diagnosis.quiz["choice"][0]);
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 10, result, nextGame, diagnosisType.ATTENTION);
+            currGame = new AttentionQuizGame(container, diagnosis.quiz, 30, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
             window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
@@ -90,7 +92,7 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("다음 이미지를 보고 무엇인지 말해보세요");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.LANGUAGE);
+            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.LANGUAGE);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_VIRTUAL) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
@@ -100,12 +102,11 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("과일 이름을 생각나는대로 최대한 많이 말해주세요.");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
+            currGame = new FluentQuizGame(container, diagnosis.quiz, 40, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
             }
     }
 
     function generateDiagnosis() {
-        setVoiceList();
         const questions = []
         const orientQuiz = [[${orient}]];
         const memory4w1h = [[${memory4w1h}]];
@@ -137,7 +138,6 @@
             questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
         })
         executiveFluencyQuiz.forEach(diagnosisQuiz => {
-            console.log("Fluent 로딩 성공")
             questions.push( {type: diagnosisType.EXECUTIVE_FLUENT, quiz: diagnosisQuiz});
         })
         return questions;
