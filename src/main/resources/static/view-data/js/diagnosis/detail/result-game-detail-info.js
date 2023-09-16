@@ -176,22 +176,28 @@ async function getMyPayPattern() {
                 cutoutPercentage: 80,
             },
         });
-        document.getElementById("myPieChartLegend").innerHTML =
-            '<div class="mt-4 text-center small">'
-            + '<span class="mr-2">'
-            + '<i class="fas fa-circle text-primary"></i> '
-            + '음식'
-            + '</span> '
-            + '<span class="mr-2"> '
-            + '<i class="fas fa-circle text-success"></i> 커피 </span>'
-            + '<span class="mr-2">'
-            + '<i class="fas fa-circle text-info"></i> 교통 </span>'
-            + '<span class="mr-2">'
-            + '<i class="fas fa-circle text-danger"></i> 옷 </span>'
-            + '<span class="mr-2">'
-            + '<i class="fas fa-circle text-warning"></i> 병원 </span>'
-            + '</div>'
-            + '</div>'
+        var list = Object.keys(transactionData.result);
+        var size = 5;
+        if(list.length > 5){
+            size = 5;
+        }else{
+            size = list.length;
+        }
+
+        var infoDesign = ["text-primary","text-success","text-info","text-danger","text-warning"];
+
+        var str = '<div class="mt-4 text-center small">';
+        for(var step = 0; step < size ;step++){
+            str += '<span class="mr-2">'
+            str += `<i class="fas fa-circle ` + infoDesign[step] + '"></i>'
+            str += list[step];
+            str += '</span> '
+        }
+        str +='</div>'
+        str +='</div>'
+
+
+        document.getElementById("myPieChartLegend").innerHTML = str;
 
 
 
