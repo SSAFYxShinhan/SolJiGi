@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('date').value = formattedDate;
 });
 async function joinTest() {
-    var male = docment.getElementById("male").checked;
+    var male = document.getElementById("male").checked;
     var gender;
     if(male){
         gender = 0;
@@ -233,12 +233,12 @@ async function joinTest() {
         body: JSON.stringify({
             username: document.getElementById("username").value,
             password: document.getElementById("password").value,
-            grade: document.getElementById("grade").value,
+            grade: document.getElementById("education").value,
             parentNumber: document.getElementById("parent-number").value,
             address:document.getElementById("address_kakao").value,
             gender: gender,
-            birth: document.getElementById("birth").value,
-            address: document.getElementById("address").value,
+            birth: document.getElementById("date").value,
+            address: document.getElementById("address_kakao").value,
             phoneNumber: document.getElementById("phone-number").value,
             name: document.getElementById("name").value,
             accountNumber: document.getElementById("account-number-input").value

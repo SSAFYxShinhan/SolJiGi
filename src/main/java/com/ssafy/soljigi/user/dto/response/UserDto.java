@@ -40,7 +40,9 @@ public class UserDto {
     public static UserDto of(User user) {
         int score = (int) Math.round(user.getLevelFactor() * log2(user.getPoint() + 1));
         Address address = user.getAddress();
-        String addr = address.getCity() + " " + address.getDong() + " " + address.getCode();
+        String addr = "";
+        if (address != null)
+            addr = address.getCity() + " " + address.getDong() + " " + address.getCode();
 
         return UserDto.builder()
                 .id(user.getId())

@@ -3,6 +3,7 @@ package com.ssafy.soljigi.base.initdata;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Random;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -56,27 +57,42 @@ public class NotProd {
 		public void dbInit() {
 			int quizCount = 9;
 
-			//			user 생성
+			Random random = new Random();
+
+//			for (int i = 0; i < 12; ++i) {
+//				diagnosisResultService.save(
+//						1L,
+//						new DiagnosisResultSaveRequest(random.nextInt(2) + 4,
+//								random.nextInt(2) + 2,
+//								random.nextInt(2) + 1,
+//								random.nextInt(2) + 5,
+//								random.nextInt(3) + 1,
+//								random.nextInt(2) + 9)
+//				);
+//			}
+//
+//			for (int i = 0; i < 35; ++i) {
+//				gameResultService.save(
+//						1L,
+//						new GameResultSaveRequest(random.nextInt(2) + 4, 5,
+//								random.nextInt(2) + 6, 7,
+//								random.nextInt(3), 2,
+//								random.nextInt(3), 2)
+//				);;
+//			}
 
 //			userRepository.save(User.builder()
-//				.password(passwordEncoder.encode("1"))
-//				.username("1")
-//					.name("name")
-//					.address(new Address("tltl","dododo","cococo"))
-//					.phoneNumber("123123124")
-//				.role(Role.USER)
-//				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
-//				.accountNumber("110222999995")
-//				.educationLevel(1)
-//				.build());
-//			userRepository.save(User.builder()
-//				.password(passwordEncoder.encode("1"))
-//				.username("2")
-//				.role(Role.USER)
-//				.gender(Gender.MALE)
-//				.birthDate(LocalDate.of(1950, 3, 5))
-//				.accountNumber("110222999993")
-//				.build());
+//					.username("test")
+//					.password(passwordEncoder.encode("test"))
+//					.name("테스터")
+//					.address(new Address("서울시 강남구","역삼동","123-456"))
+//					.phoneNumber("010-1234-5678")
+//					.role(Role.USER)
+//					.gender(Gender.MALE)
+//					.birthDate(LocalDate.of(1950, 12, 14))
+//					.accountNumber("110222999990")
+//					.educationLevel(1)
+//					.build());
 
 		}
 	}
