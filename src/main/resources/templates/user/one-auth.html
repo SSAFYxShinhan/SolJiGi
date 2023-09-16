@@ -1,57 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <title>Animated Login Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/login/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head th:replace="~{/user/fragments/header :: headerFragment}">
+    <!-- Try Toast Alert !! -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        img[src="/css/login/sol4.png"] {
+            width: 300px;
+            height: 170px;
+        }
+    </style>
 </head>
 
 <body>
-<nav th:replace="~{/user/fragments/navbar :: navFragment}"></nav>
-<!-- Navbar End -->
 
+<div class="container">
+    <div class="login-content">
+        <div style="margin-bottom: 1rem;">
+            <h2 class="title" style="color:#0e31f7">계좌 <span style="color:#0e0f1a">인증</span></h2>
+        </div>
+        <img style="margin-bottom: 1rem;" src="/css/login/sol4.png">
 
-
-<!-- Carousel Start -->
-<a name="index"></a>
-<div class="container-fluid px-0 mt-5">
-    <div class="d-flex justify-content-center align-items-center" style="height: 80vh;"> <!-- 화면의 80% 높이만큼 중앙 정렬을 위한 스타일 추가 -->
-        <div class="card shadow-lg" style="max-width: 600px;">
-            <div class="card-body">
-                <p class="display-5 mb-4 text-center">
-                    <span>계좌 인증으로 시작하기</span>
-                </p>
-                <div class="d-flex flex-column align-items-center">
-                    <div class="input-group mb-3 d-flex flex-column">
-                        <div class="mb-2">
-                            <i class="fas fa-key fa-lg fa-fw"></i>
-                            <label for="account-number-input" class="form-label">계좌번호</label>
-                        </div>
-                        <div class="d-flex">
-                            <div class="input-group mb-2 mr-2">
-                                <input type="text" id="account-number-input" name="accountNumber"
-                                       class="form-control"
-                                       placeholder="계좌번호 입력"
-                                       aria-label="Recipient's username"
-                                       aria-describedby="basic-addon2">
-                                <button class="btn btn-primary custom-btn" id="one-auth-btn" style="width: 100px">확인</button>
-                            </div>
-                            <button class="btn btn-primary custom-btn mb-2" id="getTransAction" style="width: 200px">입금 내역 조회</button>
-                        </div>
-                        <div class="input-group mb-2">
-                            <input type="text" id="configKey" class="form-control" placeholder="4자리 입력">
-                            <button class="btn btn-primary ml-2" id="accountConfig">인증하기</button>
-                        </div>
-                    </div>
+        <form>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="div ">
+                    <h5>계좌번호</h5>
+                    <input id="account-number-input" type="text" class="input">
                 </div>
             </div>
-        </div>
+
+            <div class="input-div">
+                <div class="i">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="div">
+                    <h5>인증번호</h5>
+                    <input id="configKey" type="text" class="input">
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <button type="button" class="btn" id="one-auth-btn" style="margin-bottom: 1rem;">인증 번호 보내기</button>
+                <button type="button" class="btn" id="getTransAction">입금 내역 조회</button>
+                <button type="button" class="btn" id="accountConfig" style="margin-top: 1rem;">인증하기</button>
+            </div>
+            <h5><span style="color:blue">S</span>HINHAN X <span style="color:blue">S</span>SAFY</h5>
+        </form>
     </div>
 </div>
-<a name="about"></a>
-<!-- Carousel End -->
-
-<!-- Copyright End -->
-<footer th:replace="~{/user/fragments/footer :: footerFragment}"></footer>
 
 
 <!-- JavaScript Libraries -->
@@ -66,7 +72,7 @@
 
 <!-- Template Javascript -->
 <script src="/view-data/js/one-auth.js"></script>
-<script src="/view-data/js/main.js"></script>
+<script type="text/javascript" src="/js/login/login.js"></script>
 
 </body>
 
