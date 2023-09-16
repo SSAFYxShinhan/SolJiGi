@@ -16,6 +16,7 @@
     <script src="/js/game/TTS.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
     <script src="/js/diagnosis/Fluent.js"></script>
+    <script src="/js/diagnosis/attention.js"></script>
     <script src="/js/jquery-3.6.3.min.js" defer></script>
 
 
@@ -108,7 +109,7 @@
             speech(diagnosis.quiz["choice"][0]);
             speech("다시 읽어 드리겠습니다.");
             speech(diagnosis.quiz["choice"][0]);
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 30, result, nextGame, diagnosisType.ATTENTION);
+            currGame = new AttentionQuizGame(container, diagnosis.quiz, 30, result, nextGame, diagnosisType.ATTENTION);
         } else if (diagnosis === gameType.SAME_PICTURE) {
             window.speechSynthesis.cancel();
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);

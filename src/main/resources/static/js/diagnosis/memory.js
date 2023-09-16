@@ -130,10 +130,7 @@ class MemoryDiagnosisQuiz {
         <div>
         <button type="button" onclick="sendSpeechMemory();">녹음</button> 
         <button type="button" class ="stopSpeech";">정지</button> 
-        <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
-<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">-->
-<!--        <input type="text" class="diagnosis-memory__input"/>--> 
-<!--        <input type="submit" class="diagnosis-memory__submit-btn" value="제출">-->
+        <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div> 
     </form>
     </div>
     <div class="diagnosis-memory-quiz__footer"></div>
@@ -152,7 +149,7 @@ function sendSpeechMemory() {
     var diagnosticPara = document.querySelector('.diagnosis-memory__input');
     recognition.grammars = speechRecognitionList;
     recognition.lang = 'ko-KR';
-    recognition.interimResults = true; // true: 중간 결과를 반환, false: 최종 결과만 반환
+    recognition.interimResults = false; // true: 중간 결과를 반환, false: 최종 결과만 반환
     recognition.continious = true; // true: 음성인식을 계속해서 수행, false: 음성인식을 한번만 수행
     recognition.maxAlternatives = 1;
 
@@ -171,6 +168,6 @@ function sendSpeechMemory() {
     recognition.onresult = function(event) {
         var speechResult = event.results[0][0].transcript.toLowerCase();
         console.log('Speech Result: ' + speechResult);
-        diagnosticPara.textContent = speechResult;
+        diagnosticPara.textContent += (" " + speechResult);
     }
 }

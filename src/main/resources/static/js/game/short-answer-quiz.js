@@ -8,7 +8,7 @@ class ShortAnswerQuizGame {
     this.result = result;
     this.nextEvent = nextEvent;
     this.dType = dType;
-    console.log(dType)
+
 
     this.countDownTimer = setInterval(
       () => this.countDown(this.timerElement, --this.time, this.countDownTimer),
@@ -64,11 +64,12 @@ class ShortAnswerQuizGame {
     <div class="short-answer-quiz__content">
     <span class="short-answer-quiz__question">${this.quiz.question}</span>  
     <form class="short-answer-quiz__input-form">`;
-    content += ` 
-    <p class="short-answer-quiz__input"> </p> 
-    <div>
-    <button type="button" onclick="sendSpeechShort();">녹음</button> 
-    <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
+      content += ` 
+      <p class="short-answer-quiz__input"> </p> 
+      <div>
+      <button type="button" onclick="sendSpeechShort();">녹음</button>
+      <button type="button" class ="stopSpeech";">정지</button> 
+      <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
     </div>
     <div class="short-answer-quiz__footer"></div>
@@ -93,9 +94,22 @@ function sendSpeechShort() {
 
   recognition.start();
 
+  // 중간에 중지 버튼을 눌렀을 때 음성 인식 중지
+  document.querySelector('.stopSpeech').addEventListener('click', function() {
+    recognition.stop();
+  });
+
+  // 일정 시간 후 음성 인식 중지
+  setTimeout(function() {
+    recognition.stop();
+  }, 60000); // 60초(1분) 후에 중지하도록 설정 (원하는 시간으로 변경 가능)
+
   recognition.onresult = function(event) {
     var speechResult = event.results[0][0].transcript.toLowerCase();
     console.log('Speech Result: ' + speechResult);
+    // 공백 제거 logic
+    speechResult.replace(" ","");
+    speechResult.replace("-","");
     diagnosticPara.textContent = speechResult;
   }
 
