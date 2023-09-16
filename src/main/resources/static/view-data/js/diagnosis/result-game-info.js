@@ -83,7 +83,11 @@ async function getDataFromResultPagination() {
         let json = await response.json();
         let paginationData = json;
         totalList = json.data.map(e => e.correctCount);
+        let size = Math.min(30, totalList.length);
+        totalList = totalList.slice(0,size);
         let timeData = json.data.map(e => e.registrationDateString);
+        timeData = timeData.slice(0,size);
+
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
             if (currentDateTime) {
@@ -261,7 +265,7 @@ async function getDataFromResultPagination() {
                             dataHtml += '<th>' + item.correctCount + '</th>';
                             dataHtml += '<th>' + item.totalCount + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
-                            dataHtml += '<th>' + `<a href=/view/game/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
+                            dataHtml += '<th>' + `<a href=/view/game/result/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
 
