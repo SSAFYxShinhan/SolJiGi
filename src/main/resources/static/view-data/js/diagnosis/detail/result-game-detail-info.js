@@ -57,16 +57,16 @@ function renderStickChart() {
 
     let orientWidth = Math.round((orientList[orientList.length - 2] / orientList[orientList.length - 1]) * 100);
     resultData1.style = `width: ${orientWidth}%`;
-    resultData1Text.innerText = orientWidth;
+    resultData1Text.innerText = orientWidth + "%";
     let attentionWidth = Math.round((attentionList[attentionList.length - 2] / attentionList[attentionList.length - 1]) * 100);
     resultData2.style = `width: ${attentionWidth}%`;
-    resultData2Text.innerText = attentionWidth;
+    resultData2Text.innerText = attentionWidth + "%";
     let spacetimeWidth = Math.round((spacetimeList[spacetimeList.length - 2] / spacetimeList[spacetimeList.length - 1]) * 100);
     resultData3.style = `width: ${spacetimeWidth}%`;
-    resultData3Text.innerText = spacetimeWidth;
+    resultData3Text.innerText = spacetimeWidth + "%";
     let executiveWidth = Math.round((executiveList[executiveList.length - 2] / executiveList[executiveList.length - 1]) * 100);
     resultData4.style = `width: ${executiveWidth}%`;
-    resultData4Text.innerText = executiveWidth;
+    resultData4Text.innerText = executiveWidth + "%";
 
     document.getElementById("resultTotalScore").innerText = datetime + " / 종합 결과"
 
