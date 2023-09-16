@@ -15,12 +15,22 @@
 <!-- Spinner End -->
 
 <!-- Topbar Start -->
-<div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
-  <div class="container py-3">
-    <div class="d-flex align-items-center">
-      <a th:href="@{/view/index}">
-        <h2 class="text-white fw-bold m-0">솔직이</h2>
-      </a>
+  <div class="container-fluid bg-primary bg-gradient text-white d-none d-lg-flex">
+    <div class="container py-3">
+      <div class="d-flex align-items-center justify-content-between"> <!-- align the content to space between -->
+
+        <!-- Logo -->
+        <a th:href="@{/view/index}" class="sidebar-brand d-flex">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">
+            <h2 class="text-white fw-bold m-0">솔직이 <sup>신한은행</sup></h2>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
       <!--            <div class="ms-auto d-flex align-items-center">-->
       <!--                <span sec:authorize="isAuthenticated()">-->
       <!--                    <span sec:authentication="Principal.username">로그인 한 사용자는 볼 수 있습니다.</span><span> 님 환영합니다. </span>-->
@@ -39,9 +49,6 @@
       <!--                </div>-->
 
       <!--            </div>-->
-    </div>
-  </div>
-</div>
 <!-- Topbar End -->
 
 

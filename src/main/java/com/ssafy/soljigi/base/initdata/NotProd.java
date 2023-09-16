@@ -95,16 +95,16 @@ public class NotProd {
 
 			}
 
-			for (int i = 0; i <= quizCount; ++i) {
-				quizRepository.save(
-					Quiz.builder()
-						.type(Type.FINANCE)
-						.question("quiz" + i)
-						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
-						.choiceAnswer(0)
-						.build()
-				);
-			}
+//			for (int i = 0; i <= quizCount; ++i) {
+//				quizRepository.save(
+//					Quiz.builder()
+//						.type(Type.FINANCE)
+//						.question("quiz" + i)
+//						.choice(Arrays.asList("1.aaa", "2.bbb", "3.ccc", "4.ddd"))
+//						.choiceAnswer(0)
+//						.build()
+//				);
+//			}
 
 			int accountCount = 10;
 			int transactionCountPerAccount = 10;
