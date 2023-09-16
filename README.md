@@ -1,38 +1,47 @@
+![](https://velog.velcdn.com/images/heeyeon3050/post/f528f087-892b-4468-9362-edc184ffce89/image.png)
+
+
 <div align="center">
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/7f466286-a1f5-4c28-abb9-96f8fa894180/2e994346-ce1f-4783-9ff7-4eaf47a6e617/Untitled.png)
-
-# **거래 내역 기반의 치매 예방 서비스 플랫폼** “솔직이”
-
+<h1>거래 내역 기반의 치매 예방 서비스 플랫폼 “솔직이” </h1>
+</div>
 
 ---
-
 고령화 사회에서 가장 중요한 건강 이슈 중 하나는 치매입니다. "솔직이"는 이러한 문제에 대한 해결책을 제공하는 플랫폼으로, 노년층의 거래 내역을 기반으로 개인화된 뇌 활성화 게임을 제공합니다. 또한, 거래 내역을 통해 외부 활동을 유도하고, 보호자에게 필요한 정보를 실시간으로 제공하여 노인의 금융 안전과 건강한 생활 습관 형성에 기여합니다.
+<br>
+
+---
+<div align="left">
 
 ## 목차
 
-### 1. **[서비스 개요](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B0%9C%EC%9A%94)**
+### 1. [서비스 개요]
 
-### 2. **[기술 스택](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)**
+### 2. [기술 스택]
 
-### 3. **[주요 기능](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)**
+### 3. [주요 기능]
 
-### 4. **[프로젝트 구성도](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1%EB%8F%84)**
+### 4. [프로젝트 구성도]
 
-### 5. **[UCC 영상](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#ucc-%EC%98%81%EC%83%81)**
+### 5. [UCC 영상]
 
-### 6. **[프로젝트 기간](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B8%B0%EA%B0%84)**
+### 6. [프로젝트 기간]
 
-### 7. **[팀원 소개](notion://www.notion.so/efe4dcb74fa74141aa1172816b52abff#%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)**
+### 7. [팀원 소개]
 
 <br />
 
 <div id="1"></div>
 
 # 🚀서비스 개요
+### 배경
+고령화 시대에서 치매 환자 수가 급증하며 사회적 이슈가 되고 있다. 치매는 주로 노년층에게 발병하며, 한 번 발병하면 완치가 어렵기 때문에 예방이 중요하다.
+
+### 목적
+노년층의 뇌 건강을 유지하고 치매를 예방하기 위해 게임을 통한 시청각적 자극 제공 및 건강한 생활 습관 형성을 도모한다.
+<br>
 
 
 # 🛠 기술 스택
-
 
 ## FrontEnd
 
@@ -65,7 +74,7 @@
 - **치매 진단 테스트**
     
     ```
-    신뢰성 있는 CIST 검사지를 바탕으로 ****친화적인 디자인으로 치매 진단 검사 제공
+    신뢰성 있는 CIST 검사를 바탕으로 치매 진단 검사 제공
     ```
     
 - **개인화된 치매 예방 게임**
@@ -85,26 +94,27 @@
     ```
     피보호자의 금융 활동과 건강 상태 모니터링, 이상 증상 발생 시 알림 제공
     ```
-    
 
-<br />
-
-<div id="4"></div>
+# ⭐ 기대효과
+- 디지털 소외현상 해소
+- 활동량 증가 유도
+- 개인 경험 바탕 게임으로 기억력 강화 및 치매 예방
+- 노인 금융 범죄 신속 대응
+<br>
+  
+# 🌱 장기적 확장 방향
+- 독거노인 및 고독사 현상 대응
+- AI를 통한 치매 진단 서비스 및 말벗 도우미 기능
+- 위치 및 거래 데이터 기반 프로젝트 확장 가능성 (예: 산책 경로 추천)
+<br>
 
 # 📂프로젝트 구성도
-
 - **System Architecture**
-- 
-
-<img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/50291713-06da-4580-bebd-da3033d91c04" alt="architecture" width="700px" >
-
-<br />
+![](https://velog.velcdn.com/images/heeyeon3050/post/684654a9-0b3a-4bf4-b0bb-3ee8dfd15c7f/image.png)
 
 - **ERD**
+  ![](https://velog.velcdn.com/images/heeyeon3050/post/d5c19c4f-023a-4d7d-98c5-c9ebf8f1d265/image.png)
 
-<img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/f6dac71b-e251-43f6-bd40-cfc912d00f4b" alt="ERD" width="700px" >
-
-<br />
 
 # 🎥시연 영상
 
