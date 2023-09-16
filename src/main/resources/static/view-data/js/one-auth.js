@@ -92,6 +92,27 @@ async function oneAuth() {
 
 }
 
+async function getFakeUser(){
+
+    let accountNumber = document.getElementById("account-number-input").value
+    let response = await fetch("/api/v1/auth/fake",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+                accountNumber: accountNumber
+        })
+    })
+    if(response.ok){
+        var next = localStorage.getItem("choice");
+        if(next == 'd'){
+            location.href = "/diagnosis";
+        }else if(next == 'g')
+            location.href = "/game";
+    }
+}
+
 /**
  * url:
  * 거래내역 1개를 조회하는 api 활용하여 코드를 확인함
@@ -134,6 +155,7 @@ async function oneAuthCheck() {
                         elementBtn.disabled = false;
                     }
                 }
+                getFakeUser();
             } else {
                 toastErrorMessage("잘못된 정보");
             }

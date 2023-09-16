@@ -1,5 +1,7 @@
 package com.ssafy.soljigi.user.service.impl;
 
+import com.ssafy.soljigi.user.dto.request.AuthOneRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +22,9 @@ import com.ssafy.soljigi.user.service.JwtService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+
+import java.time.LocalDate;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +60,28 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			.role(Role.USER).build();
 		userRepository.save(user);
 		var jwt = jwtService.generateToken(user);
+		return JwtAuthenticationResponse.builder().token(jwt).build();
+	}
+
+
+	public JwtAuthenticationResponse makeFakeUser(AuthOneRequest authOneRequest) {
+
+		Long randomValueId = (long) (Math.random() * 1000);
+		Long randomValuePw = (long) (Math.random() * 1000);
+		var user = User.builder()
+						.username(randomValueId.toString()).password(passwordEncoder.encode(randomValuePw.toString()))
+						.gender(Gender.MALE)
+						.accountNumber(authOneRequest.getAccountNumber())
+						.role(Role.USER)
+						.birthDate(LocalDate.now())
+						.educationLevel(2)
+						.name("ananyUser")
+						.point(0).build();
+
+		userRepository.save(user);
+		var jwt = jwtService.generateToken(user);
+
+
 		return JwtAuthenticationResponse.builder().token(jwt).build();
 	}
 
