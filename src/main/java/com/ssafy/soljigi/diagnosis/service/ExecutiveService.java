@@ -18,22 +18,20 @@ public class ExecutiveService {
 		"세모", "https://lh3.googleusercontent.com/fife/AKsag4Pj_f6gD7lcg8wKl77PWj2XjyR1looJofVKyH8DzHubAPM5FFhMZynY8vZdV9fbNdVsaMmYECbvODrJjohUtEHnxEc3Qjsj-dN4HjJhmA5cs21c2RteOoDCcOdrtOnq171drc5vK4TrX7c5q4js3RSw22lQgT7FCP5dMT5UWdfw7WJC60cJt0xkENnltk-9L_s_5fJSJ__v7coiR3BbJ7-773w051V8QV23vCnyVNZcVNauLykJFfLqq3pFvRRs8BJiCUcDXvxMkmNHQZ_D_ZIxAumomQ06DvL7JcxrMdigeDlXMGmyvBzSUxyzPFrMKMfpzaHgI9NdCcQyTo7qdjyFZoUJ8hEF88WhRPAO2G-qa7GUD11Ztx7Y4NzuVzG_n4OImqSfhU0qwuUiJNdOXvFJiEGt_7M7TLpElKdHN5PkK4VmXJl3yTII9QengelSPohegtTZHHAppi3HnKJZi_BRjNqas7PJy9-aZLFPmDLIDsEQ-TkKRqwtWdgfOaXf9x6wzr_v4IAPo08SUSU9N85jC1xSYd3N7JkqK-JMODTau_rpM3k0fgf6OFaTdb05Jh7mej8h8U873svE7b-KdzAkKWkugyOotu7DYOZQ3YZZ8yKupE8OrJmPWdGSy0f-PgcTgCEyiWps87PNN3Iw5RzyUPM0Zq0mSG-ZVUuWXQeQcgfMWAtw9dNtia4XLH6aTKuEeIOJPi-h_25EcoBaSCIF9Y2S_m2Qg8eBVuaO2EqgABjWfBGm_FYV6Azxh_jnxmB3OQs8RKoWQlIJNj9uqfU_xsFgiLb9JTuJccAZ5VC_iadNkO9zFD948i1DCyUuXr3-TgJxCtdtpZFsCNdhE40rRJFjmrk_LHpFWdDzF36nW8jLb2yngZFdRgllovb3CgK2K_jvmEay4qu8nUNirWKry57wdfzqC1RxEzC2psSbRHbDLxyCyIxw71TuMxaulBVyf8-Li_LLTujs3q2x6u12Byjt0WgewtPI36UqGPs5_Wi6Xe0EQfF__2NnWzfXJSGawaNhMIdw9f40oWcuqKDncLYsxMoYG10EwWYSu7lGp8hDXzkcKWqdoZb2cX2RnzCuAM7es_S4yNxU6RvpGzhYOScpmPk7MStuois-4nqsPcgSpStgkFgjcBLVobWk4LpfBKFvMEjxhWnxmAk_HTwGHyyIjMgprk-wEiLlCaQEUim4umw6ZgymfyZSFWvabwMoLXiQED8qmyWTjziqqG5MXpvjnbRUAQK1qGPSClrLuquoJTqNjqw46ToZ5ZmBooG6fbguMGGbcOHkYmOnaTkrfnDjs283a5vqiYqy90S-sWqy363RFr29Bef7reacRTpW1D5bymo5Td8OY0UObHna9gPsgVYGEFQHUSTIglDZGfKpI9j0ltAG6Nw3S3vsJTkt15QD4xWeLY5jUY_-trw60Sx9wdlZnrBaCILdOeHtsbL3IVeXDkXev1jZcQKuzkwG3ZNq6v9Ia8EeHrq5dtuVzSmOndHhlJAI6LjBKkqleA0jEeCa9fJXTqR20mGTbuA0HwW60i-FQH6yEF8b=w1444-h963",
 		"마름모", "https://lh3.googleusercontent.com/fife/AKsag4PZOCNR-siFoDO-Bpcs69yCu35lpAX2HhLNmb-OdMvE5igG8WRMsZzJQ6XTiF9eSv_9jyxQvHy9k-fswQhtlCJOvXF-b05c6TlN9Wk41nfaeZ1xR2036cFnFfNbNz3hI_UcJYeGty9qLL4C5QPh6INc1PqnNwcNbPJgYEnB1l1RgRr7_Hybqa0kDMUJiJ8PON4to6KSUeI_PtAO_4FEJqGQqnjaiNiQkZFfwP2xfSiki2etwabrFN2Iv-JQvBVQ1mVed-h_302cE-3arPpbC7qSsEfq9gbjdhDOVzJH7fMshHielswu8Q-PjT_nIoly_Nc3YmHrlGae4UeBLymnQ3lc84Y_3RWLfEtI54D7L9MLUXSCm9-RyWpLBWyYnmzlbgJ87qSE-oU6SafDaD9CFV5VFo1s6awBugLRAzUPhJYzXYk_j4utE4d578m8zYUQfgfWj8YpM5Bspfqmr6QqCM8nkZe2aB8S3MUlbcDdJwlDCCJGKrBrh_yFrlAbvvCQnhhIVlXZlgUmInxYZ5SaIJv6ke5YAJN5hpwWNzX_6h0W5H40WSDS8oOXeThvuTOdOhUJsby5IggWQqtQ3vISDujs-88FN1zAZ4VLeUssq0OmIcD_8EqlhxlFDu7GSnCLBSrzL7GbZhTpqt_HL-LNfSP1Yiks_jp_wIh3UA0_PImxLZIyI3H-HRwqgGir6qfP4k8pt6tWyXLpoDcSPMLv01OnT2o5CrmlV7UvKxPiK28eKoqwNUk_KrBck_8_SFiE1X1Z1wuU5J7TLIth_JhcMX2ZrogaYwVFlyW_J5-5uaIa5fxkF_p4tif__0TnlhhFdVCJPT3SEi3BPBnx8ZtyFQor8wajj7aGQarpHV8edBWuXESRILyUGe_zIS2KsHIZoyy0sEwONBnac0ZG8sgombGw_ZEg8BTbhT9jyTnZ41MWqj7jm3ekU94M6_YUMZYUBdUuBxv_-saPWKLM4qlXoPJ-hP8YW8VkoEStwOwLuP8661uA95rOVoDYgMBLETgT_HMpw7H6N33u7ifQdnROIH7DxmKukWlkk6gxqlbMaW3kYwWarstqyvESdEprlDYNyCO1hGG2exmAxqGT6RUcsCmQgVW2yOtinH14-NFla-UKr7S6iH7J1HO6i5KK7BzGIUzbqDBMVoK6LhdKTrVZ_bWW_lFHCZcbCY5vBwVG-Ur8NjQht5br737BZfLN_9jqw2mbghyuUnTMQZedny7rI-IcIUJMzzqgXSgO64RxbSjRFQ6MFbbyISGfFN2-YfCX1Iu3cnU0TmXuGcnrAAa1aJUMh_ne03-QhEYA-JtJ0SWC0LQ7HEZBgTamH2Ld9HJw_MAK7J7LluOvWOAelIRsA_OdZ4QXSZ9NrIKJ1qDA1JJUrm24n2BaiZZZpshQNi4z8XgWP_wWSAKL7x5gBjMqVpFVqPpSaSh3SuoABmSIkekYevt-YITK2S_CbiN7G0r1p9SGJ5d33mw971LWFhlXEESjwBFc85djAb6lzhGFSJ3YyPD7Bl1wzaxsYc8Xc6KFkwPWD22PfO5LJP_dSeGK=w1011-h953",
 		"별", "https://lh3.googleusercontent.com/fife/AKsag4OjrNS_kTIndvIYc9t_rv2J33WnrWep2Kf6IgVsgGjrnSdoR_lMVd3Cb0iVKnZuImPcQEVrV96_l_rkQhwnUbj2nbWGZkr5ol9pnOF0vEPbjCeIfXx6Sr8_b0EmjfTHZsERDuhETJ4ulfuLfKTwSHSdLgucXB3P5i714eg9LxAjGeCTRAS1ouODRlYWhekEjKEAvsjnxlP5nXY6twxPxzJgf89LeaJ7ivlPogqP9GB8jvBZyE2FSkACN1rABkfT67LZUFG-ub_jnXNCpgZW-PvFbQHeakDIyjOMkV7mcEaeiqwGh-vfI47nBcSx9_dTfq-NX9fbiLJVykhW0aeEj6tsywTMoZMQpL6G3a1RGXdHoVj6QPhNyBtlJkBqV7ungMF_a34ariTkKC6p-3EHxyOmm6YbZ1yelw0_W2x-9rVY0vMO4Dh_vTjEguAyZoryQeG9x_qMLts2zHalS2BZkvIzfUAbEuUxjiRvHDmXP3SroTFTNx1-a9pFKVKlcfJweNAjPr0TYCJROL0-_TRQQ76LNMpNGHv9_KkI88vSlgHCQrQXwzpwW5-MRf5TtPfj2gseUa4FiJ7h-z7gu8FNNUjDKeX6MQpSc9_2SSmwdqivQQnHR7vRvXiU2Dd4TxS5VaoBzJqB1-9jYWo991Yjs0z7yI15ZAL1LMJAtjz0eKom2YJ3Dw9WFrAhY8-Xxzt-BwJQdOqfLopqp8Dfu2So0F5h2kWjmuhaGy4aesp6JQsw7N6rBW0IX4fyJPhXa7Fe194n8qC6KZTVrj7bxP7AVYPqsPVoWc_6Yrr9TwxYlbjsqxaOhNxIRoYC1hYPbRwJ0t8VqsXfX-3ClmobP4saqlyV8AWH5FL25Ho-Rtm4o9xITBy73JeLIzUdtWI4RfOTGL6b9T5iOjWI9KQZqrFxxE0mzf4OoRryij_c3QHAoIQuiO3SLdKOKTLt0VjCNVzxN7NRPO1Q7I43ENsriiBPbvDydJsKZ3rjd6IQ67HyjcA9qscjG3mOmNaHXfnQc1Y19vCEyy2wMFuWyt9OUCQyM2zYLyRXQScY-kUjDP1J8xY2hgYnA391MtuTu7oWRV8bjRrgzFNJEeYkDzbFzJ4zX5eKJhQBN9ZtdWj8rkRRY_cgX7z9gBVunyMy3ArGs26quftkKCbZshx4Cn0DVvZOcpLrbvNyY_cDctAPOVhd5xSapr9dpI2QUJVw2FsnbcMlD_E5N6ZH1hOFZ-A8IptOw6hOT2T-x_ctUfth_RybpLeYWXNBbG1OymFOo_BwzL6JKRC1h1qmA4IYfzvS58kn3xI1E20IhZJCbf8i3Bs0YeGOjHuEzyIzU2usfqc6xtmpyoS6EK6wWkUI-HoCYBQqhRBOJmNyhe6nqxXOuNOWsFVQNWkLTIAvYh5opjSgKURKFeUSU9AR2a0xDGxsQD46cpw66BKr9M1EEcdKQNGzWsdS1ALQTkW0HwFWyYKORA60tlSBVUkQWBrfw3h3YsS-w6aUmrqhIY34Hp1_3zInx6JQxo-MuGxvmpH9zKwBbnowhZDnf4MV_NCyG3gP_a1s=w1444-h963",
-		"빈칸", "https://lh3.googleusercontent.com/fife/AKsag4PI5PEeB-zSwNuxBLErNo3JEYNQxxF16QdLfbTAUH5gvmicNmwGhM1y-ynjuu3-wYWEZy7T6aIQzyZqb7eEkl_kMV37UaJOadvpqW_ss2J7jyTp07MAub2zoHUk6yp6rN1NyIwmoIbMscP6v_-OLXzkU1pMfg4BwKipLpiHZEH5bUPsF65JZVtqeHTsSXbyuMT2acqSHm0ASKH4yPVgNdMlXGRMUS7-MeTbOBHsKpqeDIOGTtSnGE9NG4cW9BQmLcpvKOaukqX6TzffAgbMDccMOZXp4GsyYtMcMQdJMHH1EbNStgN2dfNson0HWQyyc2wpqftVG9FghpJAo_QV5oXnpL3PutGrXgs7aaEw-RhgzxCSv0B927ORf-W1UfItrL3l4LZAnTEDR3Q-THqcYyF45KGkK7IgEb9lglQncOSHpeoj6ssbnwRehnkzoKNkt9njEgw4IRFQ-Gxn1_q4Qkk31ydfLtWezrYcDXS2JBk8uYoDXJMITwfTNuRxc857RvO-REjmyKrvXPoaPQgCGJOECZVkZrtuZpwlEYnIhp9HBazFH5hVoR3bvFd_v053_BvvWNK4IIKLpjCiwoTpGZUIQHrC1DuaaY17yVaW7DlTFaHH8_ov-yUNjDLum7d5ylryezi_3gxuDjha5AUxN42p2M9Mihac6JgNFDMJAbOH653dLXYIewIc5cTylpa_fcfKG0m8Xy00022XFH_AfY8kCjF3VHeUDnFaBBKyLsToh8aOZKEaf-VXs9MkaITPyYovPiPOgApa5HE2NKmtoC9gJNs-7us2dSABZQLs_YipKC2E4H3oCrEleO9zDH-S_sQYz5aDDgGUawshED82bdH4-lv1af23XzhHoUi46go_Hbs5Orsqq2ZHWwQtIbOZrLvdbR1pUdV3pZ4xENRvA6Hk4pADus4_0fRbPoqU1ptNexKNKOTzc90Du5d4I9RSrTxJEsJmkOr7q1qBSXIDMnfOU0G0I8U9P0laQUJcirAYDmmnSmYogY_kM_AXcy-YQda9VqXuwXIBlfw86MFbxf5pH67w2XIcA0Tou8qK371WnPr_Wy-5RP3zwFfpYx21FZFGQERI3e3sVRLoTUKzc5xoKfJQMuVlCURN2PHSQy-ufTUgNQN6QYFwvcRF7LMZhBdfdA9AC2ML3fnvKBxstvyIY8wlOsFcvEecreLnFAW3SH3hGgMX0a7zIrjIQ0iEwrObDxgnTFPCSbckpUqnFyQtIXw3Zmqg_0UNHlP-9puKJMIieU8FBBez0YEBVVX0ckgGtHoYbWYwbmeOYc2hNPIZqJuh14-R3DeiUog_hN004Qk7wWLT6XQ6TF1e6MnGmhdoHK_eZNTzVbbYPvNn7zqpwrYFESe_piFMrbj624xTj4Lk-jKhBvOE9x7F8Za25cnjxQ9EYPLtkBj-rhqcMzXArvZ--a0hjX1_TR9qbTWVK6c_L5KSB2YX3j5DhZyU-ai2HwbkgEbgYv4hajtstPPKd7cF39t_97c5duE9XQrR3r0zYXiHKJegfwuxPxN-HJAnA6zLTIq8Xp5__thl=w1444-h963"
+		"빈칸", "https://lh3.googleusercontent.com/fife/AKsag4PDTLKm9vOVoQ-brcckQR3PxPhtINEazHNB5DNXv9Q3r13bcw_Y4Ew4P6WPjqXuw8On8hT9vS89eOZMJijW2ldwIEPoXt31N5p2OU9mWxqEihUMQMdvV-vEWf6VqxBJmgC784tmdMuUv-X8_IlBUG2m3iOF5i4Op2fRQ98D-ql_gQSnF1dyoTA0nxBr1otwYYlZB0jpm8ukv-I8bOYfGhn6LHxXK4H8iHXi0AXQWyr8Nyp1D-g0m-5VWPYSnKyKjgcjSUS2Hnf3BamWosEDp9W07wsuiMZv5NkO6BNIkSD7Dbmpw2PwkExzKNAxQZNzXZ0cOIFfJGkQTvbmm8vubIb7kPUvgHEzDwIvWCt0lfMxN0JdHPQ9dAcI9TYmmqD30cDK1pBCPN38aKDt21iF26dINzHjK7DZQH5FYZXnARhFPjp0ZqaEzy0fBr_OXIkeKVVzNiIbllYeakdabbSGJZ76NLINAhydxZsu7HRw5zNeKR_ajRwqiOxOQQQgjx8rRW0ML50vzTQazreWmfCUfW_j7z8nDbZ7weICUD-5EPZZY4pjxSwSXUAAnqfuLTz-gwcHASO6HhnJqQu3zsTLjjJwiXjAmoTeE94TfpfFZb2vuZTZMq8WrdVGeQXJ1mtlI2bKdyQowoCbZZqHaZ2WD-DWip72QhylJxn2kl4dUBr8iAjdCOSzTgg3z3_LZMql32SB0R5fkv9Cj3aJpSgs1qRJSwHgOMPtrVsQY9L3_5n4WqtIQYUJFSw1FuCeVpQ-9-rxjEWy7BI1uTB7cZR6XwFsmniRM88SPPQfXanT28_CmMoBs7pZIQb26unNfQKUyBqEw0okRaj84xPffEttXyZxLD7zWerQsNlhlHjhGk2Ei9TkxiCU4e6-8hcvJMNArj7gvbVcOPpl0mS0WgHJYUjQJOm86hkuEBj6WWBfT9waWJ25ykRKbRWabruIUKQBUg8VxjT1-bmzeWdF-NjIxVtOsx72-_ryJ25UjrPSYs-lqsS7kT-s0KBiQTod_8dx-dYjTEczT1TE5HgkYYZCSoetsqVpcwlww2neRqMy-unOnjMa-0jr4gbDzPXKVG2EPx5NacMZ-Wd48WuU6TgxOVzYbjA2xyCPwUw2nT0X_H56bFwv8F5tckiVgbT8CJaphgL5B6aJjhtLisqQD3jKWGNaylEYHKsXynSgiwxQe09Tfo4kh2IaPtKdlpNA6nhMShW5de9ITlIa0JO2suLMdegjYkaJVxwnnKLUazJc4OpIxMAShPM_iBgrxFtycdJOLhKOWLtMzzi7IRyNr2W6P7NUeNGf--Dm8jPScigESPtMdFHYYAaA6c13sAnhOPV6QaaLnXh1XWGT9CfOrWe_ThA_zg5nWjE49RV_FCFB6E0EgLJCKb1dN_rx-gP7mP8mZxnajYa6PW3fio4ZmadR_wg7mcRNHNOvgn016hQ0d5Rw7nbZKIrdzg1fniBgUY7qZ4bfL1NW9E4du3vKCh_bQsMXA5Zj21bLmkRCrhcrGqOAz8_bBx16jRjHZC77VjjRTpqkmVNbdC7jKc4AHF2nKls=w1285-h912"
 	);
 
-	static final String[] shapeName = new String[] {"동그라미","네모","세모", "마름모", "별"};
+	static final String[] shapeName = new String[] {"동그라미", "네모" , "세모", "마름모", "별"};
 
 	public List<DiagnosisQuizDto> getFluencyQuiz() {
 		List<DiagnosisQuizDto> quizzes = new ArrayList<>(1);
 		quizzes.add(generateFluencyQuiz());
-
 		return quizzes;
 	}
 
-	public List<DiagnosisQuizDto> getVisualQuiz() {
+	public List<DiagnosisQuizDto> getVirtualQuiz() {
 		List<DiagnosisQuizDto> quizzes = new ArrayList<>(1);
 		quizzes.add(generateVirtualQuiz());
-
 		return quizzes;
 	}
 
@@ -53,34 +51,44 @@ public class ExecutiveService {
 
 	private DiagnosisQuizDto generateVirtualQuiz() {
 		Random random = new Random();
-		List<String> pattern = new ArrayList<>(Arrays.asList(shapeName));
-		Collections.shuffle(pattern);
-		pattern.remove(4);
+		List<String> shapes = new ArrayList<>(Arrays.asList(shapeName));
+		Collections.shuffle(shapes);
+		System.out.println(shapes);
+		shapes = shapes.subList(0, 4);
+		System.out.println(shapes);
+		List<String> pattern = new ArrayList<>(shapes.subList(0, 3));
 		int answer = random.nextInt(3);
 
-		List<String> pattern2 = new ArrayList<>();
-		for (int i=0; i<3; i++) {
-			if(i == answer) {
-				pattern2.add("빈칸");
+		String answerShape = "";
+		for (int i = 0; i < 3; i++) {
+			if (i == answer) {
+				pattern.add("빈칸");
+				answerShape = pattern.get(i);
 			} else {
-				pattern2.add(pattern.get(i));
+				pattern.add(pattern.get(i));
 			}
 		}
 
+		StringBuilder question = new StringBuilder();
+		question.append("다음 빈칸에 들어올 그림은 무엇 일까요? <br><br><div>");
+		for (int i = 0; i < 6; ++i) {
+			question.append("<img src=\"")
+					.append(map.get(pattern.get(i)))
+					.append("\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">");
+		}
+		question.append("</div>");
+
+		System.out.println(shapes);
+		List<String> choice = shapes.stream().map(imgSrc ->
+				"<img src=\"" + map.get(imgSrc)
+				+ "\" alt=\"quiz_img\" style = \"width:100px; height:100px\">").toList();
+		System.out.println(shapes);
+		System.out.println(choice);
 		return DiagnosisQuizDto.builder()
 			.type(DiagnosisType.EXECUTIVE_VIRTUAL)
-			.question("다음 빈칸에 들어올 그림은 무엇 일까요? <br><br>"
-			+ "<div>"
-			+ "<img src=\"" + map.get(pattern.get(0)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern.get(1)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern.get(2)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(0)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(1)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+ "<img src=\"" + map.get(pattern2.get(2)) + "\" alt=\"quiz_img\" style = \"width:100px; height:100px; margin-left:30px;\">"
-			+"</div><br>")
-			.choice(pattern)
-			.choiceAnswer(answer)
-			.shortAnswer(Collections.singletonList(pattern.get(answer)))
+			.question(question.toString())
+			.choice(choice)
+			.choiceAnswer(shapes.indexOf(answerShape))
 			.build();
 	}
 }

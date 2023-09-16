@@ -64,12 +64,15 @@ class ShortAnswerQuizGame {
     <div class="short-answer-quiz__content">
     <span class="short-answer-quiz__question">${this.quiz.question}</span>  
     <form class="short-answer-quiz__input-form">`;
-      content += ` 
-      <p class="short-answer-quiz__input"> </p> 
-      <div>
-      <button type="button" onclick="sendSpeechShort();">녹음</button>
+    content += ` 
+    <div class="short-answer-quiz__input-box">
+      <p class="short-answer-quiz__input"></p> 
+      <button type="button" class="short-answer-quiz__record-btn" onclick="sendSpeechShort();">
+        <i class="fas fa-solid fa-microphone"></i>
+      </button> 
       <button type="button" class ="stopSpeech";">정지</button> 
-      <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
+    </div>
+    <input type="submit" class="short-answer-quiz__submit-btn" value="제출"></div>
     </form>    
     </div>
     <div class="short-answer-quiz__footer"></div>

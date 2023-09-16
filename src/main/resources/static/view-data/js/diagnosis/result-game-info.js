@@ -83,7 +83,11 @@ async function getDataFromResultPagination() {
         let json = await response.json();
         let paginationData = json;
         totalList = json.data.map(e => e.correctCount);
+        //let size = Math.min(30, totalList.length);
+        //totalList = totalList.slice(0,size);
         let timeData = json.data.map(e => e.registrationDateString);
+        //timeData = timeData.slice(0,size);
+
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
             if (currentDateTime) {
@@ -91,12 +95,14 @@ async function getDataFromResultPagination() {
             } else {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
+        }else{
+            document.getElementById("monthIsDone").innerText = "미완료"
         }
         json.data.map(e => {
             orientList.push(e.financeCorrect, e.financeTotal);
-            attentionList.push(e.matchCardCorrect, e.matchCardTotal);
-            spacetimeList.push(e.samePictureCorrect, e.samePictureTotal);
-            executiveList.push(e.transactionCorrect, e.transactionTotal);
+            attentionList.push(e.transactionCorrect, e.transactionTotal);
+            spacetimeList.push(e.matchCardCorrect, e.matchCardTotal);
+            executiveList.push(e.samePictureCorrect, e.samePictureTotal);
         });
 
         if (orientList.length >= 1) {
@@ -112,7 +118,7 @@ async function getDataFromResultPagination() {
             data: {
                 labels: timeData,
                 datasets: [{
-                    label: "총 맞춘 횟수",
+                    label: "총 맞춘 점수",
                     lineTension: 0.3,
                     backgroundColor: "rgba(78, 115, 223, 0.05)",
                     borderColor: "rgba(78, 115, 223, 1)",
@@ -239,9 +245,10 @@ async function getDataFromResultPagination() {
             (function (name) {
                 var container = $('#pagination-' + name);
                 if (!container.length) return;
+                let sampleData = paginationData.data.sort((a,b)=>(a.registrationDate - b.registrationDate));
 
                 var options = {
-                    dataSource: paginationData.data,
+                    dataSource: sampleData,
                     pageSize: 4,
                     callback: function (response, pagination) {
                         var dataHtml = '<table class="table table-bordered overflow-auto" id="dataTable" width="100%"cellSpacing="0">';
@@ -261,7 +268,7 @@ async function getDataFromResultPagination() {
                             dataHtml += '<th>' + item.correctCount + '</th>';
                             dataHtml += '<th>' + item.totalCount + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
-                            dataHtml += '<th>' + `<a href=/view/game/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
+                            dataHtml += '<th>' + `<a href=/view/game/result/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
 

@@ -1,3 +1,4 @@
+
 .choice-quiz__header {
     display: flex;
     flex-direction: column;
@@ -29,7 +30,7 @@
     align-items: center;
 }
 
-.choice-quiz__choice {
+.choice-quiz__text-choice {
     background-color: #727272;
     border: transparent;
     border-radius: 20px;
@@ -45,6 +46,33 @@
     align-items: center;
 }
 
+.choice-quiz__picture-btn-container {
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice {
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 200px;
+    transition: all 200ms ease-in;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice > img {
+    margin: 0;
+}
+
 .choice-quiz__choice:hover {
     background-color: #0876bb;
 }
@@ -52,7 +80,8 @@
 .choice-quiz__question {
     width: 100%;
     flex-grow: 1;
-    background-color: #127bbd;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
     font-size: 40px;
     display: flex;
     justify-content: center;
@@ -92,7 +121,8 @@
 .short-answer-quiz__question {
     width: 100%;
     flex-grow: 4;
-    background-color: #127bbd;
+    background: rgb(5,0,96);
+    background: linear-gradient(131deg, rgba(5,0,96,1) 0%, rgba(18,123,189,1) 100%);
     font-size: 40px;
     display: flex;
     flex-direction: column;
@@ -108,7 +138,6 @@
     margin-top: 20px;
     font-weight: 700;
     color: darkred;
-
 }
 
 .short-answer-quiz__input-form {
@@ -128,6 +157,22 @@
     height: 50px;
     font-size: 30px;
     text-align: center;
+}
+
+.short-answer-quiz__input-box {
+    position: relative;
+    width: 100%;
+}
+
+.short-answer-quiz__record-btn {
+    color: #bd1212;
+    position: absolute;
+    font-size: 30px;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    top: 8px;
+    right: 10px;
 }
 
 .short-answer-quiz__submit-btn {

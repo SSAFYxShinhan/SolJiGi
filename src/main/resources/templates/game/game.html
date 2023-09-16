@@ -18,38 +18,11 @@
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
     <style>
-        @font-face {
-            font-family: 'GongGothicMedium';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-            font-weight: 100;
-            font-style: normal;
-        }
-
         body {
             -webkit-user-select:none;
             -moz-user-select:none;
             -ms-user-select:none;
-            user-select:none
-        }
-
-        span {
-            font-family: 'GongGothicMedium';
-        }
-
-        * {
-            font-family: 'GongGothicMedium';
-        }
-
-        h1 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h2 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h5 {
-            font-family: 'GongGothicMedium';
+            user-select:none;
         }
     </style>
 </head>
@@ -69,7 +42,7 @@
     const questions = [[${quizzes}]];
     const matchCardCount = [[${matchCard}]];
     const samePictureCount = [[${samePicture}]];
-    const matchCardGameLevel = [[2, 2, 5], [2, 3, 6], [2, 4, 10], [2, 5, 15], [3, 4, 15], [4, 4, 20],];
+    const matchCardGameLevel = [[2, 2, 5], [2, 3, 6], [2, 4, 10], [3, 4, 15], [4, 4, 20],];
     const samePictureGameLevel = [[2, 2, 5], [3, 3, 7], [3, 4, 8], [4, 4, 10], [4, 5, 10], [4, 6, 15], [5, 5, 15],];
     let currGame;
 
@@ -140,6 +113,7 @@
         };
 
         let flag = false;
+        let gameId = -1;
         $.ajax({
             url: "/game/result",
             headers: {'Content-Type': 'application/json'},
@@ -150,6 +124,7 @@
                 console.log(result);
                 if (result.status === 'success') {
                     flag = true;
+                    gameId = result.data;
                     console.log(result);
                 } else if (result.status === 'fail') {
                     alert('error!!!')
@@ -163,7 +138,7 @@
         });
 
         if (flag) {
-            location.href = "/view/main";   // 게임 결과 페이지로 이동해야 함.
+            location.href = "/view/game/result/" + gameId;   // 게임 결과 페이지로 이동해야 함.
         }
     }
 </script>

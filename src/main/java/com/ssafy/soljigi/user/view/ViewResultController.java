@@ -38,6 +38,7 @@ public class ViewResultController {
 				TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 				model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
 				model.addAttribute("name", user.getName());
+				model.addAttribute("point",user.getPoint());
 			}
 		}catch (Exception e){
 			return "error/404";
@@ -54,12 +55,13 @@ public class ViewResultController {
 			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 
 		return "result/result-diagnosis-view";
 	}
 
-	@GetMapping("/diagnosis/result/detail/{id}")
+	@GetMapping("/diagnosis/result/{id}")
 	public String resultDiagnosisDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
@@ -70,11 +72,12 @@ public class ViewResultController {
 			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 		return "result/result-diagnosis-detail-view";
 	}
 
-	@GetMapping("/game/result/detail/{id}")
+	@GetMapping("/game/result/{id}")
 	public String resultGameDetailPage(@PathVariable Long id, Model model, Principal principal) {
 		model.addAttribute("id", id);
 		if (principal != null) {
@@ -85,6 +88,7 @@ public class ViewResultController {
 			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 		return "result/result-game-detail-view";
 	}

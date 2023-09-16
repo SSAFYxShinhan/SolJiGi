@@ -17,42 +17,15 @@
     <script src="/js/diagnosis/memory.js"></script>
     <script src="/js/diagnosis/Fluent.js"></script>
     <script src="/js/diagnosis/attention.js"></script>
+    <script src="/js/fontawesome.js"></script>
     <script src="/js/jquery-3.6.3.min.js" defer></script>
 
-
     <style>
-        @font-face {
-            font-family: 'GongGothicMedium';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-            font-weight: 100;
-            font-style: normal;
-        }
-
         body {
             -webkit-user-select:none;
             -moz-user-select:none;
             -ms-user-select:none;
-            user-select:none
-        }
-
-        span {
-            font-family: 'GongGothicMedium';
-        }
-
-        * {
-            font-family: 'GongGothicMedium';
-        }
-
-        h1 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h2 {
-            font-family: 'GongGothicMedium';
-        }
-
-        h5 {
-            font-family: 'GongGothicMedium';
+            user-select:none;
         }
     </style>
 </head>
@@ -68,7 +41,6 @@
 
 <script th:inline="javascript">
     let result = [0, 0, 0, 0, 0, 0, 0];
-    let scoreField = ['orientScore', 'memoryScore', 'attentionScore', 'spacetimeScore', 'executiveScore', 'languageScore'];
     let memoryResult = [0, 0, 0, 0, 0];
     let mqIdx = 0;
     const container = document.querySelector('.diagnosisContainer');
@@ -115,7 +87,7 @@
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
             window.speechSynthesis.cancel();
-            currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
+            currGame = new MatchCardGame(container, 4, 4, 40, result, nextGame, true);
         } else if (diagnosis.type === diagnosisType.LANGUAGE) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
@@ -125,7 +97,7 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 25, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+            currGame = new ChoiceQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL, true);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_FLUENT) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
@@ -145,20 +117,20 @@
         const executiveVirtualQuiz = [[${executiveVirtual}]];
         const languageQuiz = [[${language}]];
 
-        orientQuiz.forEach(diagnosisQuiz => {
-            questions.push({type: diagnosisType.ORIENT, quiz: diagnosisQuiz})
-        });
-        questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
-        attentionQuiz.forEach(diagnosisQuiz => {
-            if (diagnosisQuiz !== null)
-                questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
-        })
-        questions.push(gameType.MATCH_CARD);
-        questions.push(gameType.SAME_PICTURE);
-        questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
-        memoryQuiz.forEach(diagnosisQuiz => {
-            questions.push({type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz})
-        });
+        // orientQuiz.forEach(diagnosisQuiz => {
+        //     questions.push({type: diagnosisType.ORIENT, quiz: diagnosisQuiz})
+        // });
+        // questions.push({type: diagnosisType.MEMORY, step: 'READ', quiz: memory4w1h});
+        // attentionQuiz.forEach(diagnosisQuiz => {
+        //     if (diagnosisQuiz !== null)
+        //         questions.push({type: diagnosisType.ATTENTION, quiz: diagnosisQuiz});
+        // })
+        // questions.push(gameType.MATCH_CARD);
+        // questions.push(gameType.SAME_PICTURE);
+        // questions.push({type: diagnosisType.MEMORY, step: 'ANSWER', quiz: memory4w1h});
+        // memoryQuiz.forEach(diagnosisQuiz => {
+        //     questions.push({type: diagnosisType.MEMORY, step: 'CHOICE', quiz: diagnosisQuiz})
+        // });
         languageQuiz.forEach(diagnosisQuiz => {
             questions.push( {type: diagnosisType.LANGUAGE, quiz: diagnosisQuiz});
         })
@@ -195,6 +167,7 @@
         };
 
         let flag = false;
+        let diagnosisId = -1;
         $.ajax({
             url: "/diagnosis",
             headers: {'Content-Type': 'application/json'},
@@ -205,6 +178,7 @@
                 console.log(result);
                 if (result.status === 'success') {
                     flag = true;
+                    diagnosisId = result.data.id;
                     console.log(result);
                 } else if (result.status === 'fail') {
                     alert('error!!!')
@@ -218,47 +192,8 @@
         });
 
         if (flag) {
-            location.href = "/view/main";   // 진단 결과 페이지로 이동해야 함.
+            location.href = "/view/diagnosis/result/" + diagnosisId;   // 진단 결과 페이지로 이동해야 함.
         }
-        // const form = document.createElement("form");
-        //
-        // form.setAttribute("charset", "UTF-8");
-        // form.setAttribute("accept-charset", "UTF-8");
-        // form.setAttribute("method", "POST");
-        // form.setAttribute("action", "/diagnosis");
-
-        // orientScore: result[diagnosisType.ORIENT],
-        //     attentionScore: result[diagnosisType.ATTENTION],
-        //     spacetimeScore: result[diagnosisType.SPACETIME],
-        //     executiveScore: result[diagnosisType.EXECUTIVE],
-        //     languageScore: result[diagnosisType.LANGUAGE],
-        //     memoryScore: result[diagnosisType.MEMORY],
-        //
-        //
-        // const input1 = document.createElement("input");
-        // input1.setAttribute("type", "hidden");
-        // input1.setAttribute("name", "userId");
-        // input1.setAttribute("value", 1);
-        // form.appendChild(input1);
-        // const input2 = document.createElement("input");
-        // input2.setAttribute("type", "hidden");
-        // input2.setAttribute("name", "age");
-        // input2.setAttribute("value", 20);
-        // form.appendChild(input2);
-        // const input3 = document.createElement("input");
-        // input3.setAttribute("type", "hidden");
-        // input3.setAttribute("name", "educationLevel");
-        // input3.setAttribute("value", 1);
-        // form.appendChild(input3);
-        // for (let i = 0; i < 6; ++i) {
-        //     const input = document.createElement("input");
-        //     input.setAttribute("type", "hidden");
-        //     input.setAttribute("name", scoreField[i]);
-        //     input.setAttribute("value", result[i]);
-        //     form.appendChild(input);
-        // }
-        // document.body.appendChild(form);
-        // form.submit();
     }
 </script>
 
