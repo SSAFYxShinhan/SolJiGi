@@ -290,7 +290,7 @@ async function getDataFromResultPagination() {
                             dataHtml += '<th>' + item.result + '</th>';
                             dataHtml += '<th>' + item.totalScore + '</th>';
                             dataHtml += '<th>' + item.registrationDateString + '</th>';
-                            dataHtml += '<th>' + `<a href=/view/diagnosis/result/detail/${item.id}` + '>상세보기</a>' + '</th>';
+                            dataHtml += '<th>' + `<a href=/view/diagnosis/result/${item.id}` + '>상세보기</a>' + '</th>';
                             dataHtml += '</tr>';
                             dataHtml += '</tbody>';
 

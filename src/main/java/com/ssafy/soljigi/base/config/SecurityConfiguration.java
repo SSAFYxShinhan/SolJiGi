@@ -39,8 +39,11 @@ public class SecurityConfiguration {
 
 	private static final String[] GET_AUTHENTICATED = {
 		"/view/main",
-		"/view/login"
+		"/game",
+			"/diagnosis",
+			"/view/game/result/**"
 	};
+	
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -50,7 +53,8 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests(request ->
 			request.requestMatchers(HttpMethod.POST, POST_AUTHENTICATED).permitAll()
-				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).permitAll()
+				.requestMatchers(HttpMethod.GET, GET_AUTHENTICATED).authenticated()
+					.requestMatchers(HttpMethod.GET, "/view/game/result/**").authenticated()
 				.anyRequest().permitAll());
 
 		log.warn("2. authorizeHttpRequests");

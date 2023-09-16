@@ -6,6 +6,32 @@
     --dark: #1C2035;
 }
 
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+* {
+    font-family: 'GongGothicMedium';
+}
+
+p{
+    font-family: 'GongGothicMedium';
+}
+h1 {
+    font-family: 'GongGothicMedium';
+}
+
+h2 {
+    font-family: 'GongGothicMedium';
+}
+
+h5 {
+    font-family: 'GongGothicMedium';
+}
+
 .back-to-top {
     position: fixed;
     display: none;
@@ -99,7 +125,6 @@
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
-    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     vertical-align: middle;
     margin-left: 8px;
@@ -531,6 +556,8 @@
     transition: .5s;
 }
 
+
+
 .testimonial-carousel .owl-nav .owl-prev:hover,
 .testimonial-carousel .owl-nav .owl-next:hover {
     background: var(--primary);
@@ -574,7 +601,6 @@
 .footer .btn.btn-link::before {
     position: relative;
     content: "\f105";
-    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     margin-right: 10px;
 }

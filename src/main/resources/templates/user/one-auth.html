@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 
+<<<<<<< HEAD
 <head>
     <meta charset="utf-8">
     <title>솔직이</title>
@@ -156,6 +157,13 @@
         </nav>
     </div>
 </div>
+=======
+<head th:replace="~{/user/fragments/header :: headerFragment}">
+</head>
+
+<body>
+<nav th:replace="~{/user/fragments/navbar :: navFragment}"></nav>
+>>>>>>> 95a8968d90cdabc967b5fbd15247e35ad583871c
 <!-- Navbar End -->
 
 
@@ -199,23 +207,8 @@
 <a name="about"></a>
 <!-- Carousel End -->
 
-
-<!-- Copyright Start -->
-<div class="container-fluid copyright py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <a class="fw-medium" href="#">SOLJIGI</a>, All Right Reserved.
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                Designed By <a class="fw-medium" href="">SOLJIGI</a>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Copyright End -->
-
+<footer th:replace="~{/user/fragments/footer :: footerFragment}"></footer>
 
 
 <!-- JavaScript Libraries -->

@@ -61,9 +61,11 @@ public class NotProd {
 			userRepository.save(User.builder()
 				.password(passwordEncoder.encode("1"))
 				.username("1")
+					.name("name")
+					.address(new Address("tltl","dododo","cococo"))
+					.phoneNumber("123123124")
 				.role(Role.USER)
-				.gender(Gender.MALE)
-					.birthDate(LocalDate.of(1950, 3, 5))
+				.gender(Gender.MALE).birthDate(LocalDate.of(1950, 3, 5))
 				.accountNumber("110222999995")
 				.educationLevel(1)
 				.build());
