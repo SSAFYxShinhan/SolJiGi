@@ -1,4 +1,5 @@
-[![](https://velog.velcdn.com/images/heeyeon3050/post/f528f087-892b-4468-9362-edc184ffce89/image.png)](https://velog.velcdn.com/images/lucaschoi/post/47be1595-bd88-4ad9-b92b-7b65ee75f1c9/image.png)
+![image](https://github.com/SSAFYxShinhan/SolJiGi/assets/111184269/1dc341b6-f6b5-485d-a512-81099a0225a1)
+
 
 <h1>거래 내역 기반의 치매 예방 서비스 플랫폼 “솔직이” </h1>
 
