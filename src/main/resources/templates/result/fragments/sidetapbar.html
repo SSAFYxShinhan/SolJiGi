@@ -165,6 +165,19 @@
             </div>
 
         </li>
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <a class="nav-link dropdown-toggle" href="#" id="no" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <i class="fas fa-money fa-sm fa-fw mr-2 text-gray-400"></i>
+            <span sec:authorize="isAuthenticated()">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${point}"></span>
+                            </span>
+            <span sec:authorize="isAnonymous()"
+                  th:onclick="|location.href='@{/view/sign-in}'|"></span>
+
+        </a>
 
     </ul>
 

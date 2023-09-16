@@ -38,6 +38,7 @@ public class ViewResultController {
 				TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 				model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
 				model.addAttribute("name", user.getName());
+				model.addAttribute("point",user.getPoint());
 			}
 		}catch (Exception e){
 			return "error/404";
@@ -54,6 +55,7 @@ public class ViewResultController {
 			TransactionResponse byTransactionCount = userService.findByTransactionCount(user.getAccountNumber());
 			model.addAttribute("transActionCount", byTransactionCount.getDataBody().getTransactionCount());
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 
 		return "result/result-diagnosis-view";
@@ -70,6 +72,7 @@ public class ViewResultController {
 			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 		return "result/result-diagnosis-detail-view";
 	}
@@ -85,6 +88,7 @@ public class ViewResultController {
 			model.addAttribute("datetime",date.toLocalDate());
 			model.addAttribute("transactionResponse", pattern);
 			model.addAttribute("name",user.getName());
+			model.addAttribute("point",user.getPoint());
 		}
 		return "result/result-game-detail-view";
 	}
