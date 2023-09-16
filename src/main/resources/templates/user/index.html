@@ -34,7 +34,7 @@
                                         <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
                                             <span class="display-1 text-white animated slideInRight">까지</span></p>
                                     </div>
-                                    <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
+                                    <a sec:authorize="isAnonymous()" onclick="anonyGame()" th:href="@{/view/one-auth}"
                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
                                         시작하기</a>
                                     <a sec:authorize="isAuthenticated()" th:href="@{/game}"
@@ -58,7 +58,7 @@
                                 <div>
                                     <p class="display-1 text-white animated slideInLeft">제공</p>
                                 </div>
-                                <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
+                                <a sec:authorize="isAnonymous()" onclick="anonyDiagnosis()" th:href="@{/view/one-auth}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
                                     시작하기</a>
                                 <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
@@ -97,6 +97,16 @@
 
 <!-- Template Javascript -->
 <script src="../view-data/js/main.js"></script>
+
+<script>
+    function anonyDiagnosis() {
+        localStorage.setItem("choice","d");
+    }
+
+    function anonyGame(){
+        localStorage.setItem("choice","g");
+    }
+</script>
 </body>
 
 </html>
