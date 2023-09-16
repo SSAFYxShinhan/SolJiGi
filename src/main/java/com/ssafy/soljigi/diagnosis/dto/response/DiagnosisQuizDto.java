@@ -1,11 +1,14 @@
 package com.ssafy.soljigi.diagnosis.dto.response;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisQuiz;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisQuizChoice;
 import com.ssafy.soljigi.diagnosis.entity.DiagnosisType;
 
+import com.ssafy.soljigi.game.entity.QuizChoice;
 import lombok.Builder;
 import lombok.Data;
 
@@ -33,13 +36,25 @@ public class DiagnosisQuizDto {
 	}
 
 	public static DiagnosisQuizDto of(DiagnosisQuiz quiz) {
+		List<DiagnosisQuizChoice> choice = quiz.getChoice();
+		Collections.shuffle(choice);
+
 		return DiagnosisQuizDto.builder()
 			.id(quiz.getId())
 			.type(quiz.getType())
 			.question(quiz.getQuestion())
-			.choice(quiz.getChoice())
-			.choiceAnswer(quiz.getChoiceAnswer())
+			.choice(choice.stream().map(DiagnosisQuizChoice::getChoiceString).toList())
+			.choiceAnswer(findAnswerChoiceIndex(choice))
 			.shortAnswer(quiz.getShortAnswer())
 			.build();
+	}
+
+	private static int findAnswerChoiceIndex(List<DiagnosisQuizChoice> choice) {
+		for (int i = 0, size = choice.size(); i < size; ++i) {
+			if (choice.get(i).isAnswer()) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

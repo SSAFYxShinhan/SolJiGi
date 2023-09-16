@@ -33,10 +33,4 @@ public class GameController {
 		model.addAttribute("samePicture", 1);
 		return "game/game";
 	}
-
-	@PostMapping
-	public String addQuiz(@ModelAttribute QuizDto quizDto) {
-		quizService.saveQuiz(quizDto);
-		return "redirect:/quiz";
-	}
 }
