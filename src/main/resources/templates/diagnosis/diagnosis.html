@@ -15,6 +15,7 @@
     <script src="/js/game/short-answer-quiz.js"></script>
     <script src="/js/game/TTS.js"></script>
     <script src="/js/diagnosis/memory.js"></script>
+    <script src="/js/diagnosis/Fluent.js"></script>
     <script src="/js/jquery-3.6.3.min.js" defer></script>
 
 
@@ -89,8 +90,8 @@
                 currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
             } else if (diagnosis.step === 'ANSWER') {
                 window.speechSynthesis.cancel();
-                speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
-                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
+                // speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
+                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 3000, result, memoryResult, nextGame);
                 mqIdx = 0;
             } else if (diagnosis.step === 'CHOICE') {
                 window.speechSynthesis.cancel();
@@ -128,7 +129,7 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("과일 이름을 생각나는대로 최대한 많이 말해주세요.");
-            currGame = new ShortAnswerQuizGame(container, diagnosis.quiz, 40, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
+            currGame = new FluentQuizGame(container, diagnosis.quiz, 40, result, nextGame, diagnosisType.EXECUTIVE_FLUENT);
             }
     }
 
@@ -164,7 +165,6 @@
             questions.push( {type: diagnosisType.EXECUTIVE_VIRTUAL, quiz: diagnosisQuiz});
         })
         executiveFluencyQuiz.forEach(diagnosisQuiz => {
-            console.log("Fluent 로딩 성공")
             questions.push( {type: diagnosisType.EXECUTIVE_FLUENT, quiz: diagnosisQuiz});
         })
         return questions;

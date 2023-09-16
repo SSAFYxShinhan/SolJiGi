@@ -129,6 +129,7 @@ class MemoryDiagnosisQuiz {
         <p class="diagnosis-memory__input"> </p> 
         <div>
         <button type="button" onclick="sendSpeechMemory();">녹음</button> 
+        <button type="button" class ="stopSpeech";">정지</button> 
         <input type="submit" class="diagnosis-memory__submit-btn" value="제출"></div>
 <!--        <input type="submit" class="diagnosis-memory__submit-btn" value="네, 알겠습니다.">-->
 <!--        <input type="text" class="diagnosis-memory__input"/>--> 
@@ -151,16 +152,25 @@ function sendSpeechMemory() {
     var diagnosticPara = document.querySelector('.diagnosis-memory__input');
     recognition.grammars = speechRecognitionList;
     recognition.lang = 'ko-KR';
-    recognition.interimResults = false; // true: 중간 결과를 반환, false: 최종 결과만 반환
-    recognition.continious = false; // true: 음성인식을 계속해서 수행, false: 음성인식을 한번만 수행
+    recognition.interimResults = true; // true: 중간 결과를 반환, false: 최종 결과만 반환
+    recognition.continious = true; // true: 음성인식을 계속해서 수행, false: 음성인식을 한번만 수행
     recognition.maxAlternatives = 1;
 
     recognition.start();
+
+    // 중간에 중지 버튼을 눌렀을 때 음성 인식 중지
+    document.querySelector('.stopSpeech').addEventListener('click', function() {
+        recognition.stop();
+    });
+
+    // 일정 시간 후 음성 인식 중지
+    setTimeout(function() {
+        recognition.stop();
+    }, 60000); // 60초(1분) 후에 중지하도록 설정 (원하는 시간으로 변경 가능)
 
     recognition.onresult = function(event) {
         var speechResult = event.results[0][0].transcript.toLowerCase();
         console.log('Speech Result: ' + speechResult);
         diagnosticPara.textContent = speechResult;
     }
-
 }

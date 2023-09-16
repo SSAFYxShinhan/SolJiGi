@@ -20,7 +20,7 @@ class ShortAnswerQuizGame {
       this.clearTimer();
       // const answer = document.querySelector('.short-answer-quiz__input').value.trim().replaceAll(' ', '');
       const answer = document.querySelector('.short-answer-quiz__input').textContent;
-      console.log(answer)
+      console.log("정답 : " + answer)
 
       if (this.quiz.shortAnswer.indexOf(answer) > -1) {
           if (this.dType !== -1) {
