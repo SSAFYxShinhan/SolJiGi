@@ -72,9 +72,6 @@ const memory = 4;
 function renderStickChart() {
     //연산해서 넣기
 
-
-
-
     let orientWidth = Math.round((orientList[orientList.length - 1] / orient) * 100);
     resultData1.style = `width: ${orientWidth}%`;
     resultData1Text.innerText = orientWidth;
@@ -105,10 +102,10 @@ async function getDataFromResultPagination() {
         let json = await response.json();
         let paginationData = json;
         totalList = json.data.map(e => e.totalScore);
-        let size = Math.min(30, totalList.length);
-        totalList = totalList.slice(0,size);
+       // let size = Math.min(30, totalList.length);
+        //totalList = totalList.slice(0,size);
         let timeData = json.data.map(e => e.registrationDateString);
-        timeData = timeData.slice(0,size);
+       // timeData = timeData.slice(0,size);
 
         if (json.data[0] != null) {
             let currentDateTime = json.data[0].doneInMonth;
@@ -117,6 +114,8 @@ async function getDataFromResultPagination() {
             } else {
                 document.getElementById("monthIsDone").innerText = "미완료"
             }
+        }else{
+            document.getElementById("monthIsDone").innerText = "미완료"
         }
         json.data.map(e => {
             orientList.push(e.orientScore);
@@ -136,7 +135,7 @@ async function getDataFromResultPagination() {
             data: {
                 labels: timeData,
                 datasets: [{
-                    label: "총 맞춘 횟수",
+                    label: "총 맞춘 점수",
                     lineTension: 0.3,
                     backgroundColor: "rgba(78, 115, 223, 0.05)",
                     borderColor: "rgba(78, 115, 223, 1)",
@@ -228,7 +227,7 @@ async function getDataFromResultPagination() {
             if(activePoints.length > 0)
             {
                 var clickedElementindex = activePoints[0]["_index"];
-
+                console.log(clickedElementindex);
                 let clickData = json.data[clickedElementindex];
 
 
@@ -238,6 +237,8 @@ async function getDataFromResultPagination() {
                 let executiveData = clickData.executiveScore;
                 let languageData = clickData.languageScore;
                 let memoryData = clickData.memoryScore;
+
+
 
                 let orientWidth = Math.round((orientData / orient ) * 100);
                 resultData1.style = `width: ${orientWidth}%`;
@@ -266,9 +267,10 @@ async function getDataFromResultPagination() {
             (function (name) {
                 var container = $('#pagination-' + name);
                 if (!container.length) return;
+                let sampleData = paginationData.data.sort((a,b)=>(a.registrationDate - b.registrationDate));
 
                 var options = {
-                    dataSource: paginationData.data,
+                    dataSource: sampleData,
                     pageSize: 6,
                     callback: function (response, pagination) {
                         // window.console && console.log(response, pagination);
