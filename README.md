@@ -16,13 +16,17 @@
 
 ### 1. [서비스 개요]
 
-### 2. [기술 스택]
+### 1. [주요 기능]
 
-### 3. [주요 기능]
+### 1. [기대 효과]
+
+### 2. [장기적 확장 방향]
+
+### 3. [기술 스택]
 
 ### 4. [프로젝트 구성도]
 
-### 5. [UCC 영상]
+### 5. [시연 영상]
 
 ### 6. [프로젝트 기간]
 
@@ -39,35 +43,6 @@
 ### 목적
 노년층의 뇌 건강을 유지하고 치매를 예방하기 위해 게임을 통한 시청각적 자극 제공 및 건강한 생활 습관 형성을 도모한다.
 <br>
-
-
-# 🛠 기술 스택
-
-## FrontEnd
-
-| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/02fb9e8f-73bb-4769-b807-2140f596d451" alt="HTML" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/e4722371-ba76-45e3-a601-a8196f393340" alt="CSS" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/1ae074bb-5592-44f6-88ed-9e64e3d089cc" alt="SpringBoot" width="55px" height="50px" /> </div> |
-| --- | --- | --- |
-| HTML | CSS | JavaScript |
-
-<br />
-
-## BackEnd
-
-| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/5303242a-3a7b-4768-a99a-8acb567e4a5d" alt="Java" width="50px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/49a23b0f-24f9-4ee2-97e9-d462196dd7e5" alt="Gradle" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/14496670-235c-425c-805c-280432028d13" alt="SpringBoot" width="95px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/bc1016ca-9a4d-4aa5-8ae0-428e086587d6" alt="SpringDataJPA" width="75px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/98c18597-08bf-4d6e-8200-f6e744a69c5c" alt="Mysql" width="75px" height="50px" /> </div> |
-| --- | --- | --- | --- | --- |
-| Java | Gradle | Spring-Boot | SpringDataJPA | MySql |
-
-<br />
-
-## DevOps
-
-| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/a0522a63-1ec7-4c14-9011-5df11053c31c" alt="Docker" width="60px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/7953b467-86aa-4ae7-bc52-eff5f3d1e05b" alt="Jenkins" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/0abc1fc8-ab52-4172-9507-2dcd125b3ffe" alt="Nginx" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/4952a8e3-a6dc-40ef-964a-352c8cf6065c" alt="AWS EC2" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/5771b88a-ef65-44d4-843d-1d757a92cc63" alt="AWS S3" width="70px" height="50px" /></div> |
-| --- | --- | --- | --- | --- |
-| Docker | Jenkins | NginX | AWS EC2 | AWS S3 |
-
-<br />
-
-<div id="3"></div>
 
 # 🔥 주요 기능
 
@@ -107,6 +82,35 @@
 - AI를 통한 치매 진단 서비스 및 말벗 도우미 기능
 - 위치 및 거래 데이터 기반 프로젝트 확장 가능성 (예: 산책 경로 추천)
 <br>
+
+# 🛠 기술 스택
+
+## FrontEnd
+
+| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/02fb9e8f-73bb-4769-b807-2140f596d451" alt="HTML" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/e4722371-ba76-45e3-a601-a8196f393340" alt="CSS" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/1ae074bb-5592-44f6-88ed-9e64e3d089cc" alt="SpringBoot" width="55px" height="50px" /> </div> |
+| --- | --- | --- |
+| HTML | CSS | JavaScript |
+
+<br />
+
+## BackEnd
+
+| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/5303242a-3a7b-4768-a99a-8acb567e4a5d" alt="Java" width="50px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/49a23b0f-24f9-4ee2-97e9-d462196dd7e5" alt="Gradle" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/14496670-235c-425c-805c-280432028d13" alt="SpringBoot" width="95px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/bc1016ca-9a4d-4aa5-8ae0-428e086587d6" alt="SpringDataJPA" width="75px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/98c18597-08bf-4d6e-8200-f6e744a69c5c" alt="Mysql" width="75px" height="50px" /> </div> |
+| --- | --- | --- | --- | --- |
+| Java | Gradle | Spring-Boot | SpringDataJPA | MySql |
+
+<br />
+
+## DevOps
+
+| <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/a0522a63-1ec7-4c14-9011-5df11053c31c" alt="Docker" width="60px" height="50px" /> </div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/7953b467-86aa-4ae7-bc52-eff5f3d1e05b" alt="Jenkins" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/0abc1fc8-ab52-4172-9507-2dcd125b3ffe" alt="Nginx" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/4952a8e3-a6dc-40ef-964a-352c8cf6065c" alt="AWS EC2" width="50px" height="50px" /></div> | <div align="center"><img src="https://github.com/LikeLion-team10/Mat-ZIP/assets/80519614/5771b88a-ef65-44d4-843d-1d757a92cc63" alt="AWS S3" width="70px" height="50px" /></div> |
+| --- | --- | --- | --- | --- |
+| Docker | Jenkins | NginX | AWS EC2 | AWS S3 |
+
+<br />
+
+<div id="3"></div>
+
 
 # 📂프로젝트 구성도
 - **System Architecture**
