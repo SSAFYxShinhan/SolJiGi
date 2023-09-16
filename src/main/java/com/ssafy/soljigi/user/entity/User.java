@@ -1,11 +1,14 @@
 package com.ssafy.soljigi.user.entity;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
 import com.ssafy.soljigi.base.entity.BaseEntity;
+import com.ssafy.soljigi.diagnosis.entity.DiagnosisResultType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,6 +52,10 @@ public class User extends BaseEntity implements UserDetails {
 	private String phoneNumber;
 	private String accountNumber;
 
+	@Builder.Default
+	private LocalDateTime lastDiagnosisDate = LocalDateTime.of(1970, 1, 1, 0, 0, 0);
+	private int levelFactor;
+
 	private int point;
 
 	@Enumerated(EnumType.STRING)
@@ -61,6 +68,17 @@ public class User extends BaseEntity implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+
+	public void updateLevelFactor(LocalDateTime diagnosisDate) {
+		long days = Duration.between(lastDiagnosisDate, diagnosisDate).toDays();
+		if (days <= 30) {
+			return;
+		} else if (days > 60) {
+			levelFactor = 0;
+		}
+		levelFactor = Math.min(120, levelFactor + 10);
+		lastDiagnosisDate = diagnosisDate;
 	}
 
 	public int getAge() {

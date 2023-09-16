@@ -1,5 +1,8 @@
 package com.ssafy.soljigi.diagnosis.service;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -60,6 +63,12 @@ public class DiagnosisResultService {
 
 		int age = user.getAge();
 		int educationLevel = user.getEducationLevel();
+//		DiagnosisResultType result = getDiagnosticResult(age, educationLevel, saveRequest);
+		DiagnosisResultType result = DiagnosisResultType.NORMAL;
+
+		if (result == DiagnosisResultType.NORMAL) {
+			user.updateLevelFactor(LocalDateTime.now());
+		}
 
 		DiagnosisResult savedId = resultRepository.save(DiagnosisResult.builder()
 			.user(user)
@@ -71,7 +80,7 @@ public class DiagnosisResultService {
 			.executiveScore(saveRequest.getExecutiveScore())
 			.languageScore(saveRequest.getLanguageScore())
 			.memoryScore(saveRequest.getMemoryScore())
-			.type(getDiagnosticResult(age, educationLevel, saveRequest))
+			.type(result)
 			.build());
 		return savedId.getId();
 	}
