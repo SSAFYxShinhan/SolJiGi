@@ -29,6 +29,19 @@
     margin-bottom: 20px;
 }
 
+.diagnosis-language__problem {
+    margin: 15px 0 15px 0;
+}
+
+.diagnosis-language__img-container {
+    width: 100%;
+    height: 200px;
+}
+
+.diagnosis-language__image {
+    height: 100%;
+}
+
 .diagnosis-memory__btn {
     background-color: #727272;
     border: transparent;
