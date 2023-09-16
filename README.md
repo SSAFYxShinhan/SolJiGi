@@ -1,8 +1,9 @@
-![](https://velog.velcdn.com/images/heeyeon3050/post/f528f087-892b-4468-9362-edc184ffce89/image.png)
+[![](https://velog.velcdn.com/images/heeyeon3050/post/f528f087-892b-4468-9362-edc184ffce89/image.png)](https://velog.velcdn.com/images/lucaschoi/post/47be1595-bd88-4ad9-b92b-7b65ee75f1c9/image.png)
 
 <h1>거래 내역 기반의 치매 예방 서비스 플랫폼 “솔직이” </h1>
 
 고령화 사회에서 가장 중요한 건강 이슈 중 하나는 치매입니다. "솔직이"는 이러한 문제에 대한 해결책을 제공하는 플랫폼으로, 노년층의 거래 내역을 기반으로 개인화된 뇌 활성화 게임을 제공합니다. 또한, 거래 내역을 통해 외부 활동을 유도하고, 보호자에게 필요한 정보를 실시간으로 제공하여 노인의 금융 안전과 건강한 생활 습관 형성에 기여합니다.
+
 <br>
 
 <div align="left">
@@ -112,9 +113,11 @@
 
 # 📂프로젝트 구성도
 - **System Architecture**
+  
 ![](https://velog.velcdn.com/images/heeyeon3050/post/684654a9-0b3a-4bf4-b0bb-3ee8dfd15c7f/image.png)
 
 - **ERD**
+  
   ![](https://velog.velcdn.com/images/heeyeon3050/post/d5c19c4f-023a-4d7d-98c5-c9ebf8f1d265/image.png)
 
 
@@ -132,7 +135,7 @@
 
 | Backend | Backend | Backend | Backend |
 | --- | --- | --- | --- |
-| <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> | <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> | <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> | <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> |
+| <img src="https://github.com/rnrudejr9.png" width="120" height="120" /> | <img src="https://github.com/h-spear.png" width="120" height="120" /> | <img src="https://github.com/heeyeon3050.png" width="120" height="120" /> | <img src="https://github.com/JunJI97.png" width="120" height="120" /> |
 | 구경덕 | 김현창 | 김희연 | 지준영 |
 - 구경덕(팀장 / BE) : 프로젝트 총괄
 - 김현창(팀원 / BE) :
