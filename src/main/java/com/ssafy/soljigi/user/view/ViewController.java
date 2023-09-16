@@ -59,7 +59,7 @@ public class ViewController {
 
 		response.addCookie(cookie);
 
-		return "redirect:/sign-in";
+		return "redirect:/view/index";
 	}
 
 	@GetMapping("/my-page")

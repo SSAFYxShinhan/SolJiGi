@@ -37,10 +37,10 @@ public class GameController {
 		Long userId = userRepository.findByUsername(name).orElseThrow().getId();
 
 		// userID 설정 변경해야함
-		List<QuizDto> quizzes = quizService.getQuizzes(3, 3, userId);
+		List<QuizDto> quizzes = quizService.getQuizzes(5, 5, userId);
 		log.info("quizzes={}", quizzes);
 		model.addAttribute("quizzes", quizzes);
-		model.addAttribute("matchCard", 2);
+		model.addAttribute("matchCard", 1);
 		model.addAttribute("samePicture", 1);
 		return "game/game";
 	}

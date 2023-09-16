@@ -63,8 +63,9 @@
                 currGame = new MemoryDiagnosisRead(container, diagnosis.quiz, 30, nextGame);
             } else if (diagnosis.step === 'ANSWER') {
                 window.speechSynthesis.cancel();
-                // speech("아까 외웠던 문장을 떠올려서 다음 문제를 풀어주세요.");
-                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 3000, result, memoryResult, nextGame);
+                speech("아까 외웠던 문장을 기억나는대로 말해주세요.");
+                console.log(1)
+                currGame = new MemoryDiagnosisQuiz(container, diagnosis.quiz, 30, result, memoryResult, nextGame);
                 mqIdx = 0;
             } else if (diagnosis.step === 'CHOICE') {
                 window.speechSynthesis.cancel();
