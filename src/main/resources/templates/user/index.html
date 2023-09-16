@@ -37,7 +37,7 @@
                                     <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
                                         시작하기</a>
-                                    <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
+                                    <a sec:authorize="isAuthenticated()" th:href="@{/game}"
                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
                                         시작하기</a>
                                 </div>
@@ -61,7 +61,7 @@
                                 <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
                                     시작하기</a>
-                                <a sec:authorize="isAuthenticated()" th:href="@{/game}"
+                                <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
                                     시작하기</a>
                             </div>
