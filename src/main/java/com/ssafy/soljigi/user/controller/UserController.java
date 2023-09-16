@@ -18,4 +18,5 @@ public class UserController {
     public Response<?> findByAccountNumber(@RequestBody AuthOneRequest request){
         return Response.success(userService.findByAccount(request.getAccountNumber()));
     }
+
 }

@@ -34,7 +34,7 @@
                                         <p class="display-1  mb-4 animated slideInRight" style="color: blue;">건강
                                             <span class="display-1 text-white animated slideInRight">까지</span></p>
                                     </div>
-                                    <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
+                                    <a sec:authorize="isAnonymous()" onclick="anonyGame()" th:href="@{/view/one-auth}"
                                        class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">예방 게임
                                         시작하기</a>
                                     <a sec:authorize="isAuthenticated()" th:href="@{/game}"
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-70" src="../view-data/img/main_pic4.jpg" alt="Image">
+                    <img class="w-70" style="opacity: 60%" src="../view-data/img/main_pic6.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="flex text-end">
@@ -58,7 +58,7 @@
                                 <div>
                                     <p class="display-1 text-white animated slideInLeft">제공</p>
                                 </div>
-                                <a sec:authorize="isAnonymous()" th:href="@{/view/one-auth}"
+                                <a sec:authorize="isAnonymous()" onclick="anonyDiagnosis()" th:href="@{/view/one-auth}"
                                    class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">진단 검사
                                     시작하기</a>
                                 <a sec:authorize="isAuthenticated()" th:href="@{/diagnosis}"
@@ -82,10 +82,6 @@
 </main>
 <!-- Carousel End -->
 
-
-<!-- Copyright End -->
-<footer th:replace="~{/user/fragments/footer :: footerFragment}"></footer>
-
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -97,6 +93,16 @@
 
 <!-- Template Javascript -->
 <script src="../view-data/js/main.js"></script>
+
+<script>
+    function anonyDiagnosis() {
+        localStorage.setItem("choice","d");
+    }
+
+    function anonyGame(){
+        localStorage.setItem("choice","g");
+    }
+</script>
 </body>
 
 </html>
