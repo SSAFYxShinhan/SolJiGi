@@ -38,8 +38,8 @@ public class DiagnosisController {
 		model.addAttribute("attention", attentionService.getQuiz());
 		model.addAttribute("spacetime", -1);
 		model.addAttribute("executiveFluency", executiveService.getFluencyQuiz());
-		model.addAttribute("executiveVirtual", executiveService.getVisualQuiz());
-		model.addAttribute("language", languageService.getQuiz());
+		model.addAttribute("executiveVirtual", executiveService.getVirtualQuiz());
+		model.addAttribute("language", languageService.getQuiz(4));
 		return "diagnosis/diagnosis";
 	}
 
