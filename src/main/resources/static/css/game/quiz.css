@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-.choice-quiz__choice {
+.choice-quiz__text-choice {
     background-color: #727272;
     border: transparent;
     border-radius: 20px;
@@ -44,6 +44,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.choice-quiz__picture-btn-container {
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice {
+    background-color: #727272;
+    border: transparent;
+    border-radius: 20px;
+    margin: 10px;
+    color: whitesmoke;
+    font-size: 36px;
+    cursor: pointer;
+    height: 200px;
+    transition: all 200ms ease-in;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-quiz__picture-choice > img {
+    margin: 0;
 }
 
 .choice-quiz__choice:hover {

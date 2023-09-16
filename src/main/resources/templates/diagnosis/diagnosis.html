@@ -85,7 +85,7 @@
             currGame = new SamePictureGame(container, 5, 5, 30, result, nextGame, true);
         } else if (diagnosis === gameType.MATCH_CARD) {
             window.speechSynthesis.cancel();
-            currGame = new MatchCardGame(container, 4, 4, 50, result, nextGame, true);
+            currGame = new MatchCardGame(container, 4, 4, 40, result, nextGame, true);
         } else if (diagnosis.type === diagnosisType.LANGUAGE) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();
@@ -95,7 +95,7 @@
             console.log(diagnosis);
             window.speechSynthesis.cancel();
             speech("다음 빈칸에 들어올 그림은 무엇 일까요?");
-            currGame = new ChoiceQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL);
+            currGame = new ChoiceQuizGame(container, diagnosis.quiz, 15, result, nextGame, diagnosisType.EXECUTIVE_VIRTUAL, true);
         } else if (diagnosis.type === diagnosisType.EXECUTIVE_FLUENT) {
             console.log(diagnosis);
             window.speechSynthesis.cancel();

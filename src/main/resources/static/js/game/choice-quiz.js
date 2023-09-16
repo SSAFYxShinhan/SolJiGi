@@ -1,8 +1,10 @@
 class ChoiceQuizGame {
-    constructor(container, quiz, timeLimit, result, nextEvent, diagnosisType = -1) {
+
+    constructor(container, quiz, timeLimit, result, nextEvent, diagnosisType = -1, isPictureChoice = false) {
         this.container = container;
         this.quiz = quiz;
         this.time = timeLimit;
+        this.isPictureChoice = isPictureChoice;
         this.fillElement();
         this.timerElement = document.querySelector(".choice-quiz__timer");
         this.gameState = state.GAME;
@@ -58,20 +60,29 @@ class ChoiceQuizGame {
     fillElement() {
         let content = "";
         content += `
-    <div class="choice-quiz__header">
-        <div class="choice-quiz__timer">${this.time}</div>
-    </div>
-    <div class="choice-quiz__content">
-    <div class="choice-quiz__question"><span>${this.quiz.question}</span></div>
-    <div class="choice-quiz__btn-container">`;
-        for (const chc of this.quiz.choice) {
-            content += `<div class="choice-quiz__choice"><span>${chc}</span></div>`;
+                    <div class="choice-quiz__header">
+                        <div class="choice-quiz__timer">${this.time}</div>
+                    </div>
+                    <div class="choice-quiz__content">
+                    <div class="choice-quiz__question"><span>${this.quiz.question}</span></div>`;
+
+        console.log(this.isPictureChoice);
+        if (this.isPictureChoice) {
+            content += `<div class="choice-quiz__picture-btn-container">`;
+            for (const chc of this.quiz.choice) {
+                content += `<div class="choice-quiz__choice choice-quiz__picture-choice">${chc}</div>`;
+            }
+        } else {
+            content += `<div class="choice-quiz__btn-container">`;
+            for (const chc of this.quiz.choice) {
+                content += `<div class="choice-quiz__choice choice-quiz__text-choice"><span>${chc}</span></div>`;
+            }
         }
-        content += `
-        </div>
-    </div>
-    <div class="choice-quiz__footer"></div>
-    `;
+    content += ` 
+                </div>
+                </div>
+                <div class="choice-quiz__footer"></div>
+                `;
         this.container.innerHTML = content;
     }
 }
